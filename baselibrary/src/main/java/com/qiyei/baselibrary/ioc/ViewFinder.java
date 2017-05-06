@@ -71,6 +71,7 @@ public class ViewFinder {
         if (mActivity != null){
             return mActivity;
         }
+        //必须把fragment写在view前面
         if (mFragment != null){
             return mFragment;
         }
