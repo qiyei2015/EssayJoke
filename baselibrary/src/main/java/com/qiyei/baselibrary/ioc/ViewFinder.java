@@ -1,7 +1,9 @@
 package com.qiyei.baselibrary.ioc;
 
 import android.app.Activity;
+import android.support.v4.app.Fragment;
 import android.view.View;
+
 
 /**
  * Email: 1273482124@qq.com
@@ -10,16 +12,37 @@ import android.view.View;
  * Description: View的findViewById的辅助类
  */
 public class ViewFinder {
-
+    /**
+     * 所保存的activity实例
+     */
     private Activity mActivity;
+    /**
+     * 所保存的Fragment对象
+     */
+    private Fragment mFragment;
+    /**
+     * View实例
+     */
     private View mView;
+    /**
+     * class实例
+     */
+    private Class<?> mClass;
 
     public ViewFinder(Activity activity){
         mActivity = activity;
+        mClass = activity.getClass();
     }
 
     public ViewFinder(View view){
         mView = view;
+        mClass = view.getClass();
+    }
+
+    public ViewFinder(Fragment fragment,View view){
+        mView = view;
+        mFragment = fragment;
+        mClass = fragment.getClass();
     }
 
     /**
@@ -28,7 +51,16 @@ public class ViewFinder {
      * @return
      */
     public View finderViewById(int id){
-        return mActivity != null ? mActivity.findViewById(id) : mView.findViewById(id);
+        if (mActivity != null){
+            return mActivity.findViewById(id);
+        }
+        if (mFragment != null){
+            return mView.findViewById(id);
+        }
+        if (mView != null){
+            return mView.findViewById(id);
+        }
+        return null;
     }
 
     /**
@@ -39,10 +71,20 @@ public class ViewFinder {
         if (mActivity != null){
             return mActivity;
         }
+        if (mFragment != null){
+            return mFragment;
+        }
         if (mView != null){
             return mView;
         }
         return null;
     }
 
+    /**
+     * 返回对应的Class实例
+     * @return
+     */
+    public Class<?> findClass(){
+        return mClass;
+    }
 }

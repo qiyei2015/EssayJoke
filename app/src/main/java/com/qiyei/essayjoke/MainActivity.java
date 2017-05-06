@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        //tv.setText(stringFromJNI());
+        tv.setText("");
 
         mTextView1.setText("这是IOC注解生成的");
     }

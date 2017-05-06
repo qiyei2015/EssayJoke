@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -27,7 +28,7 @@ public class ViewUtils {
      * @param activity
      */
     public static void inject(Activity activity){
-        inject(new ViewFinder(activity),activity.getClass());
+        inject(new ViewFinder(activity));
     }
 
     /**
@@ -35,35 +36,34 @@ public class ViewUtils {
      * @param view
      */
     public static void inject(View view){
-        inject(new ViewFinder(view),view.getClass());
+        inject(new ViewFinder(view));
     }
 
     /**
-     * View中带传入的对象
+     * View中使用
+     * @param fragment
      * @param view
-     * @param clazz
      */
-    public static void inject(View view, Class<?> clazz){
-        inject(new ViewFinder(view),clazz);
+    public static void inject(Fragment fragment,View view){
+        inject(new ViewFinder(fragment,view));
     }
 
     /**
      * 实际处理者
      * @param finder
-     * @param clazz 对象
      */
-    private static void inject(ViewFinder finder, Class<?> clazz){
-        injectField(finder,clazz);
-        injectEvent(finder,clazz);
+    private static void inject(ViewFinder finder){
+        injectField(finder);
+        injectEvent(finder);
     }
 
     /**
      * 注入域
      * @param finder
-     * @param clazz
      */
-    private static void injectField(ViewFinder finder,Class<?> clazz){
+    private static void injectField(ViewFinder finder){
         //获取类里面所有的属性
+        Class<?> clazz = finder.findClass();
         Field[] fields = clazz.getDeclaredFields();
         Log.d(TAG,"name:" + clazz.getSimpleName() + " fields.length:" + fields.length);
 
@@ -94,12 +94,11 @@ public class ViewUtils {
     /**
      * 注入事件
      * @param finder
-     * @param clazz
      */
-    private static void injectEvent(ViewFinder finder,Class<?> clazz){
+    private static void injectEvent(ViewFinder finder){
         //获取所有的方法
+        Class<?> clazz = finder.findClass();
         Method[] methods = clazz.getDeclaredMethods();
-
         //依次遍历并获取方法的ViewById注解
         for (Method method : methods){
             //获取OnClick注解
