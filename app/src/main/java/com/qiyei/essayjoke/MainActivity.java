@@ -1,6 +1,5 @@
 package com.qiyei.essayjoke;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -9,9 +8,9 @@ import android.widget.Toast;
 import com.qiyei.baselibrary.ioc.CheckNet;
 import com.qiyei.baselibrary.ioc.OnClick;
 import com.qiyei.baselibrary.ioc.ViewById;
-import com.qiyei.baselibrary.ioc.ViewUtils;
+import com.qiyei.framework.BaseSkinActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseSkinActivity {
 
     static {
         System.loadLibrary("native-lib");
@@ -23,15 +22,28 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void setContentView() {
         setContentView(R.layout.activity_main);
-        ViewUtils.inject(this);
+    }
 
-        // Example of a call to a native method
+    @Override
+    protected void initTitle() {
+
+    }
+
+    @Override
+    protected void initView() {
         TextView tv = (TextView) findViewById(R.id.sample_text);
-        //tv.setText(stringFromJNI());
         tv.setText("");
-
         mTextView1.setText("这是IOC注解生成的");
+    }
+
+    @Override
+    protected void initData() {
+
     }
 
     /**
