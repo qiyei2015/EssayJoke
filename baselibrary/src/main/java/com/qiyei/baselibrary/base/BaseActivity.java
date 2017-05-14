@@ -15,7 +15,7 @@ import com.qiyei.baselibrary.ioc.ViewUtils;
  * Description: 整合应用的BaseActivity.只能放一些通用的方法，基本每个Activity都需要使用的方法，readDataBase最好不要放进来 ，
  *  如果是两个或两个以上的地方要使用,最好写一个工具类
  */
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

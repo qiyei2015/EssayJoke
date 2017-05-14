@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="title_bar_style">
+        <item name="android:background">@color/title_bar_bg_day</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">44.0dip</item>
+    </style>
+
+    <style name="title_text_style">
+        <item name="android:textSize">18.0sp</item>
+        <item name="android:textColor">@color/s9</item>
+    </style>
+
+    <style name="title_bar_button">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/s9</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@null</item>
+        <item name="android:paddingLeft">5.0dip</item>
+        <item name="android:paddingRight">5.0dip</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:layout_marginLeft">0.0dip</item>
+        <item name="android:layout_marginRight">10.0dip</item>
+    </style>
+
+    <style name="back_view" parent="@style/title_bar_button">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/btn_back</item>
+        <item name="android:paddingLeft">0.0dip</item>
+        <item name="android:paddingRight">0.0dip</item>
+        <item name="android:layout_marginLeft">0.0dip</item>
+        <item name="android:layout_marginRight">0.0dip</item>
+        <item name="android:text">@null</item>
+        <item name="android:drawableLeft">@null</item>
+    </style>
+</resources>

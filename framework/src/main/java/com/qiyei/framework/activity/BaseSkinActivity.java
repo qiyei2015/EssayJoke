@@ -1,4 +1,4 @@
-package com.qiyei.framework;
+package com.qiyei.framework.activity;
 
 import com.qiyei.baselibrary.base.BaseActivity;
 
