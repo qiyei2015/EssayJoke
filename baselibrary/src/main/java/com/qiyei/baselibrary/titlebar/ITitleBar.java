@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary.navigationbar;
+package com.qiyei.baselibrary.titlebar;
 
 /**
  * Email: 1273482124@qq.com
@@ -6,7 +6,7 @@ package com.qiyei.baselibrary.navigationbar;
  * Version: 1.0
  * Description:
  */
-public interface INavigationBar {
+public interface ITitleBar {
     /**
      * 头部的布局文件
      * @return

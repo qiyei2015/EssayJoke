@@ -1,9 +1,8 @@
 package com.qiyei.essayjoke;
 
 import android.app.Application;
-import android.widget.Toast;
 
-import com.qiyei.baselibrary.ExceptionCrashHandler;
+import com.qiyei.baselibrary.crash.ExceptionCrashHandler;
 import com.qiyei.baselibrary.fixbug.FixDexManager;
 import com.qiyei.baselibrary.util.ToastUtil;
 

@@ -1,16 +1,16 @@
-package com.qiyei.framework.view;
+package com.qiyei.baselibrary.view;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import com.qiyei.framework.R;
+import com.qiyei.baselibrary.R;
+
 
 /**
  * Email: 1273482124@qq.com
@@ -56,7 +56,7 @@ public class ColorTrackTextView extends TextView {
     public ColorTrackTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray array = context.obtainStyledAttributes(attrs,R.styleable.ColorTrackTextView);
+        TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.ColorTrackTextView);
         int originalColor = array.getColor(R.styleable.ColorTrackTextView_originalColor,getTextColors().getDefaultColor());
         int changeColor = array.getColor(R.styleable.ColorTrackTextView_changeColor,getTextColors().getDefaultColor());
         mOriginalPaint = getPaintByColor(originalColor);

@@ -2,20 +2,19 @@ package com.qiyei.essayjoke;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qiyei.baselibrary.ExceptionCrashHandler;
+import com.qiyei.baselibrary.crash.ExceptionCrashHandler;
 import com.qiyei.baselibrary.ioc.CheckNet;
 import com.qiyei.baselibrary.ioc.OnClick;
 import com.qiyei.baselibrary.ioc.ViewById;
 import com.qiyei.baselibrary.util.ToastUtil;
 import com.qiyei.essayjoke.test.TestActivity;
 import com.qiyei.framework.activity.BaseSkinActivity;
-import com.qiyei.framework.navigationbar.CommonNavigationBar;
+import com.qiyei.framework.titlebar.CommonTitleBar;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -50,7 +49,7 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initTitle() {
-        CommonNavigationBar commonNavigationBar = new CommonNavigationBar.Builder(this)
+        CommonTitleBar commonNavigationBar = new CommonTitleBar.Builder(this)
                 .setTitle("主界面")
                 .setRightText("投稿")
                 .setRightClickListener(new View.OnClickListener() {
@@ -112,7 +111,7 @@ public class MainActivity extends BaseSkinActivity {
             int len = 0;
             while ( (len = reader.read(buffer)) != -1){
                 String s = new String(buffer,0,len);
-                Log.d(TAG,s);
+                //Log.d(TAG,s);
             }
         } catch (IOException e) {
             e.printStackTrace();

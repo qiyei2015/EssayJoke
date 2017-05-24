@@ -22,6 +22,10 @@ public class TestActivity extends BaseSkinActivity {
     private Button btn1;
     @ViewById(R.id.btn2)
     private Button btn2;
+    @ViewById(R.id.btn3)
+    private Button btn3;
+    @ViewById(R.id.btn4)
+    private Button btn4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,16 @@ public class TestActivity extends BaseSkinActivity {
                 .create();
 
         dialog.show();
+    }
+
+    @OnClick(R.id.btn3)
+    private void testBtn3(View view){
+        startActivity(ViewPagerTestActivity.class);
+    }
+
+    @OnClick(R.id.btn4)
+    private void testBtn4(View view){
+        startActivity(RecyclerViewTestActivity.class);
     }
 
     private void fixBug(){

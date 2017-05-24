@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary;
+package com.qiyei.baselibrary.crash;
 
 import android.content.Context;
 import android.content.SharedPreferences;

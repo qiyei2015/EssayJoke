@@ -26,4 +26,25 @@
         android:id="@+id/btn1"
         android:text="测试"/>
 
+
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/btn2"-->
+            <!--android:text="测试2"/>-->
+
+        <!--<Button-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:id="@+id/btn3"-->
+            <!--android:text="测试3"-->
+            <!--android:layout_gravity="bottom"/>-->
+
+
+    <!--</FrameLayout>-->
 </LinearLayout>

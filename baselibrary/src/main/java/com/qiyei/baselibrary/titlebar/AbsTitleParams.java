@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary.navigationbar;
+package com.qiyei.baselibrary.titlebar;
 
 import android.content.Context;
 import android.view.ViewGroup;
@@ -9,14 +9,14 @@ import android.view.ViewGroup;
  * Version: 1.0
  * Description: Navigation的参数
  */
-public class AbsNavigationParams {
+public class AbsTitleParams {
     public Context mContext;
     /**
      * 父布局
      */
     public ViewGroup mParent;
 
-    public AbsNavigationParams(Context context,ViewGroup parent){
+    public AbsTitleParams(Context context, ViewGroup parent){
         mContext = context;
         mParent = parent;
     }

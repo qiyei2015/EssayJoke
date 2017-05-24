@@ -4,18 +4,18 @@ import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.qiyei.baselibrary.util.ToastUtil;
+import com.qiyei.baselibrary.view.ColorTrackTextView;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.fragment.ItemFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;
-import com.qiyei.framework.navigationbar.CommonNavigationBar;
-import com.qiyei.framework.view.ColorTrackTextView;
+import com.qiyei.framework.titlebar.CommonTitleBar;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,8 +30,6 @@ public class ColorTrackTextViewActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -46,7 +44,7 @@ public class ColorTrackTextViewActivity extends BaseSkinActivity {
 
     @Override
     protected void initTitle() {
-        CommonNavigationBar commonNavigationBar = new CommonNavigationBar.Builder(this)
+        CommonTitleBar commonNavigationBar = new CommonTitleBar.Builder(this)
                 .setTitle("主界面")
                 .setRightText("投稿")
                 .setRightClickListener(new View.OnClickListener() {

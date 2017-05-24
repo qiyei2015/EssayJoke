@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary.navigationbar;
+package com.qiyei.baselibrary.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Version: 1.0
  * Description:
  */
-public abstract class AbsNavigationBar<T extends AbsNavigationParams> implements INavigationBar{
+public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar {
     /**
      * 参数
      */
@@ -27,7 +27,7 @@ public abstract class AbsNavigationBar<T extends AbsNavigationParams> implements
      */
     protected View mNavigationView;
 
-    public AbsNavigationBar(T params) {
+    public AbsTitleBar(T params) {
         this.mParams = params;
         createAndBindView();
     }
@@ -113,7 +113,7 @@ public abstract class AbsNavigationBar<T extends AbsNavigationParams> implements
         public Builder(Context context) {
         }
 
-        public abstract AbsNavigationBar build();
+        public abstract AbsTitleBar build();
     }
 
 }

@@ -27,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         initData();
     }
 
+
     /**
      * 设置布局文件
      */
@@ -61,5 +62,6 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected void startActivity(Class<?> clazz){
         startActivity(new Intent(this,clazz));
     }
+
 
 }

@@ -20,6 +20,10 @@
         </activity>
         <activity android:name=".test.ColorTrackTextViewActivity">
         </activity>
+        <activity android:name=".test.ViewPagerTestActivity">
+        </activity>
+        <activity android:name=".test.RecyclerViewTestActivity">
+        </activity>
     </application>
 
 </manifest>

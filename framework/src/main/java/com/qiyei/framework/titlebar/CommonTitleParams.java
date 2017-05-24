@@ -1,11 +1,11 @@
-package com.qiyei.framework.navigationbar;
+package com.qiyei.framework.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qiyei.baselibrary.navigationbar.AbsNavigationParams;
+import com.qiyei.baselibrary.titlebar.AbsTitleParams;
 
 /**
  * Email: 1273482124@qq.com
@@ -13,7 +13,7 @@ import com.qiyei.baselibrary.navigationbar.AbsNavigationParams;
  * Version: 1.0
  * Description: 定义该NaviagtionBar支持的所有效果，包括主标题，右标题等
  */
-public class CommonNavigationParams extends AbsNavigationParams {
+public class CommonTitleParams extends AbsTitleParams {
     /**
      * 主标题
      */
@@ -37,7 +37,7 @@ public class CommonNavigationParams extends AbsNavigationParams {
         }
     };
 
-    public CommonNavigationParams(Context context, ViewGroup parent) {
+    public CommonTitleParams(Context context, ViewGroup parent) {
         super(context, parent);
     }
 

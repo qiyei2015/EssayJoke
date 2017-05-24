@@ -20,4 +20,16 @@
         android:id="@+id/btn2"
         android:text="测试2"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn3"
+        android:text="测试3"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn4"
+        android:text="测试4"/>
+
 </LinearLayout>

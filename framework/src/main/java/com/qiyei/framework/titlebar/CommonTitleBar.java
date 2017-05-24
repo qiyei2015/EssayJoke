@@ -1,9 +1,9 @@
-package com.qiyei.framework.navigationbar;
+package com.qiyei.framework.titlebar;
 
 import android.content.Context;
 import android.view.View;
 
-import com.qiyei.baselibrary.navigationbar.AbsNavigationBar;
+import com.qiyei.baselibrary.titlebar.AbsTitleBar;
 import com.qiyei.framework.R;
 
 
@@ -13,9 +13,9 @@ import com.qiyei.framework.R;
  * Version: 1.0
  * Description:
  */
-public class CommonNavigationBar extends AbsNavigationBar<CommonNavigationParams> {
+public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
 
-    public CommonNavigationBar(CommonNavigationParams params) {
+    public CommonTitleBar(CommonTitleParams params) {
         super(params);
     }
 
@@ -41,15 +41,15 @@ public class CommonNavigationBar extends AbsNavigationBar<CommonNavigationParams
     /**
      * Builder模式设置各种效果
      */
-    public static class Builder extends AbsNavigationBar.Builder{
+    public static class Builder extends AbsTitleBar.Builder{
         /**
          * 所有的效果参数
          */
-        CommonNavigationParams mBarParams;
+        CommonTitleParams mBarParams;
 
         public Builder(Context context) {
             super(context);
-            mBarParams = new CommonNavigationParams(context,null);
+            mBarParams = new CommonTitleParams(context,null);
         }
 
         /**
@@ -87,8 +87,8 @@ public class CommonNavigationBar extends AbsNavigationBar<CommonNavigationParams
          * @return
          */
         @Override
-        public CommonNavigationBar build() {
-            return new CommonNavigationBar(mBarParams);
+        public CommonTitleBar build() {
+            return new CommonTitleBar(mBarParams);
         }
     }
 
