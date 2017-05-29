@@ -7,10 +7,10 @@
     android:layout_height="match_parent"
     tools:context="com.qiyei.essayjoke.test.RecyclerViewTestActivity">
 
-    <com.qiyei.baselibrary.view.xrecyclerview.XRecyclerView
+    <com.qiyei.baselibrary.view.xrecycler.XRecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/recycler_view">
-    </com.qiyei.baselibrary.view.xrecyclerview.XRecyclerView>
+    </com.qiyei.baselibrary.view.xrecycler.XRecyclerView>
 
 </RelativeLayout>

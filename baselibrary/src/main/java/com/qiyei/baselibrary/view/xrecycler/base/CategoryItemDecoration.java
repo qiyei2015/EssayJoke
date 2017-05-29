@@ -1,10 +1,9 @@
-package com.qiyei.baselibrary.view.xrecyclerview;
+package com.qiyei.baselibrary.view.xrecycler.base;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 /**

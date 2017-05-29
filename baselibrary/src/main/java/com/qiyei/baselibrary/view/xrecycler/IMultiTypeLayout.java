@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary.view.xrecyclerview;
+package com.qiyei.baselibrary.view.xrecycler;
 
 /**
  * Email: 1273482124@qq.com

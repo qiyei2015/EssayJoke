@@ -1,4 +1,4 @@
-package com.qiyei.baselibrary.view.xrecyclerview;
+package com.qiyei.baselibrary.view.xrecycler.base;
 
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;

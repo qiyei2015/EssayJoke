@@ -6,20 +6,22 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.TextView;
 
-import com.qiyei.baselibrary.view.xrecyclerview.BaseViewHolder;
-import com.qiyei.baselibrary.view.xrecyclerview.CategoryItemDecoration;
-import com.qiyei.baselibrary.view.xrecyclerview.XRecyclerAdapter;
-import com.qiyei.baselibrary.view.xrecyclerview.XRecyclerView;
+import com.qiyei.baselibrary.view.xrecycler.XRecyclerListener;
+import com.qiyei.baselibrary.view.xrecycler.base.BaseViewHolder;
+import com.qiyei.baselibrary.view.xrecycler.base.CategoryItemDecoration;
+import com.qiyei.baselibrary.view.xrecycler.XRecyclerAdapter;
+import com.qiyei.baselibrary.view.xrecycler.XRecyclerView;
 import com.qiyei.essayjoke.R;
-import com.qiyei.framework.view.CommonRefreshView;
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewTestActivity extends AppCompatActivity implements XRecyclerView.XRecyclerViewListener{
+public class RecyclerViewTestActivity extends AppCompatActivity implements XRecyclerListener{
 
     private XRecyclerView mRecyclerView;
 
@@ -29,9 +31,12 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
         @Override
         public void handleMessage(Message msg) {
             if (msg.what == 1){
-                mRecyclerView.stopRefrsh();
+                mRecyclerView.stopRefresh();
                 return;
+            }else if (msg.what == 2){
+                mRecyclerView.stopLoadMore();
             }
+
             super.handleMessage(msg);
         }
     };
@@ -51,7 +56,7 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new CategoryItemDecoration(getDrawable(R.drawable.recyclerview_decoration)));
         //mRecyclerView.setAdapter(new CommonAdapter(this,R.layout.recyclerview_item));
-        mRecyclerView.setXRecyclerViewListener(this);
+        mRecyclerView.setXRecyclerListener(this);
         mRecyclerView.setAdapter(new XRecyclerAdapter<String>(this,mDatas,R.layout.recyclerview_item) {
             @Override
             public void convert(BaseViewHolder holder, String data, int position) {
@@ -62,7 +67,7 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
             }
         });
 
-        mRecyclerView.addRefreshViewCreator(new CommonRefreshView());
+
 
         for (int i = 0;i < 5 ;i++){
             TextView header = new TextView(this);
@@ -77,6 +82,30 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
             mRecyclerView.addFooterView(footer);
         }
 
+        mRecyclerView.setPullRefresh(true);
+
+        mRecyclerView.setPullLoad(true);
+
+        ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                int swipeFlag = ItemTouchHelper.LEFT;
+
+                return makeMovementFlags(0,swipeFlag);
+            }
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+
+            }
+        });
+
+        helper.attachToRecyclerView(mRecyclerView);
     }
 
     @Override
@@ -88,7 +117,9 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
 
     @Override
     public void onLoadMore() {
-
+        Message msg = Message.obtain();
+        msg.what = 2;
+        mHandler.sendMessageDelayed(msg,3000);
     }
 
     private void initData(){

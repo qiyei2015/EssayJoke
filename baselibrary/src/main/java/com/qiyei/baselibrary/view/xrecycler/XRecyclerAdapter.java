@@ -1,11 +1,15 @@
-package com.qiyei.baselibrary.view.xrecyclerview;
+package com.qiyei.baselibrary.view.xrecycler;
 
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.qiyei.baselibrary.view.xrecycler.base.BaseRecyclerAdapter;
+import com.qiyei.baselibrary.view.xrecycler.base.BaseViewHolder;
 
 import java.util.List;
 
@@ -26,18 +30,25 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      */
     private SparseArray<View> mFooterViews;
     /**
-     * 头部的View索引
+     * 头部的View索引 第一个是为了给RefreshView预留的
      */
-    private int BASE_TYPE_HEADER = 100000;
+    private int BASE_TYPE_HEADER = 1000000;
     /**
-     * 底部的View索引
+     * 底部的View索引 最后一个是给loadMore预留
      */
-    private int BASE_TYPE_FOOTER = 200000;
+    private int BASE_TYPE_FOOTER = 2000000;
     /**
      * 不包含头部和底部的adapter
      */
     private BaseRecyclerAdapter mAdapter;
-
+    /**
+     * 下拉刷新的View
+     */
+    private View mRefreshView;
+    /**
+     * 加载更多的View
+     */
+    private View mLoadMoreView;
 
     public XRecyclerAdapter(Context context, List<T> datas, int layoutId) {
         super(context, datas, layoutId);
@@ -98,9 +109,53 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param view
      */
     public void addHeaderView(View view){
+        if (view == null){
+            return;
+        }
+
         int position = mHeaderViews.indexOfValue(view);
-        if (position < 0){
-            mHeaderViews.put(BASE_TYPE_HEADER++,view);
+        Log.d(TAG,"addHeaderView,position:" + position + ",mHeaderViews.size():" + mHeaderViews.size());
+        if (position >= 0){
+            return;
+        }
+        mHeaderViews.put(BASE_TYPE_HEADER++,view);
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加HeaderView到指定位置
+     * @param view
+     */
+    public void addRefreshView(View view){
+        if (view == null){
+            return;
+        }
+        mRefreshView = view;
+        int pos = mHeaderViews.indexOfValue(view);
+        Log.d(TAG,"addRefreshView,pos:" + pos + ",mHeaderViews.size():" + mHeaderViews.size());
+
+        if (mHeaderViews.size() == 0){
+            if (pos < 0){
+                mHeaderViews.put(BASE_TYPE_HEADER++,view);
+            }else {
+                mHeaderViews.setValueAt(pos,view);
+            }
+        }else {
+            SparseArray<View> temp = mHeaderViews.clone();
+
+            mHeaderViews.clear();
+            BASE_TYPE_HEADER = 1000000;
+
+            if (pos < 0){
+                mHeaderViews.put(BASE_TYPE_HEADER++,view);
+            }else {
+                mHeaderViews.setValueAt(pos,view);
+            }
+
+            for (int i = 0;i < temp.size() ;i++){
+                int key = temp.keyAt(i);
+                mHeaderViews.put(BASE_TYPE_HEADER++,temp.get(key));
+            }
         }
         notifyDataSetChanged();
     }
@@ -114,6 +169,36 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         if (position < 0){
             mFooterViews.put(BASE_TYPE_FOOTER++,view);
         }
+        //将loadmore view移到最后
+        if (mLoadMoreView != null){
+            int pos = mFooterViews.indexOfValue(mLoadMoreView);
+            Log.d(TAG,"addFooterView,pos:" + pos);
+            if (pos < 0){
+                mFooterViews.put(BASE_TYPE_FOOTER++,mLoadMoreView);
+            }else {
+                mFooterViews.removeAt(pos);
+                mFooterViews.put(BASE_TYPE_FOOTER++,mLoadMoreView);
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+    /**
+     * 添加FooterView
+     * @param view
+     */
+    public void addLoadMoreView(View view){
+        if (view == null){
+            return;
+        }
+        mLoadMoreView = view;
+        int pos = mFooterViews.indexOfValue(view);
+        if (pos < 0){
+            mFooterViews.put(BASE_TYPE_FOOTER++,view);
+        }else {
+            mFooterViews.setValueAt(pos,view);
+        }
+        Log.d(TAG,"addLoadMoreView,pos:" + pos);
         notifyDataSetChanged();
     }
 
@@ -122,11 +207,11 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param view
      */
     public void removeHeaderView(View view){
-        int position = mHeaderViews.indexOfValue(view);
-        if (position < 0){
+        int pos = mHeaderViews.indexOfValue(view);
+        if (pos< 0){
             return;
         }
-        mHeaderViews.removeAt(position);
+        mHeaderViews.removeAt(pos);
         notifyDataSetChanged();
     }
 
@@ -135,11 +220,11 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param view
      */
     public void removeFooterView(View view){
-        int position = mFooterViews.indexOfValue(view);
-        if (position < 0){
+        int pos = mFooterViews.indexOfValue(view);
+        if (pos< 0){
             return;
         }
-        mFooterViews.removeAt(position);
+        mFooterViews.removeAt(pos);
         notifyDataSetChanged();
     }
 

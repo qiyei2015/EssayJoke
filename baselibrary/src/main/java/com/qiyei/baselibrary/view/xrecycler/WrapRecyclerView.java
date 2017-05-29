@@ -1,10 +1,13 @@
-package com.qiyei.baselibrary.view.xrecyclerview;
+package com.qiyei.baselibrary.view.xrecycler;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
+
+import com.qiyei.baselibrary.view.xrecycler.base.BaseRecyclerAdapter;
+import com.qiyei.baselibrary.view.xrecycler.base.BaseViewHolder;
 
 /**
  * Email: 1273482124@qq.com
@@ -27,6 +30,15 @@ public class WrapRecyclerView extends RecyclerView {
     private XRecyclerAdapter mWarpAdapter;
 
     /**
+     * 数据为空的显示页
+     */
+    private View mEmptyView;
+    /**
+     * 加载页
+     */
+    private View mLoadingView;
+
+    /**
      * 定义数据观察者
      */
     private AdapterDataObserver mDataObserver = new AdapterDataObserver() {
@@ -36,6 +48,7 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyDataSetChanged();
             }
+            dataChanged();
         }
 
         @Override
@@ -44,6 +57,7 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyItemMoved(fromPosition,toPosition);
             }
+            dataChanged();
         }
 
         @Override
@@ -52,6 +66,7 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyItemRangeChanged(positionStart,itemCount);
             }
+            dataChanged();
         }
 
         @Override
@@ -60,6 +75,7 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyItemRangeChanged(positionStart,itemCount,payload);
             }
+            dataChanged();
         }
 
         @Override
@@ -68,6 +84,7 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyItemRangeInserted(positionStart,itemCount);
             }
+            dataChanged();
         }
 
         @Override
@@ -76,9 +93,9 @@ public class WrapRecyclerView extends RecyclerView {
             if (mWarpAdapter != mAdapter){
                 mWarpAdapter.notifyItemRangeRemoved(positionStart,itemCount);
             }
+            dataChanged();
         }
     };
-
 
     public WrapRecyclerView(Context context) {
         super(context);
@@ -149,12 +166,46 @@ public class WrapRecyclerView extends RecyclerView {
     }
 
     /**
+     * 添加HeaderView到指定位置
+     * @param view
+     */
+    public void addRefreshView(View view){
+        checkAdapter(mWarpAdapter);
+        mWarpAdapter.addRefreshView(view);
+    }
+
+    /**
+     * 添加FooterView
+     * @param view
+     */
+    public void addLoadMoreView(View view){
+        checkAdapter(mWarpAdapter);
+        mWarpAdapter.addLoadMoreView(view);
+    }
+
+    /**
      * 移除FooterView
      * @param view
      */
     public void removeFooterView(View view){
         checkAdapter(mWarpAdapter);
         mWarpAdapter.removeFooterView(view);
+    }
+
+    /**
+     * 添加空的view
+     * @param view
+     */
+    public void setEmptyView(View view){
+        this.mEmptyView = view;
+    }
+
+    /**
+     * 设置加载页
+     * @param view
+     */
+    public void setLoadingView(View view){
+        this.mLoadingView = view;
     }
 
     /**
@@ -167,4 +218,20 @@ public class WrapRecyclerView extends RecyclerView {
         }
     }
 
+    /**
+     * 数据改变时需要判断是否为空
+     */
+    private void dataChanged() {
+        if (mAdapter.getItemCount() == 0){
+            if (mEmptyView != null){
+                mEmptyView.setVisibility(VISIBLE);
+            }else {
+                mEmptyView.setVisibility(GONE);
+            }
+        }else {
+            if (mEmptyView != null){
+                mEmptyView.setVisibility(GONE);
+            }
+        }
+    }
 }
