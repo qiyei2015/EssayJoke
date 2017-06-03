@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qiyei.baselibrary.titlebar.AbsTitleParams;
+import com.qiyei.sdk.titlebar.AbsTitleParams;
 
 /**
  * Email: 1273482124@qq.com

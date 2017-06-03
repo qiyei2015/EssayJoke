@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.qiyei.baselibrary.view.XGridView;
+import com.qiyei.sdk.view.XGridView;
 
 import java.util.ArrayList;
 import java.util.HashMap;

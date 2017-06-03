@@ -1,1 +1,1 @@
-include ':app', ':baselibrary', ':framework'
+include ':app', ':sdk', ':framework'

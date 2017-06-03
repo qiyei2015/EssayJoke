@@ -2,9 +2,11 @@ package com.qiyei.essayjoke;
 
 import android.app.Application;
 
-import com.qiyei.baselibrary.crash.ExceptionCrashHandler;
-import com.qiyei.baselibrary.fixbug.FixDexManager;
-import com.qiyei.baselibrary.util.ToastUtil;
+import com.qiyei.sdk.crash.ExceptionCrashHandler;
+import com.qiyei.sdk.fixbug.FixDexManager;
+import com.qiyei.sdk.http.HttpUtils;
+import com.qiyei.sdk.http.okhttp.OkHttpEngine;
+import com.qiyei.sdk.util.ToastUtil;
 
 /**
  * Email: 1273482124@qq.com
@@ -20,6 +22,8 @@ public class BaseApplication extends Application {
 
         ToastUtil.init(this);
         ExceptionCrashHandler.getInstance().init(this);
+        //初始化网络引擎
+        HttpUtils.init(new OkHttpEngine());
 
         //加载所有的修复包
         try {

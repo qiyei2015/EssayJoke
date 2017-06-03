@@ -13,10 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.qiyei.baselibrary.util.ToastUtil;
-import com.qiyei.baselibrary.view.ColorTrackTextView;
-import com.qiyei.baselibrary.view.IndicatorView.IndicatorAdapter;
-import com.qiyei.baselibrary.view.IndicatorView.IndicatorView;
+import com.qiyei.sdk.util.ToastUtil;
+import com.qiyei.sdk.view.ColorTrackTextView;
+import com.qiyei.sdk.view.IndicatorView.IndicatorAdapter;
+import com.qiyei.sdk.view.IndicatorView.IndicatorView;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.fragment.ItemFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;

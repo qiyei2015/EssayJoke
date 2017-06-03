@@ -3,7 +3,7 @@ package com.qiyei.framework.titlebar;
 import android.content.Context;
 import android.view.View;
 
-import com.qiyei.baselibrary.titlebar.AbsTitleBar;
+import com.qiyei.sdk.titlebar.AbsTitleBar;
 import com.qiyei.framework.R;
 
 

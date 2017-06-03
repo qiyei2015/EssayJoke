@@ -31,5 +31,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/btn4"
         android:text="测试4"/>
-
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn5"
+        android:text="测试5"/>
 </LinearLayout>

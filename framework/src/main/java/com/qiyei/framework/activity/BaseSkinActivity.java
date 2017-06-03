@@ -1,6 +1,6 @@
 package com.qiyei.framework.activity;
 
-import com.qiyei.baselibrary.base.BaseActivity;
+import com.qiyei.sdk.base.BaseActivity;
 
 /**
  * Email: 1273482124@qq.com

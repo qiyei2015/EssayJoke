@@ -9,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.qiyei.baselibrary.util.ToastUtil;
-import com.qiyei.baselibrary.view.ColorTrackTextView;
+import com.qiyei.sdk.util.ToastUtil;
+import com.qiyei.sdk.view.ColorTrackTextView;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.fragment.ItemFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;

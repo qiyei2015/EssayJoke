@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">BaseLibrary</string>
+
+    <string name="net_loading">加载中...</string>
+</resources>

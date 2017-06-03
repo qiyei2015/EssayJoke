@@ -10,11 +10,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.TextView;
 
-import com.qiyei.baselibrary.view.xrecycler.XRecyclerListener;
-import com.qiyei.baselibrary.view.xrecycler.base.BaseViewHolder;
-import com.qiyei.baselibrary.view.xrecycler.base.CategoryItemDecoration;
-import com.qiyei.baselibrary.view.xrecycler.XRecyclerAdapter;
-import com.qiyei.baselibrary.view.xrecycler.XRecyclerView;
+import com.qiyei.sdk.view.xrecycler.XRecyclerListener;
+import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
+import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
+import com.qiyei.sdk.view.xrecycler.XRecyclerAdapter;
+import com.qiyei.sdk.view.xrecycler.XRecyclerView;
 import com.qiyei.essayjoke.R;
 
 
@@ -82,9 +82,9 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
             mRecyclerView.addFooterView(footer);
         }
 
-        mRecyclerView.setPullRefresh(true);
+        //mRecyclerView.setPullRefresh(true);
 
-        mRecyclerView.setPullLoad(true);
+        //mRecyclerView.setPullLoad(true);
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override
