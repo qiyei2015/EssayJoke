@@ -1,4 +1,4 @@
-package com.qiyei.framework.db;
+package com.qiyei.sdk.db;
 
 import android.database.sqlite.SQLiteDatabase;
 
@@ -17,7 +17,7 @@ public interface IDaoSupport<T> {
      * @param database
      * @param clazz
      */
-    void init(SQLiteDatabase database , Class<T> clazz);
+    void init(SQLiteDatabase database, Class<T> clazz);
 
     /**
      * 插入，返回受影响的行数
@@ -34,9 +34,27 @@ public interface IDaoSupport<T> {
     long[] insert(List<T> list);
 
     /**
-     * 查询所有
+     * 获取查询支持
      * @return
      */
-    List<T> queryAll();
+    QuerySupport querySupport();
+
+    /**
+     * 更新
+     * @param obj
+     * @param whereClause
+     * @param whereArgs
+     * @return
+     */
+    long update(T obj, String whereClause, String... whereArgs);
+
+    /**
+     * 删除
+     * @param whereClause
+     * @param whereArgs
+     * @return
+     */
+    long delete(String whereClause, String... whereArgs);
+
 
 }

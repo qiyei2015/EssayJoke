@@ -9,9 +9,9 @@ package com.qiyei.sdk.http.base;
 public interface IHttpCallback {
     /**
      * 成功的回调
-     * @param s
+     * @param result
      */
-    void onSuccess(String s);
+    void onSuccess(String result);
 
     /**
      * 失败的回调

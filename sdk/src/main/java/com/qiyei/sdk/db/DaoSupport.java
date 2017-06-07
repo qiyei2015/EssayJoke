@@ -1,16 +1,13 @@
-package com.qiyei.framework.db;
+package com.qiyei.sdk.db;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.ArrayMap;
 import android.util.Log;
 
-
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,14 +54,14 @@ public class DaoSupport<T> implements IDaoSupport<T>{
         StringBuffer sb = new StringBuffer();
 
         sb.append("create table if not exists ")
-                .append(DaoUtils.getTableName(mClass))
+                .append(DaoUtil.getTableName(mClass))
                 .append("(id integer primary key autoincrement, ");
 
         for (Field field : mClass.getDeclaredFields()){
             field.setAccessible(true);
             String name = field.getName();
             String type = field.getType().getName();
-            sb.append(name).append(" " + DaoUtils.getColumnType(type)).append(", ");
+            sb.append(name).append(" " + DaoUtil.getColumnType(type)).append(", ");
         }
 
         sb.replace(sb.length() - 2, sb.length(), ")");
@@ -84,7 +81,7 @@ public class DaoSupport<T> implements IDaoSupport<T>{
 
         ContentValues values = buildContentValues(obj);
 
-        return mDatabase.insert(DaoUtils.getTableName(mClass),null,values);
+        return mDatabase.insert(DaoUtil.getTableName(mClass),null,values);
     }
 
     @Override
@@ -103,13 +100,26 @@ public class DaoSupport<T> implements IDaoSupport<T>{
         return result;
     }
 
+    /**
+     * 返回查询支持
+     * @return
+     */
     @Override
-    public List<T> queryAll() {
-        List<T> result = new ArrayList<>();
+    public QuerySupport querySupport() {
+        QuerySupport<T> querySupport = new QuerySupport<>(mDatabase,mClass);
+        return querySupport;
+    }
 
-        Cursor cursor = mDatabase.query(DaoUtils.getTableName(mClass),null,null,null,null,null,null);
 
-        return result;
+    @Override
+    public long update(T obj, String whereClause, String... whereArgs) {
+        ContentValues values = buildContentValues(obj);
+        return mDatabase.update(DaoUtil.getTableName(mClass),values,whereClause,whereArgs);
+    }
+
+    @Override
+    public long delete(String whereClause, String... whereArgs) {
+        return mDatabase.delete(DaoUtil.getTableName(mClass),whereClause,whereArgs);
     }
 
     /**
@@ -156,8 +166,5 @@ public class DaoSupport<T> implements IDaoSupport<T>{
 
         return contentValues;
     }
-
-
-
 
 }

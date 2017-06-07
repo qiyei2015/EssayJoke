@@ -14,8 +14,8 @@ import android.widget.Button;
 
 import com.qiyei.essayjoke.activity.EasyJokeMainActivity;
 import com.qiyei.essayjoke.model.User;
-import com.qiyei.framework.db.DaoSupportFactory;
-import com.qiyei.framework.db.IDaoSupport;
+import com.qiyei.sdk.db.DaoSupportFactory;
+import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.dialog.BaseDialog;
 import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.ioc.OnClick;

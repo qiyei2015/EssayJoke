@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.qiyei.sdk.crash.ExceptionCrashHandler;
 import com.qiyei.sdk.fixbug.FixDexManager;
-import com.qiyei.sdk.http.HttpUtils;
+import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.okhttp.OkHttpEngine;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -23,7 +23,7 @@ public class BaseApplication extends Application {
         ToastUtil.init(this);
         ExceptionCrashHandler.getInstance().init(this);
         //初始化网络引擎
-        HttpUtils.init(new OkHttpEngine());
+        HttpManager.init(new OkHttpEngine());
 
         //加载所有的修复包
         try {

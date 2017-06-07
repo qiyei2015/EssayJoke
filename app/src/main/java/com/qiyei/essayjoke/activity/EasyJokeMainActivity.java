@@ -9,7 +9,7 @@ import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.model.DiscoverListResult;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
-import com.qiyei.sdk.http.HttpUtils;
+import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.base.RequestMethod;
@@ -53,11 +53,11 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-        new HttpUtils().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
+        new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
             @Override
             public void onSuccess(DiscoverListResult result) {
                 Log.d(TAG,"name --> "+result.getData().getCategories().getName());
-                ToastUtil.showLongToast(result.getData().getCategories().getName());
+                //ToastUtil.showLongToast(result.getData().getCategories().getName());
             }
 
             @Override
@@ -100,8 +100,8 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
         addCommonParams(params);
 
         request.setParams(params);
-
         request.setRequestMethod(RequestMethod.GET);
+        request.setUseCache(true);
 
         return request;
     }

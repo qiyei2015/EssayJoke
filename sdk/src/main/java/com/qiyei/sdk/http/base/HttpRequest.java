@@ -21,7 +21,10 @@ public class HttpRequest {
      * Http请求方式，Get,post等
      */
     protected RequestMethod mRequestMethod;
-
+    /**
+     * 是否缓存
+     */
+    protected boolean isCache;
 
     public HttpRequest() {
     }
@@ -83,5 +86,17 @@ public class HttpRequest {
         mRequestMethod = method;
     }
 
+    /**
+     * @return {@link #isCache}
+     */
+    public boolean isUseCache() {
+        return isCache;
+    }
 
+    /**
+     * @param cache the {@link #isCache} to set
+     */
+    public void setUseCache(boolean cache) {
+        isCache = cache;
+    }
 }

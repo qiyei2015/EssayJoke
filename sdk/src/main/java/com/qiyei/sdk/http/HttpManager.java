@@ -5,17 +5,16 @@ import android.os.Looper;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 
-import com.google.gson.Gson;
 import com.qiyei.sdk.http.base.IHttpCallback;
 import com.qiyei.sdk.http.base.IHttpEngine;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.dialog.LoadingDialog;
+import com.qiyei.sdk.util.MD5Util;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -24,9 +23,9 @@ import java.util.Map;
  * Version: 1.0
  * Description:
  */
-public class HttpUtils{
+public class HttpManager {
 
-    private static final String TAG = HttpUtils.class.getSimpleName();
+    private static final String TAG = "HTTP";
 
     /**
      * http引擎
@@ -44,7 +43,6 @@ public class HttpUtils{
     private FragmentManager mFragmentManager;
     private DialogFragment mDialog;
     private String tag = "";
-
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
 
@@ -83,61 +81,90 @@ public class HttpUtils{
      */
     public <T> String execute(FragmentManager fragmentManager,HttpRequest request, final INetCallback<T> callback){
 
+        if (request == null){
+            return null;
+        }
+
         mFragmentManager = fragmentManager;
         tag = request.getUrl();
 
+        //显示加载对话框
+        showDialog();
+
+        //是否缓存
+        final boolean cache = request.isUseCache();
+        String url = HttpUtil.jointParams(request.getUrl(),request.getParams());
+        final String urlKey = MD5Util.string2MD5(url);
+
         mHttpCallback = new IHttpCallback() {
             @Override
-            public void onSuccess(String s) {
+            public void onSuccess(String result) {
 
+                if (cache){
+                    String cache = HttpUtil.getCache(urlKey);
+                    if (cache != null && cache.equals(result)){
+                        //数据一致，不用刷新界面
+                        Log.d(TAG,"数据一致，不用刷新界面");
+                        //关闭加载对话框
+                        dismissDialog();
+                        return;
+                    }
+                }
 
-                Gson gson = new Gson();
+                final T obj = (T) HttpUtil.parseJson(result,callback.getClass());
 
-                //获取type类型数组的第0个
-                Type genType = callback.getClass().getGenericInterfaces()[0];
-                Log.d(TAG,"genType:" + genType.toString());
-
-                //判断是不是参数化类型
-                Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-                Log.d(TAG,"params:" + params.toString());
-
-                Class<T> clazz = (Class) params[0];
-
-                final T obj = (T) gson.fromJson(s,clazz);
+                if (cache) {
+                    // 2.3 缓存数据
+                    long num = HttpUtil.setCache(urlKey,result);
+                    Log.d(TAG,"num --> " + num);
+                }
 
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         //关闭加载对话框
-                        if (mFragmentManager != null) {
-                            dismissDialog();
-                        }
-                        callback.onSuccess(obj);
+                        dismissDialog();
 
+                        if (cache){
+                            Log.d(TAG,"数据不一致，刷新界面");
+                        }
+
+                        callback.onSuccess(obj);
                     }
                 });
             }
 
             @Override
             public void onFail(final Exception e) {
-
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         //关闭加载对话框
-                        if (mFragmentManager != null) {
-                            dismissDialog();
-                        }
+                        dismissDialog();
                         callback.onFail(e);
                     }
                 });
             }
         };
 
-        //显示加载对话框
-        if (mFragmentManager != null) {
-            showDialog();
+        if (cache){
+            String cacheResult = HttpUtil.getCache(urlKey);
+            //有缓存
+            if (!TextUtils.isEmpty(cacheResult)){
+                T obj = (T) HttpUtil.parseJson(cacheResult,callback.getClass());
+
+                //关闭加载对话框
+                dismissDialog();
+
+                callback.onSuccess(obj);
+
+                Log.d(TAG,"有缓存，使用缓存刷新界面");
+
+                return "222";
+                // TODO: 2017/6/5 后续再改
+            }
         }
+
         switch (request.getRequestMethod()){
             case GET:
                 mEngine.get(request,mHttpCallback);
@@ -160,22 +187,31 @@ public class HttpUtils{
 
     }
 
+    /**
+     * 显示对话框
+     */
     void showDialog(){
+        if (mFragmentManager == null){
+            return;
+        }
         mDialog = new LoadingDialog();
         mDialog.setCancelable(false);
         FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
         fragmentTransaction.add(mDialog, tag);
-        fragmentTransaction.commitAllowingStateLoss();
-//        mDialog.show(mFragmentManager,tag);
+        fragmentTransaction.commitNowAllowingStateLoss();//立即执行
     }
 
+    /**
+     * 取消对话框显示
+     */
     void dismissDialog(){
-        DialogFragment dialog = (DialogFragment) mFragmentManager.findFragmentByTag(tag);
-        if(dialog!= null){
+        if (mFragmentManager == null){
+            return;
+        }
+        LoadingDialog dialog = (LoadingDialog) mFragmentManager.findFragmentByTag(tag);
+        if(dialog != null){
             dialog.dismissAllowingStateLoss();
         }
     }
-
-
 
 }

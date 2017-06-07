@@ -1,4 +1,4 @@
-package com.qiyei.essayjoke;
+package com.qiyei.essayjoke.test;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,12 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.qiyei.essayjoke.R;
 import com.qiyei.sdk.crash.ExceptionCrashHandler;
 import com.qiyei.sdk.ioc.CheckNet;
 import com.qiyei.sdk.ioc.OnClick;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.util.ToastUtil;
-import com.qiyei.essayjoke.test.TestActivity;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 
