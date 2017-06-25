@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/5/19.
@@ -128,6 +130,16 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     }
 
     /**
+     * 设置image的url
+     * @param viewId
+     * @param url
+     */
+    public void setImageUrl(int viewId,String url){
+        ImageView imageView = getView(viewId);
+        Glide.with(imageView.getContext()).load(url).into(imageView);
+    }
+
+    /**
      * 设置item中某个view的点击事件
      * @param viewId
      * @param listener
@@ -143,6 +155,22 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
      */
     public void setOnLongClickListener(int viewId,View.OnLongClickListener listener) {
         getView(viewId).setOnLongClickListener(listener);
+    }
+
+    /**
+     * 设置View可见
+     * @param id
+     */
+    public void setViewVisible(int id){
+        getView(id).setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * 设置View Gone
+     * @param id
+     */
+    public void setViewGone(int id){
+        getView(id).setVisibility(View.GONE);
     }
 
 //    /**

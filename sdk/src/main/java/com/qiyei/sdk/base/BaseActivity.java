@@ -1,10 +1,16 @@
 package com.qiyei.sdk.base;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.qiyei.sdk.ioc.ViewUtils;
 
@@ -19,25 +25,31 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     protected final String TAG = "Activity";
 
+    /**
+     * context
+     */
+    protected Context mContext;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView();
+        initContentView();
         ViewUtils.inject(this);
-        initTitle();
-        initView();
-        initData();
+        //initData();
+        //initView();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //ViewUtils.unInject(this);
+    }
 
     /**
-     * 设置布局文件
+     * 设置setContentView布局
      */
-    protected abstract void setContentView();
-    /**
-     * 初始化标题
-     */
-    protected abstract void initTitle();
+    protected abstract void initContentView();
+
     /**
      * 初始化View
      */
@@ -63,6 +75,48 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
      */
     protected void startActivity(Class<?> clazz){
         startActivity(new Intent(this,clazz));
+    }
+
+    /**
+     * TODO initialization system status bar , but build version need greater 19
+     */
+    /**
+     * 设置系统状态栏颜色
+     * @param color
+     */
+    protected void initSystemBar(int color) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            setTranslucentStatus(this, true);
+        }
+
+        SystemBarTintManager tintManager = new SystemBarTintManager(this);
+
+        tintManager.setStatusBarTintEnabled(true);
+        // 使用颜色资源
+        tintManager.setStatusBarTintResource(color);
+    }
+
+    /**
+     * 设置系统顶部栏和程序主题颜色统一
+     * @param activity 当前活动Activity实例
+     * @param on
+     * void
+     */
+    @TargetApi(19)
+    private void setTranslucentStatus(Activity activity, boolean on) {
+
+        Window win = activity.getWindow();
+
+        WindowManager.LayoutParams winParams = win.getAttributes();
+
+        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
+
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 
 

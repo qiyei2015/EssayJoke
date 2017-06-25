@@ -1,8 +1,8 @@
-package com.qiyei.essayjoke.activity;
+package com.qiyei.essayjoke.test;
 
 
 import android.os.Bundle;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 import android.view.View;
 
 import com.qiyei.essayjoke.R;
@@ -28,12 +28,12 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     }
 
     @Override
-    protected void setContentView() {
-
+    protected void initContentView() {
+        setContentView(R.layout.activity_easy_joke_main);
     }
 
     @Override
-    protected void initTitle() {
+    protected void initView() {
         CommonTitleBar commonNavigationBar = new CommonTitleBar.Builder(this)
                 .setTitle("主界面")
                 .setRightText("投稿")
@@ -47,22 +47,17 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     }
 
     @Override
-    protected void initView() {
-        setContentView(R.layout.activity_easy_joke_main);
-    }
-
-    @Override
     protected void initData() {
         new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
             @Override
             public void onSuccess(DiscoverListResult result) {
-                Log.d(TAG,"name --> "+result.getData().getCategories().getName());
+                LogUtil.d(TAG,"name --> "+result.getData().getCategories().getName());
                 //ToastUtil.showLongToast(result.getData().getCategories().getName());
             }
 
             @Override
             public void onFail(Exception e) {
-                Log.d(TAG,e.getMessage());
+                LogUtil.d(TAG,e.getMessage());
                 ToastUtil.showLongToast(e.getMessage());
             }
         });

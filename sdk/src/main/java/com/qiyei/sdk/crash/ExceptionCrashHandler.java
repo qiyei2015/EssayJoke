@@ -6,7 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Environment;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,7 +66,7 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-        Log.e(TAG,e.getMessage());
+        LogUtil.e(TAG,e.getMessage());
 
         //写入到本地文件 e 当前应用版本 手机信息
 
@@ -76,7 +76,7 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
         // 4. 保存当乞丐了文件，等应用再次启动再上传(上传文件不在这里处理)
 
         String crashFile = saveExceptionToSD(e);
-        Log.e(TAG,"crashFile --> " + crashFile);
+        LogUtil.e(TAG,"crashFile --> " + crashFile);
         // 缓存崩溃日志文件
         cacheCrashFile(crashFile);
 

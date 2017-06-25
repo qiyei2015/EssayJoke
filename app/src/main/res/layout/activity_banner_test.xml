@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_banner_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.qiyei.essayjoke.test.BannerTestActivity">
+
+    <com.qiyei.sdk.view.banner.BannerViewPager
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:id="@+id/banner_view_pager">
+    </com.qiyei.sdk.view.banner.BannerViewPager>
+
+</LinearLayout>

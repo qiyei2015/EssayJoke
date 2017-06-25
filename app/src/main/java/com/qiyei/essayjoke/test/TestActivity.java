@@ -7,12 +7,11 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
-import com.qiyei.essayjoke.activity.EasyJokeMainActivity;
 import com.qiyei.essayjoke.model.User;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
@@ -40,22 +39,23 @@ public class TestActivity extends BaseSkinActivity {
     private Button btn4;
     @ViewById(R.id.btn5)
     private Button btn5;
+    @ViewById(R.id.btn6)
+    private Button btn6;
+
+    @ViewById(R.id.btn7)
+    private Button btn7;
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    protected void setContentView() {
+    protected void initContentView() {
         setContentView(R.layout.activity_test);
-    }
-
-    @Override
-    protected void initTitle() {
-
     }
 
     @Override
@@ -69,11 +69,9 @@ public class TestActivity extends BaseSkinActivity {
 
         //如果没有权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED ){
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE
-                    ,Manifest.permission.ACCESS_COARSE_LOCATION },MY_PERMISSIONS_REQUEST_WRITE_STORE);
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
         }else {
             initDataBase();
         }
@@ -88,11 +86,10 @@ public class TestActivity extends BaseSkinActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_STORE){
-            Log.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
+            LogUtil.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
 
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[2] == PackageManager.PERMISSION_GRANTED ){
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
                 initDataBase();
             }else {
                 ToastUtil.showLongToast("你拒绝了获取存储卡的权限");
@@ -144,6 +141,16 @@ public class TestActivity extends BaseSkinActivity {
     @OnClick(R.id.btn5)
     private void testBtn5(View view){
         startActivity(EasyJokeMainActivity.class);
+    }
+
+    @OnClick(R.id.btn6)
+    private void testBtn6(View view){
+        startActivity(SkinTestActivity.class);
+    }
+
+    @OnClick(R.id.btn7)
+    private void testBtn7(View view){
+        startActivity(BannerTestActivity.class);
     }
 
     private void fixBug(){

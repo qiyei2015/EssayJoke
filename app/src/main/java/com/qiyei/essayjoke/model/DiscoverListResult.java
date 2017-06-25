@@ -96,7 +96,7 @@ public class DiscoverListResult {
              */
 
             private int count;
-            private List<?> banners;
+            private List<BannersBean> banners;
 
             public int getCount() {
                 return count;
@@ -106,12 +106,124 @@ public class DiscoverListResult {
                 this.count = count;
             }
 
-            public List<?> getBanners() {
+            public List<BannersBean> getBanners() {
                 return banners;
             }
 
-            public void setBanners(List<?> banners) {
+            public void setBanners(List<BannersBean> banners) {
                 this.banners = banners;
+            }
+
+            public static class BannersBean {
+                private String schema_url;
+                /**
+                 * title : 天蝎宝宝嗨起来~
+                 * url_list : [{"url":"http://p9.pstatp.com/origin/ef400087b7d7fbdec85"},{"url":"http://pb3.pstatp.com/origin/ef400087b7d7fbdec85"},{"url":"http://pb3.pstatp.com/origin/ef400087b7d7fbdec85"}]
+                 * uri : ef400087b7d7fbdec85
+                 * height : 248
+                 * width : 640
+                 * id : 375
+                 */
+
+                private BannerUrlBean banner_url;
+                private List<?> target_users;
+
+                public String getSchema_url() {
+                    return schema_url;
+                }
+
+                public void setSchema_url(String schema_url) {
+                    this.schema_url = schema_url;
+                }
+
+                public BannerUrlBean getBanner_url() {
+                    return banner_url;
+                }
+
+                public void setBanner_url(BannerUrlBean banner_url) {
+                    this.banner_url = banner_url;
+                }
+
+                public List<?> getTarget_users() {
+                    return target_users;
+                }
+
+                public void setTarget_users(List<?> target_users) {
+                    this.target_users = target_users;
+                }
+
+                public static class BannerUrlBean {
+                    private String title;
+                    private String uri;
+                    private int height;
+                    private int width;
+                    private int id;
+                    /**
+                     * url : http://p9.pstatp.com/origin/ef400087b7d7fbdec85
+                     */
+
+                    private List<UrlListBean> url_list;
+
+                    public String getTitle() {
+                        return title;
+                    }
+
+                    public void setTitle(String title) {
+                        this.title = title;
+                    }
+
+                    public String getUri() {
+                        return uri;
+                    }
+
+                    public void setUri(String uri) {
+                        this.uri = uri;
+                    }
+
+                    public int getHeight() {
+                        return height;
+                    }
+
+                    public void setHeight(int height) {
+                        this.height = height;
+                    }
+
+                    public int getWidth() {
+                        return width;
+                    }
+
+                    public void setWidth(int width) {
+                        this.width = width;
+                    }
+
+                    public int getId() {
+                        return id;
+                    }
+
+                    public void setId(int id) {
+                        this.id = id;
+                    }
+
+                    public List<UrlListBean> getUrl_list() {
+                        return url_list;
+                    }
+
+                    public void setUrl_list(List<UrlListBean> url_list) {
+                        this.url_list = url_list;
+                    }
+
+                    public static class UrlListBean {
+                        private String url;
+
+                        public String getUrl() {
+                            return url;
+                        }
+
+                        public void setUrl(String url) {
+                            this.url = url;
+                        }
+                    }
+                }
             }
         }
 

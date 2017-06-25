@@ -9,6 +9,4 @@ package com.qiyei.sdk.log;
 public class LogManager {
 
 
-
-
 }

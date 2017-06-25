@@ -4,7 +4,7 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -82,7 +82,7 @@ public class IndicatorGroupView extends FrameLayout {
         if (bottomTrackView == null){
             return;
         }
-        Log.d(TAG,"mBottomTrackView: itemWidth:" + itemWidth);
+        LogUtil.d(TAG,"mBottomTrackView: itemWidth:" + itemWidth);
 
         mBottomTrackView = bottomTrackView;
         mItemWidth = itemWidth;
@@ -111,7 +111,7 @@ public class IndicatorGroupView extends FrameLayout {
         mTrackParams.leftMargin = mInitLeftMargin;
 
         mBottomTrackView.setLayoutParams(mTrackParams);
-        Log.d(TAG,"mBottomTrackView: width:" + mBottomTrackView.getWidth() + "," + mBottomTrackView.getHeight() + " "+ mBottomTrackView.getBackground());
+        LogUtil.d(TAG,"mBottomTrackView: width:" + mBottomTrackView.getWidth() + "," + mBottomTrackView.getHeight() + " "+ mBottomTrackView.getBackground());
         addView(mBottomTrackView);
     }
 

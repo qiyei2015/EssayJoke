@@ -115,11 +115,20 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     }
 
     /**
+     * 设置数据
+     * @param datas
+     */
+    public void setDatas(List<T> datas){
+        mDatas = datas;
+        notifyDataSetChanged();
+    }
+
+    /**
      * 数据绑定操作
      * @param holder
-     * @param data
+     * @param item
      * @param position
      */
-    public abstract void convert(BaseViewHolder holder, T data, int position);
+    public abstract void convert(BaseViewHolder holder, T item, int position);
 
 }

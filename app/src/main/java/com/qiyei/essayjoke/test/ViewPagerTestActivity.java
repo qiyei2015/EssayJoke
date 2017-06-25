@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,12 +43,12 @@ public class ViewPagerTestActivity extends BaseSkinActivity {
     }
 
     @Override
-    protected void setContentView() {
+    protected void initContentView() {
         setContentView(R.layout.activity_view_pager_test);
     }
 
     @Override
-    protected void initTitle() {
+    protected void initView() {
         CommonTitleBar commonNavigationBar = new CommonTitleBar.Builder(this)
                 .setTitle("主界面")
                 .setRightText("投稿")
@@ -59,19 +59,17 @@ public class ViewPagerTestActivity extends BaseSkinActivity {
                     }
                 })
                 .build();
-    }
 
-    @Override
-    protected void initView() {
         mIndicatorView = (IndicatorView) findViewById(R.id.indicator_view);
         mViewPager = (ViewPager) findViewById(R.id.view_pager);
+        initViewPager();
     }
 
     @Override
     protected void initData() {
         mIndicators = new ArrayList<>();
         //initIndicator();
-        initViewPager();
+
     }
 
     @Override
@@ -106,7 +104,7 @@ public class ViewPagerTestActivity extends BaseSkinActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                  //滚动的过程中会不断的回掉
-                 Log.e("TAG", "position --> " + position + "  positionOffset --> "
+                 LogUtil.e("TAG", "position --> " + position + "  positionOffset --> "
                          + positionOffset + " positionOffsetPixels --> " + positionOffsetPixels);
 
 //                ColorTrackTextView left = mIndicators.get(position);
@@ -161,14 +159,14 @@ public class ViewPagerTestActivity extends BaseSkinActivity {
             public void highLightIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.RED);
-                Log.d(TAG,"highLightIndicator,textView:" + Color.RED);
+                LogUtil.d(TAG,"highLightIndicator,textView:" + Color.RED);
             }
 
             @Override
             public void restoreIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.BLACK);
-                Log.d(TAG,"restoreIndicator,textView:" + Color.BLACK);
+                LogUtil.d(TAG,"restoreIndicator,textView:" + Color.BLACK);
             }
 
             @Override

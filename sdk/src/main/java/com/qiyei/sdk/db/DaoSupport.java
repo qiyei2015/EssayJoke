@@ -3,7 +3,7 @@ package com.qiyei.sdk.db;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.util.ArrayMap;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -66,7 +66,7 @@ public class DaoSupport<T> implements IDaoSupport<T>{
 
         sb.replace(sb.length() - 2, sb.length(), ")");
 
-        Log.d(TAG,"create table --> " + sb.toString());
+        LogUtil.d(TAG,"create table --> " + sb.toString());
 
         mDatabase.execSQL(sb.toString());
     }

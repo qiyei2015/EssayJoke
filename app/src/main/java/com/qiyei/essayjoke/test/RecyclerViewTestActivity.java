@@ -82,9 +82,9 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
             mRecyclerView.addFooterView(footer);
         }
 
-        //mRecyclerView.setPullRefresh(true);
+        mRecyclerView.setPullRefresh(true);
 
-        //mRecyclerView.setPullLoad(true);
+        mRecyclerView.setPullLoad(true);
 
         ItemTouchHelper helper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
             @Override

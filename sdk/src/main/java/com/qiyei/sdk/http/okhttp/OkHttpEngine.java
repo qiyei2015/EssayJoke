@@ -1,6 +1,6 @@
 package com.qiyei.sdk.http.okhttp;
 
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.sdk.http.base.HttpHelper;
 import com.qiyei.sdk.http.base.IHttpCallback;
@@ -34,7 +34,7 @@ public class OkHttpEngine implements IHttpEngine{
     public void get(HttpRequest req, final IHttpCallback callback) {
 
         String url = HttpHelper.buildGetRequest(req);
-        Log.e("Get请求路径：", url);
+        LogUtil.e("Get请求路径：", url);
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder().url(url);
         Request request = builder.build();
 
@@ -65,7 +65,7 @@ public class OkHttpEngine implements IHttpEngine{
                 .post(requestBody)
                 .build();
 
-        Log.e("Post请求路径：", httpRequest.getUrl());
+        LogUtil.e("Post请求路径：", httpRequest.getUrl());
 
         mClient.newCall(request).enqueue(new Callback() {
             @Override

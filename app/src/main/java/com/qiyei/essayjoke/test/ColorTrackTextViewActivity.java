@@ -30,20 +30,16 @@ public class ColorTrackTextViewActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
     }
 
     @Override
-    protected void setContentView() {
+    protected void initContentView() {
         setContentView(R.layout.activity_color_track_text_view);
     }
 
     @Override
     protected void initView() {
-
-    }
-
-    @Override
-    protected void initTitle() {
         CommonTitleBar commonNavigationBar = new CommonTitleBar.Builder(this)
                 .setTitle("主界面")
                 .setRightText("投稿")
@@ -96,7 +92,7 @@ public class ColorTrackTextViewActivity extends BaseSkinActivity {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 // 滚动的过程中会不断的回掉
-                // Log.e("TAG", "position --> " + position + "  positionOffset --> "
+                // LogUtil.e("TAG", "position --> " + position + "  positionOffset --> "
                 //         + positionOffset + " positionOffsetPixels --> " + positionOffsetPixels);
 
                 ColorTrackTextView left = mIndicators.get(position);

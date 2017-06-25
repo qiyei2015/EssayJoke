@@ -2,7 +2,7 @@ package com.qiyei.sdk.db;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -37,7 +37,7 @@ public class DaoSupportFactory {
         }
 
         File dbFile = new File(dbDir,"easyJoke.db");
-        Log.d(TAG,"dbFile --> " + dbFile);
+        LogUtil.d(TAG,"dbFile --> " + dbFile);
 
         //如果存在就删除文件
         if (dbFile.exists()){
@@ -57,11 +57,11 @@ public class DaoSupportFactory {
             mDatabase = SQLiteDatabase.openOrCreateDatabase(dbFile,null);
             if (mDatabase == null){
                 ToastUtil.showLongToast("数据库创建失败");
-                Log.d(TAG,"数据库创建失败");
+                LogUtil.d(TAG,"数据库创建失败");
             }
         }else {
             ToastUtil.showLongToast("数据库创建失败");
-            Log.d(TAG,"数据库创建失败");
+            LogUtil.d(TAG,"数据库创建失败");
         }
     }
 

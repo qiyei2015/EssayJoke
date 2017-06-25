@@ -594,6 +594,7 @@
     <color name="tab_text_normal_night">#ff4d5059</color>
     <color name="text_play_times">@color/s4</color>
     <color name="title_bar_bg_day">#ffdcd9cf</color>
+    <color name="title_bar_bg_day_dark">#e6e0c9</color>
     <color name="title_bar_bg_night">#ff0a0b0d</color>
     <color name="title_button_text">#ff9b4d00</color>
     <color name="title_button_text_night">@color/default_text_night</color>

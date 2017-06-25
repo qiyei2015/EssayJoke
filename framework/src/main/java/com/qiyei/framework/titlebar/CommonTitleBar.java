@@ -39,6 +39,25 @@ public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
     }
 
     /**
+     * 设置Tiltle
+     * @param title
+     */
+    public void setTitle(String title){
+        mParams.mTitle = title;
+        setText(R.id.title,mParams.mTitle);
+    }
+
+    /**
+     * 设置右侧文字
+     * @param text
+     * @return
+     */
+    public void setRightText(String text){
+        mParams.mRightText = text;
+        setText(R.id.right_text,mParams.mRightText);
+    }
+
+    /**
      * Builder模式设置各种效果
      */
     public static class Builder extends AbsTitleBar.Builder{
@@ -91,5 +110,6 @@ public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
             return new CommonTitleBar(mBarParams);
         }
     }
+
 
 }

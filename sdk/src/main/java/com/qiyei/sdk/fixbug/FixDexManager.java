@@ -1,7 +1,7 @@
 package com.qiyei.sdk.fixbug;
 
 import android.content.Context;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.sdk.util.FileUtil;
 
@@ -64,7 +64,7 @@ public class FixDexManager {
 
         File destFile = new File(mDexFile,srcFile.getName());
         if (destFile.exists()){
-            Log.d(TAG,"patch [" + dexFile + "] has been load !");
+            LogUtil.d(TAG,"patch [" + dexFile + "] has been load !");
             return;
         }
 

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
+import com.qiyei.sdk.log.LogUtil;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -76,7 +76,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if (changed && mItemWidth == 0){
+        if (changed && mItemWidth == 0 && mAdapter != null){
             mItemWidth = getItemWidth();
             int count = mAdapter.getCount();
             //依次指定每个item的宽度为mItemWidth
@@ -100,7 +100,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
                 mIndicatorContainer.addBottomTrackView(bootomTrackView,(int)w);
             }
 
-            Log.d(TAG, "mItemWidth -> " + mItemWidth);
+            LogUtil.d(TAG, "mItemWidth -> " + mItemWidth);
         }
     }
 
@@ -148,7 +148,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        Log.d(TAG,"position:" + position + ",positionOffset" + positionOffset);
+        LogUtil.d(TAG,"position:" + position + ",positionOffset" + positionOffset);
 
 //        //滚动的时候让当前头部的item一直保持在最中心
 //        indicatorScrollTo(position,positionOffset);
