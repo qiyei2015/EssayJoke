@@ -113,6 +113,14 @@ public class BannerViewPager extends ViewPager {
         super.setAdapter(adapter);
     }
 
+    /**
+     * @return {@link #mAdapter}
+     */
+    @Override
+    public BannerPageAdapter getAdapter() {
+        return mAdapter;
+    }
+
     @Override
     protected void onAttachedToWindow() {
         super.onAttachedToWindow();
@@ -170,5 +178,6 @@ public class BannerViewPager extends ViewPager {
     public void setItemClickListener(BannerItemClickListener listener) {
         mAdapter.setItemClickListener(listener);
     }
+
 
 }

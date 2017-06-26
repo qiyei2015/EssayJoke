@@ -14,4 +14,9 @@
         android:id="@+id/banner_view_pager">
     </com.qiyei.sdk.view.banner.BannerViewPager>
 
+    <com.qiyei.sdk.view.banner.BannerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </com.qiyei.sdk.view.banner.BannerView>
+
 </LinearLayout>

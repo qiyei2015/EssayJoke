@@ -66,6 +66,15 @@ public abstract class BannerPageAdapter extends PagerAdapter {
     }
 
     /**
+     * 获取对应位置的Banner描述
+     * @param position
+     * @return
+     */
+    public String getBannerDesc(int position){
+        return "";
+    }
+
+    /**
      * 获取View
      * @param position
      * @return

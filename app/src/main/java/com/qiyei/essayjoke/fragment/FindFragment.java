@@ -30,6 +30,7 @@ import com.qiyei.sdk.util.DisplayUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.banner.BannerItemClickListener;
 import com.qiyei.sdk.view.banner.BannerPageAdapter;
+import com.qiyei.sdk.view.banner.BannerView;
 import com.qiyei.sdk.view.banner.BannerViewPager;
 import com.qiyei.sdk.view.xrecycler.XRecyclerView;
 
@@ -53,7 +54,7 @@ public class FindFragment extends BaseFragment{
 
     private FindAdapter mAdapter;
 
-    private BannerViewPager mBannerViewPager;
+    private BannerView mBannerView;
 
     @Nullable
     @Override
@@ -70,7 +71,7 @@ public class FindFragment extends BaseFragment{
     public void onDetach() {
         super.onDetach();
 
-        mBannerViewPager.stopLoop();
+        mBannerView.stopLoop();
     }
 
     private void initView() {
@@ -93,15 +94,15 @@ public class FindFragment extends BaseFragment{
             }
         });
 
-        mXRecyclerView.addHeaderView(mBannerViewPager);
+        mXRecyclerView.addHeaderView(mBannerView);
     }
 
     private void initData(){
         mDatas = new ArrayList<>();
         mAdapter = new FindAdapter(getContext(),mDatas,R.layout.find_list_item);
-        mBannerViewPager = new BannerViewPager(getContext());
+        mBannerView = new BannerView(getContext());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dip2px(getContext(),140));
-        mBannerViewPager.setLayoutParams(layoutParams);
+        mBannerView.setLayoutParams(layoutParams);
     }
 
     private void addCommonParams(Map<String,Object> params){
@@ -137,7 +138,7 @@ public class FindFragment extends BaseFragment{
     }
 
     private void initBanner(final List<DiscoverListResult.DataBean.RotateBannerBean.BannersBean> list){
-        mBannerViewPager.setAdapter(new BannerPageAdapter() {
+        mBannerView.setAdapter(new BannerPageAdapter() {
             @Override
             public int getCount() {
                 LogUtil.d(TAG,"banner size  --> " + list.size());
@@ -158,13 +159,17 @@ public class FindFragment extends BaseFragment{
                 return bannerIv;
             }
 
+            @Override
+            public String getBannerDesc(int position) {
+                return list.get(position).getBanner_url().getTitle();
+            }
         });
         //开启轮播
-        mBannerViewPager.startLoop();
+        mBannerView.startLoop();
         //设置轮播动画时间
-        mBannerViewPager.setDuration(2000);
-        mBannerViewPager.setSwitchTime(5000);
-        mBannerViewPager.setItemClickListener(new BannerItemClickListener() {
+        mBannerView.setDuration(2000);
+        mBannerView.setSwitchTime(5000);
+        mBannerView.setItemClickListener(new BannerItemClickListener() {
             @Override
             public void click(int position) {
                 ToastUtil.showLongToast("点击Banner的 " + position);
