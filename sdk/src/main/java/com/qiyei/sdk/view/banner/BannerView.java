@@ -13,6 +13,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.qiyei.sdk.log.LogUtil;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/6/26.
@@ -104,6 +106,10 @@ public class BannerView extends FrameLayout {
 
         pageSelect(0);
 
+        //动态指定高度 用第0个图片作为高度
+        getLayoutParams().height = mViewPager.getAdapter().getView(0).getMeasuredHeight();
+        LogUtil.d(TAG,"bannerView.height --> " + mViewPager.getAdapter().getView(0).getMeasuredHeight());
+        requestLayout();
     }
 
     /**

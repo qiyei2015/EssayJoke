@@ -101,7 +101,10 @@ public class FindFragment extends BaseFragment{
         mDatas = new ArrayList<>();
         mAdapter = new FindAdapter(getContext(),mDatas,R.layout.find_list_item);
         mBannerView = new BannerView(getContext());
-        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dip2px(getContext(),140));
+//        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+//                ViewGroup.LayoutParams.MATCH_PARENT, DisplayUtil.dip2px(getContext(),140));
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         mBannerView.setLayoutParams(layoutParams);
     }
 

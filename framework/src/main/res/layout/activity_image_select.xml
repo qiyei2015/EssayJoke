@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".imageselector.ImageSelectActivity">
+
+    <com.qiyei.sdk.view.xrecycler.XRecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:background="#ff261f1f">
+    </com.qiyei.sdk.view.xrecycler.XRecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_layout"
+        android:layout_gravity="bottom"
+        android:padding="10dp"
+        android:background="#800a0909">
+
+        <TextView
+            android:id="@+id/select_preview_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:enabled="false"
+            android:paddingLeft="20.0dip"
+            android:text="@string/media_choose_preview" />
+
+        <TextView
+            android:id="@+id/select_num_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+        <TextView
+            android:id="@+id/select_ok_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20.0dip"
+            android:text="@string/media_choose_ok" />
+    </RelativeLayout>
+
+</FrameLayout>

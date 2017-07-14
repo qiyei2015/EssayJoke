@@ -96,12 +96,25 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
 
     /**
      * 设置View的Visibility
-     * @param viewId
      * @param visibility
+     * @param viewId
      * @return
      */
-    public BaseViewHolder setVisibility(int viewId, int visibility) {
+    public BaseViewHolder setVisibility(int visibility, int viewId) {
         getView(viewId).setVisibility(visibility);
+        return this;
+    }
+
+    /**
+     * 设置View的Visibility
+     * @param visibility
+     * @param args
+     * @return
+     */
+    public BaseViewHolder setVisibility(int visibility,int...args) {
+        for (int i = 0;i < args.length ;i++){
+            getView(args[i]).setVisibility(visibility);
+        }
         return this;
     }
 

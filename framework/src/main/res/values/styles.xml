@@ -37,4 +37,14 @@
         <item name="android:text">@null</item>
         <item name="android:drawableLeft">@null</item>
     </style>
+
+    <!--图片选择器的样式-->
+    <style name="media_choose_btn">
+        <item name="android:textSize">16.0sp</item>
+        <item name="android:textColor">@color/media_choose_op_btn_enabled</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:drawablePadding">10.0dip</item>
+        <item name="android:layout_centerInParent">true</item>
+    </style>
+
 </resources>
