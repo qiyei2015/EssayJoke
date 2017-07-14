@@ -1,6 +1,7 @@
 package com.qiyei.essayjoke.activity;
 
 
+
 import android.os.Bundle;
 
 import android.view.View;
@@ -18,6 +19,7 @@ import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.ioc.ViewById;
+import com.qiyei.sdk.util.SystemStatusBarUtil;
 
 /**
  * Email: 1273482124@qq.com
@@ -79,7 +81,8 @@ public class HomeActivity extends BaseSkinActivity {
                     }
                 })
                 .build();
-        //initSystemBar(R.color.title_bar_bg_day);
+        SystemStatusBarUtil.statusBarTintColor(this,getResources().getColor(R.color.title_bar_bg_day));
+        //SystemStatusBarUtil.setNavigationBarStatusBarTranslucent(this,getSupportActionBar());
         //initViewPager();
         mHomeButton.setOnClickListener(this);
         mFindButton.setOnClickListener(this);

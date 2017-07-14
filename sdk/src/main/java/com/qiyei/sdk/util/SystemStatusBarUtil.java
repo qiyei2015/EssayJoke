@@ -1,17 +1,21 @@
 package com.qiyei.sdk.util;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
+
 /**
- * Created by hWX466139 on 2017/7/2.
+ * Email: 1273482124@qq.com
+ * Created by qiyei2015 on 2017/6/24.
+ * Version: 1.0
+ * Description: app启动的欢迎界面
  */
 public class SystemStatusBarUtil {
 
@@ -90,14 +94,14 @@ public class SystemStatusBarUtil {
      * 设置Activity的statusBar隐藏
      * @param activity
      */
-    public static void statusBarHide(Activity activity){
+    public static void statusBarHide(Activity activity, ActionBar actionBar){
         // 代表 5.0 及以上
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             View decorView = activity.getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN;
             decorView.setSystemUiVisibility(option);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
-            ActionBar actionBar = activity.getActionBar();
+
             actionBar.hide();
             return;
         }
@@ -127,7 +131,7 @@ public class SystemStatusBarUtil {
      * 导航栏，状态栏透明
      * @param activity
      */
-    public static void setNavigationBarStatusBarTranslucent(Activity activity){
+    public static void setNavigationBarStatusBarTranslucent(Activity activity,ActionBar actionBar){
         if (Build.VERSION.SDK_INT >= 21) {
             View decorView = activity.getWindow().getDecorView();
             int option = View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
@@ -137,8 +141,10 @@ public class SystemStatusBarUtil {
             activity.getWindow().setNavigationBarColor(Color.TRANSPARENT);
             activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
-        ActionBar actionBar = activity.getActionBar();
-        actionBar.hide();
+
+        if (actionBar != null){
+            actionBar.hide();
+        }
     }
 
     /**
