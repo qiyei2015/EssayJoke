@@ -1,10 +1,7 @@
 package com.qiyei.essayjoke.fragment;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -28,10 +25,9 @@ import com.qiyei.sdk.ioc.ViewUtils;
 import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.DisplayUtil;
 import com.qiyei.sdk.util.ToastUtil;
+import com.qiyei.sdk.view.banner.BannerAdapter;
 import com.qiyei.sdk.view.banner.BannerItemClickListener;
-import com.qiyei.sdk.view.banner.BannerPageAdapter;
 import com.qiyei.sdk.view.banner.BannerView;
-import com.qiyei.sdk.view.banner.BannerViewPager;
 import com.qiyei.sdk.view.xrecycler.XRecyclerView;
 
 import java.util.ArrayList;
@@ -141,7 +137,7 @@ public class FindFragment extends BaseFragment{
     }
 
     private void initBanner(final List<DiscoverListResult.DataBean.RotateBannerBean.BannersBean> list){
-        mBannerView.setAdapter(new BannerPageAdapter() {
+        mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public int getCount() {
                 LogUtil.d(TAG,"banner size  --> " + list.size());
@@ -155,7 +151,7 @@ public class FindFragment extends BaseFragment{
                 layoutParams.gravity = Gravity.TOP;
                 bannerIv.setLayoutParams(layoutParams);
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
-                String url = list.get(position).getBanner_url().getUrl_list().get(position).getUrl();
+                String url = list.get(position).getBanner_url().getUrl_list().get(0).getUrl();
 
                 Glide.with(getContext()).load(url).into(bannerIv);
 

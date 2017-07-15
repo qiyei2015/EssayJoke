@@ -4,8 +4,11 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.View;
+import android.view.ViewGroup;
 
 
 import java.lang.reflect.Field;
@@ -17,6 +20,7 @@ import java.lang.reflect.Field;
  * Description:
  */
 public class BannerViewPager extends ViewPager {
+
     /**
      * 调试用的标志
      */
@@ -40,11 +44,16 @@ public class BannerViewPager extends ViewPager {
     /**
      * BannerViewPager的Adapter
      */
-    private BannerPageAdapter mAdapter;
+    private BannerAdapter mAdapter;
     /**
      * 动画切换时的Scroller，通过它可以改变轮播的速度
      */
     private BannerScroller mScroller;
+
+    /**
+     * item点击回调的监听
+     */
+    private BannerItemClickListener mListener;
 
     /**
      * 轮播的Handler
@@ -72,6 +81,65 @@ public class BannerViewPager extends ViewPager {
             }
         }
     }
+
+    /**
+     * BannerViewPager的内部类，用于设置Adapter
+     */
+    private class BannerPageAdapter extends PagerAdapter {
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            //官方建议
+            return view == object;
+        }
+
+        /**
+         * 创建ViewPager条目回调的方法
+         * @param container
+         * @param position
+         * @return
+         */
+        @Override
+        public Object instantiateItem(ViewGroup container, final int position) {
+            final int pos = position % mAdapter.getCount();
+            View itemView = mAdapter.getView(pos);
+            container.addView(itemView);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null){
+                        mListener.click(pos);
+                    }
+                }
+            });
+
+            return itemView;
+        }
+
+        /**
+         * 销毁条目回调的方法
+         * @param container
+         * @param position
+         * @param object
+         */
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View)object);
+            object = null;
+        }
+
+        /**
+         * 为了循环，因此设置为最大
+         * @return
+         */
+        @Override
+        public int getCount() {
+            return Integer.MAX_VALUE;
+        }
+
+    }
+
 
     public BannerViewPager(Context context) {
         super(context,null);
@@ -108,16 +176,15 @@ public class BannerViewPager extends ViewPager {
      * 设置Adapter
      * @param adapter
      */
-    public void setAdapter(BannerPageAdapter adapter) {
+    public void setBannerAdapter(BannerAdapter adapter) {
         mAdapter = adapter;
-        super.setAdapter(adapter);
+        super.setAdapter(new BannerPageAdapter());
     }
 
     /**
      * @return {@link #mAdapter}
      */
-    @Override
-    public BannerPageAdapter getAdapter() {
+    public BannerAdapter getBannerAdapter() {
         return mAdapter;
     }
 
@@ -173,11 +240,10 @@ public class BannerViewPager extends ViewPager {
     }
 
     /**
-     * 设置viewpager中的item的点击事件
+     * @param listener the {@link #mListener} to set
      */
     public void setItemClickListener(BannerItemClickListener listener) {
-        mAdapter.setItemClickListener(listener);
+        mListener = listener;
     }
-
 
 }

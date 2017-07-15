@@ -82,8 +82,8 @@ public class BannerView extends FrameLayout {
      * 设置Adapter
      * @param adapter
      */
-    public void setAdapter(BannerPageAdapter adapter) {
-        mViewPager.setAdapter(adapter);
+    public void setAdapter(BannerAdapter adapter) {
+        mViewPager.setBannerAdapter(adapter);
 
         initIndicator();
 
@@ -95,7 +95,8 @@ public class BannerView extends FrameLayout {
 
             @Override
             public void onPageSelected(int position) {
-                pageSelect(position);
+
+                pageSelect(position % mViewPager.getBannerAdapter().getCount());
             }
 
             @Override
@@ -107,9 +108,27 @@ public class BannerView extends FrameLayout {
         pageSelect(0);
 
         //动态指定高度 用第0个图片作为高度
-        getLayoutParams().height = mViewPager.getAdapter().getView(0).getMeasuredHeight();
-        LogUtil.d(TAG,"bannerView.height --> " + mViewPager.getAdapter().getView(0).getMeasuredHeight());
-        requestLayout();
+//        getLayoutParams().height = mViewPager.getAdapter().getView(0).getMeasuredHeight();
+//        LogUtil.d(TAG,"bannerView.height --> " + mViewPager.getAdapter().getView(0).getMeasuredHeight());
+//        requestLayout();
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+
+        ViewGroup.LayoutParams params = getLayoutParams();
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        layoutParams.height = params.height;
+
+        mViewPager.setLayoutParams(layoutParams);
+
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
     }
 
     /**
@@ -254,7 +273,7 @@ public class BannerView extends FrameLayout {
      */
     private void initIndicator(){
         //获取page的个数
-        int count = mViewPager.getAdapter().getCount();
+        int count = mViewPager.getBannerAdapter().getCount();
         mDotContainer.setGravity(mDotGravity);
 
         for (int i = 0 ; i < count ;i++){
@@ -304,7 +323,7 @@ public class BannerView extends FrameLayout {
 
         mCurrentIndex = position;
         //更新Banner的描述
-        mDescTextView.setText(mViewPager.getAdapter().getBannerDesc(position));
+        mDescTextView.setText(mViewPager.getBannerAdapter().getBannerDesc(position));
 
     }
 

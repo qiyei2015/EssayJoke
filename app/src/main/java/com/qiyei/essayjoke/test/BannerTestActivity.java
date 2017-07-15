@@ -1,6 +1,6 @@
 package com.qiyei.essayjoke.test;
 
-import android.support.v7.app.ActionBar;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -18,7 +18,7 @@ import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.base.RequestMethod;
 import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.ToastUtil;
-import com.qiyei.sdk.view.banner.BannerPageAdapter;
+import com.qiyei.sdk.view.banner.BannerAdapter;
 import com.qiyei.sdk.view.banner.BannerViewPager;
 
 import java.util.HashMap;
@@ -89,10 +89,10 @@ public class BannerTestActivity extends AppCompatActivity {
     }
 
     private void initBanner(final List<DiscoverListResult.DataBean.RotateBannerBean.BannersBean> list){
-        mBannerViewPager.setAdapter(new BannerPageAdapter() {
+        mBannerViewPager.setBannerAdapter(new BannerAdapter() {
             @Override
             public int getCount() {
-                LogUtil.d(TAG,"banner size  --> " + list.size());
+                //LogUtil.d(TAG,"banner size  --> " + list.size());
                 return list.size();
             }
 
@@ -103,7 +103,7 @@ public class BannerTestActivity extends AppCompatActivity {
                 layoutParams.gravity = Gravity.TOP;
                 bannerIv.setLayoutParams(layoutParams);
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
-                String url = list.get(position).getBanner_url().getUrl_list().get(position).getUrl();
+                String url = list.get(position).getBanner_url().getUrl_list().get(0).getUrl();
 
                 Glide.with(BannerTestActivity.this).load(url).into(bannerIv);
 
