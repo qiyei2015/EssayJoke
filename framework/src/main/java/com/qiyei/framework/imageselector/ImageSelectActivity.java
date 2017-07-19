@@ -1,13 +1,16 @@
 package com.qiyei.framework.imageselector;
 
 
+import android.content.Intent;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -16,48 +19,60 @@ import android.widget.TextView;
 import com.qiyei.framework.R;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.util.FileUtil;
 import com.qiyei.sdk.view.xrecycler.XRecyclerView;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ImageSelectActivity extends BaseSkinActivity {
+public class ImageSelectActivity extends BaseSkinActivity implements ImageSelectAdapter.UpdateSelectListener{
 
-    // 选择图片的模式 - 多选
-    public static final int MODE_MULTI = 0x0011;
-    // 选择图片的模式 - 单选
-    public static int MODE_SINGLE = 0x0012;
-    // 是否显示相机的EXTRA_KEY
-    public static final String EXTRA_SHOW_CAMERA = "EXTRA_SHOW_CAMERA";
-    // 总共可以选择多少张图片的EXTRA_KEY
-    public static final String EXTRA_SELECT_COUNT = "EXTRA_SELECT_COUNT";
-    // 原始的图片路径的EXTRA_KEY
-    public static final String EXTRA_DEFAULT_SELECTED_LIST = "EXTRA_DEFAULT_SELECTED_LIST";
-    // 选择模式的EXTRA_KEY
-    public static final String EXTRA_SELECT_MODE = "EXTRA_SELECT_MODE";
-    // 返回选择图片列表的EXTRA_KEY
-    public static final String EXTRA_RESULT = "EXTRA_RESULT";
-
-    private XRecyclerView mRecyclerView;
+    private RecyclerView mRecyclerView;
     /**
-     *
+     * 预览按钮
      */
     private TextView mPreviewTv;
     /**
-     *
+     * 显示所选张数
      */
     private TextView mSelectNumTv;
     /**
-     *
+     *确定按钮
      */
     private TextView mSelectOkTv;
-
-    private Bundle mSelectArgs;
-
-    // 图片显示的Adapter
+    /**
+     * 图片显示的Adapter
+     */
     private ImageSelectAdapter mImageAdapter;
+    /**
+     * 图片选择器的参数
+     */
+    private Bundle mSelectArgs;
+    /**
+     * 模式，单选还是多选
+     */
+    private int mMode = ImageSelector.MODE_SINGLE;
+    /**
+     * 最多可选张数
+     */
+    private int mMaxCount = 1;
+    /**
+     * 是否显示相机
+     */
+    private boolean isShowCamera = true;
+    /**
+     * 选择的图片结果
+     */
+    private List<String> mResultList;
+    /**
+     * 打开相机时的临时文件路径
+     */
+    private String mTempFilePath;
 
+    /**
+     * 加载图片的回调
+     */
     private LoaderManager.LoaderCallbacks<Cursor> mLoadCallBack = new LoaderManager.LoaderCallbacks<Cursor>() {
 
         private final String[] IMAGE_PROJECTION = {
@@ -91,7 +106,7 @@ public class ImageSelectActivity extends BaseSkinActivity {
                     String path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]));
                     String name = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
                     long dateTime = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]));
-                    LogUtil.e("TAG", path + " " + name + " " + dateTime);
+                    LogUtil.w(ImageSelector.TAG, path + "  " + name + "  " + dateTime);
 
                     // 判断文件是不是存在
                     if (!pathExist(path)) {
@@ -101,6 +116,8 @@ public class ImageSelectActivity extends BaseSkinActivity {
                     ImageEntity image = new ImageEntity(path, name, dateTime);
                     images.add(image);
                 }
+
+                LogUtil.d(ImageSelector.TAG,"images:" + images.size());
 
                 // 显示列表数据
                 showListData(images);
@@ -138,17 +155,19 @@ public class ImageSelectActivity extends BaseSkinActivity {
         initView();
 
         LoaderManager loaderManager = getSupportLoaderManager();
-        loaderManager.initLoader(SelectorConstant.IMAGE_SELECT,null,mLoadCallBack);
+        loaderManager.initLoader(ImageSelector.IMAGE_SELECT,null,mLoadCallBack);
     }
 
     @Override
     protected void initView() {
-        mRecyclerView = (XRecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mPreviewTv = (TextView) findViewById(R.id.select_preview_tv);
         mSelectNumTv = (TextView) findViewById(R.id.select_num_tv);
         mSelectOkTv = (TextView) findViewById(R.id.select_ok_tv);
 
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this,4));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,3));
+
+        mSelectNumTv.setText( "0/" + mMaxCount);
 
         mPreviewTv.setOnClickListener(this);
         mSelectOkTv.setOnClickListener(this);
@@ -157,26 +176,87 @@ public class ImageSelectActivity extends BaseSkinActivity {
     @Override
     protected void initData() {
         if (getIntent() != null){
-            mSelectArgs = getIntent().getBundleExtra(SelectorConstant.ARGS);
+            mSelectArgs = getIntent().getBundleExtra(ImageSelector.KEY_ARGS);
+            if (mSelectArgs != null){
+                mMode = mSelectArgs.getInt(ImageSelector.KEY_SELECT_MODE,ImageSelector.MODE_SINGLE);
+                mMaxCount = mSelectArgs.getInt(ImageSelector.KEY_MAX_COUNT,1);
+                isShowCamera = mSelectArgs.getBoolean(ImageSelector.KEY_SHOW_CAMERA,true);
+                mResultList = mSelectArgs.getStringArrayList(ImageSelector.KEY_SELECT_LIST);
+            }
+        }
+        if (mResultList == null){
+            mResultList = new ArrayList<>();
         }
     }
 
 
     @Override
     public void onClick(View view) {
+//        switch (view.getId()){
+//            case R.id.select_preview_tv:
+//                break;
+//
+//            default:
+//                break;
+//        }
+    }
 
+    /**
+     * 选择图片
+     */
+    @Override
+    public void imageSelect() {
+        mSelectNumTv.setText(mResultList.size() + "/" + mMaxCount);
+    }
+
+    /**
+     * 打开相机
+     * @param file
+     */
+    @Override
+    public void openCamera(File file) {
+        mTempFilePath = file.getAbsolutePath();
+        LogUtil.d(TAG,"file:" + file.getAbsolutePath());
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+        startActivityForResult(intent, ImageSelector.REQUEST_CAMERA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == ImageSelector.REQUEST_CAMERA) {
+                // notify system the image has change
+                LogUtil.d(TAG,"filepath:" + mTempFilePath);
+                sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(mTempFilePath))));
+                mResultList.add(mTempFilePath);
+                setResult();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     /**
      * 显示图片列表数据
      */
     private void showListData(List<ImageEntity> images) {
-//        if (mImageAdapter == null) {
-//            mImageAdapter = new ImageSelectorListAdapter(this, mResultList, mMaxCount, mMode);
-//            mRecyclerView.setAdapter(mImageAdapter);
-//        }
-//        mImageAdapter.setData(images, mShowCamera);
-//        mImageAdapter.setOnUpdateSelectListener(this);
+        if (mImageAdapter == null) {
+            mImageAdapter = new ImageSelectAdapter(this, mResultList,images, mMaxCount, mMode);
+            mRecyclerView.setAdapter(mImageAdapter);
+        }
+        mImageAdapter.setShowCamera(isShowCamera);
+        mImageAdapter.setOnUpdateSelectListener(this);
+    }
+
+    /**
+     * 设置返回结果
+     */
+    private void setResult() {
+        Intent data = new Intent();
+        data.putStringArrayListExtra(ImageSelector.KEY_RESULT, (ArrayList<String>) mResultList);
+        setResult(RESULT_OK, data);
+        finish();
     }
 
 }

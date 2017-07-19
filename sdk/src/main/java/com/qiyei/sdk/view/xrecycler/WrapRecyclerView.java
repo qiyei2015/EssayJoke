@@ -222,16 +222,13 @@ public class WrapRecyclerView extends RecyclerView {
      * 数据改变时需要判断是否为空
      */
     private void dataChanged() {
+        if (mEmptyView == null){
+            return;
+        }
         if (mAdapter.getItemCount() == 0){
-            if (mEmptyView != null){
-                mEmptyView.setVisibility(VISIBLE);
-            }else {
-                mEmptyView.setVisibility(GONE);
-            }
+            mEmptyView.setVisibility(VISIBLE);
         }else {
-            if (mEmptyView != null){
-                mEmptyView.setVisibility(GONE);
-            }
+            mEmptyView.setVisibility(GONE);
         }
     }
 }

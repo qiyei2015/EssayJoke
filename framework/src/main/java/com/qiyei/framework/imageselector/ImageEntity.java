@@ -14,6 +14,10 @@ public class ImageEntity {
     public String name;
     public long time;
 
+    public ImageEntity() {
+
+    }
+
     public ImageEntity(String path, String name, long time) {
         this.path = path;
         this.name = name;

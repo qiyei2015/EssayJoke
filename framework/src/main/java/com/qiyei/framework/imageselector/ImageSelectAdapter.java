@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import com.qiyei.framework.R;
+import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.FileUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.xrecycler.IMultiTypeLayout;
@@ -27,27 +28,31 @@ import java.util.List;
  */
 public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
 
-
     private Context mContext;
-    private ArrayList<String> mSelectImages;
-    private int mMaxCount;
-    public final static int REQUEST_CAMERA = 0x0045;
+    /**
+     * 模式
+     */
     private int mMode;
-
+    /**
+     * 所选的Images
+     */
+    private List<String> mSelectImages;
+    /**
+     * 最大可选张数
+     */
+    private int mMaxCount;
+    /**
+     * 图片选择时的更新监听
+     */
     private UpdateSelectListener mListener;
 
-    public void setOnUpdateSelectListener(UpdateSelectListener listener) {
-        this.mListener = listener;
-    }
-
-    public ImageSelectAdapter(Context context, ArrayList<String> selectImages, int maxCount, int mode) {
-        super(context, new ArrayList<ImageEntity>(), R.layout.media_chooser_item);
+    public ImageSelectAdapter(Context context, List<String> selectImages,List<ImageEntity> images,int maxCount, int mode) {
+        super(context,images, R.layout.media_chooser_item);
         this.mContext = context;
         mSelectImages = selectImages;
         this.mMaxCount = maxCount;
         this.mMode = mode;
     }
-
 
     public ImageSelectAdapter(Context context, List<ImageEntity> datas, int layoutId) {
         super(context, datas, layoutId);
@@ -59,10 +64,10 @@ public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
 
     @Override
     public void convert(BaseViewHolder holder, final ImageEntity item, int position) {
-        if (item == null) {
+        if (item.name == null) {
             holder.setVisibility(View.INVISIBLE, R.id.image, R.id.mask, R.id.media_selected_indicator);
             holder.setVisibility(View.VISIBLE, R.id.camera_tv);
-            holder.setOnClickListener(R.id.image,new View.OnClickListener() {
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     openCamera();
@@ -91,14 +96,14 @@ public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
                     } else {
                         // 判断是否到达最大
                         if (mMaxCount == mSelectImages.size()) {
-                            ToastUtil.showLongToast("最多只能选择" +
-                                    mMaxCount + "张图片");
+                            ToastUtil.showLongToast(mContext.getString(R.string.max_select) +
+                                    mMaxCount + mContext.getString(R.string.num_photo));
                             return;
                         }
                         mSelectImages.add(item.path);
                     }
                     if (mListener != null) {
-                        mListener.selector();
+                        mListener.imageSelect();
                     }
                     notifyDataSetChanged();
                 }
@@ -117,26 +122,43 @@ public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(mContext, "相机打开失败", Toast.LENGTH_LONG).show();
+            ToastUtil.showLongToast(mContext.getString(R.string.open_camera_fail));
         }
     }
 
     /**
      * 设置数据
      */
-    public void setDatas(List<ImageEntity> images, boolean showCamera) {
-        mDatas.clear();
+    public void setShowCamera(boolean showCamera) {
         if (showCamera) {
-            mDatas.add(null);
+            ImageEntity imageEntity = new ImageEntity();
+            mDatas.add(0,imageEntity);
         }
-        mDatas.addAll(images);
         notifyDataSetChanged();
     }
 
-    public interface UpdateSelectListener {
-        public void selector();
+    /**
+     * 设置listener
+     * @param listener
+     */
+    public void setOnUpdateSelectListener(UpdateSelectListener listener) {
+        this.mListener = listener;
+    }
 
-        public void openCamera(File file);
+    /**
+     * 图片选择更新的监听
+     */
+    public interface UpdateSelectListener {
+        /**
+         * 图片选择回调
+         */
+        void imageSelect();
+
+        /**
+         * 打开相机回调
+         * @param file
+         */
+        void openCamera(File file);
     }
 
 }

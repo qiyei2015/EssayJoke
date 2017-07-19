@@ -49,4 +49,10 @@
         android:id="@+id/btn7"
         android:text="测试7 Banner测试"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn8"
+        android:text="测试8 图片选择器测试"/>
+
 </LinearLayout>

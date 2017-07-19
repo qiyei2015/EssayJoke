@@ -23,7 +23,7 @@ import com.qiyei.sdk.ioc.ViewUtils;
  */
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
-    protected final String TAG = "Activity";
+    protected final String TAG = BaseActivity.class.getSimpleName();
 
     /**
      * context

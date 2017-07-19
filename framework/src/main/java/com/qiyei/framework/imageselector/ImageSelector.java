@@ -2,6 +2,7 @@ package com.qiyei.framework.imageselector;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import java.util.ArrayList;
 
@@ -12,16 +13,68 @@ import java.util.ArrayList;
  */
 
 public class ImageSelector {
-    // 最多可以选择多少张图片 - 默认8张
+    /**
+     * 调试用的TAG
+     */
+    public static final String TAG = ImageSelector.class.getSimpleName();
+    /**
+     * 图片选择的请求码
+     */
+    public static final int IMAGE_SELECT = 1;
+    /**
+     * 相机请求码
+     */
+    public final static int REQUEST_CAMERA = 0x0045;
+
+    /**
+     * 多选
+     */
+    public static final int MODE_MULTI = 1;
+    /**
+     * 单选
+     */
+    public static final int MODE_SINGLE = 2;
+
+    /**
+     * 参数
+     */
+    public static final String KEY_ARGS = "key_args";
+    /**
+     * 选择图片模式
+     */
+    public static final String KEY_SELECT_MODE = "key_select_mode";
+    /**
+     * 是否显示相机的EXTRA_KEY
+     */
+    public static final String KEY_SHOW_CAMERA = "SHOW_CAMERA";
+    /**
+     * 总共可以选择多少张图片的EXTRA_KEY
+     */
+    public static final String KEY_MAX_COUNT = "key_max_count";
+    /**
+     * 原始的图片路径的EXTRA_KEY
+     */
+    public static final String KEY_SELECT_LIST = "key_select_list";
+    /**
+     * 返回选择图片列表的EXTRA_KEY
+     */
+    public static final String KEY_RESULT = "key_result";
+
+    // 最多可以选择多少张图片 - 默认9张
     private int mMaxCount = 9;
-    // 选择图片的模式 - 默认多选
-    private int mMode = ImageSelectActivity.MODE_MULTI;
+    // 选择图片的模式 - 默认单选
+    private int mMode = MODE_SINGLE;
     // 是否显示拍照的相机
     private boolean mShowCamera = true;
+
     // 原始的图片
     private ArrayList<String> mOriginData;
 
+    /**
+     * 私有构造方法
+     */
     private ImageSelector() {
+
     }
 
     public static ImageSelector create() {
@@ -32,7 +85,7 @@ public class ImageSelector {
      * 单选模式
      */
     public ImageSelector single() {
-        mMode = ImageSelectActivity.MODE_SINGLE;
+        mMode = MODE_SINGLE;
         return this;
     }
 
@@ -40,7 +93,7 @@ public class ImageSelector {
      * 多选模式
      */
     public ImageSelector multi() {
-        mMode = ImageSelectActivity.MODE_MULTI;
+        mMode = MODE_MULTI;
         return this;
     }
 
@@ -92,12 +145,17 @@ public class ImageSelector {
      * @param intent
      */
     private void addParamsByIntent(Intent intent) {
-        intent.putExtra(ImageSelectActivity.EXTRA_SHOW_CAMERA, mShowCamera);
-        intent.putExtra(ImageSelectActivity.EXTRA_SELECT_COUNT, mMaxCount);
-        if (mOriginData != null && mMode == ImageSelectActivity.MODE_MULTI) {
-            intent.putStringArrayListExtra(ImageSelectActivity.EXTRA_DEFAULT_SELECTED_LIST, mOriginData);
+        Bundle bundle = new Bundle();
+
+        bundle.putInt(KEY_MAX_COUNT, mMaxCount);
+        bundle.putBoolean(KEY_SHOW_CAMERA, mShowCamera);
+
+        if (mOriginData != null && mMode == MODE_MULTI) {
+            bundle.putSerializable(KEY_SELECT_LIST, mOriginData);
         }
-        intent.putExtra(ImageSelectActivity.EXTRA_SELECT_MODE, mMode);
+        bundle.putInt(KEY_SELECT_MODE, mMode);
+
+        intent.putExtra(ImageSelector.KEY_ARGS,bundle);
     }
 
 }

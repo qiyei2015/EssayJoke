@@ -44,6 +44,9 @@ public class TestActivity extends BaseSkinActivity {
 
     @ViewById(R.id.btn7)
     private Button btn7;
+    @ViewById(R.id.btn8)
+    private Button btn8;
+
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
@@ -151,6 +154,11 @@ public class TestActivity extends BaseSkinActivity {
     @OnClick(R.id.btn7)
     private void testBtn7(View view){
         startActivity(BannerTestActivity.class);
+    }
+
+    @OnClick(R.id.btn8)
+    private void testBtn8(View view){
+        startActivity(ImageSelectedTestActivity.class);
     }
 
     private void fixBug(){
