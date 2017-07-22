@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -23,6 +24,7 @@ import com.qiyei.sdk.util.FileUtil;
 import com.qiyei.sdk.view.xrecycler.XRecyclerView;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,6 +71,9 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
      * 打开相机时的临时文件路径
      */
     private String mTempFilePath;
+
+
+    private String TEMP_KEY = "temp_key";
 
     /**
      * 加载图片的回调
@@ -145,6 +150,17 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null){
+            mTempFilePath = savedInstanceState.getString(TEMP_KEY);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putString(TEMP_KEY,mTempFilePath);
+
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -169,8 +185,19 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
 
         mSelectNumTv.setText( "0/" + mMaxCount);
 
-        mPreviewTv.setOnClickListener(this);
-        mSelectOkTv.setOnClickListener(this);
+        mPreviewTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        mSelectOkTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult();
+            }
+        });
     }
 
     @Override
@@ -192,13 +219,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
 
     @Override
     public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.select_preview_tv:
-//                break;
-//
-//            default:
-//                break;
-//        }
+
     }
 
     /**
@@ -254,7 +275,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
      */
     private void setResult() {
         Intent data = new Intent();
-        data.putStringArrayListExtra(ImageSelector.KEY_RESULT, (ArrayList<String>) mResultList);
+        data.putExtra(ImageSelector.KEY_RESULT,(Serializable) mResultList);
         setResult(RESULT_OK, data);
         finish();
     }
