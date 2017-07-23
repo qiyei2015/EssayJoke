@@ -26,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:enabled="false"
             android:paddingLeft="20.0dip"
             android:text="@string/media_choose_preview" />
 

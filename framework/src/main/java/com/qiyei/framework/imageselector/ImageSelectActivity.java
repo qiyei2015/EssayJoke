@@ -188,7 +188,9 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
         mPreviewTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(ImageSelectActivity.this,ImagePreviewActivity.class);
+                intent.putExtra(ImageSelector.KEY_RESULT,(Serializable) mResultList);
+                startActivity(intent);
             }
         });
 

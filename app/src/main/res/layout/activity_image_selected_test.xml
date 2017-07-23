@@ -18,6 +18,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imv"/>
+        android:id="@+id/imv"
+        android:scaleType="fitXY"/>
 
 </LinearLayout>
