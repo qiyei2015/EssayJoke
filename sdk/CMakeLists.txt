@@ -4,6 +4,15 @@
 
 cmake_minimum_required(VERSION 3.4.1)
 
+#设置生成的so动态库最后输出的路径
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI})
+
+#设置头文件搜索路径（和此txt同个路径的头文件无需设置），可选
+#INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/common)
+
+#指定用到的系统库或者NDK库或者第三方库的搜索路径，可选。
+#LINK_DIRECTORIES(/usr/local/lib)
+
 # Creates and names a library, sets it as either STATIC
 # or SHARED, and provides the relative paths to its source code.
 # You can define multiple libraries, and CMake builds it for you.
@@ -20,6 +29,15 @@ add_library( # Sets the name of the library.
              # file are automatically included.
              src/main/cpp/compress_image.cpp )
 
+#add_library( imported-lib
+#             SHARED
+#             IMPORTED )
+
+#set_target_properties(
+#                      imported-lib // so库的名称
+#                      PROPERTIES IMPORTED_LOCATION // import so库
+#                      libs/libimported-lib.so // so库路径
+#)
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because system libraries are included in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -39,7 +57,7 @@ find_library( # Sets the name of the path variable.
 
 target_link_libraries( # Specifies the target library.
                        compressimg
-
+                       jnigraphics
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )

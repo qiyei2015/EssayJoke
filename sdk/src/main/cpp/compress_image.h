@@ -10,7 +10,28 @@
 #include <jni.h>
 #include <string>
 
-extern "C"
+/**
+ * 统一编译方式
+ */
+extern "C"{
+#include "jpeg/jpeglib.h"
+#include "jpeg/cdjpeg.h"        /* Common decls for cjpeg/djpeg applications */
+#include "jpeg/jversion.h"        /* for version message */
+#include "jpeg/jconfig.h"
+};
+
+
+/**
+ * Log打印
+ */
+#define LOG_TAG "jni"
+#define LOG_W(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
+#define LOG_I(...) __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define LOG_E(...) __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
+
+#define true 1
+#define false 0
+
 
 JNIEXPORT jint JNICALL
 Java_com_qiyei_sdk_util_ImageUtil_compressBitmap(JNIEnv *env, jclass type, jobject bitmap,
