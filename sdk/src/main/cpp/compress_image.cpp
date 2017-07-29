@@ -36,11 +36,84 @@ struct  error_mgr {
 typedef struct error_mgr *error_ptr;
 
 /**
+ * 错误退出函数
+ */
+METHODDEF(void) error_exit(j_common_ptr info){
+
+    //获取j_common_ptr中的error
+    error_ptr  err = (error_ptr)info->err;
+    //调用error中的output_message输出打印信息
+    (*info->err->output_message)(info);
+    error = (char *)err->pub.jpeg_message_table[err->pub.msg_code];
+
+    LOG_E("jpeg error_exit,jpeg_message_table[%d]:%s",err->pub.msg_code,err->pub.jpeg_message_table[err->pub.msg_code]);
+
+    //
+    longjmp(err->setjmp_buffer,1);
+
+}
+
+/**
  * jpeg压缩图片
  */
 jint compress_jpeg(BYTE * data,int width,int height,int quality,jboolean optimize,char * file_name){
 
+    struct jpeg_compress_struct jcs;
 
+    //当读完整个文件的时候就会回调my_error_exit这个退出方法。
+    struct error_mgr jpeg_err;
+    jcs.err = jpeg_std_error(&jpeg_err.pub);
+    jpeg_err.pub.error_exit = error_exit;
+    //setjmp是洗衣歌系统级函数，是一个回调
+    if (setjmp(jpeg_err.setjmp_buffer)){
+        return -1;
+    }
+
+    //初始化jcs结构体
+    jpeg_create_compress(&jcs);
+    //打开输出文件 wb 可写 rb 可读,最终会把压缩的图像保存到该文件中
+    FILE *f = fopen(file_name,"wb");
+    if ( f == NULL){
+        return -1;
+    }
+
+    //设置jcs的文件路径以及宽高
+    jpeg_stdio_dest(&jcs,f);
+    jcs.image_width = width;
+    jcs.image_height = height;
+    jcs.arith_code = false; //true 算数编码，flase 霍夫曼编码
+    ///* 颜色的组成 rgb，三个 # of color components in input image */
+    int nComponent = 3;
+    jcs.input_components = nComponent; //颜色组成RGB
+    jcs.in_color_space = JCS_RGB;
+
+    jpeg_set_defaults(&jcs);
+    //是否采用霍夫曼编码
+    jcs.optimize_coding = optimize;
+    //设置质量
+    jpeg_set_quality(&jcs,quality,true);
+
+    //开始压缩
+    jpeg_start_compress(&jcs,TRUE);
+
+    JSAMPROW row_pointer[1];
+    int row_stride = jcs.image_width * nComponent;
+
+    //依次按照每一行循环扫描
+    while (jcs.next_scanline < jcs.image_height){
+        //得到一行的首地址。然后写入
+        row_pointer[0] = &data[jcs.next_scanline * row_stride];
+        jpeg_write_scanlines(&jcs,row_pointer,1);
+    }
+
+    //压缩结束
+    jpeg_finish_compress(&jcs);
+    //销毁回收内存
+    jpeg_destroy_compress(&jcs);
+    //关闭文件
+    fclose(f);
+
+    return 0;
 }
 
 
@@ -124,9 +197,5 @@ Java_com_qiyei_sdk_util_ImageUtil_compressBitmap(JNIEnv *env, jclass type, jobje
     LOG_W("result = %d",result);
 
     //4 返回结果
-    if (result == 0){
-        return -1;
-    }
-
-    return 1;
+    return result;
 }

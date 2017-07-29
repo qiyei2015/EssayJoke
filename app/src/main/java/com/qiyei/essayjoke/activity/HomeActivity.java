@@ -14,12 +14,12 @@ import com.qiyei.essayjoke.fragment.FindFragment;
 import com.qiyei.essayjoke.fragment.HomeFragment;
 import com.qiyei.essayjoke.fragment.MessageFragment;
 import com.qiyei.essayjoke.fragment.NewFragment;
-import com.qiyei.essayjoke.test.TestActivity;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.util.SystemStatusBarUtil;
+import com.qiyei.sdk.util.ToastUtil;
 
 /**
  * Email: 1273482124@qq.com
@@ -77,7 +77,7 @@ public class HomeActivity extends BaseSkinActivity {
                 .setRightClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(TestActivity.class);
+                        ToastUtil.showLongToast("请安装测试demo测试");
                     }
                 })
                 .build();

@@ -13,12 +13,18 @@
 /**
  * 统一编译方式
  */
+#ifdef __cplusplus
 extern "C"{
+#endif
+
 #include "jpeg/jpeglib.h"
 #include "jpeg/cdjpeg.h"        /* Common decls for cjpeg/djpeg applications */
 #include "jpeg/jversion.h"        /* for version message */
 #include "jpeg/jconfig.h"
+
+#ifdef __cplusplus
 };
+#endif
 
 
 /**

@@ -26,9 +26,6 @@ public class ImageUtil {
         compressBitmap(bitmap,quality,path);
     }
 
-
-
-
     /**
      * native压缩图片路径
      * @param bitmap

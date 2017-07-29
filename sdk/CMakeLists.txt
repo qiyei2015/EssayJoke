@@ -29,15 +29,15 @@ add_library( # Sets the name of the library.
              # file are automatically included.
              src/main/cpp/compress_image.cpp )
 
-#add_library( imported-lib
-#             SHARED
-#             IMPORTED )
+# 添加libjpeg.so依赖库
+add_library(jpeg SHARED IMPORTED)
 
-#set_target_properties(
-#                      imported-lib // so库的名称
-#                      PROPERTIES IMPORTED_LOCATION // import so库
-#                      libs/libimported-lib.so // so库路径
-#)
+#设置libjpeg.so依赖库路径
+set_target_properties(
+jpeg
+  PROPERTIES IMPORTED_LOCATION
+  ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI}/libjpeg.so)
+
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because system libraries are included in the search path by
 # default, you only need to specify the name of the public NDK library
@@ -58,6 +58,7 @@ find_library( # Sets the name of the path variable.
 target_link_libraries( # Specifies the target library.
                        compressimg
                        jnigraphics
+                       jpeg
                        # Links the target library to the log library
                        # included in the NDK.
                        ${log-lib} )

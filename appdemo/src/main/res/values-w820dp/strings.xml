@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_page">首页</string>
+    <string name="find">发现</string>
+    <string name="fresh">新鲜</string>
+    <string name="message">消息</string>
+    <string name="test">测试</string>
+</resources>

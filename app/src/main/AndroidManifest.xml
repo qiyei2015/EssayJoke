@@ -17,21 +17,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".test.TestActivity">
+        <activity android:name=".activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
-        <activity android:name=".test.ColorTrackTextViewActivity">
-        </activity>
-        <activity android:name=".test.ViewPagerTestActivity">
-        </activity>
-        <activity android:name=".test.RecyclerViewTestActivity">
-        </activity>
-        <activity android:name=".test.EasyJokeMainActivity">
-        </activity>
-        <activity android:name=".test.SkinTestActivity">
+        <activity android:name=".activity.SplashActivity">
         </activity>
         <activity android:name=".activity.HomeActivity">
         </activity>
-
         <service
             android:name=".service.LocalService"
             android:enabled="true"
@@ -50,19 +45,6 @@
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
 
-        <activity android:name=".activity.WelcomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-        <activity android:name=".test.BannerTestActivity">
-        </activity>
-        <activity android:name=".activity.SplashActivity">
-        </activity>
-        <activity android:name=".test.ImageSelectedTestActivity">
-        </activity>
     </application>
 
 </manifest>

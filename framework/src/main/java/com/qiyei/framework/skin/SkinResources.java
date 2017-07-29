@@ -6,6 +6,7 @@ import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Environment;
 import com.qiyei.sdk.log.LogUtil;
 
@@ -71,7 +72,13 @@ public class SkinResources {
     public ColorStateList getColorByName(String name){
         try {
             int resId = mResources.getIdentifier(name,"color", mPackageName);
-            ColorStateList colorStateList = mResources.getColorStateList(resId,null);
+            ColorStateList colorStateList;
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+                colorStateList = mResources.getColorStateList(resId,null);
+            }else {
+                colorStateList = mResources.getColorStateList(resId);
+            }
+
             LogUtil.d(TAG,"resId -> " + resId + " mPackageName -> " + mPackageName  + " resName -> " + name);
             return colorStateList;
         } catch (Resources.NotFoundException e) {
