@@ -1,1 +1,1 @@
-include ':app', ':sdk', ':framework', ':appdemo'
+include ':EssayJokeApp', ':SDK', ':Framework', ':appdemo'
