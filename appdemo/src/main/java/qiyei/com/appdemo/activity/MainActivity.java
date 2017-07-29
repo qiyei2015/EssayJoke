@@ -55,12 +55,13 @@ public class MainActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initData();
+        initView();
     }
 
     @Override
     protected void initContentView() {
-        setContentView(R.layout.activity_test);
+        setContentView(R.layout.activity_main);
     }
 
     @Override
@@ -74,9 +75,10 @@ public class MainActivity extends BaseSkinActivity {
 
         //如果没有权限
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
         }else {
             initDataBase();
         }
@@ -86,7 +88,7 @@ public class MainActivity extends BaseSkinActivity {
     public void onClick(View v) {
         if (v.getId() == R.id.btn1){
             ToastUtil.showLongToast(2/1 + "测试");
-            startActivity(ColorTrackTextViewActivity.class);
+            startActivity(TestActivity.class);
         }
     }
 

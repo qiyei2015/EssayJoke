@@ -11,12 +11,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qiyei.sdk.view.XGridView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+
+import qiyei.com.appdemo.R;
 
 public class TestActivity extends AppCompatActivity {
     private Context mContext;
@@ -32,55 +36,55 @@ public class TestActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_test);
-//
-//        initData();
-//        initView();
+        setContentView(R.layout.activity_test);
+
+        initData();
+        initView();
         setListener();
     }
 
-//    private void initView() {
-//        tv1 = (TextView) findViewById(R.id.tv1);
-//        btn1 = (Button) findViewById(R.id.btn1);
-//        xGridView = (XGridView) findViewById(R.id.x_grid_view);
-//        xGridView.setAdapter(adapter);
-//        xGridView.setOnItemChangeListener(new XGridView.OnItemChangeListener() {
-//            @Override
-//            public void onChange(int from, int to) {
-//                Toast.makeText(mContext,"From:" + from + "  To:" + to,Toast.LENGTH_LONG);
-//
-//                HashMap<String, Object> temp = dataSourceList.get(from);
-//                //直接交互
-//                //Collections.swap(dataSourceList,from,to);
-//
-//                //非直接交互 这里的处理需要注意下 排序交换
-//                if(from < to){
-//                    for(int i = from; i < to; i++){
-//                        Collections.swap(dataSourceList, i, i+1);
-//                    }
-//                }else if(from > to){
-//                    for(int i = from; i > to; i--){
-//                        Collections.swap(dataSourceList, i, i-1);
-//                    }
-//                }
-//                dataSourceList.set(to, temp);
-//
-//                adapter.notifyDataSetChanged();
-//            }
-//        });
-//    }
-//
-//    private void initData() {
-//        mContext = this;
-//        for (int i = 0; i < 30;i++){
-//            HashMap<String,Object> itemMap = new HashMap<>();
-//            itemMap.put("item_image",R.drawable.icon_alipay_main_icon);
-//            itemMap.put("item_text","拖拽" + i);
-//            dataSourceList.add(itemMap);
-//        }
-//        adapter = new SimpleAdapter(this,dataSourceList,R.layout.item_grid_view
-//                ,new String[]{"item_image","item_text"},new int[]{R.id.item_imv,R.id.item_tv});
-//    }
+    private void initView() {
+        tv1 = (TextView) findViewById(R.id.tv1);
+        btn1 = (Button) findViewById(R.id.btn1);
+        xGridView = (XGridView) findViewById(R.id.x_grid_view);
+        xGridView.setAdapter(adapter);
+        xGridView.setOnItemChangeListener(new XGridView.OnItemChangeListener() {
+            @Override
+            public void onChange(int from, int to) {
+                Toast.makeText(mContext,"From:" + from + "  To:" + to,Toast.LENGTH_LONG);
+
+                HashMap<String, Object> temp = dataSourceList.get(from);
+                //直接交互
+                //Collections.swap(dataSourceList,from,to);
+
+                //非直接交互 这里的处理需要注意下 排序交换
+                if(from < to){
+                    for(int i = from; i < to; i++){
+                        Collections.swap(dataSourceList, i, i+1);
+                    }
+                }else if(from > to){
+                    for(int i = from; i > to; i--){
+                        Collections.swap(dataSourceList, i, i-1);
+                    }
+                }
+                dataSourceList.set(to, temp);
+
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void initData() {
+        mContext = this;
+        for (int i = 0; i < 30;i++){
+            HashMap<String,Object> itemMap = new HashMap<>();
+            itemMap.put("item_image",R.drawable.icon_alipay_main_icon);
+            itemMap.put("item_text","拖拽" + i);
+            dataSourceList.add(itemMap);
+        }
+        adapter = new SimpleAdapter(this,dataSourceList,R.layout.item_grid_view
+                ,new String[]{"item_image","item_text"},new int[]{R.id.item_imv,R.id.item_tv});
+    }
 
     private void setListener() {
         final ValueAnimator animator = ValueAnimator.ofInt(0,400);

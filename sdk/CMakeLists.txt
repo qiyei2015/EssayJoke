@@ -34,7 +34,7 @@ add_library(jpeg SHARED IMPORTED)
 
 #设置libjpeg.so依赖库路径
 set_target_properties(
-jpeg
+  jpeg
   PROPERTIES IMPORTED_LOCATION
   ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI}/libjpeg.so)
 

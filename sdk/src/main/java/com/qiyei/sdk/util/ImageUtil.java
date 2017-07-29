@@ -12,7 +12,7 @@ public class ImageUtil {
 
     static {
         //加载libjpeg库
-//        System.loadLibrary("jpeg");
+        System.loadLibrary("jpeg");
         System.loadLibrary("compressimg");
     }
 
@@ -27,12 +27,35 @@ public class ImageUtil {
     }
 
     /**
-     * native压缩图片路径
+     * 压缩图片
+     * @param bitmap
+     * @param width
+     * @param height
+     * @param path
+     */
+    public static void compressImage(Bitmap bitmap,int width,int height,String path){
+        jpegCompressBitmap(bitmap,width,height,path);
+    }
+
+
+    /**
+     * native压缩图片
      * @param bitmap
      * @param quality
      * @param path
      * @return
      */
     private native static int compressBitmap(Bitmap bitmap,int quality,String path);
+
+    /**
+     * native压缩图片,暂时有问题
+     * @param bitmap
+     * @param width
+     * @param height
+     * @param path
+     * @return
+     */
+    private native static int jpegCompressBitmap(Bitmap bitmap,int width,int height,String path);
+
 
 }

@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
 
     <application
         android:name=".BaseApplication"
@@ -32,6 +33,12 @@
         </activity>
         <activity android:name=".activity.SkinTestActivity">
         </activity>
+        <activity android:name=".activity.BannerTestActivity">
+        </activity>
+        <activity android:name=".activity.ImageSelectedTestActivity">
+        </activity>
+        <activity android:name=".activity.TestActivity">
+        </activity>
 
         <service
             android:name=".service.LocalService"
@@ -50,11 +57,6 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
-
-        <activity android:name=".activity.BannerTestActivity">
-        </activity>
-        <activity android:name=".activity.ImageSelectedTestActivity">
-        </activity>
     </application>
 
 </manifest>

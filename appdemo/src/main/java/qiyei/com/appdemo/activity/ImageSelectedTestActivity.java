@@ -61,9 +61,11 @@ public class ImageSelectedTestActivity extends AppCompatActivity {
 
                 Bitmap bitmap = BitmapFactory.decodeFile(path);
 
-                ImageUtil.compressImage(bitmap,50, Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
+                ImageUtil.compressImage(bitmap,800,600, Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
                         new File(path).getName());
-                //mImageView.setImageBitmap(bitmap);
+                Bitmap bitmap2 = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
+                        new File(path).getName());
+                mImageView.setImageBitmap(bitmap2);
 
                 //Glide.with(this).load(mImageList.get(0)).override(1080,1500).into(mImageView);
             }
