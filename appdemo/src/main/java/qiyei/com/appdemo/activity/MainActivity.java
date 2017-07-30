@@ -23,10 +23,15 @@ import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.List;
 
 import qiyei.com.appdemo.R;
+import qiyei.com.appdemo.model.Control;
+import qiyei.com.appdemo.model.IControl;
 import qiyei.com.appdemo.model.User;
 
 public class MainActivity extends BaseSkinActivity {
@@ -48,7 +53,8 @@ public class MainActivity extends BaseSkinActivity {
     private Button btn7;
     @ViewById(R.id.btn8)
     private Button btn8;
-
+    @ViewById(R.id.btn9)
+    private Button btn9;
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
@@ -167,6 +173,11 @@ public class MainActivity extends BaseSkinActivity {
         startActivity(ImageSelectedTestActivity.class);
     }
 
+    @OnClick(R.id.btn9)
+    private void testBtn9(View view){
+        dynamicProxy();
+    }
+
     private void fixBug(){
         File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.dex");
         if (!fixFile.exists()){
@@ -195,4 +206,21 @@ public class MainActivity extends BaseSkinActivity {
         }
         userDao.insert(users);
     }
+
+
+    private void dynamicProxy(){
+        final Control control = new Control();
+
+        IControl controlProxy = (IControl) Proxy.newProxyInstance(control.getClass().getClassLoader(), control.getClass().getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                LogUtil.d("invoke","first invoke method !");
+
+                return method.invoke(control,args);
+            }
+        });
+
+        controlProxy.printHello("hello world !");
+    }
+
 }

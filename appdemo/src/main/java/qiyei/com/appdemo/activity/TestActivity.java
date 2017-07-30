@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.qiyei.sdk.view.XGridView;
 
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
