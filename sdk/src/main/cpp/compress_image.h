@@ -34,11 +34,11 @@ extern "C"{
 #include "jpeg/jconfig.h"
 
 JNIEXPORT jint JNICALL
-        Java_com_qiyei_sdk_util_ImageUtil_compressBitmap(JNIEnv *env, jclass type, jobject bitmap,
+        Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap(JNIEnv *env, jclass type, jobject bitmap,
                                                          jint quality, jstring path_);
 
 JNIEXPORT jint JNICALL
-Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap(JNIEnv *env, jclass type, jobject bitmap,
+Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap2(JNIEnv *env, jclass type, jobject bitmap,
                                                      jint width, jint height, jstring path_);
 #ifdef __cplusplus
 };

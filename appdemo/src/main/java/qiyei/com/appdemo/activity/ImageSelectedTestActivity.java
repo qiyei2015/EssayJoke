@@ -59,9 +59,10 @@ public class ImageSelectedTestActivity extends AppCompatActivity {
                 LogUtil.d(TAG,"image -->"+mImageList.toString());
                 String path = mImageList.get(0);
 
-                Bitmap bitmap = BitmapFactory.decodeFile(path);
+                //Bitmap bitmap = ImageUtil.scaleImage(BitmapFactory.decodeFile(path),800,480);
+                Bitmap bitmap = ImageUtil.cropImage(BitmapFactory.decodeFile(path),1000,500,ImageUtil.TOP_LEFT);
 
-                ImageUtil.compressImage(bitmap,800,600, Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
+                ImageUtil.compressImage(bitmap,50, Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
                         new File(path).getName());
                 Bitmap bitmap2 = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator +
                         new File(path).getName());

@@ -116,9 +116,8 @@ jint compress_jpeg(BYTE * data,int width,int height,int quality,jboolean optimiz
     return 0;
 }
 
-
 JNIEXPORT jint JNICALL
-Java_com_qiyei_sdk_util_ImageUtil_compressBitmap(JNIEnv *env, jclass type, jobject bitmap,
+Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap(JNIEnv *env, jclass type, jobject bitmap,
                                                  jint quality, jstring path_) {
     //1. 解析RGB
     //1.1 获取bitmap信息，w，h.format
@@ -202,7 +201,7 @@ Java_com_qiyei_sdk_util_ImageUtil_compressBitmap(JNIEnv *env, jclass type, jobje
 
 
 JNIEXPORT jint JNICALL
-        Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap(JNIEnv *env, jclass type, jobject bitmap,
+        Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap2(JNIEnv *env, jclass type, jobject bitmap,
                                                              jint width, jint height, jstring path_){
     //1. 解析RGB
     //1.1 获取bitmap信息，w，h.format

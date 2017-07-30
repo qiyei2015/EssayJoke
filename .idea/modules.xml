@@ -4,8 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Framework/framework.iml" filepath="$PROJECT_DIR$/Framework/framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SDK/sdk.iml" filepath="$PROJECT_DIR$/SDK/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SDK/SDK.iml" filepath="$PROJECT_DIR$/SDK/SDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/appdemo/appdemo.iml" filepath="$PROJECT_DIR$/appdemo/appdemo.iml" />
     </modules>
   </component>
