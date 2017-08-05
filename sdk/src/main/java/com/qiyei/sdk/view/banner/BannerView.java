@@ -83,7 +83,7 @@ public class BannerView extends FrameLayout {
      * @param adapter
      */
     public void setAdapter(BannerAdapter adapter) {
-        mViewPager.setBannerAdapter(adapter);
+        mViewPager.setAdapter(adapter);
 
         initIndicator();
 

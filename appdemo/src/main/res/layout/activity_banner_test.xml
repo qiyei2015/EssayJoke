@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.qiyei.essayjoke.test.BannerTestActivity">
+    tools:context=".activity.BannerTestActivity">
 
     <com.qiyei.sdk.view.banner.BannerViewPager
         android:layout_width="match_parent"

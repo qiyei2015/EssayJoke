@@ -22,9 +22,10 @@ public abstract class BannerAdapter {
     /**
      * 获取View
      * @param position
+     * @param convertView 为复用的View
      * @return
      */
-    public abstract View getView(int position);
+    public abstract View getView(int position,View convertView);
 
     /**
      * 返回数量

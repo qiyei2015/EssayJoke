@@ -29,6 +29,17 @@ add_library( # Sets the name of the library.
              # file are automatically included.
              src/main/cpp/compress_image.cpp )
 
+#配置头文件路径
+#include_directories(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/)
+
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/ CORE_SRC_LIST)
+list(APPEND SRC_LIST ${CORE_SRC_LIST})
+
+#add_library( # Sets the name of the library.
+#             diffpatch
+#             SHARED
+#             ${SRC_LIST})
+
 # 添加libjpeg.so依赖库
 add_library(jpeg SHARED IMPORTED)
 

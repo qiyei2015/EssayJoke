@@ -145,8 +145,15 @@ public class FindFragment extends BaseFragment{
             }
 
             @Override
-            public View getView(int position) {
-                ImageView bannerIv = new ImageView(getContext());
+            public View getView(int position,View convertView) {
+
+                ImageView bannerIv = null;
+                if (convertView != null){
+                    bannerIv = (ImageView) convertView;
+                }else {
+                    bannerIv = new ImageView(getContext());
+                }
+
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.gravity = Gravity.TOP;
                 bannerIv.setLayoutParams(layoutParams);
@@ -166,8 +173,8 @@ public class FindFragment extends BaseFragment{
         //开启轮播
         mBannerView.startLoop();
         //设置轮播动画时间
-        mBannerView.setDuration(2000);
-        mBannerView.setSwitchTime(5000);
+        mBannerView.setDuration(1200);
+        mBannerView.setSwitchTime(3000);
         mBannerView.setItemClickListener(new BannerItemClickListener() {
             @Override
             public void click(int position) {

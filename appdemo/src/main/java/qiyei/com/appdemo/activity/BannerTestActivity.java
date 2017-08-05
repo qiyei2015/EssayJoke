@@ -90,7 +90,7 @@ public class BannerTestActivity extends AppCompatActivity {
     }
 
     private void initBanner(final List<DiscoverListResult.DataBean.RotateBannerBean.BannersBean> list){
-        mBannerViewPager.setBannerAdapter(new BannerAdapter() {
+        mBannerViewPager.setAdapter(new BannerAdapter() {
             @Override
             public int getCount() {
                 //LogUtil.d(TAG,"banner size  --> " + list.size());
@@ -98,8 +98,14 @@ public class BannerTestActivity extends AppCompatActivity {
             }
 
             @Override
-            public View getView(int position) {
-                ImageView bannerIv = new ImageView(BannerTestActivity.this);
+            public View getView(int position,View convertView) {
+                ImageView bannerIv = null;
+                if (convertView != null){
+                    bannerIv = (ImageView) convertView;
+                }else {
+                    bannerIv = new ImageView(BannerTestActivity.this);
+                }
+
                 FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                 layoutParams.gravity = Gravity.TOP;
                 bannerIv.setLayoutParams(layoutParams);

@@ -1,6 +1,9 @@
 package com.qiyei.sdk.view.banner;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -11,7 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.qiyei.sdk.log.LogUtil;
+
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Email: 1273482124@qq.com
@@ -56,6 +63,64 @@ public class BannerViewPager extends ViewPager {
     private BannerItemClickListener mListener;
 
     /**
+     * 内存优化 --> 当前Activity
+     */
+    private Activity mActivity;
+
+    /**
+     * 内存优化 --> 复用的View
+     */
+    private List<View> mConvertViews;
+
+    /**
+     * Activity生命周期管理，主要用于管理Banner的生命周期，当Activity pause时应该停止轮播，resume时开启轮播
+     */
+    private Application.ActivityLifecycleCallbacks mActivityLifecycleCallbacks = new Application.ActivityLifecycleCallbacks() {
+        @Override
+        public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+        }
+
+        @Override
+        public void onActivityStarted(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivityResumed(Activity activity) {
+            //判断是不是监听的当前Activity的生命周期
+            if (mActivity == activity){
+                startLoop();
+                LogUtil.d(TAG,"onActivityResumed(Activity activity) Banner startLoop !");
+            }
+        }
+
+        @Override
+        public void onActivityPaused(Activity activity) {
+            //判断是不是监听的当前Activity的生命周期
+            if (mActivity == activity){
+                stopLoop();
+                LogUtil.d(TAG,"onActivityResumed(Activity activity) Banner stopLoop !");
+            }
+        }
+
+        @Override
+        public void onActivityStopped(Activity activity) {
+
+        }
+
+        @Override
+        public void onActivitySaveInstanceState(Activity activity, Bundle outState) {
+
+        }
+
+        @Override
+        public void onActivityDestroyed(Activity activity) {
+
+        }
+    };
+
+    /**
      * 轮播的Handler
      */
     private class LoopHandler extends Handler{
@@ -73,7 +138,8 @@ public class BannerViewPager extends ViewPager {
             switch (msg.what){
                 case MSG_LOOP:
                     int index = getCurrentItem() + 1;
-                    setCurrentItem(index % mAdapter.getCount(),true);
+                    setCurrentItem(index,true);
+                    LogUtil.d(TAG,"index:" + index);
                     startLoop();
                     break;
                 default:
@@ -102,7 +168,7 @@ public class BannerViewPager extends ViewPager {
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
             final int pos = position % mAdapter.getCount();
-            View itemView = mAdapter.getView(pos);
+            View itemView = mAdapter.getView(pos,getConvertView());
             container.addView(itemView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +192,9 @@ public class BannerViewPager extends ViewPager {
         @Override
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View)object);
-            object = null;
+
+            //添加到mConvertView中，以便复用
+            mConvertViews.add((View)object);
         }
 
         /**
@@ -139,7 +207,6 @@ public class BannerViewPager extends ViewPager {
         }
 
     }
-
 
     public BannerViewPager(Context context) {
         super(context,null);
@@ -157,8 +224,11 @@ public class BannerViewPager extends ViewPager {
      * @param attr
      */
     private void init(Context context, AttributeSet attr){
+
         mHandler = new LoopHandler(Looper.getMainLooper());
         mScroller = new BannerScroller(context);
+        mActivity = (Activity) context;
+        mConvertViews = new ArrayList<>();
 
         //反射，设置到ViewPager中的mScroller
         try {
@@ -174,9 +244,9 @@ public class BannerViewPager extends ViewPager {
 
     /**
      * 设置Adapter
-     * @param adapter
+     * @param adapter the {@link #mAdapter} to set
      */
-    public void setBannerAdapter(BannerAdapter adapter) {
+    public void setAdapter(BannerAdapter adapter) {
         mAdapter = adapter;
         super.setAdapter(new BannerPageAdapter());
     }
@@ -190,10 +260,13 @@ public class BannerViewPager extends ViewPager {
 
     @Override
     protected void onAttachedToWindow() {
+        if (mAdapter != null){
+            mHandler = new LoopHandler(Looper.getMainLooper());
+            startLoop();
+            mActivity.getApplication().registerActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
+
+        }
         super.onAttachedToWindow();
-//        if (mHandler == null){
-//            mHandler = new LoopHandler(Looper.getMainLooper());
-//        }
     }
 
     /**
@@ -201,26 +274,36 @@ public class BannerViewPager extends ViewPager {
      */
     @Override
     protected void onDetachedFromWindow() {
+        if (mHandler != null){
+            stopLoop();
+            mActivity.getApplication().unregisterActivityLifecycleCallbacks(mActivityLifecycleCallbacks);
+        }
         super.onDetachedFromWindow();
-        //mHandler.removeMessages(MSG_LOOP);
-        //mHandler = null;
     }
 
     /**
      * 开启轮播
      */
     public void startLoop(){
-        Message msg = Message.obtain();
-        msg.what = MSG_LOOP;
-        mHandler.sendMessageDelayed(msg,switchTime);
+        if (mAdapter == null){
+            return;
+        }
+        if (mAdapter.getCount() != 1 && mHandler != null){
+            mHandler.removeMessages(MSG_LOOP);
+            Message msg = Message.obtain();
+            msg.what = MSG_LOOP;
+            mHandler.sendMessageDelayed(msg,switchTime);
+        }
     }
 
     /**
      * 停止轮播
      */
     public void stopLoop(){
-        mHandler.removeMessages(MSG_LOOP);
-        mHandler = null;
+        if (mHandler != null){
+            mHandler.removeMessages(MSG_LOOP);
+            mHandler = null;
+        }
     }
 
     /**
@@ -246,4 +329,17 @@ public class BannerViewPager extends ViewPager {
         mListener = listener;
     }
 
+    /**
+     * 获取复用View
+     * 如果itemView的parent 为null，就表示它被Adapter移除视线之外了，就可以复用它了
+     * @return 返回第一个 view 的parent 为null的View
+     */
+    private View getConvertView(){
+        for (View view : mConvertViews){
+            if (view.getParent() == null){
+                return view;
+            }
+        }
+        return null;
+    }
 }
