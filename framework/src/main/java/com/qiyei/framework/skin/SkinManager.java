@@ -9,6 +9,7 @@ import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.framework.skin.attrs.SkinView;
 import com.qiyei.framework.skin.listener.ISkinChangeListener;
+import com.qiyei.sdk.util.VersionManager;
 
 import java.io.File;
 import java.util.HashMap;
@@ -93,10 +94,18 @@ public class SkinManager {
         LogUtil.d(TAG,"path --> " + path);
         //1 校验签名 增量更新再说
 
+        String signature = VersionManager.getSignature(mContext);
+        if (!(signature != null && signature.equals(VersionManager.getSignature(path)))){
+            result = false;
+            LogUtil.i(TAG,"loadSkin faild ! current signature: " + signature + "\n Skin signature :" + VersionManager.getSignature(path));
+            LogUtil.i(TAG,"loadSkin faild ! the signature is illegal !");
+            return result;
+        }
+
         //2 检查文件是否存在
         File file = new File(path);
         if (!file.exists()){
-            LogUtil.d(TAG,"skin file is not exists !");
+            LogUtil.i(TAG,"skin file is not exists !");
             return false;
         }
 
@@ -104,7 +113,7 @@ public class SkinManager {
                 path, PackageManager.GET_ACTIVITIES).packageName;
 
         if(TextUtils.isEmpty(packageName)){
-            LogUtil.d(TAG,"skin packageName is null !");
+            LogUtil.i(TAG,"skin packageName is null !");
             return false;
         }
 
@@ -112,7 +121,7 @@ public class SkinManager {
         String currentSkinPath = getSkinPath();
 
         if(path.equals(currentSkinPath)){
-            LogUtil.d(TAG,"skin path is same,,not need change skin !");
+            LogUtil.i(TAG,"skin path is same,,not need change skin !");
             return false;
         }
 
@@ -139,7 +148,7 @@ public class SkinManager {
         //判断当前有没有皮肤，没有皮肤就不需要执行下去
         String skinPath = getSkinPath();
         if (TextUtils.isEmpty(skinPath)){
-            LogUtil.d(TAG,"skinPath is null,not need restore skin !");
+            LogUtil.i(TAG,"skinPath is null,not need restore skin !");
             return false;
         }
 
