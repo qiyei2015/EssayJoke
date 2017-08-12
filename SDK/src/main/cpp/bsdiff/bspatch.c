@@ -206,29 +206,3 @@ extern int bspatch_main(int argc,char * argv[])
 
 	return 0;
 }
-
-JNIEXPORT void JNICALL
-Java_com_qiyei_sdk_util_VersionManager_versionCombine(JNIEnv *env, jclass type, jstring oldApkPath_,
-jstring newApkPath_, jstring patchPath_){
-	// 1.封装参数
-	int argc = 4;
-	char * argv[4];
-	// 1.1 转换  jstring -> char*
-	char* old_pak_cstr = (char*)(*env)->GetStringUTFChars(env,oldApkPath_,NULL);
-	char* new_apk_cstr = (char*)(*env)->GetStringUTFChars(env,newApkPath_,NULL);
-	char* patch_cstr = (char*)(*env)->GetStringUTFChars(env,patchPath_,NULL);
-	// 第0的位置随便给
-	argv[0] = "combine";
-	argv[1] = old_pak_cstr;
-	argv[2] = new_apk_cstr;
-	argv[3] = patch_cstr;
-
-	// 2.调用上面的方法  int argc,char * argv[]
-	bspatch_main(argc,argv);
-
-	// 3.释放资源
-	(*env)->ReleaseStringUTFChars(env,oldApkPath_,old_pak_cstr);
-	(*env)->ReleaseStringUTFChars(env,newApkPath_,new_apk_cstr);
-	(*env)->ReleaseStringUTFChars(env,patchPath_,patch_cstr);
-
-}

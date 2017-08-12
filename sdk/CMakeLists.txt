@@ -18,27 +18,51 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI})
 # You can define multiple libraries, and CMake builds it for you.
 # Gradle automatically packages shared libraries with your APK.
 
+#配置头文件路径
+#include_directories(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/)
+
+#添加源文件路径
+aux_source_directory(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/ CORE_SRC_LIST)
+list(APPEND SRC_LIST ${CORE_SRC_LIST})
+
+#添加libbspatch 库
+add_library( # Sets the name of the library.
+             bspatch
+             SHARED
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/huffman.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/randtable.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/crctable.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/blocksort.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/bzip2.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/compress.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/decompress.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/bzlib.c
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/bspatch.c)
+
+#***************************************************************************************************
+
+add_library( # Sets the name of the library.
+             diffpatch
+             SHARED
+             ${PROJECT_SOURCE_DIR}/src/main/cpp/diffpatch.cpp)
+
+target_link_libraries( # Specifies the target library.
+                       diffpatch
+                       jnigraphics
+                       bspatch
+                       # Links the target library to the log library
+                       # included in the NDK.
+                       ${log-lib} )
+
+#***************************************************************************************************
 add_library( # Sets the name of the library.
              compressimg
-
              # Sets the library as a shared library.
              SHARED
-
              # Provides a relative path to your source file(s).
              # Associated headers in the same location as their source
              # file are automatically included.
              src/main/cpp/compress_image.cpp )
-
-#配置头文件路径
-#include_directories(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/)
-
-aux_source_directory(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/ CORE_SRC_LIST)
-list(APPEND SRC_LIST ${CORE_SRC_LIST})
-
-#add_library( # Sets the name of the library.
-#             diffpatch
-#             SHARED
-#             ${SRC_LIST})
 
 # 添加libjpeg.so依赖库
 add_library(jpeg SHARED IMPORTED)
