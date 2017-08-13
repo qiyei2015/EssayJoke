@@ -107,7 +107,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
     /**
      * 采用对象适配器模式
      */
-    public void setAdapter(IndicatorAdapter adapter){
+    private void setAdapter(IndicatorAdapter adapter){
         if (adapter == null){
             throw new NullPointerException("adapter cannot be null");
         }

@@ -25,7 +25,9 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        initContentView();
+        initData();
+        initView();
     }
 
     @Override
