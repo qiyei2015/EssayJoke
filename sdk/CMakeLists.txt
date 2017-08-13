@@ -19,7 +19,7 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/libs/${ANDROID_ABI})
 # Gradle automatically packages shared libraries with your APK.
 
 #配置头文件路径
-#include_directories(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/)
+include_directories(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/)
 
 #添加源文件路径
 aux_source_directory(${PROJECT_SOURCE_DIR}/src/main/cpp/bsdiff/ CORE_SRC_LIST)
