@@ -5,7 +5,7 @@
     android:id="@+id/activity_recycler_view_test"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.qiyei.essayjoke.test.RecyclerViewTestActivity">
+    tools:context=".activity.RecyclerViewTestActivity">
 
     <com.qiyei.sdk.view.xrecycler.XRecyclerView
         android:layout_width="match_parent"
