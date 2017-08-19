@@ -1,4 +1,4 @@
-package com.qiyei.sdk.util;
+package com.qiyei.sdk.version;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

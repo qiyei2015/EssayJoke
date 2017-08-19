@@ -9,7 +9,7 @@ import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.framework.skin.attrs.SkinView;
 import com.qiyei.framework.skin.listener.ISkinChangeListener;
-import com.qiyei.sdk.util.VersionManager;
+import com.qiyei.sdk.version.VersionManager;
 
 import java.io.File;
 import java.util.HashMap;
