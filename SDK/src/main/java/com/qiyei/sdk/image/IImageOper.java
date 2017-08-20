@@ -1,5 +1,6 @@
 package com.qiyei.sdk.image;
 
+import android.content.Context;
 import android.widget.ImageView;
 
 import java.io.File;

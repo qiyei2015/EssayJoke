@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.qiyei.sdk.image.ImageManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -149,7 +150,8 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
      */
     public void setImageUrl(int viewId,String url){
         ImageView imageView = getView(viewId);
-        Glide.with(imageView.getContext()).load(url).into(imageView);
+        //加载图片
+        ImageManager.loadImage(imageView,url);
     }
 
     /**

@@ -100,11 +100,6 @@ public class ImageUtil {
     }
 
     /**
-     * 按比例缩放图片
-     * @param origin 原图
-     * @param ratio 缩放比例
-     */
-    /**
      * 裁剪图片
      * @param origin 原图
      * @param reqWidth 请求的宽

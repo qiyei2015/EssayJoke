@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import com.qiyei.framework.R;
+import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.FileUtil;
 import com.qiyei.sdk.util.ToastUtil;
@@ -79,10 +80,12 @@ public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
             // 显示图片
             ImageView imageView = holder.getView(R.id.image);
 
-            Glide.with(mContext)
-                    .load(item.path)
-                    .centerCrop()
-                    .into(imageView);
+//            Glide.with(mContext)
+//                    .load(item.path)
+//                    .centerCrop()
+//                    .into(imageView);
+
+            ImageManager.loadImage(imageView,item.path);
 
             ImageView selectedIndicatorIv = holder.getView(R.id.media_selected_indicator);
             selectedIndicatorIv.setSelected(mSelectImages.contains(item.path));

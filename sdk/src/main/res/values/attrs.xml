@@ -12,4 +12,25 @@
         <attr name="visiableNum" format="integer"/>
     </declare-styleable>
 
+
+    <!--TextSwitchView属性-->
+    <declare-styleable name="TextSwitchView">
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomTitleView">
+        <attr name="titleText" format="string"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="titleTextSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomCircleView">
+        <attr name="firstColor" format="color"/>
+        <attr name="secondColor" format="color"/>
+        <attr name="circleWidth" format="dimension"/>
+        <attr name="speed" format="integer"/>
+    </declare-styleable>
+
 </resources>

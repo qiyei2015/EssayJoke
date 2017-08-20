@@ -14,6 +14,7 @@ import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.base.RequestMethod;
+import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.banner.BannerAdapter;
@@ -112,8 +113,7 @@ public class BannerTestActivity extends AppCompatActivity {
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 String url = list.get(position).getBanner_url().getUrl_list().get(0).getUrl();
 
-                Glide.with(BannerTestActivity.this).load(url).into(bannerIv);
-
+                ImageManager.loadImage(bannerIv,url);
                 return bannerIv;
             }
 

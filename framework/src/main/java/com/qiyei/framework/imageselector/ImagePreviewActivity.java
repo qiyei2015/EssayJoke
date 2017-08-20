@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.qiyei.framework.R;
 import com.qiyei.framework.activity.BaseSkinActivity;
+import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.log.LogUtil;
 
 import java.util.List;
@@ -37,7 +38,7 @@ public class ImagePreviewActivity extends BaseSkinActivity {
     protected void initView() {
         mImageView = (ImageView) findViewById(R.id.image_view);
         LogUtil.d(TAG,"mImageList:" + mImageList.toString());
-        Glide.with(this).load(mImageList.get(0)).override(1080,1500).into(mImageView);
+        ImageManager.loadImage(mImageView,1080,1500,mImageList.get(0));
     }
 
     @Override

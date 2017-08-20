@@ -20,6 +20,7 @@ import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.base.RequestMethod;
+import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
 import com.qiyei.sdk.log.LogUtil;
@@ -160,8 +161,7 @@ public class FindFragment extends BaseFragment{
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 String url = list.get(position).getBanner_url().getUrl_list().get(0).getUrl();
 
-                Glide.with(getContext()).load(url).into(bannerIv);
-
+                ImageManager.loadImage(bannerIv,url);
                 return bannerIv;
             }
 
