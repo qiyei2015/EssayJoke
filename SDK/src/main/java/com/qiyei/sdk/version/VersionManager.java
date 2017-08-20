@@ -1,9 +1,11 @@
 package com.qiyei.sdk.version;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.net.Uri;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
@@ -167,6 +169,18 @@ public class VersionManager {
     }
 
     /**
+     * 安装APK
+     * @param context
+     * @param path
+     */
+    public static void installAPK(Context context, String path){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.parse(path), "application/vnd.android.package-archive");
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    /**
      * 获取对应路径的APK的PackageParser
      * @param path
      * @return
@@ -204,4 +218,5 @@ public class VersionManager {
      * @param patchPath 差分包路径， 从服务器上下载下来
      */
     public static native void versionCombine(String oldApkPath,String newApkPath,String patchPath);
+
 }

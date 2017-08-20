@@ -24,7 +24,6 @@
 /**
  * 统一编译方式
  */
-
 #ifdef __cplusplus
 extern "C"{
 #endif
