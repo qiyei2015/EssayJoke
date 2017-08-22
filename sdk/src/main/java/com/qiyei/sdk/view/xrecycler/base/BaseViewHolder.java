@@ -151,7 +151,7 @@ public class BaseViewHolder extends RecyclerView.ViewHolder {
     public void setImageUrl(int viewId,String url){
         ImageView imageView = getView(viewId);
         //加载图片
-        ImageManager.loadImage(imageView,url);
+        ImageManager.getInstance().loadImage(imageView,url);
     }
 
     /**

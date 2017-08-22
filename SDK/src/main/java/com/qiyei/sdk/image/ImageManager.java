@@ -11,25 +11,44 @@ import android.widget.ImageView;
  */
 public class ImageManager {
 
-    private static Context sContext ;
+    private Context sContext ;
 
     /**
      * 图片操作管理者
      */
-    private static IImageOper sImageManager;
+    private IImageOper sImageManager;
+
+    private static class SingleHolder{
+        static final ImageManager sInstance = new ImageManager();
+    }
+
+    /**
+     * 构造方法私有化
+     */
+    private ImageManager(){
+
+    }
+
+    /**
+     * 内部类方式单例
+     * @return
+     */
+    public static ImageManager getInstance(){
+        return SingleHolder.sInstance;
+    }
 
     /**
      * 初始化方法
      * @param context
      * @param oper
      */
-    public static void init(Context context , IImageOper oper){
+    public void init(Context context , IImageOper oper){
         sContext = context.getApplicationContext();
         sImageManager = oper;
         sImageManager.init();
     }
 
-    public static void setImageOper(IImageOper oper){
+    public void setImageOper(IImageOper oper){
         sImageManager = oper;
     }
 
@@ -38,7 +57,7 @@ public class ImageManager {
      * @param url
      * @param imageView
      */
-    public static void loadImage(ImageView imageView, String url){
+    public void loadImage(ImageView imageView, String url){
         sImageManager.loadImage(imageView,url);
     }
 
@@ -48,7 +67,7 @@ public class ImageManager {
      * @param imageView
      * @param placeId 占位符
      */
-    public static void loadImage(ImageView imageView,String url,int placeId){
+    public void loadImage(ImageView imageView,String url,int placeId){
         sImageManager.loadImage(imageView,url,placeId,0);
     }
 
@@ -59,7 +78,7 @@ public class ImageManager {
      * @param placeResId
      * @param errResId
      */
-    public static void loadImage(ImageView imageView, String url,int placeResId, int errResId){
+    public void loadImage(ImageView imageView, String url,int placeResId, int errResId){
         sImageManager.loadImage(imageView,url,placeResId,errResId);
     }
 
@@ -70,7 +89,7 @@ public class ImageManager {
      * @param targetY
      * @param url
      */
-    public static void loadImage(ImageView imageView, int targetX, int targetY,String url){
+    public void loadImage(ImageView imageView, int targetX, int targetY,String url){
         sImageManager.loadImage(imageView,targetX,targetY,url);
     }
 

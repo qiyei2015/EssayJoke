@@ -38,7 +38,7 @@ public final class SDKManager {
         ToastUtil.init(sContext);
         ExceptionCrashHandler.getInstance().init(sContext);
 
-        ImageManager.init(sContext,new GlideOperImpl());
+        ImageManager.getInstance().init(sContext,new GlideOperImpl());
 
         //初始化网络引擎
         HttpManager.init(new OkHttpEngine());

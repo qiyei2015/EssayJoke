@@ -2,4 +2,5 @@
     <string name="app_name">BaseLibrary</string>
 
     <string name="net_loading">加载中...</string>
+    <string name="downloading">开始下载</string>
 </resources>

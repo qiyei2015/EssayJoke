@@ -161,7 +161,7 @@ public class FindFragment extends BaseFragment{
                 bannerIv.setScaleType(ImageView.ScaleType.FIT_XY);
                 String url = list.get(position).getBanner_url().getUrl_list().get(0).getUrl();
 
-                ImageManager.loadImage(bannerIv,url);
+                ImageManager.getInstance().loadImage(bannerIv,url);
                 return bannerIv;
             }
 

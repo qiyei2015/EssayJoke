@@ -38,7 +38,7 @@ public class ImagePreviewActivity extends BaseSkinActivity {
     protected void initView() {
         mImageView = (ImageView) findViewById(R.id.image_view);
         LogUtil.d(TAG,"mImageList:" + mImageList.toString());
-        ImageManager.loadImage(mImageView,1080,1500,mImageList.get(0));
+        ImageManager.getInstance().loadImage(mImageView,1080,1500,mImageList.get(0));
     }
 
     @Override

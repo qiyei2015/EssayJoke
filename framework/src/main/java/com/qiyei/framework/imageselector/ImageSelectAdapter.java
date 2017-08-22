@@ -85,7 +85,7 @@ public class ImageSelectAdapter extends BaseRecyclerAdapter<ImageEntity> {
 //                    .centerCrop()
 //                    .into(imageView);
 
-            ImageManager.loadImage(imageView,item.path);
+            ImageManager.getInstance().loadImage(imageView,item.path);
 
             ImageView selectedIndicatorIv = holder.getView(R.id.media_selected_indicator);
             selectedIndicatorIv.setSelected(mSelectImages.contains(item.path));
