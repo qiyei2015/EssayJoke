@@ -56,6 +56,9 @@ public class MainActivity extends BaseSkinActivity {
     @ViewById(R.id.btn9)
     private Button btn9;
 
+    @ViewById(R.id.btn10)
+    private Button btn10;
+
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
     @Override
@@ -176,6 +179,11 @@ public class MainActivity extends BaseSkinActivity {
     @OnClick(R.id.btn9)
     private void testBtn9(View view){
         dynamicProxy();
+    }
+
+    @OnClick(R.id.btn10)
+    private void testBtn10(View view){
+        startActivity(DataCenterTestActivity.class);
     }
 
     private void fixBug(){

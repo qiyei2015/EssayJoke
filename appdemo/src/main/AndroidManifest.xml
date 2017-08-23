@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="qiyei.com.appdemo">
 
@@ -20,6 +21,7 @@
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
@@ -57,6 +59,9 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
+
+        <activity android:name=".activity.DataCenterTestActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -61,4 +61,10 @@
         android:id="@+id/btn9"
         android:text="测试9 动态代理"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn10"
+        android:text="测试10 数据中心"/>
+
 </LinearLayout>
