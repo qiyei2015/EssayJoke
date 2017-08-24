@@ -16,7 +16,7 @@ public class ImageManager {
     /**
      * 图片操作管理者
      */
-    private IImageOper sImageManager;
+    private IImageOperator mImageImpl;
 
     private static class SingleHolder{
         static final ImageManager sInstance = new ImageManager();
@@ -42,14 +42,14 @@ public class ImageManager {
      * @param context
      * @param oper
      */
-    public void init(Context context , IImageOper oper){
+    public void init(Context context , IImageOperator oper){
         sContext = context.getApplicationContext();
-        sImageManager = oper;
-        sImageManager.init();
+        mImageImpl = oper;
+        mImageImpl.init();
     }
 
-    public void setImageOper(IImageOper oper){
-        sImageManager = oper;
+    public void setImageOper(IImageOperator oper){
+        mImageImpl = oper;
     }
 
     /**
@@ -58,7 +58,7 @@ public class ImageManager {
      * @param imageView
      */
     public void loadImage(ImageView imageView, String url){
-        sImageManager.loadImage(imageView,url);
+        mImageImpl.loadImage(imageView,url);
     }
 
     /**
@@ -68,7 +68,7 @@ public class ImageManager {
      * @param placeId 占位符
      */
     public void loadImage(ImageView imageView,String url,int placeId){
-        sImageManager.loadImage(imageView,url,placeId,0);
+        mImageImpl.loadImage(imageView,url,placeId,0);
     }
 
     /**
@@ -79,7 +79,7 @@ public class ImageManager {
      * @param errResId
      */
     public void loadImage(ImageView imageView, String url,int placeResId, int errResId){
-        sImageManager.loadImage(imageView,url,placeResId,errResId);
+        mImageImpl.loadImage(imageView,url,placeResId,errResId);
     }
 
     /**
@@ -90,7 +90,7 @@ public class ImageManager {
      * @param url
      */
     public void loadImage(ImageView imageView, int targetX, int targetY,String url){
-        sImageManager.loadImage(imageView,targetX,targetY,url);
+        mImageImpl.loadImage(imageView,targetX,targetY,url);
     }
 
 }

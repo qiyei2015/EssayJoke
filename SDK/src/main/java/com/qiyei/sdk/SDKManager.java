@@ -3,11 +3,13 @@ package com.qiyei.sdk;
 import android.app.Application;
 import android.content.Context;
 
+import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.crash.ExceptionCrashHandler;
+import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.okhttp.OkHttpEngine;
-import com.qiyei.sdk.image.GlideOperImpl;
+import com.qiyei.sdk.image.GlideImpl;
 import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -20,36 +22,40 @@ import com.qiyei.sdk.util.ToastUtil;
 public final class SDKManager {
 
     /**
-     * Application 类型的Context
-     */
-    public static Context sContext;
-
-    /**
      *
      * @param context
      */
     public static void initSDK(Context context) throws Exception{
         if (context instanceof Application){
-            sContext = context;
+            //初始化运行时环境
+            RuntimeEnv.init(context);
         }else {
             throw new Exception("please init SDK in your Application !");
         }
 
-        ToastUtil.init(sContext);
-        ExceptionCrashHandler.getInstance().init(sContext);
+        //初始化ToastUtil
+        ToastUtil.init(RuntimeEnv.appContext);
 
-        ImageManager.getInstance().init(sContext,new GlideOperImpl());
+        //初始化CrashHandler
+        ExceptionCrashHandler.getInstance().init(RuntimeEnv.appContext);
+
+        //初始化DataCenter
+        DataManager.getInstance();
+
+        //初始化图片加载框架
+        ImageManager.getInstance().init(RuntimeEnv.appContext,new GlideImpl());
 
         //初始化网络引擎
         HttpManager.init(new OkHttpEngine());
 
         //加载所有的修复包
         try {
-            FixDexManager fixDexManager = new FixDexManager(sContext);
+            FixDexManager fixDexManager = new FixDexManager(RuntimeEnv.appContext);
             fixDexManager.fixDex();
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
 }

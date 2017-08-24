@@ -11,9 +11,18 @@ import java.io.File;
  * Version: 1.0
  * Description: 所有图片的操作
  */
-public interface IImageOper {
+public interface IImageOperator {
+
+    /**
+     * 初始化
+     */
     void init();
 
+    /**
+     * 加载图片
+     * @param imageView
+     * @param url
+     */
     void loadImage(ImageView imageView, String url);
 
     void loadImage(ImageView imageView, String url,int placeResId, int errResId);

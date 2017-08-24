@@ -2,7 +2,8 @@ package com.qiyei.sdk.dc;
 
 
 
-import com.qiyei.sdk.dc.impl.DataCenter;
+import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.dc.impl.DataCenterProxy;
 import com.qiyei.sdk.dc.impl.IDataCenterObserver;
 
 import java.util.ArrayList;
@@ -16,12 +17,15 @@ import java.util.Set;
  * Version: 1.0
  * Description: 数据中心的Manager，对外提供数据的统一访问
  */
-public class DataManager{
-
+public class DataManager implements IDataOperator{
     /**
      * 数据观察者，外部使用
      */
     private List<DataObserver> mObservers = new ArrayList<>();
+    /**
+     * DataCenter的代理
+     */
+    private DataCenterProxy mProxy;
 
     /**
      * 内部类方式构造单例
@@ -34,9 +38,7 @@ public class DataManager{
      * 构造方法私有化
      */
     private DataManager(){
-
-        //注册数据中心
-        DataCenter.getInstance().registerDataObserver(new IDataCenterObserver() {
+        mProxy = new DataCenterProxy(RuntimeEnv.appContext,new IDataCenterObserver() {
 
             @Override
             public void dataUpdate(Set<String> uris) {
@@ -104,16 +106,18 @@ public class DataManager{
      * @param uri
      * @param value
      */
+    @Override
     public void setString(String uri,String value){
-        DataCenter.getInstance().setValue(uri,value);
+        mProxy.setString(uri,value);
     }
 
     /**
      * 存储String类型数据
      * @param uri
      */
+    @Override
     public String getString(String uri){
-        return DataCenter.getInstance().getValue(uri);
+        return mProxy.getString(uri);
     }
 
 }

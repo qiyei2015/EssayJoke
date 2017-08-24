@@ -1,6 +1,8 @@
 package com.qiyei.sdk.dc.impl;
 
 
+import com.qiyei.sdk.dc.DCConstant;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,8 +42,12 @@ public class DataCenter{
      */
     private DataCenter(){
         IDataBuffer memoryBuffer = new MemoryDataBuffer();
-        memoryBuffer.init();
-        mBufferMap.put("memory",memoryBuffer);
+        IDataBuffer spBuffer = new SPDataBuffer();
+        IDataBuffer sqlBuffer = new SQLDataBuffer();
+
+        mBufferMap.put(DCConstant.MEM_DATA,memoryBuffer);
+        mBufferMap.put(DCConstant.SP_DATA,spBuffer);
+        mBufferMap.put(DCConstant.SQL_DATA,sqlBuffer);
     }
 
     /**
@@ -51,7 +57,6 @@ public class DataCenter{
     public static DataCenter getInstance(){
         return DataCenter.SingleHolder.sInstance;
     }
-
 
     /**
      * 注册DataCenter数据观察者
@@ -97,7 +102,6 @@ public class DataCenter{
         for (IDataCenterObserver observer : mCenterObservers){
             observer.dataUpdate(uris);
         }
-
     }
 
     /**
@@ -108,7 +112,5 @@ public class DataCenter{
         mDataBuffer = getDataBuffer(uri);
         return mDataBuffer.getValue(uri);
     }
-
-
 
 }

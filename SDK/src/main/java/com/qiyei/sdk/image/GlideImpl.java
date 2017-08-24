@@ -1,6 +1,5 @@
 package com.qiyei.sdk.image;
 
-import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -13,7 +12,7 @@ import java.io.File;
  * Version: 1.0
  * Description: 采用Glide操作的Image图片管理实现
  */
-public class GlideOperImpl implements IImageOper {
+public class GlideImpl implements IImageOperator {
 
     @Override
     public void init() {
