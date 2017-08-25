@@ -1,5 +1,7 @@
 package com.qiyei.sdk.dc.impl;
 
+import android.content.Context;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/8/22.
@@ -8,6 +10,13 @@ package com.qiyei.sdk.dc.impl;
  */
 public class SQLDataBuffer implements IDataBuffer {
 
+    /**
+     * 同一个包下可以引用
+     * @param context
+     */
+    SQLDataBuffer(Context context){
+        init();
+    }
 
     @Override
     public void init() {

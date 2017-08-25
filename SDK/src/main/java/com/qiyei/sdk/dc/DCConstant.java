@@ -2,8 +2,6 @@ package com.qiyei.sdk.dc;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 
-import java.net.URI;
-
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/8/20.
@@ -30,22 +28,27 @@ public class DCConstant {
     /**
      * 加密标志
      */
-    public static final String SECRET = "_sec";
+    private static final String SECRET = "_sec";
     /**
      * 不加密数据的主机
      */
-    public static String AUTHORITY = RuntimeEnv.packageName;
+    static String AUTHORITY = RuntimeEnv.packageName;
     /**
      * 加密数据的主机
      */
-    public static String AUTHORITY_SECRET = RuntimeEnv.packageName + SECRET;
+    static String AUTHORITY_SECRET = RuntimeEnv.packageName + SECRET;
     /**
      * 不加密的uri
      */
-    public static String URI = "content://" + AUTHORITY + "/";
+    static String URI = "content://" + AUTHORITY;
     /**
      * 加密的uri
      */
-    public static String URI_SECRET = "content://" + AUTHORITY_SECRET + "/";
+    static String URI_SECRET = "content://" + AUTHORITY_SECRET;
 
+//    public static class SQLDATA{
+//
+//    }
+//
+//    public static class
 }

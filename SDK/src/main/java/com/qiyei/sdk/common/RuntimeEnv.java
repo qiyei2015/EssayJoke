@@ -1,6 +1,7 @@
 package com.qiyei.sdk.common;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 /**
  * Email: 1273482124@qq.com
@@ -39,6 +40,9 @@ public final class RuntimeEnv {
         appContext = context.getApplicationContext();
         //初始化包名
         packageName = context.getPackageName();
+        if (TextUtils.isEmpty(packageName)){
+            packageName = "com.qiyei";
+        }
 
     }
 

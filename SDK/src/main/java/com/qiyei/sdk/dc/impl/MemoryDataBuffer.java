@@ -1,5 +1,6 @@
 package com.qiyei.sdk.dc.impl;
 
+import android.content.Context;
 import android.text.TextUtils;
 
 import java.util.HashMap;
@@ -13,8 +14,18 @@ import java.util.Map;
  */
 public class MemoryDataBuffer implements IDataBuffer {
 
-
+    /**
+     * 保存数据的Map
+     */
     private Map<String,String> mDataMap;
+
+    /**
+     * 同一个包下可以引用
+     * @param context
+     */
+    MemoryDataBuffer(Context context){
+        init();
+    }
 
     @Override
     public void init() {

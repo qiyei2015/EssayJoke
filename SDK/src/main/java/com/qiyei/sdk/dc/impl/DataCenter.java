@@ -1,7 +1,14 @@
 package com.qiyei.sdk.dc.impl;
 
 
+
+import android.content.Context;
+import android.net.Uri;
+import android.text.TextUtils;
+
+import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.dc.DCConstant;
+import com.qiyei.sdk.log.LogUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,16 +41,16 @@ public class DataCenter{
      * 内部类方式构造单例
      */
     private static class SingleHolder{
-        static final DataCenter sInstance = new DataCenter();
+        static final DataCenter sInstance = new DataCenter(RuntimeEnv.appContext);
     }
 
     /**
      * 构造方法私有化
      */
-    private DataCenter(){
-        IDataBuffer memoryBuffer = new MemoryDataBuffer();
-        IDataBuffer spBuffer = new SPDataBuffer();
-        IDataBuffer sqlBuffer = new SQLDataBuffer();
+    private DataCenter(Context context){
+        IDataBuffer memoryBuffer = new MemoryDataBuffer(context);
+        IDataBuffer spBuffer = new SPDataBuffer(context);
+        IDataBuffer sqlBuffer = new SQLDataBuffer(context);
 
         mBufferMap.put(DCConstant.MEM_DATA,memoryBuffer);
         mBufferMap.put(DCConstant.SP_DATA,spBuffer);
@@ -80,11 +87,27 @@ public class DataCenter{
 
     /**
      * 根据uri返回相应的DataBuffer
-     * @param uri
+     * @param pathUri
      * @return
      */
-    private IDataBuffer getDataBuffer(String uri){
-        return mBufferMap.get("memory");
+    private IDataBuffer getDataBuffer(String pathUri){
+        if (TextUtils.isEmpty(pathUri)){
+            return null;
+        }
+        IDataBuffer dataBuffer = null;
+
+        //根据uri的path来解析是使用的那个type
+        Uri uri = Uri.parse(pathUri);
+        List<String> paths = uri.getPathSegments();
+        if (paths.size() > 0){
+            dataBuffer =  mBufferMap.get(paths.get(0));
+        }
+
+        //如果没找到，就默认保存为MEM类型数据
+        if (dataBuffer == null){
+            dataBuffer = mBufferMap.get(DCConstant.MEM_DATA);
+        }
+        return dataBuffer;
     }
 
     /**
@@ -93,6 +116,8 @@ public class DataCenter{
      * @param value
      */
     public void setValue(String uri,String value){
+        LogUtil.i(DCConstant.TAG,"setValue,uri --> " + uri + " value --> " + value);
+
         mDataBuffer = getDataBuffer(uri);
 
         mDataBuffer.setValue(uri,value);
@@ -109,6 +134,7 @@ public class DataCenter{
      * @param uri
      */
     public String getValue(String uri){
+        LogUtil.i(DCConstant.TAG,"getValue,uri --> " + uri);
         mDataBuffer = getDataBuffer(uri);
         return mDataBuffer.getValue(uri);
     }

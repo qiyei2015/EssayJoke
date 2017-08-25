@@ -51,12 +51,12 @@ public class DataManager implements IDataOperator{
                             updateUris.add(uri);
                         }
                     }
+                    //updateUris有内容才更新
                     if (updateUris.size() > 0){
                         observer.dataUpdate(updateUris);
                     }
+                    //清除，便于下一次循环使用
                     updateUris.clear();
-
-                    //observer.dataUpdate(uris);
                 }
             }
 
@@ -102,6 +102,94 @@ public class DataManager implements IDataOperator{
     }
 
     /**
+     * 获取普通的uri
+     * @param type
+     * @param key
+     * @return
+     */
+    @Override
+    public String getUri(String type,String key){
+        return DCConstant.URI + "/" + type + "/" + key;
+    }
+
+    /**
+     * 获取加密的uri
+     * @param type
+     * @param key
+     * @return
+     */
+    @Override
+    public String getSecretUri(String type,String key){
+        return DCConstant.URI_SECRET + "/" + type + "/" + key;
+    }
+
+    @Override
+    public void setInt(String uri, int value) {
+        mProxy.setInt(uri,value);
+    }
+
+    @Override
+    public int getInt(String uri, int defValue) {
+        Integer value = mProxy.getInt(uri);
+        return value == null ? defValue : value;
+    }
+
+    @Override
+    public void setLong(String uri, long value) {
+        mProxy.setLong(uri,value);
+    }
+
+    @Override
+    public long getLong(String uri, long defValue) {
+        Long value = mProxy.getLong(uri);
+        return value == null ? defValue : value;
+    }
+
+    @Override
+    public void setFloat(String uri, float value) {
+        mProxy.setFloat(uri,value);
+    }
+
+    @Override
+    public float getFloat(String uri, float defValue) {
+        Float value = mProxy.getFloat(uri);
+        return value == null ? defValue : value;
+    }
+
+    @Override
+    public void setDouble(String uri, double value) {
+        mProxy.setDouble(uri,value);
+    }
+
+    @Override
+    public double getDouble(String uri, double defValue) {
+        Double value = mProxy.getDouble(uri);
+        return value == null ? defValue : value;
+    }
+
+    @Override
+    public void setChar(String uri, char value) {
+        mProxy.setChar(uri,value);
+    }
+
+    @Override
+    public char getChar(String uri, char defValue) {
+        Character value = mProxy.getChar(uri);
+        return value == null ? defValue : value;
+    }
+
+    @Override
+    public void setBoolean(String uri, boolean value) {
+        mProxy.setBoolean(uri,value);
+    }
+
+    @Override
+    public boolean getBoolean(String uri, boolean defValue) {
+        Boolean value = mProxy.getBoolean(uri);
+        return value == null ? defValue : value;
+    }
+
+    /**
      * 存储String类型数据
      * @param uri
      * @param value
@@ -116,8 +204,9 @@ public class DataManager implements IDataOperator{
      * @param uri
      */
     @Override
-    public String getString(String uri){
-        return mProxy.getString(uri);
+    public String getString(String uri,String defValue){
+        String value = mProxy.getString(uri);
+        return value == null ? defValue : value;
     }
 
 }

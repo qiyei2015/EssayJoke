@@ -1,5 +1,7 @@
 package com.qiyei.sdk.dc.impl;
 
+import android.content.Context;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/8/22.
@@ -7,6 +9,14 @@ package com.qiyei.sdk.dc.impl;
  * Description: SharePreferences 中数据
  */
 public class SPDataBuffer implements IDataBuffer {
+
+    /**
+     * 同一个包下可以引用
+     * @param context
+     */
+    SPDataBuffer(Context context){
+        init();
+    }
 
 
     @Override
