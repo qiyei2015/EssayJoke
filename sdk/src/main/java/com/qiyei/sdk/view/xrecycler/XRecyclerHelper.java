@@ -2,9 +2,10 @@ package com.qiyei.sdk.view.xrecycler;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.qiyei.sdk.log.LogManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -83,7 +84,7 @@ public class XRecyclerHelper {
             topMargin = -this.viewHeight;
         }
         params.topMargin = topMargin;
-        LogUtil.d(TAG,"setRefreshViewMarginTop, params.topMargin:" + params.topMargin);
+        LogManager.d(TAG,"setRefreshViewMarginTop, params.topMargin:" + params.topMargin);
         this.view.setLayoutParams(params);
         this.view.requestLayout();
     }
@@ -112,7 +113,7 @@ public class XRecyclerHelper {
         }
 
         int y = currentTopMargin - finalTopMargin;
-        LogUtil.d(TAG,"restoreRefreshView, currentTopMargin:" + currentTopMargin + ",finalTopMargin:" + finalTopMargin);
+        LogManager.d(TAG,"restoreRefreshView, currentTopMargin:" + currentTopMargin + ",finalTopMargin:" + finalTopMargin);
         //从当前状态恢复到最终状态
         ValueAnimator animator = ObjectAnimator.ofFloat(currentTopMargin,finalTopMargin).setDuration(300);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -138,7 +139,7 @@ public class XRecyclerHelper {
             marginBottom = 0;
         }
         params.bottomMargin = marginBottom;
-        LogUtil.d(TAG,"setViewBottomMargin, params.marginBottom:" + params.bottomMargin);
+        LogManager.d(TAG,"setViewBottomMargin, params.marginBottom:" + params.bottomMargin);
         this.view.setLayoutParams(params);
     }
 
@@ -165,7 +166,7 @@ public class XRecyclerHelper {
         }
 
         int y = currentBottomMargin - finalBottomMargin;
-        LogUtil.d(TAG,"restoreViewBottomMargin, currentBottomMargin:" + currentBottomMargin + ",finalBottomMargin:" + finalBottomMargin);
+        LogManager.d(TAG,"restoreViewBottomMargin, currentBottomMargin:" + currentBottomMargin + ",finalBottomMargin:" + finalBottomMargin);
         //从当前状态恢复到最终状态
         ValueAnimator animator = ObjectAnimator.ofFloat(currentBottomMargin,finalBottomMargin).setDuration(300);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {

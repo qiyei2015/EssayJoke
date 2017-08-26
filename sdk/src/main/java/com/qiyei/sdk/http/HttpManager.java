@@ -6,13 +6,13 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
-import com.qiyei.sdk.log.LogUtil;
 
 import com.qiyei.sdk.http.base.IHttpCallback;
 import com.qiyei.sdk.http.base.IHttpEngine;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.dialog.LoadingDialog;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.MD5Util;
 
 import java.util.Map;
@@ -104,7 +104,7 @@ public class HttpManager {
                     String cache = HttpUtil.getCache(urlKey);
                     if (cache != null && cache.equals(result)){
                         //数据一致，不用刷新界面
-                        LogUtil.d(TAG,"数据一致，不用刷新界面");
+                        LogManager.d(TAG,"数据一致，不用刷新界面");
                         //关闭加载对话框
                         dismissDialog();
                         return;
@@ -116,7 +116,7 @@ public class HttpManager {
                 if (cache) {
                     // 2.3 缓存数据
                     long num = HttpUtil.setCache(urlKey,result);
-                    LogUtil.d(TAG,"num --> " + num);
+                    LogManager.d(TAG,"num --> " + num);
                 }
 
                 mHandler.post(new Runnable() {
@@ -126,7 +126,7 @@ public class HttpManager {
                         dismissDialog();
 
                         if (cache){
-                            LogUtil.d(TAG,"数据不一致，刷新界面");
+                            LogManager.d(TAG,"数据不一致，刷新界面");
                         }
 
                         callback.onSuccess(obj);
@@ -158,7 +158,7 @@ public class HttpManager {
 
                 callback.onSuccess(obj);
 
-                LogUtil.d(TAG,"有缓存，使用缓存刷新界面");
+                LogManager.d(TAG,"有缓存，使用缓存刷新界面");
 
                 return "222";
                 // TODO: 2017/6/5 后续再改

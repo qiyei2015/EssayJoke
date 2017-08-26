@@ -11,7 +11,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 
-import com.bumptech.glide.Glide;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.adapter.FindAdapter;
 import com.qiyei.essayjoke.model.DiscoverListResult;
@@ -23,7 +22,6 @@ import com.qiyei.sdk.http.base.RequestMethod;
 import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
-import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.DisplayUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.banner.BannerAdapter;
@@ -79,14 +77,14 @@ public class FindFragment extends BaseFragment{
         new HttpManager().execute(getChildFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
             @Override
             public void onSuccess(DiscoverListResult result) {
-                LogUtil.d(TAG,"name --> "+result.getData().getCategories().getName());
+                LogManager.d(TAG,"name --> "+result.getData().getCategories().getName());
                 mAdapter.setDatas(result.getData().getCategories().getCategory_list());
                 initBanner(result.getData().getRotate_banner().getBanners());
             }
 
             @Override
             public void onFail(Exception e) {
-                LogUtil.d(TAG,e.getMessage());
+                LogManager.d(TAG,e.getMessage());
                 ToastUtil.showLongToast(e.getMessage());
             }
         });
@@ -141,7 +139,7 @@ public class FindFragment extends BaseFragment{
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public int getCount() {
-                LogUtil.d(TAG,"banner size  --> " + list.size());
+                LogManager.d(TAG,"banner size  --> " + list.size());
                 return list.size();
             }
 

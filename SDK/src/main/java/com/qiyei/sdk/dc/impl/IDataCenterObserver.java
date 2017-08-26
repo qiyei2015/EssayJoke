@@ -12,15 +12,15 @@ public interface IDataCenterObserver {
 
     /**
      * 数据更新
-     * @param urls
+     * @param urlSet
      */
-    void dataUpdate(Set<String> urls);
+    void onDataChanged(Set<String> urlSet);
 
     /**
      * 数据被删除
-     * @param urls
+     * @param urlSet
      */
-    void dataDeleted(Set<String> urls);
+    void onDataDeleted(Set<String> urlSet);
 
 
 }

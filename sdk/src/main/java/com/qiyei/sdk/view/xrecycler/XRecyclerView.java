@@ -6,9 +6,10 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.qiyei.sdk.log.LogManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -74,7 +75,7 @@ public class XRecyclerView extends WrapRecyclerView{
 
             int refreshHeight = mRefresh.view.getMeasuredHeight();
             mRefresh.viewHeight = refreshHeight;
-            LogUtil.d(TAG,"onLayout,mRefresh.viewHeight:" + refreshHeight);
+            LogManager.d(TAG,"onLayout,mRefresh.viewHeight:" + refreshHeight);
             if (refreshHeight > 0){
                 mRefresh.setViewTopMargin(-refreshHeight);   //隐藏掉RefreshView
             }
@@ -125,7 +126,7 @@ public class XRecyclerView extends WrapRecyclerView{
         switch (e.getAction()){
             case MotionEvent.ACTION_MOVE:
 
-                LogUtil.d(TAG,"onTouchEvent,mRefresh.status:" + mRefresh.status);
+                LogManager.d(TAG,"onTouchEvent,mRefresh.status:" + mRefresh.status);
                 //如果在最顶部或者底部才处理，否则不需要处理
                 if (mRefresh.status == XStatus.RUNNING || mLoadMore.status == XStatus.RUNNING){
                     return super.onTouchEvent(e);
@@ -151,7 +152,7 @@ public class XRecyclerView extends WrapRecyclerView{
                 //手指下拉
                 if (refreshY > 0 && isScrollTop && isPullRefresh){
                     refreshY = refreshY - mRefresh.viewHeight;
-                    LogUtil.d(TAG,"onTouchEvent,refreshY:" + refreshY);
+                    LogManager.d(TAG,"onTouchEvent,refreshY:" + refreshY);
                     mRefresh.setViewTopMargin(refreshY);
                     mRefresh.updateViewStatus(refreshY);
                     mRefresh.drag = true;
@@ -159,7 +160,7 @@ public class XRecyclerView extends WrapRecyclerView{
                 }
                 //手指上拉
                 if (loadMoreY < 0 && !canScrollDown() && isPullLoad){
-                    LogUtil.d(TAG,"onTouchEvent,loadMoreY:" + -loadMoreY);
+                    LogManager.d(TAG,"onTouchEvent,loadMoreY:" + -loadMoreY);
                     mLoadMore.setViewBottomMargin(-loadMoreY);
                     mLoadMore.updateViewStatus(-loadMoreY);
                     mLoadMore.drag = true;

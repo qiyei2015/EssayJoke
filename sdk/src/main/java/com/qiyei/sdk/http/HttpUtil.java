@@ -1,13 +1,12 @@
 package com.qiyei.sdk.http;
 
 import android.text.TextUtils;
-import com.qiyei.sdk.log.LogUtil;
 
 import com.google.gson.Gson;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.http.cache.HttpCache;
-import com.qiyei.sdk.util.MD5Util;
+import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -67,10 +66,10 @@ public class HttpUtil {
         Gson gson = new Gson();
         //获取type类型数组的第0个
         Type genType = clazz.getGenericInterfaces()[0];
-        LogUtil.d(TAG,"genType:" + genType.toString());
+        LogManager.d(TAG,"genType:" + genType.toString());
         //判断是不是参数化类型
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        LogUtil.d(TAG,"params:" + params.toString());
+        LogManager.d(TAG,"params:" + params.toString());
         T obj = (T) gson.fromJson(json,(Class) params[0]);
         return obj;
     }

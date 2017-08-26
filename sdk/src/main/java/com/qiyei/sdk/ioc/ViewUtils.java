@@ -5,9 +5,10 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.View;
 import android.widget.Toast;
+
+import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -73,7 +74,7 @@ public class ViewUtils {
         //获取类里面所有的属性
         Class<?> clazz = finder.findClass();
         Field[] fields = clazz.getDeclaredFields();
-        LogUtil.d(TAG,"name:" + clazz.getSimpleName() + " fields.length:" + fields.length);
+        LogManager.d(TAG,"name:" + clazz.getSimpleName() + " fields.length:" + fields.length);
 
         //依次遍历并获取域上的ViewById注解
         for (Field field : fields){

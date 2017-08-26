@@ -3,7 +3,7 @@ package com.qiyei.sdk.util;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 
-import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.log.LogManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -55,11 +55,11 @@ public class ImageUtil {
         int width = origin.getWidth();
         int height = origin.getHeight();
 
-        LogUtil.d(TAG,"scaleImage originWidth:" + width + ",originHeight:" + height);
+        LogManager.d(TAG,"scaleImage originWidth:" + width + ",originHeight:" + height);
 
         float scaleWidth = (float) (reqWidth * 1.0 / width);
         float scaleHeight = (float) (reqHeight * 1.0 / height);
-        LogUtil.d(TAG,"scaleImage scaleWidth:" + scaleWidth + ",scaleHeight:" + scaleHeight);
+        LogManager.d(TAG,"scaleImage scaleWidth:" + scaleWidth + ",scaleHeight:" + scaleHeight);
 
         Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth,scaleHeight);
@@ -68,7 +68,7 @@ public class ImageUtil {
         if (!origin.isRecycled()){
             origin.recycle();
         }
-        LogUtil.d(TAG,"scaleImage newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
+        LogManager.d(TAG,"scaleImage newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
         return newBitmap;
     }
 
@@ -84,9 +84,9 @@ public class ImageUtil {
         int width = origin.getWidth();
         int height = origin.getHeight();
 
-        LogUtil.d(TAG,"scaleImage originWidth:" + width + ",originHeight:" + height);
+        LogManager.d(TAG,"scaleImage originWidth:" + width + ",originHeight:" + height);
 
-        LogUtil.d(TAG,"scaleImage ratio:" + ratio);
+        LogManager.d(TAG,"scaleImage ratio:" + ratio);
 
         Matrix matrix = new Matrix();
         matrix.postScale(ratio,ratio);
@@ -95,7 +95,7 @@ public class ImageUtil {
         if (!origin.isRecycled()){
             origin.recycle();
         }
-        LogUtil.d(TAG,"scaleImage newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
+        LogManager.d(TAG,"scaleImage newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
         return newBitmap;
     }
 
@@ -114,10 +114,10 @@ public class ImageUtil {
 
         int width = origin.getWidth();
         int height = origin.getHeight();
-        LogUtil.d(TAG,"cropImage originWidth:" + width + ",originHeight:" + height);
+        LogManager.d(TAG,"cropImage originWidth:" + width + ",originHeight:" + height);
 
         if (!(reqWidth < width) || !(reqHeight < height)){
-            LogUtil.e(TAG," reqWidth or reqHeight cannot be more than origin !");
+            LogManager.e(TAG," reqWidth or reqHeight cannot be more than origin !");
             return null;
         }
         Bitmap newBitmap = null;
@@ -143,14 +143,14 @@ public class ImageUtil {
                         ,reqWidth,reqHeight,null,true);
                 break;
             default:
-                LogUtil.e(TAG," please check or direction,it must be correct params !");
+                LogManager.e(TAG," please check or direction,it must be correct params !");
                 return null;
         }
 
         if (!origin.isRecycled()){
             origin.recycle();
         }
-        LogUtil.d(TAG,"cropImage nnewWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
+        LogManager.d(TAG,"cropImage nnewWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
         return newBitmap;
     }
 
@@ -166,9 +166,9 @@ public class ImageUtil {
         int width = origin.getWidth();
         int height = origin.getHeight();
 
-        LogUtil.d(TAG,"rotateBitmap originWidth:" + width + ",originHeight:" + height);
+        LogManager.d(TAG,"rotateBitmap originWidth:" + width + ",originHeight:" + height);
 
-        LogUtil.d(TAG,"rotateBitmap degress:" + degress);
+        LogManager.d(TAG,"rotateBitmap degress:" + degress);
 
         Matrix matrix = new Matrix();
         matrix.setRotate(degress);
@@ -177,7 +177,7 @@ public class ImageUtil {
         if (!origin.isRecycled()){
             origin.recycle();
         }
-        LogUtil.d(TAG,"rotateBitmap newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
+        LogManager.d(TAG,"rotateBitmap newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
         return newBitmap;
     }
 
@@ -195,9 +195,9 @@ public class ImageUtil {
         int width = origin.getWidth();
         int height = origin.getHeight();
 
-        LogUtil.d(TAG,"skewBitmap originWidth:" + width + ",originHeight:" + height);
+        LogManager.d(TAG,"skewBitmap originWidth:" + width + ",originHeight:" + height);
 
-        LogUtil.d(TAG,"skewBitmap kx:" + kx + ",ky:" + ky);
+        LogManager.d(TAG,"skewBitmap kx:" + kx + ",ky:" + ky);
 
         Matrix matrix = new Matrix();
         matrix.postSkew(kx,ky);
@@ -206,7 +206,7 @@ public class ImageUtil {
         if (!origin.isRecycled()){
             origin.recycle();
         }
-        LogUtil.d(TAG,"skewBitmap newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
+        LogManager.d(TAG,"skewBitmap newWidth:" + newBitmap.getWidth() + ",newHeight:" + newBitmap.getHeight());
         return newBitmap;
     }
 

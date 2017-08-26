@@ -37,7 +37,7 @@ public class SkinAttrsSupport {
             // 获取名称 , 值
             String attrName = attrs.getAttributeName(index);
             String attrValue = attrs.getAttributeValue(index);
-            // LogUtil.e(TAG,"attrName -> "+attrName +" ; attrValue -> "+attrValue);
+            // LogManager.e(TAG,"attrName -> "+attrName +" ; attrValue -> "+attrValue);
             // 只获取重要的
             SkinType skinType = getSkinType(attrName);
             if(skinType != null){

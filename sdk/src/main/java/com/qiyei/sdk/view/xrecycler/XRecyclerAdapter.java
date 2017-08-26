@@ -3,11 +3,11 @@ package com.qiyei.sdk.view.xrecycler;
 import android.content.Context;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import com.qiyei.sdk.log.LogUtil;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 
@@ -114,7 +114,7 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         }
 
         int position = mHeaderViews.indexOfValue(view);
-        LogUtil.d(TAG,"addHeaderView,position:" + position + ",mHeaderViews.size():" + mHeaderViews.size());
+        LogManager.d(TAG,"addHeaderView,position:" + position + ",mHeaderViews.size():" + mHeaderViews.size());
         if (position >= 0){
             return;
         }
@@ -132,7 +132,7 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         }
         mRefreshView = view;
         int pos = mHeaderViews.indexOfValue(view);
-        LogUtil.d(TAG,"addRefreshView,pos:" + pos + ",mHeaderViews.size():" + mHeaderViews.size());
+        LogManager.d(TAG,"addRefreshView,pos:" + pos + ",mHeaderViews.size():" + mHeaderViews.size());
 
         if (mHeaderViews.size() == 0){
             if (pos < 0){
@@ -172,7 +172,7 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         //将loadmore view移到最后
         if (mLoadMoreView != null){
             int pos = mFooterViews.indexOfValue(mLoadMoreView);
-            LogUtil.d(TAG,"addFooterView,pos:" + pos);
+            LogManager.d(TAG,"addFooterView,pos:" + pos);
             if (pos < 0){
                 mFooterViews.put(BASE_TYPE_FOOTER++,mLoadMoreView);
             }else {
@@ -198,7 +198,7 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         }else {
             mFooterViews.setValueAt(pos,view);
         }
-        LogUtil.d(TAG,"addLoadMoreView,pos:" + pos);
+        LogManager.d(TAG,"addLoadMoreView,pos:" + pos);
         notifyDataSetChanged();
     }
 

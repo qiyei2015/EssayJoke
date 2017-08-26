@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.view.xrecycler.IMultiTypeLayout;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
 
     public BaseRecyclerAdapter(Context context, List<T> datas, int layoutId) {
         mContext = context;
-        LogUtil.d(TAG,"datas :" + datas);
+        LogManager.d(TAG,"datas :" + datas);
         mDatas = datas;
         mLayoutId = layoutId;
     }

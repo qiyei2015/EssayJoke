@@ -15,7 +15,6 @@ import com.qiyei.essayjoke.model.User;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
-import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -90,7 +89,7 @@ public class WelcomeActivity extends BaseSkinActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_STORE){
-            LogUtil.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
+            LogManager.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
 
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED){

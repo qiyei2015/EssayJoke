@@ -2,8 +2,9 @@ package com.qiyei.sdk.db;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
-import com.qiyei.sdk.log.LogUtil;
 
+import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -31,13 +32,13 @@ public class DaoSupportFactory {
 
         //数据库放在外部存储下面：/sdcard/EasyJoke/database/        android6.0以后需要动态申请权限
         File dbDir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                + File.separator + "EasyJoke" + File.separator + "database");
+                + File.separator + RuntimeEnv.packageName + File.separator + "database");
         if (!dbDir.exists()){
             dbDir.mkdirs();
         }
 
         File dbFile = new File(dbDir,"easyJoke.db");
-        LogUtil.d(TAG,"dbFile --> " + dbFile);
+        LogManager.d(TAG,"dbFile --> " + dbFile);
 
         //如果存在就删除文件
         if (dbFile.exists()){
@@ -57,11 +58,11 @@ public class DaoSupportFactory {
             mDatabase = SQLiteDatabase.openOrCreateDatabase(dbFile,null);
             if (mDatabase == null){
                 ToastUtil.showLongToast("数据库创建失败");
-                LogUtil.d(TAG,"数据库创建失败");
+                LogManager.d(TAG,"数据库创建失败");
             }
         }else {
             ToastUtil.showLongToast("数据库创建失败");
-            LogUtil.d(TAG,"数据库创建失败");
+            LogManager.d(TAG,"数据库创建失败");
         }
     }
 

@@ -11,46 +11,49 @@ import java.util.Set;
  */
 public abstract class DataObserver {
 
-    private Set<String> mUris;
-
     /**
      * 感兴趣的uris
      */
+    private Set<String> mUriSet;
+
+    /**
+     * 构造方法
+     */
     public DataObserver(){
-        mUris = new HashSet<>();
+        mUriSet = new HashSet<>();
     }
 
     /**
      * 数据更新
-     * @param uris
+     * @param uriSet
      */
-    public abstract void dataUpdate(Set<String> uris);
+    public abstract void onDataChanged(Set<String> uriSet);
 
     /**
      * 数据被删除
-     * @param uris
+     * @param uriSet
      */
-    public void dataDeleted(Set<String> uris){
+    public void onDataDeleted(Set<String> uriSet){
 
     }
 
     /**
      * 添加感兴趣的uri,不允许重复添加
-     * @param uris
+     * @param uriSet
      */
-    public void addUris(Set<String> uris){
-        for (String uri : uris){
-            if (!mUris.contains(uri)){
-                mUris.add(uri);
+    public void addUri(Set<String> uriSet){
+        for (String uri : uriSet){
+            if (!mUriSet.contains(uri)){
+                mUriSet.add(uri);
             }
         }
     }
 
     /**
-     * @return {@link #mUris}
+     * @return {@link #mUriSet}
      */
-    public Set<String> getUris() {
-        return mUris;
+    public Set<String> getUri() {
+        return mUriSet;
     }
 
 }

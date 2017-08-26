@@ -10,10 +10,15 @@ import android.content.Context;
  */
 public class DataCenterProxy {
 
+    /**
+     * 数据中心
+     */
+    private DataCenter mDataCenter;
 
     public DataCenterProxy(Context context,IDataCenterObserver observer){
         //注册
-        DataCenter.getInstance().registerDataObserver(observer);
+        mDataCenter = DataCenter.getInstance();
+        mDataCenter.registerDataObserver(observer);
     }
 
     /**
@@ -22,7 +27,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setInt(String uri, int value) {
-        setValue(uri,value + "");
+        mDataCenter.setInt(uri,value);
     }
 
     /**
@@ -31,11 +36,7 @@ public class DataCenterProxy {
      * @return
      */
     public Integer getInt(String uri) {
-        Integer value = null;
-        if (getValue(uri) != null){
-            value = Integer .valueOf(getValue(uri));
-        }
-        return value;
+        return mDataCenter.getInt(uri);
     }
 
     /**
@@ -44,7 +45,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setLong(String uri, long value) {
-        setValue(uri,value + "");
+        mDataCenter.setLong(uri,value);
     }
 
     /**
@@ -53,11 +54,7 @@ public class DataCenterProxy {
      * @return
      */
     public Long getLong(String uri) {
-        Long value = null;
-        if (getValue(uri) != null){
-            value = Long .valueOf(getValue(uri));
-        }
-        return value;
+        return mDataCenter.getLong(uri);
     }
 
     /**
@@ -66,7 +63,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setFloat(String uri, float value) {
-        setValue(uri,value + "");
+        mDataCenter.setFloat(uri,value);
     }
 
     /**
@@ -75,11 +72,7 @@ public class DataCenterProxy {
      * @return
      */
     public Float getFloat(String uri) {
-        Float value = null;
-        if (getValue(uri) != null){
-            value = Float .valueOf(getValue(uri));
-        }
-        return value;
+        return mDataCenter.getFloat(uri);
     }
 
     /**
@@ -88,7 +81,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setDouble(String uri, double value) {
-        setValue(uri,value + "");
+        mDataCenter.setDouble(uri,value);
     }
 
     /**
@@ -97,11 +90,7 @@ public class DataCenterProxy {
      * @return
      */
     public Double getDouble(String uri) {
-        Double value = null;
-        if (getValue(uri) != null){
-            value = Double .valueOf(getValue(uri));
-        }
-        return value;
+        return mDataCenter.getDouble(uri);
     }
 
     /**
@@ -110,7 +99,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setChar(String uri, char value) {
-        setValue(uri,value + "");
+        mDataCenter.setChar(uri,value);
     }
 
     /**
@@ -119,11 +108,7 @@ public class DataCenterProxy {
      * @return
      */
     public Character getChar(String uri) {
-        char[] value = null;
-        if (getValue(uri) != null){
-            value = getValue(uri).toCharArray();
-        }
-        return value[0];
+        return mDataCenter.getChar(uri);
     }
 
     /**
@@ -132,7 +117,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setBoolean(String uri, boolean value) {
-        setValue(uri,value + "");
+        mDataCenter.setBoolean(uri,value);
     }
 
     /**
@@ -141,15 +126,7 @@ public class DataCenterProxy {
      * @return
      */
     public Boolean getBoolean(String uri) {
-        Boolean value = null;
-        if (getValue(uri) != null){
-            if ("true".equals(getValue(uri))){
-                value = true;
-            }else if ("false".equals(getValue(uri))){
-                value = false;
-            }
-        }
-        return value;
+        return mDataCenter.getBoolean(uri);
     }
 
     /**
@@ -158,7 +135,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setString(String uri,String value){
-        setValue(uri,value);
+        mDataCenter.setString(uri,value);
     }
 
     /**
@@ -166,24 +143,7 @@ public class DataCenterProxy {
      * @param uri
      */
     public String getString(String uri){
-        return getValue(uri);
-    }
-
-    /**
-     * 保存值
-     * @param uri
-     * @param value
-     */
-    private void setValue(String uri,String value){
-        DataCenter.getInstance().setValue(uri,value);
-    }
-
-    /**
-     * 获取值
-     * @return
-     */
-    private String getValue(String uri){
-        return DataCenter.getInstance().getValue(uri);
+        return mDataCenter.getString(uri);
     }
 
 }

@@ -22,7 +22,7 @@ public interface IDataOperator {
      * @param key 该类型下的key
      * @return
      */
-    String getSecretUri(String type,String key);
+    String getUriForSecret(String type,String key);
 
     /**
      *

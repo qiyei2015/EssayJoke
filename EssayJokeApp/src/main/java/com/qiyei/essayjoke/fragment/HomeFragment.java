@@ -17,7 +17,6 @@ import com.qiyei.essayjoke.R;
 import com.qiyei.framework.fragment.BaseFragment;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
-import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.view.IndicatorView.IndicatorAdapter;
 import com.qiyei.sdk.view.IndicatorView.IndicatorView;
 
@@ -81,7 +80,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 //滚动的过程中会不断的回掉
-                LogUtil.e("TAG", "position --> " + position + "  positionOffset --> "
+                LogManager.e("TAG", "position --> " + position + "  positionOffset --> "
                         + positionOffset + " positionOffsetPixels --> " + positionOffsetPixels);
 
 //                ColorTrackTextView left = mIndicators.get(position);
@@ -136,14 +135,14 @@ public class HomeFragment extends BaseFragment {
             public void highLightIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.RED);
-                LogUtil.d(TAG,"highLightIndicator,textView:" + Color.RED);
+                LogManager.d(TAG,"highLightIndicator,textView:" + Color.RED);
             }
 
             @Override
             public void restoreIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.BLACK);
-                LogUtil.d(TAG,"restoreIndicator,textView:" + Color.BLACK);
+                LogManager.d(TAG,"restoreIndicator,textView:" + Color.BLACK);
             }
 
             @Override

@@ -7,10 +7,9 @@ import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Environment;
-import com.qiyei.sdk.log.LogUtil;
 
-import java.io.File;
+import com.qiyei.sdk.log.LogManager;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -79,11 +78,11 @@ public class SkinResources {
                 colorStateList = mResources.getColorStateList(resId);
             }
 
-            LogUtil.d(TAG,"resId -> " + resId + " mPackageName -> " + mPackageName  + " resName -> " + name);
+            LogManager.d(TAG,"resId -> " + resId + " mPackageName -> " + mPackageName  + " resName -> " + name);
             return colorStateList;
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
-            LogUtil.d(TAG," mPackageName -> " + mPackageName  + " resName -> " + name);
+            LogManager.d(TAG," mPackageName -> " + mPackageName  + " resName -> " + name);
             return null;
         }
     }
@@ -97,11 +96,11 @@ public class SkinResources {
         try {
             int resId = mResources.getIdentifier(name,"drawable", mPackageName);
             Drawable drawable = mResources.getDrawable(resId,null);
-            LogUtil.d(TAG,"resId -> " + resId + " mPackageName -> " + mPackageName  + " resName -> " + name);
+            LogManager.d(TAG,"resId -> " + resId + " mPackageName -> " + mPackageName  + " resName -> " + name);
             return drawable;
         } catch (Resources.NotFoundException e) {
             e.printStackTrace();
-            LogUtil.d(TAG," mPackageName -> " + mPackageName  + " resName -> " + name);
+            LogManager.d(TAG," mPackageName -> " + mPackageName  + " resName -> " + name);
             return null;
         }
     }

@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.provider.MediaStore;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
@@ -19,9 +18,7 @@ import android.widget.TextView;
 
 import com.qiyei.framework.R;
 import com.qiyei.framework.activity.BaseSkinActivity;
-import com.qiyei.sdk.log.LogUtil;
-import com.qiyei.sdk.util.FileUtil;
-import com.qiyei.sdk.view.xrecycler.XRecyclerView;
+import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
 import java.io.Serializable;
@@ -111,7 +108,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
                     String path = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[0]));
                     String name = data.getString(data.getColumnIndexOrThrow(IMAGE_PROJECTION[1]));
                     long dateTime = data.getLong(data.getColumnIndexOrThrow(IMAGE_PROJECTION[2]));
-                    LogUtil.w(ImageSelector.TAG, path + "  " + name + "  " + dateTime);
+                    LogManager.w(ImageSelector.TAG, path + "  " + name + "  " + dateTime);
 
                     // 判断文件是不是存在
                     if (!pathExist(path)) {
@@ -122,7 +119,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
                     images.add(image);
                 }
 
-                LogUtil.d(ImageSelector.TAG,"images:" + images.size());
+                LogManager.d(ImageSelector.TAG,"images:" + images.size());
 
                 // 显示列表数据
                 showListData(images);
@@ -239,7 +236,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
     @Override
     public void openCamera(File file) {
         mTempFilePath = file.getAbsolutePath();
-        LogUtil.d(TAG,"file:" + file.getAbsolutePath());
+        LogManager.d(TAG,"file:" + file.getAbsolutePath());
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         startActivityForResult(intent, ImageSelector.REQUEST_CAMERA);
@@ -251,7 +248,7 @@ public class ImageSelectActivity extends BaseSkinActivity implements ImageSelect
         if (resultCode == RESULT_OK) {
             if (requestCode == ImageSelector.REQUEST_CAMERA) {
                 // notify system the image has change
-                LogUtil.d(TAG,"filepath:" + mTempFilePath);
+                LogManager.d(TAG,"filepath:" + mTempFilePath);
                 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(mTempFilePath))));
                 mResultList.add(mTempFilePath);
                 setResult();

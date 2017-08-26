@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class BannerViewPager extends ViewPager {
             //判断是不是监听的当前Activity的生命周期
             if (mActivity == activity){
                 startLoop();
-                LogUtil.d(TAG,"onActivityResumed(Activity activity) Banner startLoop !");
+                LogManager.d(TAG,"onActivityResumed(Activity activity) Banner startLoop !");
             }
         }
 
@@ -100,7 +100,7 @@ public class BannerViewPager extends ViewPager {
             //判断是不是监听的当前Activity的生命周期
             if (mActivity == activity){
                 stopLoop();
-                LogUtil.d(TAG,"onActivityResumed(Activity activity) Banner stopLoop !");
+                LogManager.d(TAG,"onActivityResumed(Activity activity) Banner stopLoop !");
             }
         }
 
@@ -139,7 +139,7 @@ public class BannerViewPager extends ViewPager {
                 case MSG_LOOP:
                     int index = getCurrentItem() + 1;
                     setCurrentItem(index,true);
-                    LogUtil.d(TAG,"index:" + index);
+                    LogManager.d(TAG,"index:" + index);
                     startLoop();
                     break;
                 default:

@@ -29,9 +29,10 @@ import android.support.v7.widget.AppCompatSeekBar;
 import android.support.v7.widget.AppCompatSpinner;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.InflateException;
 import android.view.View;
+
+import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -219,7 +220,7 @@ public class SkinAppCompatViewInflater {
             themeId = a.getResourceId(R.styleable.View_theme, 0);
 
             if (themeId != 0) {
-                LogUtil.i(LOG_TAG, "app:theme is now deprecated. "
+                LogManager.i(LOG_TAG, "app:theme is now deprecated. "
                         + "Please move to using android:theme instead.");
             }
         }

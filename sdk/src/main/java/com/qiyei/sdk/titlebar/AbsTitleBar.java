@@ -3,12 +3,13 @@ package com.qiyei.sdk.titlebar;
 import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.qiyei.sdk.log.LogManager;
 
 
 /**
@@ -90,7 +91,7 @@ public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar
             ViewGroup activityRoot = (ViewGroup) ((Activity)mParams.mContext).findViewById(android.R.id.content);
             //获取我们在Activity中设置ContentView的View
             mParams.mParent = (ViewGroup)activityRoot.getChildAt(0);
-            LogUtil.i("TAG","mParams.mParent:" + mParams.mParent);
+            LogManager.i("TAG","mParams.mParent:" + mParams.mParent);
         }
         if (mParams.mParent == null){
             return;

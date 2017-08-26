@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import com.qiyei.sdk.log.LogUtil;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 
 import com.qiyei.sdk.R;
+import com.qiyei.sdk.log.LogManager;
 
 
 /**
@@ -100,7 +100,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
                 mIndicatorContainer.addBottomTrackView(bootomTrackView,(int)w);
             }
 
-            LogUtil.d(TAG, "mItemWidth -> " + mItemWidth);
+            LogManager.d(TAG, "mItemWidth -> " + mItemWidth);
         }
     }
 
@@ -148,7 +148,7 @@ public class IndicatorView extends HorizontalScrollView implements ViewPager.OnP
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-        LogUtil.d(TAG,"position:" + position + ",positionOffset" + positionOffset);
+        LogManager.d(TAG,"position:" + position + ",positionOffset" + positionOffset);
 
 //        //滚动的时候让当前头部的item一直保持在最中心
 //        indicatorScrollTo(position,positionOffset);

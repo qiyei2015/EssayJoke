@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.DisplayMetrics;
 
-import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -43,14 +43,14 @@ public class VersionManager {
     public static String getSignature(Context context){
         //获取当前应用的包名
         String packageName = context.getApplicationInfo().packageName;
-        LogUtil.i(TAG,"getSignature, packageName --> " + packageName);
+        LogManager.i(TAG,"getSignature, packageName --> " + packageName);
 
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfos = packageManager.getInstalledPackages(PackageManager.GET_SIGNATURES);
         for (PackageInfo info : packageInfos){
             //找到与当前应用相同的包名的应用
             if (info.packageName.equals(packageName)){
-                LogUtil.i(TAG,"getSignature, signature --> ");
+                LogManager.i(TAG,"getSignature, signature --> ");
                 return info.signatures[0].toCharsString();
             }
         }
@@ -66,14 +66,14 @@ public class VersionManager {
         //反射实例化PackageParser对象
         Object packageParser = getPackageParser(path);
         if (packageParser == null){
-            LogUtil.i(TAG,"getSignature, getPackageParser() is null");
+            LogManager.i(TAG,"getSignature, getPackageParser() is null");
             return null;
         }
 
         //反射获取parserPackage方法
         Object packageObject = getPackageInfo(path,packageParser);
         if (packageObject == null){
-            LogUtil.i(TAG,"getSignature, getPackageInfo() is null");
+            LogManager.i(TAG,"getSignature, getPackageInfo() is null");
             return null;
         }
 
@@ -94,7 +94,7 @@ public class VersionManager {
             e.printStackTrace();
             return null;
         }
-        LogUtil.i(TAG,"getSignature, collectCertificatesMethod invoke is ok");
+        LogManager.i(TAG,"getSignature, collectCertificatesMethod invoke is ok");
         //获取mSignatures属性
         try {
             Field signatureField = packageObject.getClass().getDeclaredField("mSignatures");
@@ -108,7 +108,7 @@ public class VersionManager {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        LogUtil.i(TAG,"getSignature, signatureField is error ");
+        LogManager.i(TAG,"getSignature, signatureField is error ");
         return null;
     }
 

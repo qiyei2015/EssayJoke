@@ -3,13 +3,9 @@ package com.qiyei.framework.imageselector;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.bumptech.glide.Glide;
 
 import com.qiyei.framework.R;
 import com.qiyei.sdk.image.ImageManager;
-import com.qiyei.sdk.log.LogUtil;
 import com.qiyei.sdk.util.FileUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.xrecycler.IMultiTypeLayout;
@@ -18,7 +14,6 @@ import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -8,7 +8,7 @@ import android.text.TextUtils;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.dc.DCConstant;
-import com.qiyei.sdk.log.LogUtil;
+import com.qiyei.sdk.log.LogManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.Set;
  * Version: 1.0
  * Description: 数据中心
  */
-public class DataCenter{
+public final class DataCenter{
 
     /**
      * 存储观察者数据
@@ -48,7 +48,7 @@ public class DataCenter{
      * 构造方法私有化
      */
     private DataCenter(Context context){
-        IDataBuffer memoryBuffer = new MemoryDataBuffer(context);
+        IDataBuffer memoryBuffer = new MEMDataBuffer(context);
         IDataBuffer spBuffer = new SPDataBuffer(context);
         IDataBuffer sqlBuffer = new SQLDataBuffer(context);
 
@@ -110,22 +110,201 @@ public class DataCenter{
         return dataBuffer;
     }
 
+
+    /**
+     * 保存int
+     * @param uri
+     * @param value
+     */
+    public void setInt(String uri, int value) {
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取int
+     * @param uri
+     * @return
+     */
+    public Integer getInt(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Integer){
+            return (Integer) value;
+        }
+        return null;
+    }
+
+    /**
+     * 保存long
+     * @param uri
+     * @param value
+     */
+    public void setLong(String uri, long value) {
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取long
+     * @param uri
+     * @return
+     */
+    public Long getLong(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Long){
+            return (Long) value;
+        }
+        return null;
+    }
+
+    /**
+     * 保存float
+     * @param uri
+     * @param value
+     */
+    public void setFloat(String uri, float value) {
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取float
+     * @param uri
+     * @return
+     */
+    public Float getFloat(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Float){
+            return (Float) value;
+        }
+        return null;
+    }
+
+    /**
+     * 保存double
+     * @param uri
+     * @param value
+     */
+    public void setDouble(String uri, double value) {
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取double
+     * @param uri
+     * @return
+     */
+    public Double getDouble(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Double){
+            return (Double) value;
+        }else if (value instanceof String){
+            return Double.parseDouble((String)value);
+        }
+        return null;
+    }
+
+    /**
+     * 保存char
+     * @param uri
+     * @param value
+     */
+    public void setChar(String uri, char value) {
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取char
+     * @param uri
+     * @return
+     */
+    public Character getChar(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Character){
+            return (Character) value;
+        }else if (value instanceof String){
+            return ((String)value).toCharArray()[0];
+        }
+        return null;
+    }
+
+    /**
+     * 保存boolean
+     * @param uri
+     * @param value
+     */
+    public void setBoolean(String uri, boolean value) {
+        setValue(uri,value + "");
+    }
+
+    /**
+     * 获取boolean
+     * @param uri
+     * @return
+     */
+    public Boolean getBoolean(String uri) {
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof Boolean){
+            return (Boolean) value;
+        }
+        return null;
+    }
+
+    /**
+     * 保存值
+     * @param uri
+     * @param value
+     */
+    public void setString(String uri,String value){
+        setValue(uri,value);
+    }
+
+    /**
+     * 获取值
+     * @return
+     */
+    public String getString(String uri){
+        Object value = getValue(uri);
+        if (value == null){
+            return null;
+        }
+        if (value instanceof String){
+            return (String) value;
+        }
+        return null;
+    }
+
+
     /**
      * 存储String类型数据
      * @param uri
      * @param value
      */
-    public void setValue(String uri,String value){
-        LogUtil.i(DCConstant.TAG,"setValue,uri --> " + uri + " value --> " + value);
+    private void setValue(String uri,Object value){
+        LogManager.i(DCConstant.TAG,"setValue,uri --> " + uri + " value --> " + value);
 
         mDataBuffer = getDataBuffer(uri);
-
-        mDataBuffer.setValue(uri,value);
+        //mDataBuffer.setValue(uri,value);
         //更新数据
         Set<String> uris = new HashSet<>();
         uris.add(uri);
         for (IDataCenterObserver observer : mCenterObservers){
-            observer.dataUpdate(uris);
+            observer.onDataChanged(uris);
         }
     }
 
@@ -133,10 +312,11 @@ public class DataCenter{
      * 存储String类型数据
      * @param uri
      */
-    public String getValue(String uri){
-        LogUtil.i(DCConstant.TAG,"getValue,uri --> " + uri);
+    private Object getValue(String uri){
+        LogManager.i(DCConstant.TAG,"getValue,uri --> " + uri);
         mDataBuffer = getDataBuffer(uri);
-        return mDataBuffer.getValue(uri);
+//        return mDataBuffer.getValue(uri);
+        return null;
     }
 
 }

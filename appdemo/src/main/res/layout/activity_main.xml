@@ -67,4 +67,10 @@
         android:id="@+id/btn10"
         android:text="测试10 数据中心"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn11"
+        android:text="测试11 测试异常信息"/>
+
 </LinearLayout>

@@ -1,6 +1,9 @@
 package com.qiyei.sdk.dc.impl;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.qiyei.sdk.common.RuntimeEnv;
 
 /**
  * Email: 1273482124@qq.com
@@ -11,25 +14,138 @@ import android.content.Context;
 public class SQLDataBuffer implements IDataBuffer {
 
     /**
+     * 数据库名称
+     */
+    private static final String DB_NAME = RuntimeEnv.packageName + "_sql";
+    /**
+     * 表名称
+     */
+    private static final String TABLE_NAME = "data_sql";
+    /**
+     * 版本号
+     */
+    private static int DB_VERSION = 1;
+
+    /**
+     * 创建表的语句
+     */
+    static final String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+            " (" +
+            $.id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            $.name + " TEXT, " +
+            $.value + " TEXT " +
+            " )";
+
+    /**
+     * 升级表的语句
+     */
+    static final String SQL_UPDATE_TABLE = "CREATE TABLE " + TABLE_NAME +
+            " (" +
+            $.id + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            $.name + " TEXT, " +
+            $.value + " TEXT " +
+            " )";
+
+    /**
+     * 数据库对象
+     */
+    private SQLiteDatabase mDatabase;
+
+    /**
+     * 数据库的一些字段名称
+     */
+    interface ${
+        //id
+        String id = "id";
+
+        /**
+         * 名称
+         */
+        String name = "name";
+
+        /**
+         * 值
+         */
+        String value = "value";
+
+    }
+
+    /**
      * 同一个包下可以引用
      * @param context
      */
     SQLDataBuffer(Context context){
-        init();
+        mDatabase = new SQLDataHelper(context,DB_NAME,DB_VERSION).getWritableDatabase();
     }
 
     @Override
-    public void init() {
+    public void setInt(String uri, int value) {
 
     }
 
     @Override
-    public String getValue(String key) {
+    public Integer getInt(String uri) {
         return null;
     }
 
     @Override
-    public boolean setValue(String key, String value) {
-        return false;
+    public void setLong(String uri, long value) {
+
     }
+
+    @Override
+    public Long getLong(String uri) {
+        return null;
+    }
+
+    @Override
+    public void setFloat(String uri, float value) {
+
+    }
+
+    @Override
+    public Float getFloat(String uri) {
+        return null;
+    }
+
+    @Override
+    public void setDouble(String uri, double value) {
+
+    }
+
+    @Override
+    public Double getDouble(String uri) {
+        return null;
+    }
+
+    @Override
+    public void setChar(String uri, char value) {
+
+    }
+
+    @Override
+    public Character getChar(String uri) {
+        return null;
+    }
+
+    @Override
+    public void setBoolean(String uri, boolean value) {
+
+    }
+
+    @Override
+    public Boolean getBoolean(String uri) {
+        return null;
+    }
+
+    @Override
+    public void setString(String uri, String value) {
+
+    }
+
+    @Override
+    public String getString(String uri) {
+        return null;
+    }
+
 }

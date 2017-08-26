@@ -41,19 +41,19 @@ public class DataManager implements IDataOperator{
         mProxy = new DataCenterProxy(RuntimeEnv.appContext,new IDataCenterObserver() {
 
             @Override
-            public void dataUpdate(Set<String> uris) {
+            public void onDataChanged(Set<String> urlSet) {
                 Set<String> updateUris = new HashSet<String>();
 
                 for (DataObserver observer : mObservers){
                     //只更新关心的
-                    for (String uri : uris){
-                        if (observer.getUris().contains(uri)){
+                    for (String uri : urlSet){
+                        if (observer.getUri().contains(uri)){
                             updateUris.add(uri);
                         }
                     }
                     //updateUris有内容才更新
                     if (updateUris.size() > 0){
-                        observer.dataUpdate(updateUris);
+                        observer.onDataChanged(updateUris);
                     }
                     //清除，便于下一次循环使用
                     updateUris.clear();
@@ -61,9 +61,9 @@ public class DataManager implements IDataOperator{
             }
 
             @Override
-            public void dataDeleted(Set<String> uris) {
+            public void onDataDeleted(Set<String> urlSet) {
                 for (DataObserver observer : mObservers){
-                    observer.dataDeleted(uris);
+                    observer.onDataDeleted(urlSet);
                 }
             }
         });
@@ -79,13 +79,13 @@ public class DataManager implements IDataOperator{
 
     /**
      * 注册数据观察者
-     * @param uris 感兴趣的uris
+     * @param uriSet 感兴趣的uri
      * @param observer
      */
-    public void registerDataObserver(Set<String> uris,DataObserver observer){
+    public void registerDataObserver(Set<String> uriSet,DataObserver observer){
         if (!mObservers.contains(observer)){
             //添加感兴趣的uri
-            observer.addUris(uris);
+            observer.addUri(uriSet);
             //添加到mObservers中
             mObservers.add(observer);
         }
@@ -119,7 +119,7 @@ public class DataManager implements IDataOperator{
      * @return
      */
     @Override
-    public String getSecretUri(String type,String key){
+    public String getUriForSecret(String type,String key){
         return DCConstant.URI_SECRET + "/" + type + "/" + key;
     }
 

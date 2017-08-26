@@ -44,7 +44,7 @@ public class CategoryItemDecoration extends RecyclerView.ItemDecoration {
             RecyclerView.LayoutParams params = (RecyclerView.LayoutParams)child.getLayoutParams();
             rect.top = child.getBottom() + params.bottomMargin;
             rect.bottom = rect.top + mDivder.getIntrinsicHeight();
-            //LogUtil.d(TAG,"rect.bottom: " + rect.bottom);
+            //LogManager.d(TAG,"rect.bottom: " + rect.bottom);
             mDivder.setBounds(rect);
             mDivder.draw(c);
         }
@@ -60,7 +60,7 @@ public class CategoryItemDecoration extends RecyclerView.ItemDecoration {
         out.right = outRect.right;
         out.bottom += mDivder.getIntrinsicHeight();
         outRect = out;
-        //LogUtil.d(TAG,"outRect.bottom:" + outRect.bottom);
+        //LogManager.d(TAG,"outRect.bottom:" + outRect.bottom);
         super.getItemOffsets(outRect,view,parent,state);
     }
 }

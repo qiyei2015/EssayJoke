@@ -4,11 +4,6 @@ import android.app.Application;
 
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
-import com.qiyei.sdk.crash.ExceptionCrashHandler;
-import com.qiyei.sdk.fixbug.FixDexManager;
-import com.qiyei.sdk.http.HttpManager;
-import com.qiyei.sdk.http.okhttp.OkHttpEngine;
-import com.qiyei.sdk.util.ToastUtil;
 
 /**
  * Email: 1273482124@qq.com

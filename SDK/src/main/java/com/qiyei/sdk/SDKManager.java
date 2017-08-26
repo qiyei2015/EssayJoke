@@ -4,13 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.crash.ExceptionCrashHandler;
+import com.qiyei.sdk.common.ExceptionCrashHandler;
 import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.okhttp.OkHttpEngine;
 import com.qiyei.sdk.image.GlideImpl;
 import com.qiyei.sdk.image.ImageManager;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 /**
@@ -32,6 +33,9 @@ public final class SDKManager {
         }else {
             throw new Exception("please init SDK in your Application !");
         }
+
+        //开始日志初始化,写设备信息，应用信息
+        LogManager.writeAppInfo();
 
         //初始化ToastUtil
         ToastUtil.init(RuntimeEnv.appContext);
