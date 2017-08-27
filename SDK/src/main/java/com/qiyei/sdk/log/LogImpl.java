@@ -138,9 +138,10 @@ public class LogImpl {
             default:
                 break;
         }
-        //打印进程ID 线程ID
+        //打印进程ID 线程ID 当前类 当前方法
         String message = time + " " + preTAG + " "
                 + "Pid:"+ android.os.Process.myPid() + "|" +"Tid:"+ android.os.Process.myTid()
+                + " [" + RuntimeEnv.getCurrentClassName() + " --> " + RuntimeEnv.getCurrentMethodName()+"]"
                 + " [" + tag +"] " + msg;
         printMessage(message);
     }

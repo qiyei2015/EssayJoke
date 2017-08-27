@@ -19,14 +19,30 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    sourceSets {
+        main {
+            jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
+            jniLibs.srcDirs = ['libs']  //配置生成jniLibs
+        }
+    }
+
+    repositories {
+        // 本地的libs目录
+        flatDir {
+            dirs 'libs' //aar目录
+        }
+    }
 }
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name: 'hotfix_core-release-3.1.0', ext: 'aar')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
     testCompile 'junit:junit:4.12'
     compile project(':Framework')
+    compile files('libs/alicloud-android-utils-1.0.3.jar')
+    compile files('libs/utdid4all-1.1.5.3_proguard.jar')
 }

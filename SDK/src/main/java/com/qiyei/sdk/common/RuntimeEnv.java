@@ -8,6 +8,8 @@ import android.os.Build;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.qiyei.sdk.log.LogManager;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -140,4 +142,65 @@ public final class RuntimeEnv {
         return sb.toString();
     }
 
+    /***
+     * 获取当前运行的类的方法 和行数
+     * @return
+     */
+    public static String getCurrentMethodName() {
+        StackTraceElement element = getCallLogManagerStackTrace();
+        if (element != null){
+            String methodName = element.getMethodName();
+            int lineNumber = element.getLineNumber();
+            return methodName + " " + lineNumber;
+        }
+        return null;
+    }
+
+    /**
+     * 获取当前运行的Class
+     * @return
+     */
+    public static String getCurrentClassName() {
+        StackTraceElement element = getCallLogManagerStackTrace();
+        if (element != null){
+            String clazz = element.getClassName();
+            //去最后一个即 类的简名
+            if (clazz.contains(".")){
+                String strArray[] = clazz.split("\\.");
+                clazz = strArray[strArray.length -1];
+            }
+            return clazz;
+        }
+        return null;
+    }
+
+    /**
+     * 获取调用LogManager的调用栈
+     * @return
+     */
+    private static StackTraceElement getCallLogManagerStackTrace(){
+        int level = 0;
+        //LogManager的全限定名称
+        String clazzName = LogManager.class.getCanonicalName();
+        //方法数组
+        String array[] = new String[]{"v","d","i","w","e"};
+
+        StackTraceElement[] stacks = new Throwable().getStackTrace();
+        //依次寻找，找到LogManager的上一级
+        for (level = 0 ;level < stacks.length;level++){
+            String method = stacks[level].getMethodName();
+
+            if (clazzName.equals(stacks[level].getClassName()) && (method.equals(array[0])
+                    || method.equals(array[1]) || method.equals(array[2])
+                    || method.equals(array[3]) || method.equals(array[4]))){
+                break;
+            }
+        }
+
+        //返回上一级的调用栈
+        if (stacks.length > (level + 1)){
+            return stacks[level +1];
+        }
+        return null;
+    }
 }

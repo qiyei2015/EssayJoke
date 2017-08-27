@@ -59,7 +59,6 @@ public final class SDKManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 }

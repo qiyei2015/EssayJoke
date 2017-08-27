@@ -93,6 +93,8 @@ public class ViewUtils {
                             field.set(finder.finderObject(),view);
                         } catch (IllegalAccessException e) {
                             e.printStackTrace();
+
+                            LogManager.e(TAG,e.getMessage());
                         }
                     }
                 }
@@ -165,12 +167,18 @@ public class ViewUtils {
                 mMethod.invoke(mObject,v);
             } catch (Exception e) {
                 e.printStackTrace();
+
+                LogManager.e(TAG,e.getMessage());
                 try {
                     mMethod.invoke(mObject,new  Object[]{});
                 } catch (IllegalAccessException e1) {
                     e1.printStackTrace();
+
+                    LogManager.e(TAG,e1.getMessage());
                 } catch (InvocationTargetException e1) {
                     e1.printStackTrace();
+
+                    LogManager.e(TAG,e1.getMessage());
                 }
             }
         }
@@ -189,6 +197,7 @@ public class ViewUtils {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            LogManager.e(TAG,e.getMessage());
         }
         return false;
     }
