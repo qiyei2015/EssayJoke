@@ -1,6 +1,7 @@
 package com.qiyei.appdemo.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
@@ -61,6 +63,8 @@ public class MainActivity extends BaseSkinActivity {
 
     @ViewById(R.id.btn11)
     private Button btn11;
+    @ViewById(R.id.btn12)
+    private Button btn12;
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
@@ -195,6 +199,10 @@ public class MainActivity extends BaseSkinActivity {
         button.setText("hello");
     }
 
+    @OnClick(R.id.btn12)
+    private void testBtn12(View view){
+        startService(new Intent(this,RemoteService.class));
+    }
 
     private void fixBug(){
         File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.dex");

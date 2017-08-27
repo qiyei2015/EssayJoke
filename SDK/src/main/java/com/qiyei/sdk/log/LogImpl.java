@@ -57,7 +57,7 @@ public class LogImpl {
      */
     public LogImpl(String fileName){
         mFileName = fileName;
-        //先创建文件夹
+        //先创建文件夹 默认存储在 包名 + log 目录下
         File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
                 + File.separator + RuntimeEnv.packageName + File.separator + LogConstant.SUFFIX);
         if (!dir.exists()){

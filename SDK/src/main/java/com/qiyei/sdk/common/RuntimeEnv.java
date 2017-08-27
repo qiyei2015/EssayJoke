@@ -1,10 +1,12 @@
 package com.qiyei.sdk.common;
 
+import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -17,17 +19,26 @@ import java.util.Map;
  * Description: 运行时环境参数
  */
 public final class RuntimeEnv {
+    /**
+     * 调试用的标志
+     */
+    private static final String TAG = RuntimeEnv.class.getSimpleName();
 
     /**
      * 运行时的Application 类型的Context
      */
     public static Context appContext = null;
-
-
+    /**
+     * 进程名 子进程将按照 主进程_子进程 显示
+     */
     public static String procName = "";
-
+    /**
+     * 包名
+     */
     public static String packageName = "";
-
+    /**
+     * 应用名称
+     */
     public static String appName = "";
 
     /**
@@ -53,12 +64,34 @@ public final class RuntimeEnv {
         if (TextUtils.isEmpty(packageName)){
             packageName = "com.qiyei";
         }
+        Log.i(TAG,"packageName --> " + packageName);
+
         String[] names = packageName.split("\\.");
         if (names.length > 1){
             appName = names[names.length -1];
         }else {
             appName = "qiyei";
         }
+        Log.i(TAG,"appName --> " + appName);
+        //获取当前进程的pid
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) appContext.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningAppProcessInfo appProcessInfo : activityManager.getRunningAppProcesses()){
+            //找到相同的pid就是当前进程了
+            if (appProcessInfo.pid == pid){
+                procName = appProcessInfo.processName;
+            }
+        }
+        if (!TextUtils.isEmpty(procName)){
+            // : 说明是子进程
+            if (procName.contains(":")){
+                //将 : 替换成 _
+                procName = procName.replace(":","_");
+            }
+        }
+
+        Log.i(TAG,"pid -- > " + pid + " procName --> " + procName);
+
     }
 
 

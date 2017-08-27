@@ -73,4 +73,10 @@
         android:id="@+id/btn11"
         android:text="测试11 测试异常信息"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn12"
+        android:text="测试12 进程保活"/>
+
 </LinearLayout>
