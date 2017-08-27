@@ -56,26 +56,32 @@ public class FileUtil {
     }
 
     /**
-     * delete file
-     *
-     * @param file
-     *            file
-     * @return true if delete success
+     * 递归删除文件或目录
+     * @param fileName
+     * @return
      */
-    public static boolean deleteFile(File file) {
-        if (!file.exists()) {
-            return true;
-        }
-        if (file.isDirectory()) {
-            File[] files = file.listFiles();
-            for (File f : files) {
-                deleteFile(f);
+    public static boolean deleteFile(File fileName) {
+        boolean success = false;
+        if (fileName.isDirectory()){
+            File[] files = fileName.listFiles();
+            for (File file : files){
+                if (!deleteFile(file)){
+                    success = false;
+                    break;
+                }
             }
+        }else {
+            success = fileName.delete();
         }
-        return file.delete();
+        return success;
     }
 
-
+    /**
+     * 创建临时文件
+     * @param context
+     * @return
+     * @throws IOException
+     */
     public static File createTmpFile(Context context) throws IOException {
         File dir = null;
         if (TextUtils.equals(Environment.getExternalStorageState(), Environment.MEDIA_MOUNTED)) {
