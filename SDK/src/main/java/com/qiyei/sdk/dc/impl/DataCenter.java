@@ -112,165 +112,11 @@ public final class DataCenter{
 
 
     /**
-     * 保存int
-     * @param uri
-     * @param value
-     */
-    public void setInt(String uri, int value) {
-        setValue(uri,value);
-    }
-
-    /**
-     * 获取int
-     * @param uri
-     * @return
-     */
-    public Integer getInt(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Integer){
-            return (Integer) value;
-        }
-        return null;
-    }
-
-    /**
-     * 保存long
-     * @param uri
-     * @param value
-     */
-    public void setLong(String uri, long value) {
-        setValue(uri,value);
-    }
-
-    /**
-     * 获取long
-     * @param uri
-     * @return
-     */
-    public Long getLong(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Long){
-            return (Long) value;
-        }
-        return null;
-    }
-
-    /**
-     * 保存float
-     * @param uri
-     * @param value
-     */
-    public void setFloat(String uri, float value) {
-        setValue(uri,value);
-    }
-
-    /**
-     * 获取float
-     * @param uri
-     * @return
-     */
-    public Float getFloat(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Float){
-            return (Float) value;
-        }
-        return null;
-    }
-
-    /**
-     * 保存double
-     * @param uri
-     * @param value
-     */
-    public void setDouble(String uri, double value) {
-        setValue(uri,value);
-    }
-
-    /**
-     * 获取double
-     * @param uri
-     * @return
-     */
-    public Double getDouble(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Double){
-            return (Double) value;
-        }else if (value instanceof String){
-            return Double.parseDouble((String)value);
-        }
-        return null;
-    }
-
-    /**
-     * 保存char
-     * @param uri
-     * @param value
-     */
-    public void setChar(String uri, char value) {
-        setValue(uri,value);
-    }
-
-    /**
-     * 获取char
-     * @param uri
-     * @return
-     */
-    public Character getChar(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Character){
-            return (Character) value;
-        }else if (value instanceof String){
-            return ((String)value).toCharArray()[0];
-        }
-        return null;
-    }
-
-    /**
-     * 保存boolean
-     * @param uri
-     * @param value
-     */
-    public void setBoolean(String uri, boolean value) {
-        setValue(uri,value + "");
-    }
-
-    /**
-     * 获取boolean
-     * @param uri
-     * @return
-     */
-    public Boolean getBoolean(String uri) {
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof Boolean){
-            return (Boolean) value;
-        }
-        return null;
-    }
-
-    /**
      * 保存值
      * @param uri
      * @param value
      */
-    public void setString(String uri,String value){
+    public void setStringValue(String uri,String value){
         setValue(uri,value);
     }
 
@@ -278,33 +124,33 @@ public final class DataCenter{
      * 获取值
      * @return
      */
-    public String getString(String uri){
-        Object value = getValue(uri);
-        if (value == null){
-            return null;
-        }
-        if (value instanceof String){
-            return (String) value;
-        }
-        return null;
+    public String getStringValue(String uri){
+        return getValue(uri);
     }
 
+    /**
+     * 删除指定uri的数据
+     * @param uri
+     */
+    public void deleteStringValue(String  uri){
+        deleteValue(uri);
+    }
 
     /**
      * 存储String类型数据
      * @param uri
      * @param value
      */
-    private void setValue(String uri,Object value){
+    private void setValue(String uri,String value){
         LogManager.i(DCConstant.TAG,"setValue,uri --> " + uri + " value --> " + value);
 
         mDataBuffer = getDataBuffer(uri);
-        //mDataBuffer.setValue(uri,value);
+        mDataBuffer.setValue(uri,value);
         //更新数据
-        Set<String> uris = new HashSet<>();
-        uris.add(uri);
+        Set<String> uriSet = new HashSet<>();
+        uriSet.add(uri);
         for (IDataCenterObserver observer : mCenterObservers){
-            observer.onDataChanged(uris);
+            observer.onDataChanged(uriSet);
         }
     }
 
@@ -312,11 +158,27 @@ public final class DataCenter{
      * 存储String类型数据
      * @param uri
      */
-    private Object getValue(String uri){
+    private String getValue(String uri){
         LogManager.i(DCConstant.TAG,"getValue,uri --> " + uri);
         mDataBuffer = getDataBuffer(uri);
-//        return mDataBuffer.getValue(uri);
-        return null;
+        return mDataBuffer.getValue(uri);
+    }
+
+    /**
+     * 删除指定的uri的数据
+     * @param uri
+     */
+    private void deleteValue(String uri){
+        LogManager.i(DCConstant.TAG,"deleteValue,uri --> " + uri);
+
+        mDataBuffer = getDataBuffer(uri);
+        mDataBuffer.deleteValue(uri);
+        //更新数据
+        Set<String> uriSet = new HashSet<>();
+        uriSet.add(uri);
+        for (IDataCenterObserver observer : mCenterObservers){
+            observer.onDataDeleted(uriSet);
+        }
     }
 
 }

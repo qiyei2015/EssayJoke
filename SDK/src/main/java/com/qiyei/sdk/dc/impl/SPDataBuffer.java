@@ -21,7 +21,7 @@ public class SPDataBuffer implements IDataBuffer {
     /**
      * 后缀
      */
-    private String suffix = ".sharePref";
+    private String suffix = "_sharePref";
     /**
      * 存储的数据大小
      */
@@ -47,101 +47,7 @@ public class SPDataBuffer implements IDataBuffer {
     }
 
     @Override
-    public void setInt(String uri, int value) {
-        mEditor.putInt(uri,value);
-        mEditor.commit();
-    }
-
-    @Override
-    public Integer getInt(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            return mSharedPreferences.getInt(uri,Integer.MIN_VALUE);
-        }
-        return null;
-    }
-
-    @Override
-    public void setLong(String uri, long value) {
-        mEditor.putLong(uri,value);
-        mEditor.commit();
-    }
-
-    @Override
-    public Long getLong(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            return mSharedPreferences.getLong(uri,Long.MIN_VALUE);
-        }
-        return null;
-    }
-
-    @Override
-    public void setFloat(String uri, float value) {
-        mEditor.putFloat(uri,value);
-        mEditor.commit();
-    }
-
-    @Override
-    public Float getFloat(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            return mSharedPreferences.getFloat(uri,Float.MIN_VALUE);
-        }
-        return null;
-    }
-
-    @Override
-    public void setDouble(String uri, double value) {
-        mEditor.putString(uri,String.valueOf(value));
-        mEditor.commit();
-    }
-
-    @Override
-    public Double getDouble(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            if (!TextUtils.isEmpty(mSharedPreferences.getString(uri,null))){
-                return Double.parseDouble(mSharedPreferences.getString(uri,null));
-            }
-        }
-       return null;
-    }
-
-    @Override
-    public void setChar(String uri, char value) {
-        mEditor.putString(uri,String.valueOf(value));
-        mEditor.commit();
-    }
-
-    @Override
-    public Character getChar(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            if (!TextUtils.isEmpty(mSharedPreferences.getString(uri,null))){
-                return mSharedPreferences.getString(uri,null).toCharArray()[0];
-            }
-        }
-        return null;
-    }
-
-    @Override
-    public void setBoolean(String uri, boolean value) {
-        mEditor.putBoolean(uri,value);
-        mEditor.commit();
-    }
-
-    @Override
-    public Boolean getBoolean(String uri) {
-        if (mSharedPreferences.contains(uri)){
-            //获取最小值
-            return mSharedPreferences.getBoolean(uri,false);
-        }
-        return null;
-    }
-
-    @Override
-    public void setString(String uri, String value) {
+    public void setValue(String uri, String value) {
         mEditor.putString(uri,value);
         if (value.length() > VALUE_SIZE){
             mEditor.commit();
@@ -151,8 +57,14 @@ public class SPDataBuffer implements IDataBuffer {
     }
 
     @Override
-    public String getString(String uri) {
+    public String getValue(String uri) {
         return mSharedPreferences.getString(uri,null);
+    }
+
+    @Override
+    public void deleteValue(String uri) {
+        mEditor.remove(uri);
+        mEditor.commit();
     }
 
 }

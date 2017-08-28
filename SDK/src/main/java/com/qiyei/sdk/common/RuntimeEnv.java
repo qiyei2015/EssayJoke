@@ -151,7 +151,7 @@ public final class RuntimeEnv {
         if (element != null){
             String methodName = element.getMethodName();
             int lineNumber = element.getLineNumber();
-            return methodName + " " + lineNumber;
+            return methodName + "() " + lineNumber;
         }
         return null;
     }
@@ -170,6 +170,19 @@ public final class RuntimeEnv {
                 clazz = strArray[strArray.length -1];
             }
             return clazz;
+        }
+        return null;
+    }
+
+    /**
+     * 获取当前运行的Class
+     * @return
+     */
+    public static String getCurrentFileName() {
+        StackTraceElement element = getCallLogManagerStackTrace();
+        if (element != null){
+            String fileName = element.getFileName();
+            return fileName;
         }
         return null;
     }

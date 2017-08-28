@@ -174,8 +174,8 @@ public class LogManager {
         SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         String time = sf.format(new Date());
         String message = time + " "
-                + "Pid:"+ android.os.Process.myPid() + "|" +"Tid:"+ android.os.Process.myTid()
-                + " [" + RuntimeEnv.getCurrentClassName() + "|" + RuntimeEnv.getCurrentMethodName()+"]"
+                + ""+ android.os.Process.myPid() + "|" +""+ android.os.Process.myTid()
+                + "[" + RuntimeEnv.getCurrentFileName() + "->" + RuntimeEnv.getCurrentMethodName()+"]"
                 + " ";
         sb.append(message);
 

@@ -123,6 +123,15 @@ public class DataManager implements IDataOperator{
         return DCConstant.URI_SECRET + "/" + type + "/" + key;
     }
 
+    /**
+     * 删除指定的uri的数据
+     * @param uri
+     */
+    @Override
+    public void deleteValue(String uri) {
+        mProxy.deleteValue(uri);
+    }
+
     @Override
     public void setInt(String uri, int value) {
         mProxy.setInt(uri,value);

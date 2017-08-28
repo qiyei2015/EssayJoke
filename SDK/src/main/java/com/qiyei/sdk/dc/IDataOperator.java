@@ -25,6 +25,12 @@ public interface IDataOperator {
     String getUriForSecret(String type,String key);
 
     /**
+     * 删除指定uri的数据
+     * @param uri
+     */
+    void deleteValue(String uri);
+
+    /**
      *
      * @param uri
      * @param value

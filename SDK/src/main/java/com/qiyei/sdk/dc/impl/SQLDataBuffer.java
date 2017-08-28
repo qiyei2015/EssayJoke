@@ -79,73 +79,21 @@ public class SQLDataBuffer implements IDataBuffer {
     }
 
     @Override
-    public void setInt(String uri, int value) {
+    public void setValue(String uri, String value) {
 
     }
 
     @Override
-    public Integer getInt(String uri) {
+    public String getValue(String uri) {
         return null;
     }
 
     @Override
-    public void setLong(String uri, long value) {
+    public void deleteValue(String uri) {
 
     }
 
-    @Override
-    public Long getLong(String uri) {
-        return null;
-    }
+    
 
-    @Override
-    public void setFloat(String uri, float value) {
-
-    }
-
-    @Override
-    public Float getFloat(String uri) {
-        return null;
-    }
-
-    @Override
-    public void setDouble(String uri, double value) {
-
-    }
-
-    @Override
-    public Double getDouble(String uri) {
-        return null;
-    }
-
-    @Override
-    public void setChar(String uri, char value) {
-
-    }
-
-    @Override
-    public Character getChar(String uri) {
-        return null;
-    }
-
-    @Override
-    public void setBoolean(String uri, boolean value) {
-
-    }
-
-    @Override
-    public Boolean getBoolean(String uri) {
-        return null;
-    }
-
-    @Override
-    public void setString(String uri, String value) {
-
-    }
-
-    @Override
-    public String getString(String uri) {
-        return null;
-    }
 
 }

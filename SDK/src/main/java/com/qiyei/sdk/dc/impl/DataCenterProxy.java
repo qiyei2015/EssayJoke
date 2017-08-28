@@ -1,6 +1,10 @@
 package com.qiyei.sdk.dc.impl;
 
 import android.content.Context;
+import android.text.TextUtils;
+
+import com.qiyei.sdk.dc.DCConstant;
+import com.qiyei.sdk.log.LogManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -22,12 +26,24 @@ public class DataCenterProxy {
     }
 
     /**
+     * 删除指定的uri的数据
+     * @param uri
+     */
+    public void deleteValue(String  uri){
+        if (TextUtils.isEmpty(uri)){
+            LogManager.w(DCConstant.TAG,"deleteValue(String  uri),the uri is null");
+            return;
+        }
+        mDataCenter.deleteStringValue(uri);
+    }
+
+    /**
      * 保存int
      * @param uri
      * @param value
      */
     public void setInt(String uri, int value) {
-        mDataCenter.setInt(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -36,7 +52,15 @@ public class DataCenterProxy {
      * @return
      */
     public Integer getInt(String uri) {
-        return mDataCenter.getInt(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        try {
+            return Integer.parseInt(getValue(uri));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -45,7 +69,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setLong(String uri, long value) {
-        mDataCenter.setLong(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -54,7 +78,15 @@ public class DataCenterProxy {
      * @return
      */
     public Long getLong(String uri) {
-        return mDataCenter.getLong(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        try {
+            return Long.parseLong(getValue(uri));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -63,7 +95,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setFloat(String uri, float value) {
-        mDataCenter.setFloat(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -72,7 +104,15 @@ public class DataCenterProxy {
      * @return
      */
     public Float getFloat(String uri) {
-        return mDataCenter.getFloat(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        try {
+            return Float.parseFloat(getValue(uri));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -81,7 +121,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setDouble(String uri, double value) {
-        mDataCenter.setDouble(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -90,7 +130,15 @@ public class DataCenterProxy {
      * @return
      */
     public Double getDouble(String uri) {
-        return mDataCenter.getDouble(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        try {
+            return Double.parseDouble(getValue(uri));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -99,7 +147,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setChar(String uri, char value) {
-        mDataCenter.setChar(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -108,7 +156,10 @@ public class DataCenterProxy {
      * @return
      */
     public Character getChar(String uri) {
-        return mDataCenter.getChar(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        return getValue(uri).toCharArray()[0];
     }
 
     /**
@@ -117,7 +168,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setBoolean(String uri, boolean value) {
-        mDataCenter.setBoolean(uri,value);
+        setValue(uri,value+"");
     }
 
     /**
@@ -126,7 +177,15 @@ public class DataCenterProxy {
      * @return
      */
     public Boolean getBoolean(String uri) {
-        return mDataCenter.getBoolean(uri);
+        if (TextUtils.isEmpty(getValue(uri))){
+            return null;
+        }
+        try {
+            return Boolean.parseBoolean(getValue(uri));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -135,7 +194,7 @@ public class DataCenterProxy {
      * @param value
      */
     public void setString(String uri,String value){
-        mDataCenter.setString(uri,value);
+        setValue(uri,value);
     }
 
     /**
@@ -143,7 +202,33 @@ public class DataCenterProxy {
      * @param uri
      */
     public String getString(String uri){
-        return mDataCenter.getString(uri);
+        return getValue(uri);
+    }
+
+    /**
+     * 将所有数据都保存为String方式
+     * @param uri
+     * @param value
+     */
+    private void setValue(String uri,String value){
+        if (TextUtils.isEmpty(uri) || TextUtils.isEmpty(value)){
+            LogManager.w(DCConstant.TAG,"setValue(String uri,String value),the uri or value is null");
+            return;
+        }
+        mDataCenter.setStringValue(uri,value);
+    }
+
+    /**
+     * 所有数据都以String类型获取
+     * @param uri
+     * @return
+     */
+    private String getValue(String uri){
+        if (TextUtils.isEmpty(uri)){
+            LogManager.w(DCConstant.TAG,"getValue(String uri),the uri is null");
+            return null;
+        }
+        return mDataCenter.getStringValue(uri);
     }
 
 }
