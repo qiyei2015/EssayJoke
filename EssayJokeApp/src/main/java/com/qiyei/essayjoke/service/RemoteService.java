@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.qiyei.essayjoke.ProcessConnection;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 public class RemoteService extends Service {
@@ -18,7 +19,7 @@ public class RemoteService extends Service {
         return new ProcessConnection.Stub(){
             @Override
             public void connect() throws RemoteException {
-                ToastUtil.showLongToast("RemoteService 已经建立连接 ！");
+                ToastUtil.showLongToast("RemoteCoreService 已经建立连接 ！");
             }
         };
     }

@@ -162,23 +162,27 @@ public class ViewUtils {
                 return;
             }
             //反射该方法
-            try {
-                mMethod.setAccessible(true);
-                mMethod.invoke(mObject,v);
-            } catch (Exception e) {
-                e.printStackTrace();
 
-                LogManager.e(TAG,e.getMessage());
+            Class<?>[] params = mMethod.getParameterTypes();
+            mMethod.setAccessible(true);
+            LogManager.i(TAG,"invoke onClick() params.length -> " + params.length);
+            //有1个参数或者0个参数
+            if (params.length == 0){
                 try {
-                    mMethod.invoke(mObject,new  Object[]{});
+                    mMethod.invoke(mObject);
                 } catch (IllegalAccessException e1) {
                     e1.printStackTrace();
-
-                    LogManager.e(TAG,e1.getMessage());
+                    LogManager.e(TAG,"invoke fail :" + LogManager.getExecptionInfo(e1));
                 } catch (InvocationTargetException e1) {
                     e1.printStackTrace();
-
-                    LogManager.e(TAG,e1.getMessage());
+                    LogManager.e(TAG,"invoke fail :" + LogManager.getExecptionInfo(e1));
+                }
+            }else {
+                try {
+                    mMethod.invoke(mObject,v);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    LogManager.e(TAG,"invoke fail :" + LogManager.getExecptionInfo(e));
                 }
             }
         }

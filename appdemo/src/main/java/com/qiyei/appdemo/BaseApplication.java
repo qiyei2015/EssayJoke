@@ -46,6 +46,11 @@ public class BaseApplication extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
         String appVersion;
         try {
             appVersion = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
@@ -75,11 +80,7 @@ public class BaseApplication extends Application {
                         }
                     }
                 }).initialize();
-    }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
         try {
             SDKManager.initSDK(this);
         } catch (Exception e) {

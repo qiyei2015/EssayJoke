@@ -22,6 +22,7 @@ import com.qiyei.sdk.http.base.RequestMethod;
 import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.DisplayUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.banner.BannerAdapter;

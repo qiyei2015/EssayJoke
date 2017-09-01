@@ -61,6 +61,12 @@
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
 
+        <service
+            android:name=".service.TestService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+
         <activity android:name=".activity.DataCenterTestActivity">
         </activity>
     </application>

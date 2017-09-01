@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 
 import com.qiyei.essayjoke.ProcessConnection;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 public class LocalService extends Service {

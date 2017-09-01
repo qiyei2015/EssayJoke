@@ -199,7 +199,7 @@ public class LogManager {
                 dir.mkdir();
             }
             //异常信息文件格式 时间 + .log
-            fileName = dir.toString() + File.separator + getFormatTime("yyyy-MM-dd HH-mm-ss.SSS") + ".log";
+            fileName = dir.toString() + File.separator + getFormatTime("yyyy-MM-dd HH-mm-ss.SSS") + "_crash.log";
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(fileName);
@@ -246,10 +246,17 @@ public class LogManager {
      * @param throwable
      * @return
      */
-    private static String getExecptionInfo(Throwable throwable){
+    public static String getExecptionInfo(Throwable throwable){
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
         throwable.printStackTrace(printWriter);
+
+        //原因
+        Throwable cause = throwable.getCause();
+        while (cause != null){
+            cause.printStackTrace(printWriter);
+            cause = cause.getCause();
+        }
         printWriter.close();
         return stringWriter.toString();
     }

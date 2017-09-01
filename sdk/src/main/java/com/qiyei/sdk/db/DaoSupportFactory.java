@@ -58,14 +58,17 @@ public class DaoSupportFactory {
             mDatabase = SQLiteDatabase.openOrCreateDatabase(dbFile,null);
             if (mDatabase == null){
                 ToastUtil.showLongToast("数据库创建失败");
-                LogManager.d(TAG,"数据库创建失败");
+                LogManager.e(TAG,"数据库创建失败");
             }
         }else {
             ToastUtil.showLongToast("数据库创建失败");
-            LogManager.d(TAG,"数据库创建失败");
+            LogManager.e(TAG,"数据库创建失败");
         }
     }
 
+    /**
+     * 单例方式提供对象
+     */
     private static class SingleHolder{
         private static final DaoSupportFactory sInstance = new DaoSupportFactory();
     }

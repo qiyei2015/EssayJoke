@@ -15,6 +15,7 @@ import com.qiyei.essayjoke.model.User;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.util.ArrayList;

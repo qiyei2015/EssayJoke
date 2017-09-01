@@ -16,12 +16,13 @@ import com.qiyei.appdemo.ProcessConnection;
 
 public class RemoteService extends Service {
     private static final String TAG = "Service";
+
     @Override
     public IBinder onBind(Intent intent) {
         return new ProcessConnection.Stub(){
             @Override
             public void connect() throws RemoteException {
-                ToastUtil.showLongToast("RemoteService 已经建立连接 ！");
+                ToastUtil.showLongToast("RemoteCoreService 已经建立连接 ！");
             }
         };
     }

@@ -14,6 +14,7 @@ import android.widget.Button;
 
 
 import com.qiyei.appdemo.service.RemoteService;
+import com.qiyei.appdemo.service.TestService;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
@@ -63,6 +64,7 @@ public class MainActivity extends BaseSkinActivity {
 
     @ViewById(R.id.btn11)
     private Button btn11;
+
     @ViewById(R.id.btn12)
     private Button btn12;
 
@@ -83,6 +85,7 @@ public class MainActivity extends BaseSkinActivity {
     @Override
     protected void initView() {
         btn1.setOnClickListener(this);
+
     }
 
     @Override
@@ -195,13 +198,12 @@ public class MainActivity extends BaseSkinActivity {
 
     @OnClick(R.id.btn11)
     private void testBtn11(View view){
-        Button button = null;
-        button.setText("hello");
     }
 
     @OnClick(R.id.btn12)
     private void testBtn12(View view){
         startService(new Intent(this,RemoteService.class));
+        startService(new Intent(this, TestService.class));
     }
 
     private void fixBug(){

@@ -17,6 +17,7 @@ import com.qiyei.essayjoke.R;
 import com.qiyei.framework.fragment.BaseFragment;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.view.IndicatorView.IndicatorAdapter;
 import com.qiyei.sdk.view.IndicatorView.IndicatorView;
 
