@@ -84,7 +84,7 @@ public final class SDKManager {
         //获取系统的闹钟服务
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         //2秒
-        int sec = 2 * 1000;
+        int sec = 3 * 1000;
         long triggerAtTime = SystemClock.elapsedRealtime() + sec;
         Intent receiver = new Intent(context,StartCoreServiceReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context,0,receiver,0);

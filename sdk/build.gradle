@@ -39,9 +39,9 @@ android {
     }
     sourceSets {
         main {
-            java.srcDirs = ['src/main/java', 'src/main/aidl']   //java类路径
-//            java.srcDirs = ['src/main/java']
-            aidl.srcDirs = ['src/main/aidl']
+//            java.srcDirs = ['src/main/java', 'src/main/aidl']   //java类路径
+            java.srcDirs = ['src/main/java']
+            aidl.srcDirs = ['src/main/aidl']    //aidl文件路径
             jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
             jniLibs.srcDirs = ['libs']  //配置生成jniLibs
         }
