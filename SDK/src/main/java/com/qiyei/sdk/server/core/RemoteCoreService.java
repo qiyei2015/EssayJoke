@@ -1,4 +1,5 @@
-package com.qiyei.sdk.server;
+package com.qiyei.sdk.server.core;
+
 
 import android.content.ComponentName;
 import android.content.Context;
@@ -9,19 +10,20 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.server.base.BaseService;
 
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/9/1.
  * Version: 1.0
- * Description: 核心服务，提供SDK的核心功能等
+ * Description: 核心服务的远程服务，用于双进程守护
  */
-public class CoreService extends BaseService {
+public class RemoteCoreService extends BaseService {
 
     /**
      * 调试标志
      */
-    private static final String TAG = CoreService.class.getSimpleName();
+    private static final String TAG = RemoteCoreService.class.getSimpleName();
     /**
      * 名字
      */
@@ -43,13 +45,12 @@ public class CoreService extends BaseService {
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            //先启动远程核心服务
-            startService(new Intent(mContext,RemoteCoreService.class));
-            bindService(new Intent(mContext, RemoteCoreService.class),mServiceConnection, Context.BIND_IMPORTANT);
-            LogManager.i(TAG,"onServiceDisconnected RemoteCoreService");
+            //先启动核心服务
+            startService(new Intent(mContext,CoreService.class));
+            bindService(new Intent(mContext, CoreService.class),mServiceConnection, Context.BIND_IMPORTANT);
+            LogManager.i(TAG,"onServiceDisconnected CoreService");
         }
     };
-
 
     @Override
     public void onCreate() {
@@ -66,12 +67,10 @@ public class CoreService extends BaseService {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        bindService(new Intent(mContext, RemoteCoreService.class),mServiceConnection, Context.BIND_IMPORTANT);
-        LogManager.i(TAG,"bind RemoteCoreService");
-
+        bindService(new Intent(mContext, CoreService.class),mServiceConnection, Context.BIND_IMPORTANT);
+        LogManager.i(TAG,"bind CoreService");
         return START_STICKY;
     }
-
 
     @Override
     protected String getServiceName() {
@@ -87,4 +86,6 @@ public class CoreService extends BaseService {
     protected void onClientDown(int id) {
         LogManager.i(TAG,"CoreService onClientDown id:" + id);
     }
+
+
 }

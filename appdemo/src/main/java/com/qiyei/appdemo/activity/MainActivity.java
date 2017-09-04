@@ -68,6 +68,9 @@ public class MainActivity extends BaseSkinActivity {
     @ViewById(R.id.btn12)
     private Button btn12;
 
+    @ViewById(R.id.btn13)
+    private Button btn13;
+
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
     @Override
@@ -204,6 +207,11 @@ public class MainActivity extends BaseSkinActivity {
     private void testBtn12(View view){
         startService(new Intent(this,RemoteService.class));
         startService(new Intent(this, TestService.class));
+    }
+
+    @OnClick(R.id.btn13)
+    private void testBtn13(View view){
+        startActivity(BinderTestActivity.class);
     }
 
     private void fixBug(){

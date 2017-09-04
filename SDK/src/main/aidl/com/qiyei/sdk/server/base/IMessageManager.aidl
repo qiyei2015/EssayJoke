@@ -1,8 +1,8 @@
 // IMessageManager.aidl
-package com.qiyei.sdk.server;
+package com.qiyei.sdk.server.base;
 
 // Declare any non-default types here with import statements
-import com.qiyei.sdk.server.IMessageListener;
+import com.qiyei.sdk.server.base.IMessageListener;
 
 interface IMessageManager {
 

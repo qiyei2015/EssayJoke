@@ -60,7 +60,6 @@
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE">
         </service>
-
         <service
             android:name=".service.TestService"
             android:enabled="true"
@@ -68,6 +67,8 @@
         </service>
 
         <activity android:name=".activity.DataCenterTestActivity">
+        </activity>
+        <activity android:name=".activity.BinderTestActivity">
         </activity>
     </application>
 

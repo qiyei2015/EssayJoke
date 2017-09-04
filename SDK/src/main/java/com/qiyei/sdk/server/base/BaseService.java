@@ -1,4 +1,4 @@
-package com.qiyei.sdk.server;
+package com.qiyei.sdk.server.base;
 
 import android.app.Service;
 import android.content.ComponentName;
@@ -12,6 +12,8 @@ import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.server.base.IMessageListener;
+import com.qiyei.sdk.server.base.IMessageManager;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

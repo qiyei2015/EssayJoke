@@ -4,7 +4,6 @@ import android.app.AlarmManager;
 import android.app.Application;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
@@ -18,9 +17,9 @@ import com.qiyei.sdk.http.okhttp.OkHttpEngine;
 import com.qiyei.sdk.image.GlideImpl;
 import com.qiyei.sdk.image.ImageManager;
 import com.qiyei.sdk.log.LogManager;
-import com.qiyei.sdk.server.CoreService;
-import com.qiyei.sdk.server.CoreWakeUpService;
-import com.qiyei.sdk.server.RemoteCoreService;
+import com.qiyei.sdk.server.core.CoreService;
+import com.qiyei.sdk.server.core.CoreWakeUpService;
+import com.qiyei.sdk.server.core.RemoteCoreService;
 import com.qiyei.sdk.util.ToastUtil;
 
 /**

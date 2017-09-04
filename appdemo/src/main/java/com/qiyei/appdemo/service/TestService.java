@@ -7,7 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
-import com.qiyei.sdk.server.BaseService;
+import com.qiyei.sdk.server.base.BaseService;
 
 /**
  * Email: 1273482124@qq.com

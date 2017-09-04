@@ -1,4 +1,4 @@
-package com.qiyei.sdk.server;
+package com.qiyei.sdk.server.base;
 
 import android.content.ComponentName;
 import android.os.IBinder;

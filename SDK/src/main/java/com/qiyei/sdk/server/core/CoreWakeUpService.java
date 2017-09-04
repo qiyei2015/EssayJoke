@@ -1,4 +1,4 @@
-package com.qiyei.sdk.server;
+package com.qiyei.sdk.server.core;
 
 import android.annotation.TargetApi;
 import android.app.ActivityManager;

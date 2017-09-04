@@ -17,14 +17,14 @@
 
         <!--核心服务-->
         <service
-            android:name=".server.CoreService"
+            android:name=".server.core.CoreService"
             android:enabled="true"
             android:exported="false">
         </service>
 
         <!--核心服务的远程服务,单独一个进程-->
         <service
-            android:name=".server.RemoteCoreService"
+            android:name=".server.core.RemoteCoreService"
             android:enabled="true"
             android:exported="false"
             android:process=":remote.core">
@@ -32,7 +32,7 @@
 
         <!--5.0以后的JobService，用于进程保活-->
         <service
-            android:name=".server.CoreWakeUpService"
+            android:name=".server.core.CoreWakeUpService"
             android:enabled="true"
             android:exported="false"
             android:permission="android.permission.BIND_JOB_SERVICE">

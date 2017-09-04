@@ -4,6 +4,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.util.AndroidUtil;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -79,6 +80,12 @@ public class LogImpl {
      * @return
      */
     public int print(int level,String tag, String msg){
+
+        //如果是非调试状态，直接不打印，返回
+        if (!AndroidUtil.isDebug(RuntimeEnv.appContext)){
+            return 0;
+        }
+
         Log.d(LogConstant.TAG,"log print --> level:" + level);
         //大于等于该级别才会打印
         if (level >= mLevel){

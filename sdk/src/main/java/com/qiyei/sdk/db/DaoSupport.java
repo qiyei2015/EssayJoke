@@ -164,7 +164,6 @@ public class DaoSupport<T> implements IDaoSupport<T>{
                 mMethodArgs[1] = null;
             }
         }
-
         return contentValues;
     }
 
