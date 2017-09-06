@@ -53,9 +53,6 @@ public final class SDKManager {
         //初始化ToastUtil
         ToastUtil.init(RuntimeEnv.appContext);
 
-        //初始化CrashHandler
-        ExceptionCrashHandler.getInstance().init(RuntimeEnv.appContext);
-
         //初始化DataCenter
         DataManager.getInstance();
 

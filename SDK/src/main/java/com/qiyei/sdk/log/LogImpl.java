@@ -43,6 +43,11 @@ public class LogImpl {
     private PrintWriter mPrintWriter;
 
     /**
+     * 日志开关是否打开
+     */
+    private boolean isOpen;
+
+    /**
      * 日志打印的标签
      */
     private static final String V = "V";
@@ -65,6 +70,9 @@ public class LogImpl {
             dir.mkdirs();
         }
         File file = new File(dir,fileName+SUFFIX_NAME);
+
+        mPath = file.getAbsolutePath();
+
         try {
             mPrintWriter = new PrintWriter(new FileWriter(file,true),true);
         } catch (IOException e) {
@@ -82,7 +90,7 @@ public class LogImpl {
     public int print(int level,String tag, String msg){
 
         //如果是非调试状态，直接不打印，返回
-        if (!AndroidUtil.isDebug(RuntimeEnv.appContext)){
+        if (!AndroidUtil.isDebug(RuntimeEnv.appContext) && !isOpen){
             return 0;
         }
 
@@ -95,20 +103,6 @@ public class LogImpl {
             printToConsole(level,tag, msg);
         }
         return 0;
-    }
-
-    /**
-     * @return {@link #mLevel}
-     */
-    public int getLevel() {
-        return mLevel;
-    }
-
-    /**
-     * @param level the {@link #mLevel} to set
-     */
-    public void setLevel(int level) {
-        mLevel = level;
     }
 
     /**
@@ -196,4 +190,38 @@ public class LogImpl {
         }
     }
 
+    /**
+     * @return {@link #isOpen}
+     */
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    /**
+     * @param open the {@link #isOpen} to set
+     */
+    public void setOpen(boolean open) {
+        isOpen = open;
+    }
+
+    /**
+     * @return {@link #mLevel}
+     */
+    public int getLevel() {
+        return mLevel;
+    }
+
+    /**
+     * @param level the {@link #mLevel} to set
+     */
+    public void setLevel(int level) {
+        mLevel = level;
+    }
+
+    /**
+     * @return {@link #mPath}
+     */
+    public String getPath() {
+        return mPath;
+    }
 }

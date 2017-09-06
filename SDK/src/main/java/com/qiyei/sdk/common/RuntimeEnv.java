@@ -94,6 +94,8 @@ public final class RuntimeEnv {
 
         Log.i(TAG,"pid -- > " + pid + " procName --> " + procName);
 
+        //初始化CrashHandler
+        ExceptionCrashHandler.getInstance().init(RuntimeEnv.appContext);
     }
 
 

@@ -103,6 +103,7 @@ public class LogManager {
         return printLog(LogConstant.ERROR,tag,msg);
     }
 
+
     /**
      * 日志打印函数
      * @param level
@@ -125,9 +126,6 @@ public class LogManager {
     private static int printLog(String file,int level,String tag, String msg){
         return 0;
     }
-
-
-
 
     /**
      * 写默认的应用信息
@@ -269,6 +267,17 @@ public class LogManager {
     private static String getFormatTime(String formatStr) {
         SimpleDateFormat df = new SimpleDateFormat(formatStr);
         return df.format(System.currentTimeMillis());
+    }
+
+    /**
+     * 设置开关的状态
+     * @param open
+     */
+    public static void openLog(boolean open){
+        //依次遍历map打开开关
+        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
+            entry.getValue().setOpen(open);
+        }
     }
 
 }
