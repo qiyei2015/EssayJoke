@@ -1,6 +1,6 @@
 package com.qiyei.sdk.server.core;
 
-import android.app.Service;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -8,8 +8,10 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.os.RemoteException;
 
-import com.qiyei.sdk.common.RuntimeEnv;
+
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.server.base.IBinderPool;
+import com.qiyei.sdk.server.binder.ComputeImpl;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -19,9 +21,9 @@ import java.util.concurrent.CountDownLatch;
  * Version: 1.0
  * Description:
  */
-public class CoreBinderPool {
+public class CoreBinderPool implements IBinderPool{
 
-    private static final String TAG = CoreBinderPool.class.getSimpleName();
+    private static final String TAG = CoreBinderConstant.TAG;
 
     private Context mContext;
 
@@ -30,7 +32,7 @@ public class CoreBinderPool {
     /**
      * 所要连接的Service
      */
-    private Service mService;
+    private Class<?> mService;
     /**
      * 用于同步的
      */
@@ -47,10 +49,14 @@ public class CoreBinderPool {
                 mBinderPool.asBinder().linkToDeath(mDeathRecipient,0);
                 //计数器减1
                 mDownlatch.countDown();
+                LogManager.i(CoreBinderConstant.TAG,"CoreBinderPool onServiceConnected name: " + name + ", service :" + service);
             } catch (RemoteException e) {
                 e.printStackTrace();
                 LogManager.w(TAG,LogManager.getExecptionInfo(e));
             }
+
+            //添加服务 连接成功了才能添加
+            addBinder(CoreBinderConstant.compute,new ComputeImpl());
         }
 
         @Override
@@ -58,6 +64,15 @@ public class CoreBinderPool {
 
         }
     };
+
+    /**
+     * 构造方法
+     * @param context
+     */
+    public CoreBinderPool(Context context){
+        mContext = context;
+        attachService(CoreService.class);
+    }
 
     /**
      * Binder的生命周期监听
@@ -76,30 +91,11 @@ public class CoreBinderPool {
     };
 
 
-    private static class SingleHolder{
-        static final CoreBinderPool sInstance = new CoreBinderPool(RuntimeEnv.appContext);
-    }
-
-    /**
-     * 构造方法私有化
-     */
-    private CoreBinderPool(Context context){
-        mContext = context.getApplicationContext();
-    }
-
-    /**
-     * 内部类方式单例
-     * @return
-     */
-    public static CoreBinderPool getInstance(){
-        return SingleHolder.sInstance;
-    }
-
     /**
      * 链接Service
      * @param service
      */
-    protected void attachService(Service service){
+    protected void attachService(Class<?> service){
         mService = service;
         connectCoreService();
     }
@@ -116,7 +112,7 @@ public class CoreBinderPool {
             return;
         }
 
-        Intent intent = new Intent(mContext,mService.getClass());
+        Intent intent = new Intent(mContext,mService);
 
         //绑定CoreService
         if (mContext.bindService(intent,mConnecttion,Context.BIND_AUTO_CREATE)){
@@ -138,16 +134,18 @@ public class CoreBinderPool {
      * @param name
      * @return
      */
+    @Override
     public IBinder queryBinder(String name){
         IBinder binder = null;
         try {
             if (mBinderPool != null){
                 binder = mBinderPool.queryBinder(name);
             }
+            LogManager.i(TAG,"queryBinder,mBinderPool:" + mBinderPool);
         } catch (RemoteException e) {
             e.printStackTrace();
         }
-
+        LogManager.i(TAG,"queryBinder,binder:" + binder);
         return binder;
     }
 
@@ -157,6 +155,7 @@ public class CoreBinderPool {
      * @param binder
      * @return
      */
+    @Override
     public void addBinder(String name, IBinder binder){
         try {
             if (mBinderPool != null){
@@ -171,6 +170,7 @@ public class CoreBinderPool {
      * 移除Binder
      * @param name
      */
+    @Override
     public void removeBinder(String name){
         try {
             if (mBinderPool != null){

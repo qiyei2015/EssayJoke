@@ -7,10 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.qiyei.appdemo.ICompute;
 import com.qiyei.appdemo.R;
-import com.qiyei.appdemo.binder.ComputeImpl;
-import com.qiyei.sdk.server.core.CoreBinderPool;
+import com.qiyei.sdk.server.core.CoreBinderManager;
+import com.qiyei.sdk.server.core.ICompute;
 import com.qiyei.sdk.util.ToastUtil;
 
 public class BinderTestActivity extends AppCompatActivity {
@@ -26,9 +25,11 @@ public class BinderTestActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IBinder binder = CoreBinderPool.getInstance().queryBinder("compute");
+                IBinder binder = CoreBinderManager.getInstance().queryBinder("compute");
                 ICompute compute = ICompute.Stub.asInterface(binder);
-
+                if (compute == null){
+                    return;
+                }
                 try {
                     ToastUtil.showLongToast("调用 ICompute 的add : " + compute.add(20,30));
                 } catch (RemoteException e) {
@@ -36,9 +37,6 @@ public class BinderTestActivity extends AppCompatActivity {
                 }
             }
         });
-
-        //这个一般由服务端添加
-        CoreBinderPool.getInstance().addBinder("compute",new ComputeImpl());
 
     }
 

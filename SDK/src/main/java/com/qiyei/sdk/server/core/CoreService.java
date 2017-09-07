@@ -108,9 +108,9 @@ public class CoreService extends BaseService {
 
     @Override
     protected void onServiceReady() {
-
-        CoreBinderPool.getInstance().attachService(this);
         LogManager.i(TAG,"CoreService onServiceReady");
+
+        CoreBinderManager.getInstance();
     }
 
     @Override
