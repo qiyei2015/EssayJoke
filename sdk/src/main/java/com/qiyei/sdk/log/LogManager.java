@@ -112,7 +112,11 @@ public class LogManager {
      * @return
      */
     private static int printLog(int level,String tag, String msg){
-        return sDefLogImpl.print(level,tag,msg);
+        //依次遍历map打开开关
+        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
+            entry.getValue().print(level,tag,msg);
+        }
+        return 0;
     }
 
     /**
@@ -277,6 +281,17 @@ public class LogManager {
         //依次遍历map打开开关
         for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
             entry.getValue().setOpen(open);
+        }
+    }
+
+    /**
+     * 设置是否写入文件
+     * @param write
+     */
+    public static void writeFile(boolean write){
+        //依次遍历map打开开关
+        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
+            entry.getValue().setWriteFile(write);
         }
     }
 

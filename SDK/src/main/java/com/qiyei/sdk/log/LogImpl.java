@@ -17,7 +17,7 @@ import java.util.Date;
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/8/23.
  * Version: 1.0
- * Description:
+ * Description: 日志打印的具体实现
  */
 public class LogImpl {
 
@@ -46,6 +46,10 @@ public class LogImpl {
      * 日志开关是否打开
      */
     private boolean isOpen;
+    /**
+     * 是否写入文件
+     */
+    private boolean isWriteFile;
 
     /**
      * 日志打印的标签
@@ -69,7 +73,7 @@ public class LogImpl {
         if (!dir.exists()){
             dir.mkdirs();
         }
-        File file = new File(dir,fileName+SUFFIX_NAME);
+        File file = new File(dir,mFileName + SUFFIX_NAME);
 
         mPath = file.getAbsolutePath();
 
@@ -97,8 +101,10 @@ public class LogImpl {
         Log.d(LogConstant.TAG,"log print --> level:" + level);
         //大于等于该级别才会打印
         if (level >= mLevel){
-            //打印到文件
-            printToFile(level,tag,msg);
+            if (isWriteFile){
+                //打印到文件 只有设置了为true才会打印到文件
+                printToFile(level,tag,msg);
+            }
             //打印到控制台
             printToConsole(level,tag, msg);
         }
@@ -205,6 +211,20 @@ public class LogImpl {
     }
 
     /**
+     * @return {@link #isWriteFile}
+     */
+    public boolean isWriteFile() {
+        return isWriteFile;
+    }
+
+    /**
+     * @param writeFile the {@link #isWriteFile} to set
+     */
+    public void setWriteFile(boolean writeFile) {
+        isWriteFile = writeFile;
+    }
+
+    /**
      * @return {@link #mLevel}
      */
     public int getLevel() {
@@ -224,4 +244,5 @@ public class LogImpl {
     public String getPath() {
         return mPath;
     }
+
 }
