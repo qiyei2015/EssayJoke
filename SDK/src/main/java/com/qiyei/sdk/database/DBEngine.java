@@ -1,4 +1,4 @@
-package com.qiyei.sdk.db;
+package com.qiyei.sdk.database;
 
 /**
  * Email: 1273482124@qq.com

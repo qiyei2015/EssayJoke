@@ -28,7 +28,7 @@ public class DaoSupportFactory {
     /**
      * 构造方法，创建数据库位置
      */
-    private DaoSupportFactory(){
+    private DaoSupportFactory(String name){
 
         //数据库放在外部存储下面：/sdcard/EasyJoke/database/        android6.0以后需要动态申请权限
         File dbDir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
@@ -37,7 +37,7 @@ public class DaoSupportFactory {
             dbDir.mkdirs();
         }
 
-        File dbFile = new File(dbDir,"easyJoke.db");
+        File dbFile = new File(dbDir,name);
         LogManager.d(TAG,"dbFile --> " + dbFile);
 
         //如果存在就删除文件
@@ -70,7 +70,7 @@ public class DaoSupportFactory {
      * 单例方式提供对象
      */
     private static class SingleHolder{
-        private static final DaoSupportFactory sInstance = new DaoSupportFactory();
+        private static final DaoSupportFactory sInstance = new DaoSupportFactory("essayjoke.db");
     }
 
     /**
