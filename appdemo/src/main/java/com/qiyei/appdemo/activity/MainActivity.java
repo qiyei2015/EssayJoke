@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,7 @@ import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.dialog.BaseDialog;
+import com.qiyei.sdk.dialog.DialogListener;
 import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.ioc.OnClick;
 import com.qiyei.sdk.ioc.ViewById;
@@ -133,30 +135,33 @@ public class MainActivity extends BaseSkinActivity {
     @OnClick(R.id.btn2)
     private void testBtn2(View view){
 
-        View view2 = LayoutInflater.from(this).inflate(R.layout.dialog_test,null);
-        final BaseDialog dialog = new BaseDialog.Builder(this,R.layout.dialog_test)
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_test,null,false);
+
+        BaseDialog dialog = new BaseDialog.Builder(this)
                 .setCancelable(true)
                 //.setContentView(R.layout.dialog_test)
-                //.setContentView(view2)
+                .setContentView(contentView)
                 .setText(R.id.dialog_content,"这是一个对话框，哈哈哈！")
-                .setOnClickListener(R.id.dialog_ok, new View.OnClickListener() {
+                .setDialogListener(R.id.dialog_ok, new DialogListener() {
                     @Override
                     public void onClick(View v) {
                         ToastUtil.showLongToast("对话框点击了确认");
-                        //dialog.dismiss();
+
                     }
                 })
-                .setOnClickListener(R.id.dialog_cancel, new View.OnClickListener() {
+                .setDialogListener(R.id.dialog_cancel, new DialogListener() {
                     @Override
                     public void onClick(View v) {
                         ToastUtil.showLongToast("对话框点击了取消");
-                        //dialog.dismiss();
                     }
                 })
+//                .setGravity(Gravity.BOTTOM)
+//                .fullWidth()
                 .setFragmentManager(getSupportFragmentManager())
-                .create();
+                .build();
 
         dialog.show();
+
     }
 
     @OnClick(R.id.btn3)
@@ -201,6 +206,35 @@ public class MainActivity extends BaseSkinActivity {
 
     @OnClick(R.id.btn11)
     private void testBtn11(View view){
+
+        BaseDialog dialog = new BaseDialog.Builder(this)
+                .setCancelable(true)
+                .setContentView(R.layout.common_dialog)
+                //.setContentView(contentView)
+                .setText(R.id.id_dialog_title,"这是一个对话框标题！")
+                .setText(R.id.id_tv_content,"对话框内容")
+                .setText(R.id.id_tv_confirm,"确认")
+                .setText(R.id.id_tv_cancel,"取消")
+                .setDrawable(R.id.id_dialog_title_imv,R.drawable.icon_login_single)
+                .setDialogListener(R.id.id_tv_confirm, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了确认");
+
+                    }
+                })
+                .setDialogListener(R.id.id_tv_cancel, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了取消");
+                    }
+                })
+//                .setGravity(Gravity.BOTTOM)
+//                .fullWidth()
+                .setFragmentManager(getSupportFragmentManager())
+                .build();
+
+        dialog.show();
     }
 
     @OnClick(R.id.btn12)

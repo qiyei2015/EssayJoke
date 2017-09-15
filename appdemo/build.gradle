@@ -26,6 +26,11 @@ android {
         }
     }
 
+    aaptOptions {
+       cruncherEnabled = false
+       useNewCruncher = false
+    }
+
     repositories {
         // 本地的libs目录
         flatDir {

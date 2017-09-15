@@ -1,5 +1,6 @@
 package com.qiyei.sdk.dialog;
 
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.View;

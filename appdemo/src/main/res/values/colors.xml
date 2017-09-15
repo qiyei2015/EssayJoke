@@ -5,7 +5,6 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="main_bg_color">#2F2FFF</color>
-    <color name="main_text_color">#FFFFFF</color>
 
     <color name="abc_input_method_navigation_guard">@android:color/black</color>
     <color name="abc_search_url_text_normal">#ff7fa87f</color>
@@ -332,8 +331,6 @@
     <color name="link_text_material_light">@color/material_deep_teal_500</color>
     <color name="list_bg_day">#ffffffff</color>
     <color name="list_bg_night">#ff171a1e</color>
-    <color name="list_divider_color">#ffe5e5e5</color>
-    <color name="list_divider_color_night">#ff000000</color>
     <color name="list_footer_btn">#ff444444</color>
     <color name="list_footer_btn_night">@color/default_text_night</color>
     <color name="list_footer_more_text">#ff444444</color>
@@ -643,5 +640,13 @@
     <color name="write_comment_hint_text_night">@color/default_text_night</color>
     <color name="write_comment_text">#ff6a6056</color>
     <color name="write_comment_text_night">@color/default_text_night</color>
+
+
+    <color name="bule">#3a91f9</color>
+    <color name="bg_light_blue">#50C2DD</color>
+    <color name="gray_line">#e3e6e8</color>
+    <color name="custom_dialog_message">#3f454f</color>
+    <color name="dialog_cancel_btn_bg_normal">#efeff4</color>
+    <color name="dialog_cancel_btn_bg_pressed">#d8d8e0</color>
 
 </resources>

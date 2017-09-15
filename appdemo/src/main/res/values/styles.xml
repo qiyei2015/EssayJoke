@@ -9,15 +9,15 @@
     </style>
 
     <!--主页按钮的样式-->
-    <style name="home_bottom_tab_style">
-        <item name="android:layout_width">0dp</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_weight">1</item>
-        <item name="android:button">@null</item>
-        <item name="android:gravity">center|bottom</item>
-        <item name="android:textSize">10sp</item>
-        <item name="android:drawablePadding">6sp</item>
-        <item name="android:textColor">@color/tab_text_normal</item>
+
+
+    <style name="button_common_style">
+        <item name="android:layout_height">@dimen/common_button_height</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_18</item>
+        <item name="android:background">@drawable/takeout_button_selector</item>
     </style>
+
 
 </resources>

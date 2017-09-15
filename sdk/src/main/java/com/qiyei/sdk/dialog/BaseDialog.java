@@ -1,8 +1,10 @@
 package com.qiyei.sdk.dialog;
 
-import android.annotation.SuppressLint;
-import android.app.Dialog;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.qiyei.sdk.R;
+import com.qiyei.sdk.log.LogManager;
 
 
 /**
@@ -23,44 +26,55 @@ import com.qiyei.sdk.R;
  * Description:
  */
 public class BaseDialog extends DialogFragment {
-
+    /**
+     * 调试标志
+     */
     private static final String TAG = BaseDialog.class.getSimpleName();
+    /**
+     * context
+     */
+    protected Context mContext;
+    /**
+     * Dialog的参数
+     */
+    protected DialogParams mParams;
 
-    private DialogParams mDialogParams;
+    /**
+     * 构造方法
+     */
     public BaseDialog(){
         super();
     }
 
-    @SuppressLint("ValidFragment")
-    public BaseDialog(DialogParams params){
-        mDialogParams = params;
-    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
-        setCancelable(mDialogParams.isCancelable);
+        //保存数据，防止重建Dialog时出现数据丢失的情况
+        if (savedInstanceState != null){
+
+        }
+        setCancelable(mParams.isCancelable);
+        LogManager.i(TAG,"onCreate()");
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        LogManager.i(TAG,"onCreateView()");
         //去除标题
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-        if (mDialogParams.mLayoutId != 0){
-            return inflater.inflate(mDialogParams.mLayoutId,container,false);
-        }else {
-            return mDialogParams.mContentView;
-        }
+        //必须返回的View是Builder中已经设置的那个对象，使用LayoutInflater加载的是另外一个对象
+        return mParams.mContentView;
     }
 
-    @Override
-    public void setupDialog(Dialog dialog, int style) {
-        super.setupDialog(dialog, style);
-
-    }
 
     @Override
     public void onStart() {
@@ -68,26 +82,36 @@ public class BaseDialog extends DialogFragment {
 
         //设置布局属性
         Window window = getDialog().getWindow();
-        window.setLayout(mDialogParams.mWidth,mDialogParams.mHeight);
-        window.setGravity(mDialogParams.mGravity);
+        window.setLayout(mParams.mWidth,mParams.mHeight);
+        window.setGravity(mParams.mGravity);
+
+        LogManager.i(TAG,"onStart()");
     }
 
     /**
-     * builder设计模式创建Dialog
+     *
      */
     public static class Builder{
-        private Context mContext;
-        /**
-         * 对话框参数
-         */
-        private DialogParams mParams;
 
-        public Builder(Context context,int layoutId){
-            mContext = context;
-            mParams = new DialogParams();
-            mParams.mHelper = new DialogHelper();
-            mParams.mLayoutId = layoutId;
-            mParams.mHelper.setContentView(LayoutInflater.from(mContext).inflate(mParams.mLayoutId,null,false));
+        private Context mBuilderContext;
+        //参数
+        private DialogParams mBuilderParams ;
+        //helper
+        private DialogHelper mHelper;
+        //说应用的dialog
+        BaseDialog dialog;
+
+        /**
+         * 构造方法
+         * @param context
+         */
+        public Builder(Context context){
+            mBuilderContext = context;
+            dialog = new BaseDialog();
+
+            mBuilderParams = new DialogParams();
+            mHelper = new DialogHelper(dialog);
+            mBuilderParams.mHelper = mHelper;
         }
 
         /**
@@ -96,9 +120,9 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder setContentView(int layoutId){
-            mParams.mLayoutId = layoutId;
-            mParams.mContentView = null;
-            mParams.mHelper.setContentView(LayoutInflater.from(mContext).inflate(mParams.mLayoutId,null,false));
+            mBuilderParams.mLayoutId = layoutId;
+            mBuilderParams.mContentView = LayoutInflater.from(mBuilderContext).inflate(mBuilderParams.mLayoutId,null,false);
+            mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
             return this;
         }
 
@@ -108,9 +132,9 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder setContentView(View view){
-            mParams.mContentView = view;
-            mParams.mLayoutId = 0;
-            mParams.mHelper.setContentView(mParams.mContentView);
+            mBuilderParams.mContentView = view;
+            mBuilderParams.mLayoutId = 0;
+            mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
             return this;
         }
 
@@ -120,7 +144,7 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder setCancelable(boolean cancelable){
-            mParams.isCancelable = cancelable;
+            mBuilderParams.isCancelable = cancelable;
             return this;
         }
 
@@ -130,7 +154,7 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder setFragmentManager(FragmentManager manager){
-            mParams.mFragmentManager = manager;
+            mBuilderParams.mFragmentManager = manager;
             return this;
         }
 
@@ -139,7 +163,7 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder fullWidth(){
-            mParams.mWidth = ViewGroup.LayoutParams.MATCH_PARENT;
+            mBuilderParams.mWidth = ViewGroup.LayoutParams.MATCH_PARENT;
             return this;
         }
 
@@ -149,7 +173,7 @@ public class BaseDialog extends DialogFragment {
          * @return
          */
         public Builder setGravity(int gravity){
-            mParams.mGravity = gravity;
+            mBuilderParams.mGravity = gravity;
             return this;
         }
 
@@ -159,7 +183,47 @@ public class BaseDialog extends DialogFragment {
          * @param text
          */
         public Builder setText(int viewId, CharSequence text) {
-            mParams.mHelper.setText(viewId,text);
+            LogManager.i(TAG,"setText viewId : " + viewId + ",text :" + text);
+            mBuilderParams.mHelper.setText(viewId,text);
+            return this;
+        }
+
+        /**
+         * 设置ImageView
+         * @param viewId
+         * @param bitmap
+         */
+        public Builder setImage(int viewId, Bitmap bitmap) {
+            LogManager.i(TAG,"setImage viewId : " + viewId + ",bitmap :" + bitmap);
+            mBuilderParams.mHelper.setImage(viewId,bitmap);
+            return this;
+        }
+
+        /**
+         * 设置ImageView的Drawable
+         * @param viewId
+         * @param resId
+         */
+        public Builder setDrawable(int viewId, int resId) {
+            LogManager.i(TAG,"setDrawable viewId : " + viewId + ",resId :" + resId);
+            Drawable drawable ;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                drawable = mBuilderContext.getDrawable(resId);
+            }else {
+                drawable = mBuilderContext.getResources().getDrawable(resId);
+            }
+            mBuilderParams.mHelper.setDrawable(viewId,drawable);
+            return this;
+        }
+
+        /**
+         * 设置ImageView的Drawable
+         * @param viewId
+         * @param drawable
+         */
+        public Builder setDrawable(int viewId, Drawable drawable) {
+            LogManager.i(TAG,"setDrawable viewId : " + viewId + ",drawable :" + drawable);
+            mBuilderParams.mHelper.setDrawable(viewId,drawable);
             return this;
         }
 
@@ -169,17 +233,19 @@ public class BaseDialog extends DialogFragment {
          * @param viewId
          * @param listener
          */
-        public Builder setOnClickListener(int viewId, View.OnClickListener listener) {
-            mParams.mHelper.setOnClickListener(viewId,listener);
+        public Builder setDialogListener(int viewId, DialogListener listener) {
+            LogManager.i(TAG,"setOnClickListener viewId : " + viewId + ",listener :" + listener);
+            mBuilderParams.mHelper.setOnClickListener(viewId,listener);
             return this;
         }
 
         /**
-         * 创建Dialog对象
+         * 创建对话框
          * @return
          */
-        public BaseDialog create(){
-            return new BaseDialog(mParams);
+        public BaseDialog build(){
+            dialog.mParams = mBuilderParams;
+            return dialog;
         }
     }
 
@@ -190,7 +256,7 @@ public class BaseDialog extends DialogFragment {
      * @return
      */
     public <T extends View> T getView(int viewId){
-        return mDialogParams.mHelper.getView(viewId);
+        return mParams.mHelper.getView(viewId);
     }
 
     /**
@@ -199,10 +265,11 @@ public class BaseDialog extends DialogFragment {
     public void show(){
         //如果没有被添加
         if (!isAdded()){
-            FragmentTransaction transaction = mDialogParams.mFragmentManager.beginTransaction();
+            FragmentTransaction transaction = mParams.mFragmentManager.beginTransaction();
             transaction.add(this, TAG);
             transaction.commitAllowingStateLoss();
         }
+        LogManager.i(TAG,"show()");
     }
 
     /**
