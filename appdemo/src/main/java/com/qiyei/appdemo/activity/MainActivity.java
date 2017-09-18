@@ -140,7 +140,7 @@ public class MainActivity extends BaseSkinActivity {
         BaseDialog dialog = new BaseDialog.Builder(this)
                 .setCancelable(true)
                 //.setContentView(R.layout.dialog_test)
-                .setContentView(contentView)
+                .setContentView(R.layout.dialog_test)
                 .setText(R.id.dialog_content,"这是一个对话框，哈哈哈！")
                 .setDialogListener(R.id.dialog_ok, new DialogListener() {
                     @Override

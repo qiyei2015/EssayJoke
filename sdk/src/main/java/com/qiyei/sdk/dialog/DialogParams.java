@@ -1,10 +1,13 @@
 package com.qiyei.sdk.dialog;
 
-import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Email: 1273482124@qq.com
@@ -12,12 +15,13 @@ import android.view.ViewGroup;
  * Version: 1.0
  * Description: Dialog的控制类，控制其中的ContentView等的操作
  */
-public class DialogParams {
+public class DialogParams implements Serializable{
 
     /**
      * Dialog辅助类
      */
     public DialogHelper mHelper;
+
     /**
      * 显示DialogFragment需要的FragmentManager
      */
@@ -51,6 +55,24 @@ public class DialogParams {
      */
     public boolean isCancelable;
 
+    /**
+     * 记录事件的map,这里的事件包括setText，D监听器，图片等
+     */
+    public Map<String,HashMap<Integer,Object>> mEventMap = new HashMap<>();
 
 
+    @Override
+    public String toString() {
+        return "DialogParams{" +
+                "mHelper=" + mHelper +
+                ", mFragmentManager=" + mFragmentManager +
+                ", mWidth=" + mWidth +
+                ", mAnimations=" + mAnimations +
+                ", mGravity=" + mGravity +
+                ", mHeight=" + mHeight +
+                ", mContentView=" + mContentView +
+                ", mLayoutId=" + mLayoutId +
+                ", isCancelable=" + isCancelable +
+                '}';
+    }
 }

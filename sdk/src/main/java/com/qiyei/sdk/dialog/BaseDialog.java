@@ -14,9 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qiyei.sdk.R;
 import com.qiyei.sdk.log.LogManager;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -40,6 +45,27 @@ public class BaseDialog extends DialogFragment {
     protected DialogParams mParams;
 
     /**
+     * onSaveInstanceState保存的key
+     */
+    private static final String KEY = "dialog";
+    /**
+     * Text的key
+     */
+    private static final String TEXT = "text";
+    /**
+     * Drawable的key
+     */
+    private static final String DRAWABLE = "drawable";
+    /**
+     * Listener的Key
+     */
+    private static final String LISTENER = "listener";
+    /**
+     * 是否是恢复的数据
+     */
+    private boolean isSavedInstanceState = false;
+
+    /**
      * 构造方法
      */
     public BaseDialog(){
@@ -53,7 +79,9 @@ public class BaseDialog extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
         //保存数据，防止重建Dialog时出现数据丢失的情况
         if (savedInstanceState != null){
-
+            mParams = (DialogParams) savedInstanceState.getSerializable(KEY);
+            LogManager.i(TAG,"savedInstanceState mParams:" + mParams.toString());
+            isSavedInstanceState = true;
         }
         setCancelable(mParams.isCancelable);
         LogManager.i(TAG,"onCreate()");
@@ -62,6 +90,7 @@ public class BaseDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        outState.putSerializable(KEY,mParams);
     }
 
 
@@ -72,24 +101,60 @@ public class BaseDialog extends DialogFragment {
         //去除标题
         getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
         //必须返回的View是Builder中已经设置的那个对象，使用LayoutInflater加载的是另外一个对象
-        return mParams.mContentView;
-    }
+        View contentView = mParams.mContentView;
 
+        if (savedInstanceState != null){
+            contentView = LayoutInflater.from(getContext()).inflate(mParams.mLayoutId,null);
+            mParams.mContentView = contentView;
+        }
+        LogManager.i(TAG,"contentView.getParent():" + contentView.getParent());
+        return contentView;
+    }
 
     @Override
     public void onStart() {
         super.onStart();
-
         //设置布局属性
         Window window = getDialog().getWindow();
         window.setLayout(mParams.mWidth,mParams.mHeight);
         window.setGravity(mParams.mGravity);
 
         LogManager.i(TAG,"onStart()");
+        if (!isSavedInstanceState){
+            return;
+        }
+        HashMap<Integer,Object> hashMap = mParams.mEventMap.get(TEXT);
+        for (Map.Entry<Integer,Object> entry : hashMap.entrySet()){
+            TextView view = (TextView) mParams.mContentView.findViewById(entry.getKey());
+            view.setText((CharSequence) entry.getValue());
+        }
+
+        hashMap = mParams.mEventMap.get(DRAWABLE);
+        for (Map.Entry<Integer,Object> entry : hashMap.entrySet()){
+            ImageView view = (ImageView) mParams.mContentView.findViewById(entry.getKey());
+            view.setVisibility(View.VISIBLE);
+            if (entry.getValue() instanceof Integer){
+                view.setImageResource((Integer) entry.getValue());
+            }else if (entry.getValue() instanceof Bitmap){
+                view.setImageBitmap((Bitmap) entry.getValue());
+            }
+        }
+
+        hashMap = mParams.mEventMap.get(LISTENER);
+        for (final Map.Entry<Integer,Object> entry : hashMap.entrySet()){
+            View view = mParams.mContentView.findViewById(entry.getKey());
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((DialogListener) entry.getValue()).onClick(v);
+                    dismiss();
+                }
+            });
+        }
     }
 
     /**
-     *
+     * 还是使用builder模式
      */
     public static class Builder{
 
@@ -98,7 +163,7 @@ public class BaseDialog extends DialogFragment {
         private DialogParams mBuilderParams ;
         //helper
         private DialogHelper mHelper;
-        //说应用的dialog
+        //所引用的dialog
         BaseDialog dialog;
 
         /**
@@ -112,6 +177,10 @@ public class BaseDialog extends DialogFragment {
             mBuilderParams = new DialogParams();
             mHelper = new DialogHelper(dialog);
             mBuilderParams.mHelper = mHelper;
+
+            mBuilderParams.mEventMap.put(TEXT,new HashMap<Integer, Object>());
+            mBuilderParams.mEventMap.put(DRAWABLE,new HashMap<Integer, Object>());
+            mBuilderParams.mEventMap.put(LISTENER,new HashMap<Integer, Object>());
         }
 
         /**
@@ -121,7 +190,8 @@ public class BaseDialog extends DialogFragment {
          */
         public Builder setContentView(int layoutId){
             mBuilderParams.mLayoutId = layoutId;
-            mBuilderParams.mContentView = LayoutInflater.from(mBuilderContext).inflate(mBuilderParams.mLayoutId,null,false);
+            mBuilderParams.mContentView = LayoutInflater.from(mBuilderContext).inflate(mBuilderParams.mLayoutId,null);
+            LogManager.i(TAG,"mBuilderParams.mContentView.getParent():" + mBuilderParams.mContentView.getParent());
             mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
             return this;
         }
@@ -135,6 +205,7 @@ public class BaseDialog extends DialogFragment {
             mBuilderParams.mContentView = view;
             mBuilderParams.mLayoutId = 0;
             mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
+            LogManager.i(TAG,"mBuilderParams.mContentView.getParent():" + mBuilderParams.mContentView.getParent());
             return this;
         }
 
@@ -184,6 +255,7 @@ public class BaseDialog extends DialogFragment {
          */
         public Builder setText(int viewId, CharSequence text) {
             LogManager.i(TAG,"setText viewId : " + viewId + ",text :" + text);
+            mBuilderParams.mEventMap.get(TEXT).put(viewId,text);
             mBuilderParams.mHelper.setText(viewId,text);
             return this;
         }
@@ -195,6 +267,7 @@ public class BaseDialog extends DialogFragment {
          */
         public Builder setImage(int viewId, Bitmap bitmap) {
             LogManager.i(TAG,"setImage viewId : " + viewId + ",bitmap :" + bitmap);
+            mBuilderParams.mEventMap.get(DRAWABLE).put(viewId,bitmap);
             mBuilderParams.mHelper.setImage(viewId,bitmap);
             return this;
         }
@@ -206,6 +279,7 @@ public class BaseDialog extends DialogFragment {
          */
         public Builder setDrawable(int viewId, int resId) {
             LogManager.i(TAG,"setDrawable viewId : " + viewId + ",resId :" + resId);
+            mBuilderParams.mEventMap.get(DRAWABLE).put(viewId,resId);
             Drawable drawable ;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
                 drawable = mBuilderContext.getDrawable(resId);
@@ -221,6 +295,7 @@ public class BaseDialog extends DialogFragment {
          * @param viewId
          * @param drawable
          */
+        @Deprecated
         public Builder setDrawable(int viewId, Drawable drawable) {
             LogManager.i(TAG,"setDrawable viewId : " + viewId + ",drawable :" + drawable);
             mBuilderParams.mHelper.setDrawable(viewId,drawable);
@@ -235,6 +310,7 @@ public class BaseDialog extends DialogFragment {
          */
         public Builder setDialogListener(int viewId, DialogListener listener) {
             LogManager.i(TAG,"setOnClickListener viewId : " + viewId + ",listener :" + listener);
+            mBuilderParams.mEventMap.get(LISTENER).put(viewId,listener);
             mBuilderParams.mHelper.setOnClickListener(viewId,listener);
             return this;
         }
@@ -279,5 +355,6 @@ public class BaseDialog extends DialogFragment {
     public void dismiss(){
         super.dismiss();
     }
+
 
 }

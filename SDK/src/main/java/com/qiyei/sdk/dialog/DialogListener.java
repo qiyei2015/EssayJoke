@@ -2,13 +2,15 @@ package com.qiyei.sdk.dialog;
 
 import android.view.View;
 
+import java.io.Serializable;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/9/15.
  * Version: 1.0
  * Description: 对话框事件监听器
  */
-public interface DialogListener {
+public interface DialogListener extends Serializable{
 
     /**
      * 点击
