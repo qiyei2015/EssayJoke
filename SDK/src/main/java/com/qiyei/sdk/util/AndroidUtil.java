@@ -22,4 +22,18 @@ public class AndroidUtil {
         return isDebug;
     }
 
+    /**
+     * 获取App版本号
+     * @param context
+     * @return
+     */
+    public static String getAppVersionName(Context context){
+        String appVersion;
+        try {
+            appVersion = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (Exception e) {
+            appVersion = "1.0.0";
+        }
+        return appVersion;
+    }
 }

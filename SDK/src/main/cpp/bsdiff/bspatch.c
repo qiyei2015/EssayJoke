@@ -58,7 +58,7 @@ static off_t offtin(u_char *buf)
 	return y;
 }
 
-extern int bspatch_main(int argc,char * argv[])
+extern int bspatch_main(int argc,const char * argv[])
 {
 	FILE * f, * cpf, * dpf, * epf;
 	BZFILE * cpfbz2, * dpfbz2, * epfbz2;

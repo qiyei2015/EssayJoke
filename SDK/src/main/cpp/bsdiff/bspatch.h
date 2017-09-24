@@ -5,7 +5,7 @@
 #ifndef ESSAYJOKE_BSPATCH_H_H
 #define ESSAYJOKE_BSPATCH_H_H
 
-extern int bspatch_main(int argc,char * argv[]);
+extern int bspatch_main(int argc,const char * argv[]);
 
 
 #endif //ESSAYJOKE_BSPATCH_H_H

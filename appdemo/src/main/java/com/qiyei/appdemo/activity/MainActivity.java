@@ -17,6 +17,7 @@ import android.widget.Button;
 import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.appdemo.service.TestService;
 import com.qiyei.framework.activity.BaseSkinActivity;
+import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.dialog.BaseDialog;
@@ -25,6 +26,7 @@ import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.ioc.OnClick;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.permission.PermissionManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -75,9 +77,16 @@ public class MainActivity extends BaseSkinActivity {
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
+    /**
+     * 标题栏
+     */
+    private CommonTitleBar mTitleBar = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        PermissionManager.requestAllDangerousPermission(this);
         initData();
         initView();
     }
@@ -89,23 +98,32 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     protected void initView() {
+        mTitleBar = new CommonTitleBar.Builder(this)
+                .setTitle("Demo测试")
+                .setRightText("哈哈")
+                .build();
         btn1.setOnClickListener(this);
 
     }
 
     @Override
     protected void initData() {
-        fixBug();
-
         //如果没有权限
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-                || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
-        }else {
-            initDataBase();
-        }
+
+        String[] permission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
+                ,Manifest.permission.VIBRATE,Manifest.permission.CAMERA};
+        PermissionManager.requestPermission(this,MY_PERMISSIONS_REQUEST_WRITE_STORE,permission);
+
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+//                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+//                || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
+//        }else {
+//            initDataBase();
+//
+//        }
+//        fixBug();
     }
 
     @Override

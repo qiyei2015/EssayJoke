@@ -94,6 +94,7 @@ public final class SDKManager {
     public static class StartCoreServiceReceiver extends BroadcastReceiver{
 
         public StartCoreServiceReceiver() {
+
         }
 
         @Override

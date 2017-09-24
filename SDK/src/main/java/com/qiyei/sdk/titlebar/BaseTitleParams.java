@@ -7,18 +7,18 @@ import android.view.ViewGroup;
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/5/14.
  * Version: 1.0
- * Description: Navigation的参数
+ * Description: TitleBar的基本参数
  */
-public class AbsTitleParams {
+public class BaseTitleParams {
     public Context mContext;
     /**
      * 父布局
      */
-    public ViewGroup mParent;
+    public ViewGroup mActivityRoot;
 
-    public AbsTitleParams(Context context, ViewGroup parent){
+    public BaseTitleParams(Context context, ViewGroup root){
         mContext = context;
-        mParent = parent;
+        mActivityRoot = root;
     }
 
 }

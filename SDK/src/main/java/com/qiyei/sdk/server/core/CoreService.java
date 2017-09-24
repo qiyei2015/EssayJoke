@@ -1,5 +1,6 @@
 package com.qiyei.sdk.server.core;
 
+import android.app.Notification;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.annotation.Nullable;
 
+import com.qiyei.sdk.R;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.server.base.BaseService;
 
@@ -97,7 +99,12 @@ public class CoreService extends BaseService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         bindService(new Intent(mContext, RemoteCoreService.class),mServiceConnection, Context.BIND_IMPORTANT);
         LogManager.i(TAG,"bind RemoteCoreService");
+        Notification notification = new Notification.Builder(this.getApplicationContext())
+                .setContentText("")
+                .setSmallIcon(R.drawable.wakeup)
+                .setWhen(System.currentTimeMillis()).build();
 
+        startForeground(0,notification);
         return START_STICKY;
     }
 

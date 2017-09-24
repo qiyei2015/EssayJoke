@@ -18,7 +18,7 @@ import com.qiyei.sdk.log.LogManager;
  * Version: 1.0
  * Description:
  */
-public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar {
+public abstract class BaseTitleBar<T extends BaseTitleParams> implements ITitleBar {
     /**
      * 参数
      */
@@ -28,9 +28,9 @@ public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar
      */
     protected View mNavigationView;
 
-    public AbsTitleBar(T params) {
+    public BaseTitleBar(T params) {
         this.mParams = params;
-        createAndBindView();
+        bindViewToActivityRoot();
     }
 
     /**
@@ -51,7 +51,7 @@ public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar
      * @param viewId
      * @param resId
      */
-    protected void setImage(int viewId,int resId){
+    protected void setDrawable(int viewId,int resId){
         ImageView imv = getView(viewId);
         if (imv != null){
             imv.setVisibility(View.VISIBLE);
@@ -82,28 +82,29 @@ public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar
     }
 
     /**
-     * 创建绑定View
+     * 绑定View到ActivityRoot上
      */
-    private void createAndBindView() {
+    private void bindViewToActivityRoot() {
         //创建View
-        if (mParams.mParent == null){
+        if (mParams.mActivityRoot == null){
             //获取Activity的根布局
             ViewGroup activityRoot = (ViewGroup) ((Activity)mParams.mContext).findViewById(android.R.id.content);
             //获取我们在Activity中设置ContentView的View
-            mParams.mParent = (ViewGroup)activityRoot.getChildAt(0);
-            LogManager.i("TAG","mParams.mParent:" + mParams.mParent);
+            mParams.mActivityRoot = (ViewGroup)activityRoot.getChildAt(0);
+            LogManager.i("TAG","mParams.mParent:" + mParams.mActivityRoot);
         }
-        if (mParams.mParent == null){
+        if (mParams.mActivityRoot == null){
             return;
         }
 
         mNavigationView = LayoutInflater.from(mParams.mContext)
-                .inflate(bindLayoutId(),mParams.mParent,false);
+                .inflate(bindLayoutId(),mParams.mActivityRoot,false);
 
         //添加View到mParams.mParent中
-        mParams.mParent.addView(mNavigationView,0);
+        mParams.mActivityRoot.addView(mNavigationView,0);
 
-        applyView();
+        //绑定View
+        bindView();
     }
 
     /**
@@ -112,9 +113,10 @@ public abstract class AbsTitleBar<T extends AbsTitleParams> implements ITitleBar
     public static abstract class Builder{
 
         public Builder(Context context) {
+
         }
 
-        public abstract AbsTitleBar build();
+        public abstract BaseTitleBar build();
     }
 
 }

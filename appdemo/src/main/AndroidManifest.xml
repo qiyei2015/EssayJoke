@@ -19,6 +19,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.taobao.android.hotfix.IDSECRET"
+            android:value="Yours" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.APPSECRET"
+            android:value="Yours" />
+        <meta-data
+            android:name="com.taobao.android.hotfix.RSASECRET"
+            android:value="Yours" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

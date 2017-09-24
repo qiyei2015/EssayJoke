@@ -11,6 +11,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
+import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.log.LogManager;
+
 import java.util.List;
 
 /**
@@ -22,13 +25,15 @@ import java.util.List;
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 public class CoreWakeUpService extends JobService {
 
+    private static final String TAG = CoreWakeUpService.class.getSimpleName();
+
     private final int jobWakeUpId = 1;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         JobInfo.Builder builder = new JobInfo.Builder(jobWakeUpId,
                 new ComponentName(this,CoreWakeUpService.class));
-        builder.setPeriodic(2000);  //2秒
+        builder.setPeriodic(1000);  //1秒
 
         JobScheduler jobScheduler = (JobScheduler) getSystemService(Context.JOB_SCHEDULER_SERVICE);
         jobScheduler.schedule(builder.build());
@@ -42,9 +47,10 @@ public class CoreWakeUpService extends JobService {
         // 如果杀死了启动  轮寻onStartJob
 
         // 判断服务有没有在运行
-        boolean messageServiceAlive = serviceAlive(CoreService.class.getName());
-        if(!messageServiceAlive){
+        boolean alive = serviceAlive(CoreService.class.getName());
+        if(!alive){
             startService(new Intent(this,CoreService.class));
+            LogManager.i(TAG,"startService CoreService");
         }
 
         return false;
@@ -69,12 +75,16 @@ public class CoreWakeUpService extends JobService {
             return false;
         }
         for (int i = 0; i < myList.size(); i++) {
-            String mName = myList.get(i).service.getClassName().toString();
-            if (mName.equals(serviceName)) {
-                isWork = true;
-                break;
+            String name = myList.get(i).service.getClassName().toString();
+            if (name.contains(CoreService.class.getCanonicalName())){
+                LogManager.i(TAG, "RunningServiceInfo name:" + name);
+                if (name.equals(serviceName)) {
+                    isWork = true;
+                    break;
+                }
             }
         }
+        LogManager.i(TAG,serviceName + " isAlive " + isWork);
         return isWork;
     }
 }

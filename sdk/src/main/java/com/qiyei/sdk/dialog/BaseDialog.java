@@ -162,7 +162,7 @@ public class BaseDialog extends DialogFragment {
         //参数
         private DialogParams mBuilderParams ;
         //helper
-        private DialogHelper mHelper;
+        private DialogViewHolder mHolder;
         //所引用的dialog
         BaseDialog dialog;
 
@@ -175,8 +175,8 @@ public class BaseDialog extends DialogFragment {
             dialog = new BaseDialog();
 
             mBuilderParams = new DialogParams();
-            mHelper = new DialogHelper(dialog);
-            mBuilderParams.mHelper = mHelper;
+            mHolder = new DialogViewHolder(dialog);
+            mBuilderParams.mHolder = mHolder;
 
             mBuilderParams.mEventMap.put(TEXT,new HashMap<Integer, Object>());
             mBuilderParams.mEventMap.put(DRAWABLE,new HashMap<Integer, Object>());
@@ -192,7 +192,7 @@ public class BaseDialog extends DialogFragment {
             mBuilderParams.mLayoutId = layoutId;
             mBuilderParams.mContentView = LayoutInflater.from(mBuilderContext).inflate(mBuilderParams.mLayoutId,null);
             LogManager.i(TAG,"mBuilderParams.mContentView.getParent():" + mBuilderParams.mContentView.getParent());
-            mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
+            mBuilderParams.mHolder.setContentView(mBuilderParams.mContentView);
             return this;
         }
 
@@ -204,7 +204,7 @@ public class BaseDialog extends DialogFragment {
         public Builder setContentView(View view){
             mBuilderParams.mContentView = view;
             mBuilderParams.mLayoutId = 0;
-            mBuilderParams.mHelper.setContentView(mBuilderParams.mContentView);
+            mBuilderParams.mHolder.setContentView(mBuilderParams.mContentView);
             LogManager.i(TAG,"mBuilderParams.mContentView.getParent():" + mBuilderParams.mContentView.getParent());
             return this;
         }
@@ -256,7 +256,7 @@ public class BaseDialog extends DialogFragment {
         public Builder setText(int viewId, CharSequence text) {
             LogManager.i(TAG,"setText viewId : " + viewId + ",text :" + text);
             mBuilderParams.mEventMap.get(TEXT).put(viewId,text);
-            mBuilderParams.mHelper.setText(viewId,text);
+            mBuilderParams.mHolder.setText(viewId,text);
             return this;
         }
 
@@ -268,7 +268,7 @@ public class BaseDialog extends DialogFragment {
         public Builder setImage(int viewId, Bitmap bitmap) {
             LogManager.i(TAG,"setImage viewId : " + viewId + ",bitmap :" + bitmap);
             mBuilderParams.mEventMap.get(DRAWABLE).put(viewId,bitmap);
-            mBuilderParams.mHelper.setImage(viewId,bitmap);
+            mBuilderParams.mHolder.setImage(viewId,bitmap);
             return this;
         }
 
@@ -286,7 +286,7 @@ public class BaseDialog extends DialogFragment {
             }else {
                 drawable = mBuilderContext.getResources().getDrawable(resId);
             }
-            mBuilderParams.mHelper.setDrawable(viewId,drawable);
+            mBuilderParams.mHolder.setDrawable(viewId,drawable);
             return this;
         }
 
@@ -298,7 +298,7 @@ public class BaseDialog extends DialogFragment {
         @Deprecated
         public Builder setDrawable(int viewId, Drawable drawable) {
             LogManager.i(TAG,"setDrawable viewId : " + viewId + ",drawable :" + drawable);
-            mBuilderParams.mHelper.setDrawable(viewId,drawable);
+            mBuilderParams.mHolder.setDrawable(viewId,drawable);
             return this;
         }
 
@@ -311,7 +311,7 @@ public class BaseDialog extends DialogFragment {
         public Builder setDialogListener(int viewId, DialogListener listener) {
             LogManager.i(TAG,"setOnClickListener viewId : " + viewId + ",listener :" + listener);
             mBuilderParams.mEventMap.get(LISTENER).put(viewId,listener);
-            mBuilderParams.mHelper.setOnClickListener(viewId,listener);
+            mBuilderParams.mHolder.setOnClickListener(viewId,listener);
             return this;
         }
 
@@ -332,7 +332,7 @@ public class BaseDialog extends DialogFragment {
      * @return
      */
     public <T extends View> T getView(int viewId){
-        return mParams.mHelper.getView(viewId);
+        return mParams.mHolder.getView(viewId);
     }
 
     /**

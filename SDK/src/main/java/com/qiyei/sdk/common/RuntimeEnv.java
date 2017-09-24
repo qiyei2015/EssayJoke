@@ -1,10 +1,13 @@
 package com.qiyei.sdk.common;
 
+import android.Manifest;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -43,6 +46,8 @@ public final class RuntimeEnv {
      */
     public static String appName = "";
 
+    private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
+
     /**
      * 初始化
      * @param context
@@ -58,6 +63,7 @@ public final class RuntimeEnv {
         if (appContext != null){
             return;
         }
+
         //初始化appContext
         appContext = context.getApplicationContext();
         //初始化包名
@@ -217,5 +223,18 @@ public final class RuntimeEnv {
             return stacks[level +1];
         }
         return null;
+    }
+
+    /**
+     * 申请必要的权限
+     */
+    public static void requestPermissions(Context context){
+        //如果没有权限
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(context, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(context,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
+        }
     }
 }

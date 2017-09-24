@@ -10,7 +10,7 @@ JNIEXPORT void JNICALL
                                                               jstring newApkPath_, jstring patchPath_){
 // 1.封装参数
         int argc = 4;
-        char * argv[4];
+        const char * argv[4];
         // 1.1 转换  jstring -> char*
         char* old_pak_cstr = (char*)(env)->GetStringUTFChars(oldApkPath_,NULL);
         char* new_apk_cstr = (char*)(env)->GetStringUTFChars(newApkPath_,NULL);

@@ -17,9 +17,9 @@ import java.lang.ref.WeakReference;
  * Version: 1.0
  * Description: Dialog辅助类
  */
-public class DialogHelper {
+public class DialogViewHolder {
 
-    private static final String TAG = DialogHelper.class.getSimpleName();
+    private static final String TAG = DialogViewHolder.class.getSimpleName();
 
     /**
      * 所引用的dialog
@@ -36,7 +36,7 @@ public class DialogHelper {
      */
     private SparseArray<WeakReference<View>> mViews;
 
-    public DialogHelper(BaseDialog dialog){
+    public DialogViewHolder(BaseDialog dialog){
         mViews = new SparseArray<>();
         mDialog = dialog;
     }

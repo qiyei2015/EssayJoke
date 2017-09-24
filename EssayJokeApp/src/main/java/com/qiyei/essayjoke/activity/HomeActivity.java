@@ -81,6 +81,7 @@ public class HomeActivity extends BaseSkinActivity {
                     }
                 })
                 .build();
+
         SystemStatusBarUtil.statusBarTintColor(this,getResources().getColor(R.color.title_bar_bg_day));
         //SystemStatusBarUtil.setNavigationBarStatusBarTranslucent(this,getSupportActionBar());
         //initViewPager();

@@ -20,7 +20,7 @@ public class DialogParams implements Serializable{
     /**
      * Dialog辅助类
      */
-    public DialogHelper mHelper;
+    public DialogViewHolder mHolder;
 
     /**
      * 显示DialogFragment需要的FragmentManager
@@ -64,7 +64,7 @@ public class DialogParams implements Serializable{
     @Override
     public String toString() {
         return "DialogParams{" +
-                "mHelper=" + mHelper +
+                "mHolder=" + mHolder +
                 ", mFragmentManager=" + mFragmentManager +
                 ", mWidth=" + mWidth +
                 ", mAnimations=" + mAnimations +
