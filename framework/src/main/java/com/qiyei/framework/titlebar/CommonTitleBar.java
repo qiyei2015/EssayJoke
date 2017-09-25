@@ -3,7 +3,7 @@ package com.qiyei.framework.titlebar;
 import android.content.Context;
 import android.view.View;
 
-import com.qiyei.sdk.titlebar.AbsTitleBar;
+import com.qiyei.sdk.titlebar.BaseTitleBar;
 import com.qiyei.framework.R;
 
 
@@ -13,9 +13,9 @@ import com.qiyei.framework.R;
  * Version: 1.0
  * Description:
  */
-public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
+public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
 
-    public CommonTitleBar(CommonTitleParams params) {
+    protected CommonTitleBar(CommonTitleParams params) {
         super(params);
     }
 
@@ -29,7 +29,7 @@ public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
     }
 
     @Override
-    public void applyView() {
+    public void bindView() {
         setText(R.id.title,mParams.mTitle);
         setText(R.id.right_text,mParams.mRightText);
 
@@ -60,7 +60,7 @@ public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
     /**
      * Builder模式设置各种效果
      */
-    public static class Builder extends AbsTitleBar.Builder{
+    public static class Builder extends BaseTitleBar.Builder{
         /**
          * 所有的效果参数
          */
@@ -110,6 +110,5 @@ public class CommonTitleBar extends AbsTitleBar<CommonTitleParams> {
             return new CommonTitleBar(mBarParams);
         }
     }
-
 
 }

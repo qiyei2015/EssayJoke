@@ -26,7 +26,9 @@ import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.ioc.OnClick;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.permission.PermissionFail;
 import com.qiyei.sdk.permission.PermissionManager;
+import com.qiyei.sdk.permission.PermissionSuccess;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -111,7 +113,9 @@ public class MainActivity extends BaseSkinActivity {
         //如果没有权限
 
         String[] permission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
-                ,Manifest.permission.VIBRATE,Manifest.permission.CAMERA};
+                ,Manifest.permission.VIBRATE,Manifest.permission.CAMERA,Manifest.permission.SEND_SMS};
+
+
         PermissionManager.requestPermission(this,MY_PERMISSIONS_REQUEST_WRITE_STORE,permission);
 
 //        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
@@ -136,18 +140,20 @@ public class MainActivity extends BaseSkinActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_STORE){
-            LogManager.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
-
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-                initDataBase();
-            }else {
-                ToastUtil.showLongToast("你拒绝了获取存储卡的权限");
-            }
-            return;
-        }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_STORE){
+//            LogManager.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
+//
+//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+//                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
+//                initDataBase();
+//            }else {
+//                ToastUtil.showLongToast("你拒绝了获取存储卡的权限");
+//            }
+//            return;
+//        }
+        PermissionManager.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+
     }
 
     @OnClick(R.id.btn2)
@@ -286,7 +292,9 @@ public class MainActivity extends BaseSkinActivity {
     /**
      * 初始化数据库
      */
+    @PermissionSuccess(requestCode = MY_PERMISSIONS_REQUEST_WRITE_STORE)
     private void initDataBase(){
+        ToastUtil.showLongToast("申请权限成功");
         IDaoSupport<User> userDao = DaoSupportFactory.getInstance().getDao(User.class);
         List<User> users = new ArrayList<>();
         for (int i = 0;i < 100;i++){
@@ -295,6 +303,10 @@ public class MainActivity extends BaseSkinActivity {
         userDao.insert(users);
     }
 
+    @PermissionFail(requestCode = MY_PERMISSIONS_REQUEST_WRITE_STORE)
+    private void initDataFail(){
+        ToastUtil.showLongToast("申请权限失败");
+    }
 
     private void dynamicProxy(){
         final Control control = new Control();

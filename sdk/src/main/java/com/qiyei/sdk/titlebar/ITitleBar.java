@@ -14,7 +14,7 @@ public interface ITitleBar {
     int bindLayoutId();
 
     /**
-     * 绑定头部的参数，应用View
+     * 绑定头部的参数，绑定View
      */
-    void applyView();
+    void bindView();
 }

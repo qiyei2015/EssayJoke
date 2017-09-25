@@ -10,6 +10,8 @@ import android.Manifest;
  */
 public class PermissionConstant {
 
+    public static final String TAG = "Permission";
+
     /**
      * 存储 组
      */
@@ -54,7 +56,6 @@ public class PermissionConstant {
      * 短彩信 组
      */
     public static final String group_SMS = Manifest.permission_group.SMS;
-
 
 
 }
