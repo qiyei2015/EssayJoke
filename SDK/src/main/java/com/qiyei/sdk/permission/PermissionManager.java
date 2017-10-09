@@ -110,19 +110,18 @@ public class PermissionManager {
      * @param grantResults
      */
     public static void onRequestPermissionsResult(Object object,int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
-
         String[] noApplyPermissions = getNoApplyPermissions(object,permissions);
         if (noApplyPermissions == null){
             LogManager.e(PermissionConstant.TAG,"onRequestPermissionsResult(),noApplyPermissions is null");
             return;
         }
-
+        LogManager.i(PermissionConstant.TAG,"noApplyPermissions size :" + noApplyPermissions.length);
         if (noApplyPermissions.length == 0){
             //无没有申请的权限
             PermissionProcessor.requestPermissionSuccess(object,requestCode);
         }else {
-            //申请权限
-            ActivityCompat.requestPermissions(getActivityFormObject(object),noApplyPermissions,requestCode);
+            //申请权限失败
+            PermissionProcessor.requestPermissionFail(object,requestCode);
         }
     }
 
@@ -187,7 +186,7 @@ public class PermissionManager {
         }else if (object instanceof android.app.Fragment){
             activity = ((android.app.Fragment)object).getActivity();
         }
-        LogManager.i(PermissionConstant.TAG,"getActivityFormObject(),activity is :" + activity);
+//        LogManager.i(PermissionConstant.TAG,"getActivityFormObject(),activity is :" + activity);
         return activity;
     }
 
