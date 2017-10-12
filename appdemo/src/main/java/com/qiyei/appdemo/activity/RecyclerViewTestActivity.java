@@ -11,6 +11,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.TextView;
 
 
+import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.view.xrecycler.XRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.XRecyclerListener;
 import com.qiyei.sdk.view.xrecycler.XRecyclerView;
@@ -124,7 +125,10 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
     }
 
     private void initData(){
-
+        CommonTitleBar titleBar = new CommonTitleBar.Builder(this)
+                .setTitle("recyclerView下拉刷新上拉加载测试")
+                .setRightText("待添加")
+                .build();
         mDatas = new ArrayList<>();
         for (int i = 0;i < 50;i++){
             String s = new String("测试 " + i);
