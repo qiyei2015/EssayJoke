@@ -2,15 +2,11 @@
 buildscript {
     repositories {
         jcenter()
-
-        //添加阿里云的仓库
-        maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/releases"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
-
+        classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.1'
+        classpath 'com.qihoo360.replugin:replugin-plugin-gradle:2.2.1'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }

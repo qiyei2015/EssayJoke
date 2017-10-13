@@ -5,6 +5,7 @@ android {
     buildToolsVersion "26.0.0"
 
     defaultConfig {
+        applicationId "com.qiyei.appdemo"
         minSdkVersion 16
         targetSdkVersion 25
         versionCode 1
@@ -37,6 +38,22 @@ android {
             dirs 'libs' //aar目录
         }
     }
+    //解决多语言未翻译问题
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+// 这个plugin需要放在android配置之后，因为需要读取android中的配置项
+apply plugin: 'replugin-plugin-gradle'
+/***
+ * plugin配置
+ */
+repluginPluginConfig {
+    pluginName = "appdemo"
+    hostApplicationId = "com.qiyei.essayjoke"
+    hostAppLauncherActivity = "com.qiyei.essayjoke.activity.WelcomeActivity"
 }
 
 dependencies {
@@ -46,6 +63,7 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.qihoo360.replugin:replugin-plugin-lib:2.2.1'
     testCompile 'junit:junit:4.12'
     compile project(':Framework')
     compile files('libs/alicloud-android-utils-1.0.3.jar')

@@ -2,13 +2,17 @@ package com.qiyei.essayjoke.activity;
 
 
 
+import android.content.Context;
 import android.os.Bundle;
 
+import android.os.Environment;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.qihoo360.replugin.RePlugin;
+import com.qihoo360.replugin.model.PluginInfo;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.fragment.FindFragment;
 import com.qiyei.essayjoke.fragment.HomeFragment;
@@ -20,6 +24,12 @@ import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.util.SystemStatusBarUtil;
 import com.qiyei.sdk.util.ToastUtil;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * Email: 1273482124@qq.com
@@ -67,6 +77,25 @@ public class HomeActivity extends BaseSkinActivity {
     protected void initData() {
         mContext = this;
         mFragmentHelper = new FragmentHelper(getSupportFragmentManager(),R.id.main_tab_layout);
+        if (!RePlugin.isPluginInstalled("appdemo")){
+
+
+            String pluginApk = "appdemo.apk";
+            String fileName = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + pluginApk;
+            File pluginFile = new File(fileName);
+            //文件不存在就返回
+            if (!pluginFile.exists()){
+                return;
+            }
+            PluginInfo info = null;
+            if (pluginFile.exists()) {
+                info = RePlugin.install(fileName);
+            }
+            if (info != null){
+                ToastUtil.showLongToast("安装 appdemo 成功 " + info.getName());
+            }
+        }
+
     }
 
     @Override
@@ -77,7 +106,12 @@ public class HomeActivity extends BaseSkinActivity {
                 .setRightClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        ToastUtil.showLongToast("请安装测试demo测试");
+//                        ToastUtil.showLongToast("请安装测试demo测试");
+//                        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "appdemo.apk";
+//                        RePlugin.install(path);
+
+                        RePlugin.startActivity(mContext, RePlugin.createIntent("appdemo",
+                                "com.qiyei.appdemo.activity.MainActivity"));
                     }
                 })
                 .build();
@@ -129,6 +163,38 @@ public class HomeActivity extends BaseSkinActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+
+    /**
+     * 从assets目录中复制某文件内容
+     *  @param  fileName assets目录下的Apk源文件路径
+     *  @param  newFileName 复制到/data/data/package_name/files/目录下文件名
+     */
+    private void copyAssetsFileToAppFiles(String fileName, String newFileName) {
+        InputStream is = null;
+        FileOutputStream fos = null;
+        int buffsize = 1024;
+
+        try {
+            is = new FileInputStream(fileName);
+            fos = this.openFileOutput(newFileName, Context.MODE_PRIVATE);
+            int byteCount = 0;
+            byte[] buffer = new byte[buffsize];
+            while((byteCount = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, byteCount);
+            }
+            fos.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

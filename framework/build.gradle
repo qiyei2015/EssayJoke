@@ -25,6 +25,11 @@ android {
             jniLibs.srcDirs = ['libs']  //配置生成jniLibs
         }
     }
+    //解决多语言未翻译问题
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
