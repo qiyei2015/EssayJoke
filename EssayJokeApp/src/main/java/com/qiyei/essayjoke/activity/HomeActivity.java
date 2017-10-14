@@ -90,8 +90,11 @@ public class HomeActivity extends BaseSkinActivity {
             PluginInfo info = null;
             if (pluginFile.exists()) {
                 info = RePlugin.install(fileName);
+
             }
             if (info != null){
+                //预先加载
+                RePlugin.preload(info);
                 ToastUtil.showLongToast("安装 appdemo 成功 " + info.getName());
             }
         }
@@ -106,10 +109,6 @@ public class HomeActivity extends BaseSkinActivity {
                 .setRightClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        ToastUtil.showLongToast("请安装测试demo测试");
-//                        String path = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "appdemo.apk";
-//                        RePlugin.install(path);
-
                         RePlugin.startActivity(mContext, RePlugin.createIntent("appdemo",
                                 "com.qiyei.appdemo.activity.MainActivity"));
                     }
@@ -117,8 +116,6 @@ public class HomeActivity extends BaseSkinActivity {
                 .build();
 
         SystemStatusBarUtil.statusBarTintColor(this,getResources().getColor(R.color.title_bar_bg_day));
-        //SystemStatusBarUtil.setNavigationBarStatusBarTranslucent(this,getSupportActionBar());
-        //initViewPager();
         mHomeButton.setOnClickListener(this);
         mFindButton.setOnClickListener(this);
         mNewButton.setOnClickListener(this);
