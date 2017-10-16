@@ -2,11 +2,6 @@
 buildscript {
     repositories {
         jcenter()
-
-        //添加阿里云的仓库
-        maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/releases"
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.2'
