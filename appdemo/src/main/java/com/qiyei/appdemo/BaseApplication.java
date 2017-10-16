@@ -20,7 +20,7 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
  * Description:
  */
 public class BaseApplication extends Application {
-    private static final String TAG = "Application";
+    private static final String TAG = " Sophix";
 
     private static final String APP_ID = "24598257-1";
     private static final String App_Secret = "7b8ceb0c2596b44787e61a9aaf1ff4d3";
@@ -61,10 +61,6 @@ public class BaseApplication extends Application {
         }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
-
-        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
-        SophixManager.getInstance().queryAndLoadNewPatch();
-
     }
 
     /**
@@ -80,6 +76,8 @@ public class BaseApplication extends Application {
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
                     public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
+
+                        Log.d(TAG,"code:" + code + ",info:" + info);
                         // 补丁加载回调通知
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             // 表明补丁加载成功
@@ -88,6 +86,7 @@ public class BaseApplication extends Application {
                             // 表明新补丁生效需要重启. 开发者可提示用户或者强制重启;
                             // 建议: 用户可以监听进入后台事件, 然后调用killProcessSafely自杀，以此加快应用补丁，详见1.3.2.3
                             Log.d(TAG,"新补丁生效需要重启");
+                            SophixManager.getInstance().killProcessSafely();
                         } else {
                             // 其它错误信息, 查看PatchStatus类说明
                             Log.d(TAG,"补丁加载失败");

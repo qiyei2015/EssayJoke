@@ -77,47 +77,4 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         startActivity(new Intent(this,clazz));
     }
 
-    /**
-     * TODO initialization system status bar , but build version need greater 19
-     */
-    /**
-     * 设置系统状态栏颜色
-     * @param color
-     */
-    protected void initSystemBar(int color) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(this, true);
-        }
-
-        SystemBarTintManager tintManager = new SystemBarTintManager(this);
-
-        tintManager.setStatusBarTintEnabled(true);
-        // 使用颜色资源
-        tintManager.setStatusBarTintResource(color);
-    }
-
-    /**
-     * 设置系统顶部栏和程序主题颜色统一
-     * @param activity 当前活动Activity实例
-     * @param on
-     * void
-     */
-    @TargetApi(19)
-    private void setTranslucentStatus(Activity activity, boolean on) {
-
-        Window win = activity.getWindow();
-
-        WindowManager.LayoutParams winParams = win.getAttributes();
-
-        final int bits = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS;
-
-        if (on) {
-            winParams.flags |= bits;
-        } else {
-            winParams.flags &= ~bits;
-        }
-        win.setAttributes(winParams);
-    }
-
-
 }
