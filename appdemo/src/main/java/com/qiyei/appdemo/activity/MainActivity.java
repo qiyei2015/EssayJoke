@@ -42,6 +42,7 @@ import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.Control;
 import com.qiyei.appdemo.model.IControl;
 import com.qiyei.appdemo.model.User;
+import com.taobao.sophix.SophixManager;
 
 public class MainActivity extends BaseSkinActivity {
 
@@ -220,6 +221,8 @@ public class MainActivity extends BaseSkinActivity {
 
     @OnClick(R.id.btn9)
     private void testBtn9(View view){
+        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
+        SophixManager.getInstance().queryAndLoadNewPatch();
         dynamicProxy();
     }
 

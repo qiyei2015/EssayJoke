@@ -27,7 +27,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btn2"
-                android:text="测试2 对话框测试"/>
+                android:text="测试2 对话框测试"
+                android:background="@color/main_bg_color"/>
 
             <Button
                 android:layout_width="match_parent"
