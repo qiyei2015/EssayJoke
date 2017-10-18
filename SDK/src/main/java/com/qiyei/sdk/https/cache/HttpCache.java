@@ -1,4 +1,4 @@
-package com.qiyei.sdk.http.cache;
+package com.qiyei.sdk.https.cache;
 
 /**
  * Email: 1273482124@qq.com

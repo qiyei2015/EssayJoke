@@ -6,10 +6,10 @@ import android.view.View;
 
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
-import com.qiyei.sdk.http.HttpManager;
-import com.qiyei.sdk.http.base.HttpRequest;
-import com.qiyei.sdk.http.base.INetCallback;
-import com.qiyei.sdk.http.base.RequestMethod;
+import com.qiyei.sdk.https.HttpManager;
+import com.qiyei.sdk.https.base.HttpRequest;
+import com.qiyei.sdk.https.base.INetCallback;
+import com.qiyei.sdk.https.base.RequestMethod;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 

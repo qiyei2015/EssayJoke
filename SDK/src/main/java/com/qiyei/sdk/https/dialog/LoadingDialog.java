@@ -1,4 +1,4 @@
-package com.qiyei.sdk.http.dialog;
+package com.qiyei.sdk.https.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;

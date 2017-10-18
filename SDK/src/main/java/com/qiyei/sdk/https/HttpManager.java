@@ -1,4 +1,4 @@
-package com.qiyei.sdk.http;
+package com.qiyei.sdk.https;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 
-import com.qiyei.sdk.http.base.IHttpCallback;
-import com.qiyei.sdk.http.base.IHttpEngine;
-import com.qiyei.sdk.http.base.HttpRequest;
-import com.qiyei.sdk.http.base.INetCallback;
-import com.qiyei.sdk.http.dialog.LoadingDialog;
+import com.qiyei.sdk.https.base.IHttpCallback;
+import com.qiyei.sdk.https.base.IHttpEngine;
+import com.qiyei.sdk.https.base.HttpRequest;
+import com.qiyei.sdk.https.base.INetCallback;
+import com.qiyei.sdk.https.dialog.LoadingDialog;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.MD5Util;
 

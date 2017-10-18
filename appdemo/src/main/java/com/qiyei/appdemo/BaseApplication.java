@@ -8,6 +8,7 @@ import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
+import com.qiyei.sdk.util.HookUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
@@ -61,6 +62,12 @@ public class BaseApplication extends Application {
         }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
+
+        try {
+            HookUtil.hook();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**

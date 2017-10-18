@@ -1,4 +1,4 @@
-package com.qiyei.sdk.http.base;
+package com.qiyei.sdk.https.base;
 
 
 import java.util.Map;
