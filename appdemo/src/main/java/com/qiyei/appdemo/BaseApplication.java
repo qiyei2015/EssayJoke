@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.qiyei.appdemo.activity.BannerTestActivity;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.log.LogManager;
@@ -64,7 +65,7 @@ public class BaseApplication extends Application {
         SkinManager.getInstance().init(this);
 
         try {
-            HookUtil.hook();
+            HookUtil.hook(this, BannerTestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

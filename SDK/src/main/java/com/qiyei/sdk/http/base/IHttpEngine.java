@@ -1,4 +1,4 @@
-package com.qiyei.sdk.https.base;
+package com.qiyei.sdk.http.base;
 
 /**
  * Email: 1273482124@qq.com
@@ -26,7 +26,5 @@ public interface IHttpEngine {
     //文件下载
 
     //文件下载
-
-
 
 }

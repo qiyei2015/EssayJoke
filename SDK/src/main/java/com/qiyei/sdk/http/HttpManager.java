@@ -1,4 +1,4 @@
-package com.qiyei.sdk.https;
+package com.qiyei.sdk.http;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 
-import com.qiyei.sdk.https.base.IHttpCallback;
-import com.qiyei.sdk.https.base.IHttpEngine;
-import com.qiyei.sdk.https.base.HttpRequest;
-import com.qiyei.sdk.https.base.INetCallback;
-import com.qiyei.sdk.https.dialog.LoadingDialog;
+import com.qiyei.sdk.http.base.IHttpCallback;
+import com.qiyei.sdk.http.base.IHttpEngine;
+import com.qiyei.sdk.http.base.HttpRequest;
+import com.qiyei.sdk.http.base.INetCallback;
+import com.qiyei.sdk.http.dialog.LoadingDialog;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.MD5Util;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  * Version: 1.0
  * Description:
  */
-public class HttpManager {
+public class HttpManager implements IHttpExecutor{
 
     private static final String TAG = "HTTP";
 
@@ -68,6 +68,7 @@ public class HttpManager {
      * @param callback
      * @return
      */
+    @Override
     public <T> String execute(HttpRequest request, final INetCallback<T> callback){
         return execute(null,request,callback);
     }
@@ -79,6 +80,7 @@ public class HttpManager {
      * @param callback
      * @return
      */
+    @Override
     public <T> String execute(FragmentManager fragmentManager,HttpRequest request, final INetCallback<T> callback){
 
         if (request == null){
@@ -183,6 +185,7 @@ public class HttpManager {
      * 取消任务
      * @param taskId
      */
+    @Override
     public void cancel(String taskId){
 
     }

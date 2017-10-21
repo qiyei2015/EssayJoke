@@ -1,9 +1,9 @@
-package com.qiyei.sdk.https.okhttp;
+package com.qiyei.sdk.http.okhttp;
 
-import com.qiyei.sdk.https.base.HttpHelper;
-import com.qiyei.sdk.https.base.IHttpCallback;
-import com.qiyei.sdk.https.base.IHttpEngine;
-import com.qiyei.sdk.https.base.HttpRequest;
+import com.qiyei.sdk.http.base.HttpHelper;
+import com.qiyei.sdk.http.base.IHttpCallback;
+import com.qiyei.sdk.http.base.IHttpEngine;
+import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.log.LogManager;
 
 import java.io.IOException;

@@ -6,10 +6,10 @@ import android.view.View;
 
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
-import com.qiyei.sdk.https.HttpManager;
-import com.qiyei.sdk.https.base.HttpRequest;
-import com.qiyei.sdk.https.base.INetCallback;
-import com.qiyei.sdk.https.base.RequestMethod;
+import com.qiyei.sdk.https.api.HttpManager;
+import com.qiyei.sdk.https.api.listener.IHttpListener;
+import com.qiyei.sdk.https.api.request.HttpGetRequest;
+import com.qiyei.sdk.https.api.request.HttpRequest;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -51,19 +51,33 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-        new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
+//        new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
+//            @Override
+//            public void onSuccess(DiscoverListResult result) {
+//                LogManager.d(TAG,"name --> "+result.getData().getCategories().getName());
+//                //ToastUtil.showLongToast(result.getData().getCategories().getName());
+//            }
+//
+//            @Override
+//            public void onFail(Exception e) {
+//                LogManager.d(TAG,e.getMessage());
+//                ToastUtil.showLongToast(e.getMessage());
+//            }
+//        });
+
+        new HttpManager().execute(getSupportFragmentManager(), buildRequest(), new IHttpListener<DiscoverListResult>() {
+
             @Override
-            public void onSuccess(DiscoverListResult result) {
-                LogManager.d(TAG,"name --> "+result.getData().getCategories().getName());
-                //ToastUtil.showLongToast(result.getData().getCategories().getName());
+            public void onSuccess(DiscoverListResult response) {
+               LogManager.d(TAG,"name --> "+response.getData().getCategories().getName());
             }
 
             @Override
-            public void onFail(Exception e) {
-                LogManager.d(TAG,e.getMessage());
-                ToastUtil.showLongToast(e.getMessage());
+            public void onFailure(Exception exception) {
+                LogManager.d(TAG,exception.getMessage());
             }
         });
+
     }
 
     @Override
@@ -71,7 +85,7 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     }
 
-    private void addCommonParams(Map<String,Object> params){
+    private void addCommonParams(Map<String,String> params){
         params.put("app_name","joke_essay");
         params.put("version_name","5.7.0");
         params.put("ac","wifi");
@@ -87,20 +101,20 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     private HttpRequest buildRequest(){
 
-        HttpRequest request = new HttpRequest();
+        HttpGetRequest request = new HttpGetRequest(null);
 
         request.setUrl("http://is.snssdk.com/2/essay/discovery/v3/");
-        Map<String,Object> params = new HashMap<>();
+        Map<String,String> params = new HashMap<>();
 
         params.put("iid","6152551759");
         params.put("aid","7");
 
         addCommonParams(params);
-
         request.setParams(params);
-        request.setRequestMethod(RequestMethod.GET);
-        request.setUseCache(true);
-
+        request.setCache(true);
         return request;
     }
+
+
+
 }

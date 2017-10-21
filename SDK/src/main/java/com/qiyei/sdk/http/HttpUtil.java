@@ -1,11 +1,11 @@
-package com.qiyei.sdk.https;
+package com.qiyei.sdk.http;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
-import com.qiyei.sdk.https.cache.HttpCache;
+import com.qiyei.sdk.http.cache.HttpCache;
 import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.ParameterizedType;
