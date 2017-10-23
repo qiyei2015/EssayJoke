@@ -1,6 +1,24 @@
 package com.qiyei.sdk.https.server.okhttp;
 
+import android.text.TextUtils;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.util.concurrent.TimeUnit;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -10,10 +28,130 @@ import okhttp3.OkHttpClient;
  */
 public class OkHttpFactory {
 
+    /**
+     * 超时时间
+     */
+    private static final int TIMEOUT = 30;
 
-    public static OkHttpClient createOkHttpClient(){
+    /**
+     * SSL上下文
+     */
+    private static SSLContext sslContext;
 
-        return new OkHttpClient();
+
+    static {
+//        sslContext = SSLContext.getInstance("SSL");
+//        sslContext.init(null, trustAllCerts,
+//                new java.security.SecureRandom());
     }
 
+    /**
+     * 加密证书
+     */
+    private static TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(
+                X509Certificate[] chain,
+                String authType) throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(
+                X509Certificate[] chain,
+                String authType) throws CertificateException {
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            X509Certificate[] x509Certificates = new X509Certificate[0];
+            return x509Certificates;
+        }
+    }};
+
+    /**
+     * 加密处理器
+     */
+    private static X509TrustManager mX509TrustManager = new X509TrustManager() {
+        @Override
+        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+        }
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return new X509Certificate[0];
+        }
+    };
+
+    /**
+     * 拦截器
+     */
+    private static class MyInterceptor implements Interceptor{
+
+        @Override
+        public Response intercept(Chain chain) throws IOException {
+            long id = System.currentTimeMillis();
+            Request original = chain.request();
+            Request.Builder requestBuilder = original.newBuilder();
+
+//            for (String key : headers.keySet()) {
+//                requestBuilder.addHeader(key, headers.get(key));
+//            }
+//            String ip = DnsManager.getInstance().findIpByHost(original.url().host());
+//            if (!TextUtils.isEmpty(ip)) {
+//                requestBuilder.addHeader("host", original.url().host());
+//                requestBuilder.url(original.url().toString().replace(original.url().host(), ip));
+//            }
+//
+            Request request = requestBuilder.build();
+//            if (request.method().toLowerCase().contains("get")) {
+//                log(id, ">> method=" + request.method() + " url=" + request.url());
+//            } else {
+//                RequestBody rb = request.body();
+//                if (rb != null) {
+//                    okio.Buffer buffer = new okio.Buffer();
+//                    rb.writeTo(buffer);
+//                    log(id, ">> method=" + request.method() + " url=" + request.url() + " \nbody=" + buffer.readUtf8());
+//                    buffer.clear();
+//                } else {
+//                    log(id, ">> method=" + request.method() + " url=" + request.url());
+//                }
+//            }
+            okhttp3.Response response = chain.proceed(request);
+            String content = response.body().string();
+//            log(id, (System.currentTimeMillis() - id) + "ms<< " + content);
+            okhttp3.MediaType mediaType = response.body().contentType();
+            return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
+        }
+    }
+
+
+
+    public static OkHttpClient createOkHttpClient(){
+        try {
+            sslContext = SSLContext.getDefault();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(new MyInterceptor())
+                .hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                })
+                .sslSocketFactory(sslContext.getSocketFactory(),mX509TrustManager)
+                .retryOnConnectionFailure(false)
+                .build();
+        return okHttpClient;
+    }
 }

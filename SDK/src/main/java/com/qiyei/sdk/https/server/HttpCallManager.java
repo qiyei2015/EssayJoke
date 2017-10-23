@@ -14,15 +14,21 @@ import okhttp3.Call;
 public class HttpCallManager {
 
     /**
-     * 保存Call请求的map
+     * 保存OkhttpCall请求的map
      */
-    private Map<String, Call> mCallMap;
+    private Map<String, Call> mOkHttpCallMap;
+
+    /**
+     * 保存RetrofitCall请求的map
+     */
+    private Map<String, retrofit2.Call> mRetrofitCallMap;
 
     /**
      * 无参构造方法
      */
     private HttpCallManager() {
-        mCallMap = new HashMap<>(16);
+        mOkHttpCallMap = new HashMap<>(16);
+        mRetrofitCallMap = new HashMap<>(16);
     }
 
     /**
@@ -46,7 +52,16 @@ public class HttpCallManager {
      * @param call
      */
     public void addCall(String id,Call call){
-        mCallMap.put(id,call);
+        mOkHttpCallMap.put(id,call);
+    }
+
+    /**
+     * 添加Call
+     * @param id
+     * @param call
+     */
+    public void addCall(String id, retrofit2.Call call){
+        mRetrofitCallMap.put(id,call);
     }
 
     /**
@@ -55,7 +70,16 @@ public class HttpCallManager {
      * @return
      */
     public Call queryCall(String id){
-        return mCallMap.get(id);
+        return mOkHttpCallMap.get(id);
+    }
+
+    /**
+     * 查询Call
+     * @param id
+     * @return
+     */
+    public retrofit2.Call queryCall(String id,String type){
+        return mRetrofitCallMap.get(id);
     }
 
     /**
@@ -63,7 +87,11 @@ public class HttpCallManager {
      * @param id
      */
     public void removeCall(String id){
-        mCallMap.remove(id);
+        if (queryCall(id) != null){
+            mOkHttpCallMap.remove(id);
+            return;
+        }
+        mRetrofitCallMap.remove(id);
     }
 
 }

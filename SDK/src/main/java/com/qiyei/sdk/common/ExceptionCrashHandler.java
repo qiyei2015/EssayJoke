@@ -1,30 +1,26 @@
 package com.qiyei.sdk.common;
 
-import android.content.Context;
+
 
 import com.qiyei.sdk.log.LogManager;
 
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/7.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/5/7.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: 崩溃时异常处理器
  */
 public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
     /**
      * 调试标志
      */
     private final static String TAG = ExceptionCrashHandler.class.getSimpleName();
-    /**
-     * Context
-     */
-    private Context mContext;
 
     /**
      * 默认的线程ExceptionHandler
      */
-    private Thread.UncaughtExceptionHandler mDefaultUncaughtExceptionHandler;
+    private Thread.UncaughtExceptionHandler mDefaultHandler;
 
     private static class SingleHolder{
         private final static ExceptionCrashHandler sHandler = new ExceptionCrashHandler();
@@ -46,14 +42,12 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
 
     /**
      * 初始化，一般在Application中调用
-     * @param context
      */
-    public void init(Context context){
-        mContext = context;
+    public void init(){
         //设置全局的异常处理类为本类
         Thread.currentThread().setUncaughtExceptionHandler(this);
         //获取当前线程默认的ExceptionHandler
-        mDefaultUncaughtExceptionHandler = Thread.currentThread().getDefaultUncaughtExceptionHandler();
+        mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
 
     @Override
@@ -71,8 +65,16 @@ public class ExceptionCrashHandler implements Thread.UncaughtExceptionHandler {
         LogManager.e(TAG,"crashFile --> " + crashFile);
         // 缓存崩溃日志文件
         LogManager.cacheCrashFile(crashFile);
-
+        uploadCrashLog();
         //让系统默认处理器处理
-        mDefaultUncaughtExceptionHandler.uncaughtException(t,e);
+        mDefaultHandler.uncaughtException(t,e);
+    }
+
+    /**
+     * 上传crash日志到服务器
+     */
+    private void uploadCrashLog(){
+
+
     }
 }

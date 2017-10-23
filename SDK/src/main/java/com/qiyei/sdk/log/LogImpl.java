@@ -1,6 +1,5 @@
 package com.qiyei.sdk.log;
 
-import android.os.Environment;
 import android.util.Log;
 
 import com.qiyei.sdk.common.RuntimeEnv;
@@ -14,10 +13,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/8/23.
- * Version: 1.0
- * Description: 日志打印的具体实现
+ * @author Created by qiyei2015 on 2017/8/23.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: 日志打印的具体实现
  */
 public class LogImpl {
 
@@ -68,8 +67,7 @@ public class LogImpl {
     public LogImpl(String fileName){
         mFileName = fileName;
         //先创建文件夹 默认存储在 包名 + log 目录下
-        File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                + File.separator + RuntimeEnv.packageName + File.separator + LogConstant.SUFFIX);
+        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
         if (!dir.exists()){
             dir.mkdirs();
         }
@@ -80,6 +78,7 @@ public class LogImpl {
         try {
             mPrintWriter = new PrintWriter(new FileWriter(file,true),true);
         } catch (IOException e) {
+            Log.i(LogConstant.TAG,"PrintWriter IOException ");
             e.printStackTrace();
         }
     }

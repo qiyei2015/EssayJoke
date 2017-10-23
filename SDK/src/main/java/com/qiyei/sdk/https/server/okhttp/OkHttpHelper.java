@@ -30,7 +30,7 @@ public class OkHttpHelper {
      */
     public static String buildGetRequest(HttpGetRequest request){
 
-        String url = request.getUrl();
+        String url = request.getBaseUrl() + request.getPathUrl();
 
         Map<String,String> params = request.getParams();
 

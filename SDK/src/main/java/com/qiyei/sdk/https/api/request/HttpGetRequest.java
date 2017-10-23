@@ -17,8 +17,8 @@ public class HttpGetRequest<T> extends HttpRequest {
      */
     private Map<String,String> mParams;
 
-    public HttpGetRequest(T content){
-        super(content);
+    public HttpGetRequest(T body){
+        super(body);
         mParams = new HashMap<>();
     }
 

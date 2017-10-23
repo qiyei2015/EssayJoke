@@ -12,9 +12,13 @@ import java.util.Map;
 public class HttpRequest<T> {
 
     /**
-     * 请求的url
+     * 基础url，为了应对微服务有多个基础url
      */
-    protected String mUrl;
+    protected String mBaseUrl;
+    /**
+     * 请求的路径url，完整 mBaseUrl + mPathUrl
+     */
+    protected String mPathUrl;
     /**
      * 请求的Header参数
      */
@@ -22,7 +26,7 @@ public class HttpRequest<T> {
     /**
      * 请求体，外部传入
      */
-    protected T mContent;
+    protected T mBody;
     /**
      * 是否缓存
      */
@@ -30,27 +34,39 @@ public class HttpRequest<T> {
 
     /**
      * Http请求构造函数
-     * @param content
+     * @param body
      */
-    public HttpRequest(T content){
+    public HttpRequest(T body){
         mHeaderMap = new HashMap<>();
         isCache = true;
-        mUrl = "";
-        mContent = content;
+        mPathUrl = "";
+        mBody = body;
     }
 
     /**
-     * @return {@link #mUrl}
+     * @return {@link #mBaseUrl}
      */
-    public String getUrl() {
-        return mUrl;
+    public String getBaseUrl() {
+        return mBaseUrl;
+    }
+    /**
+     * @param baseUrl the {@link #mBaseUrl} to set
+     */
+    public void setBaseUrl(String baseUrl) {
+        mBaseUrl = baseUrl;
+    }
+    /**
+     * @return {@link #mPathUrl}
+     */
+    public String getPathUrl() {
+        return mPathUrl;
     }
 
     /**
-     * @param url the {@link #mUrl} to set
+     * @param pathUrl the {@link #mPathUrl} to set
      */
-    public void setUrl(String url) {
-        mUrl = url;
+    public void setPathUrl(String pathUrl) {
+        mPathUrl = pathUrl;
     }
 
     /**
@@ -68,17 +84,17 @@ public class HttpRequest<T> {
     }
 
     /**
-     * @return {@link #mContent}
+     * @return {@link #mBody}
      */
-    public T getContent() {
-        return mContent;
+    public T getBody() {
+        return mBody;
     }
 
     /**
-     * @param content the {@link #mContent} to set
+     * @param body the {@link #mBody} to set
      */
-    public void setContent(T content) {
-        mContent = content;
+    public void setBody(T body) {
+        mBody = body;
     }
 
     /**

@@ -64,11 +64,11 @@ public class BaseApplication extends Application {
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
 
-        try {
-            HookUtil.hook(this, BannerTestActivity.class);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            HookUtil.hook(this, BannerTestActivity.class);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**

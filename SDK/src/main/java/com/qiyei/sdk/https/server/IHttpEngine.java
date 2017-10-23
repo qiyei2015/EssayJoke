@@ -7,6 +7,7 @@ import com.qiyei.sdk.https.api.request.HttpDownloadRequest;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.api.request.HttpPostRequest;
 import com.qiyei.sdk.https.api.request.HttpUploadRequest;
+import com.qiyei.sdk.https.server.task.HttpGetTask;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -19,39 +20,11 @@ public interface IHttpEngine {
     /**
      * get请求
      * @param fragmentManager
-     * @param request
+     * @param task
      * @param callback
      * @return 返回task id
      */
-    String get(FragmentManager fragmentManager, HttpGetRequest request, IHttpCallback callback);
-
-    /**
-     * post请求
-     * @param fragmentManager
-     * @param request
-     * @param callback
-     * @return 返回task id
-     */
-    String post(FragmentManager fragmentManager, HttpPostRequest request, IHttpCallback callback);
-
-
-    /**
-     * download 下载请求
-     * @param fragmentManager
-     * @param request
-     * @param callback
-     * @return 返回task id
-     */
-    String download(FragmentManager fragmentManager, HttpDownloadRequest request, IHttpTransferCallback callback);
-
-    /**
-     * upload请求
-     * @param fragmentManager
-     * @param request
-     * @param callback
-     * @return 返回task id
-     */
-    String upload(FragmentManager fragmentManager, HttpUploadRequest request, IHttpTransferCallback callback);
+    <T,R> String get(final FragmentManager fragmentManager, HttpGetTask<T> task, IHttpCallback<R> callback);
 
     /**
      * 取消http请求

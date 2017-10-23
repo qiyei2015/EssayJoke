@@ -6,13 +6,13 @@ package com.qiyei.sdk.https.server;
  * @email: 1273482124@qq.com
  * @description: http内部回调
  */
-public interface IHttpCallback{
+public interface IHttpCallback<R>{
 
     /**
      * 成功的回调
      * @param response
      */
-    void onSuccess(String response);
+    void onSuccess(HttpResponse<R> response);
 
     /**
      * 失败的回调

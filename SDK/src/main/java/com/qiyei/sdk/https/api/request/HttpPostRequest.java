@@ -11,8 +11,8 @@ package com.qiyei.sdk.https.api.request;
 public class HttpPostRequest<T> extends HttpRequest {
 
 
-    public HttpPostRequest(T content) {
-        super(content);
+    public HttpPostRequest(T body) {
+        super(body);
     }
 
 }

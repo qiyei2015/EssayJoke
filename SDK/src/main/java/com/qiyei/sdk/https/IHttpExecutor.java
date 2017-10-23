@@ -18,30 +18,33 @@ public interface IHttpExecutor {
      * 执行https请求
      * @param request 请求参数
      * @param listener 回调listener
-     * @param <T> 泛型参数
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
      * @return 该任务的taskId
      */
-    <T> String execute(HttpRequest request, IHttpListener<T> listener);
+    <T,R> String execute(HttpRequest<T> request, IHttpListener<R> listener);
 
     /**
      * 执行https请求
      * @param fragmentManager 显示对话框的fragment
      * @param request 请求参数
      * @param listener 回调listener
-     * @param <T> 泛型参数
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
      * @return 该任务的taskId
      */
-    <T> String execute(FragmentManager fragmentManager, HttpRequest request,IHttpListener<T> listener);
+    <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener);
 
     /**
      * 执行https请求
      * @param fragmentManager 显示对话框的fragment
      * @param request 请求参数
      * @param listener 回调listener
-     * @param <T> 泛型参数
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
      * @return 该任务的taskId
      */
-    <T> String execute(android.app.FragmentManager fragmentManager, HttpRequest request,IHttpListener<T> listener);
+    <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener);
 
     /**
      * 取消网络请求

@@ -29,6 +29,7 @@ import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.permission.PermissionFail;
 import com.qiyei.sdk.permission.PermissionManager;
 import com.qiyei.sdk.permission.PermissionSuccess;
+import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -129,6 +130,9 @@ public class MainActivity extends BaseSkinActivity {
 //
 //        }
 //        fixBug();
+        LogManager.i(TAG,"inner path:" + AndroidUtil.getInnerDataPath());
+        LogManager.i(TAG,"external path:" + AndroidUtil.getExternalDataPath());
+        LogManager.i(TAG,"sdcard path:" + AndroidUtil.getSdCardDataPath());
     }
 
     @Override

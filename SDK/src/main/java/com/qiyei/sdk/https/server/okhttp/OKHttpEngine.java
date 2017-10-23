@@ -5,15 +5,18 @@ import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 
 
+import com.qiyei.sdk.http.HttpUtil;
 import com.qiyei.sdk.https.api.request.HttpDownloadRequest;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.api.request.HttpPostRequest;
 import com.qiyei.sdk.https.api.request.HttpUploadRequest;
 import com.qiyei.sdk.https.base.Https;
 import com.qiyei.sdk.https.server.HttpCallManager;
+import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.IHttpCallback;
 import com.qiyei.sdk.https.server.IHttpEngine;
 import com.qiyei.sdk.https.server.IHttpTransferCallback;
+import com.qiyei.sdk.https.server.task.HttpGetTask;
 import com.qiyei.sdk.log.LogManager;
 
 import java.io.IOException;
@@ -47,10 +50,9 @@ public class OkHttpEngine implements IHttpEngine{
         mHandler = new Handler(Looper.getMainLooper());
     }
 
-
     @Override
-    public String get(final FragmentManager fragmentManager, HttpGetRequest request, final IHttpCallback callback) {
-        String url = OkHttpHelper.buildGetRequest(request);
+    public <T,R> String get(final FragmentManager fragmentManager, HttpGetTask<T> task, final IHttpCallback<R> callback) {
+        String url = OkHttpHelper.buildGetRequest(task.getRequest());
         LogManager.i(Https.TAG,Https.GET + " url --> " + url);
 
         okhttp3.Request.Builder builder = new okhttp3.Request.Builder().url(url);
@@ -79,13 +81,16 @@ public class OkHttpEngine implements IHttpEngine{
                 if (response != null && response.isSuccessful()){
                     result = response.body().string();
                 }
-                final String res = result;
+
+                final R obj = (R) HttpUtil.parseJson(result,callback.getClass());
+                final HttpResponse<R> responseObj = new HttpResponse<R>(null);
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
                         OkHttpHelper.dismissDialog(fragmentManager,taskId);
-                        if (res != null){
-                            callback.onSuccess(res);
+                        if (responseObj != null){
+                            callback.onSuccess(responseObj);
                         }else {
                             callback.onFailure(new Exception("response is null"));
                         }
@@ -95,27 +100,6 @@ public class OkHttpEngine implements IHttpEngine{
         });
 
         return taskId;
-    }
-
-
-    @Override
-    public String post(FragmentManager fragmentManager, HttpPostRequest request, IHttpCallback callback) {
-
-        return null;
-    }
-
-
-
-    @Override
-    public String download(FragmentManager fragmentManager, HttpDownloadRequest request, IHttpTransferCallback callback) {
-
-        return null;
-    }
-
-    @Override
-    public String upload(FragmentManager fragmentManager, HttpUploadRequest request, IHttpTransferCallback callback) {
-
-        return null;
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -31,8 +32,7 @@ public class DaoSupportFactory {
     private DaoSupportFactory(String name){
 
         //数据库放在外部存储下面：/sdcard/EasyJoke/database/        android6.0以后需要动态申请权限
-        File dbDir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                + File.separator + RuntimeEnv.packageName + File.separator + "database");
+        File dbDir = new File(AndroidUtil.getExternalDataPath() + File.separator + "database");
         if (!dbDir.exists()){
             dbDir.mkdirs();
         }

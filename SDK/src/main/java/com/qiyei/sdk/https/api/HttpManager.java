@@ -32,7 +32,7 @@ public class HttpManager implements IHttpExecutor {
      * @return 该任务的taskId
      */
     @Override
-    public <T> String execute(HttpRequest request, IHttpListener<T> listener){
+    public <T,R> String execute(HttpRequest<T> request, IHttpListener<R> listener){
         return mProxy.execute(request,listener);
     }
 
@@ -45,7 +45,7 @@ public class HttpManager implements IHttpExecutor {
      * @return 该任务的taskId
      */
     @Override
-    public <T> String execute(FragmentManager fragmentManager, HttpRequest request,IHttpListener<T> listener){
+    public <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener){
         return mProxy.execute(fragmentManager,request,listener);
     }
 
@@ -58,7 +58,7 @@ public class HttpManager implements IHttpExecutor {
      * @return 该任务的taskId
      */
     @Override
-    public <T> String execute(android.app.FragmentManager fragmentManager, HttpRequest request, IHttpListener<T> listener) {
+    public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener) {
         return mProxy.execute(fragmentManager,request,listener);
     }
 

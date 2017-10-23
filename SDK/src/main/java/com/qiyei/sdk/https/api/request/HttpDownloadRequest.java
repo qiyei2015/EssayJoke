@@ -14,9 +14,9 @@ public class HttpDownloadRequest<T> extends HttpRequest {
     /**
      * Http请求构造函数
      *
-     * @param content
+     * @param body
      */
-    public HttpDownloadRequest(T content) {
-        super(content);
+    public HttpDownloadRequest(T body) {
+        super(body);
     }
 }

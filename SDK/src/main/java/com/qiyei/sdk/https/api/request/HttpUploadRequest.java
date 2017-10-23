@@ -14,9 +14,9 @@ public class HttpUploadRequest<T> extends HttpRequest {
     /**
      * Http请求构造函数
      *
-     * @param content
+     * @param body
      */
-    public HttpUploadRequest(T content) {
-        super(content);
+    public HttpUploadRequest(T body) {
+        super(body);
     }
 }

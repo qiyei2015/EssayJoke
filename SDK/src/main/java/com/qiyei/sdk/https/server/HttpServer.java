@@ -12,6 +12,8 @@ import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.api.request.HttpRequest;
 import com.qiyei.sdk.https.base.Https;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
+import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
+import com.qiyei.sdk.https.server.task.HttpGetTask;
 import com.qiyei.sdk.log.LogManager;
 
 /**
@@ -45,7 +47,7 @@ public class HttpServer implements IHttpExecutor{
      * 静态内部类
      */
     private static class SingleHolder{
-        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new OkHttpEngine());
+        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new RetrofitEngine());
     }
 
     /**
@@ -65,20 +67,31 @@ public class HttpServer implements IHttpExecutor{
     }
 
     @Override
-    public <T> String execute(HttpRequest request, IHttpListener<T> listener) {
+    public <T,R> String execute(HttpRequest<T> request, IHttpListener<R> listener) {
         return null;
     }
 
     @Override
-    public <T> String execute(final FragmentManager fragmentManager, HttpRequest request, final IHttpListener<T> listener) {
+    public <T,R> String execute(final FragmentManager fragmentManager, HttpRequest<T> request, final IHttpListener<R> listener) {
         String taskId = null;
         if (request instanceof HttpGetRequest){
-            taskId= mEngine.get(fragmentManager,(HttpGetRequest) request, new IHttpCallback() {
+
+            HttpGetTask<T> getTask = new HttpGetTask<>((HttpGetRequest<T>) request);
+            taskId = getTask.getTaskId();
+
+
+            mEngine.get(fragmentManager, getTask, new IHttpCallback<R>() {
+
                 @Override
-                public void onSuccess(String response) {
+                public void onSuccess(HttpResponse<R> response) {
                     LogManager.i(Https.TAG,"response:" + response);
-                    final T obj = (T) HttpUtil.parseJson(response,listener.getClass());
-                    listener.onSuccess(obj);
+//
+
+                    if (HttpResponse.isOK(response)){
+                        listener.onSuccess(response.getContent());
+                    }else {
+                        listener.onFailure(new Exception("is not ok"));
+                    }
                 }
 
                 @Override
@@ -87,13 +100,29 @@ public class HttpServer implements IHttpExecutor{
                     listener.onFailure(exception);
                 }
             });
+
+
+//            mEngine.get(fragmentManager,getTask, new IHttpCallback() {
+//                @Override
+//                public void onSuccess(String response) {
+//                    LogManager.i(Https.TAG,"response:" + response);
+//                    final T obj = (T) HttpUtil.parseJson(response,listener.getClass());
+//                    listener.onSuccess(obj);
+//                }
+//
+//                @Override
+//                public void onFailure(Exception exception) {
+//                    LogManager.i(Https.TAG,"exception:" + exception.toString());
+//                    listener.onFailure(exception);
+//                }
+//            });
         }
 
         return taskId;
     }
 
     @Override
-    public <T> String execute(android.app.FragmentManager fragmentManager, HttpRequest request, IHttpListener<T> listener) {
+    public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener) {
         return null;
     }
 

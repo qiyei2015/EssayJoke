@@ -102,8 +102,9 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     private HttpRequest buildRequest(){
 
         HttpGetRequest request = new HttpGetRequest(null);
+        request.setBaseUrl("http://is.snssdk.com/2/essay/");
 
-        request.setUrl("http://is.snssdk.com/2/essay/discovery/v3/");
+        request.setPathUrl("discovery/v3/");
         Map<String,String> params = new HashMap<>();
 
         params.put("iid","6152551759");
