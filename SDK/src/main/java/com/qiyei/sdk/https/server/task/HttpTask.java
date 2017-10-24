@@ -1,4 +1,6 @@
 package com.qiyei.sdk.https.server.task;
+import com.qiyei.sdk.https.api.listener.IHttpListener;
+
 import java.util.UUID;
 
 /**
@@ -18,6 +20,19 @@ public abstract class HttpTask {
     protected String mTag;
 
     /**
+     * 请求回调
+     */
+    protected IHttpListener mListener;
+
+    /**
+     * 构造器
+     * @param listener
+     */
+    public HttpTask(IHttpListener listener) {
+        mListener = listener;
+    }
+
+    /**
      * 生成taskId
      */
     protected void init(){
@@ -30,4 +45,12 @@ public abstract class HttpTask {
     public String getTaskId() {
         return mTaskId;
     }
+
+    /**
+     * @return {@link #mListener}
+     */
+    public IHttpListener getListener() {
+        return mListener;
+    }
+
 }

@@ -14,6 +14,7 @@ import com.qiyei.sdk.https.server.IHttpEngine;
 import com.qiyei.sdk.https.server.IHttpTransferCallback;
 import com.qiyei.sdk.https.server.okhttp.OkHttpHelper;
 import com.qiyei.sdk.https.server.task.HttpGetTask;
+import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -40,14 +41,12 @@ public class RetrofitEngine implements IHttpEngine {
     @Override
     public <T,R> String get(final FragmentManager fragmentManager, final HttpGetTask<T> task, final IHttpCallback<R> callback) {
 
-        Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
-
-        IRetrofitService service = retrofit.create(IRetrofitService<T,R>.class);
 
         //进行参数的注入
-        setPath(null,task.getRequest().getPathUrl());
+        //setPath(null,task.getRequest().getPathUrl());
 
-        Call call = service.createGetCall();
+        // TODO: 2017/10/24 这里建议通过反射构造Call请求 ，task.request中含有ApiService的class就可以了，通过pathUrl来调用方法
+        Call call = task.getRequest().getCall();
 
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
 
@@ -57,6 +56,7 @@ public class RetrofitEngine implements IHttpEngine {
             @Override
             public void onResponse(Call<R> call, Response<R> response) {
                 OkHttpHelper.dismissDialog(fragmentManager,task.getTaskId());
+                LogManager.i(Https.TAG,"Retrofit --> " + response.body().toString());
                 HttpResponse<R> obj = new HttpResponse<>(response.body());
                 callback.onSuccess(obj);
             }

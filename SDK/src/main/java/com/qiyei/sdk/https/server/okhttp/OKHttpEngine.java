@@ -5,17 +5,14 @@ import android.os.Looper;
 import android.support.v4.app.FragmentManager;
 
 
-import com.qiyei.sdk.http.HttpUtil;
-import com.qiyei.sdk.https.api.request.HttpDownloadRequest;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.api.request.HttpPostRequest;
-import com.qiyei.sdk.https.api.request.HttpUploadRequest;
+
+
 import com.qiyei.sdk.https.base.Https;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
+import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.https.server.IHttpCallback;
 import com.qiyei.sdk.https.server.IHttpEngine;
-import com.qiyei.sdk.https.server.IHttpTransferCallback;
 import com.qiyei.sdk.https.server.task.HttpGetTask;
 import com.qiyei.sdk.log.LogManager;
 
@@ -51,7 +48,7 @@ public class OkHttpEngine implements IHttpEngine{
     }
 
     @Override
-    public <T,R> String get(final FragmentManager fragmentManager, HttpGetTask<T> task, final IHttpCallback<R> callback) {
+    public <T,R> String get(final FragmentManager fragmentManager, final HttpGetTask<T> task, final IHttpCallback<R> callback) {
         String url = OkHttpHelper.buildGetRequest(task.getRequest());
         LogManager.i(Https.TAG,Https.GET + " url --> " + url);
 
@@ -81,9 +78,9 @@ public class OkHttpEngine implements IHttpEngine{
                 if (response != null && response.isSuccessful()){
                     result = response.body().string();
                 }
-
-                final R obj = (R) HttpUtil.parseJson(result,callback.getClass());
-                final HttpResponse<R> responseObj = new HttpResponse<R>(null);
+                LogManager.i(Https.TAG,"OkHttp --> " + result);
+                final R obj = (R) HttpUtil.parseJson(result,task.getListener().getClass(),true);
+                final HttpResponse<R> responseObj = new HttpResponse<R>(obj);
 
                 mHandler.post(new Runnable() {
                     @Override

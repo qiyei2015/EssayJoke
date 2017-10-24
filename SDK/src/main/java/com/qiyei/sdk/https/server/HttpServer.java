@@ -76,7 +76,7 @@ public class HttpServer implements IHttpExecutor{
         String taskId = null;
         if (request instanceof HttpGetRequest){
 
-            HttpGetTask<T> getTask = new HttpGetTask<>((HttpGetRequest<T>) request);
+            HttpGetTask<T> getTask = new HttpGetTask<>((HttpGetRequest<T>) request,listener);
             taskId = getTask.getTaskId();
 
 
@@ -86,7 +86,6 @@ public class HttpServer implements IHttpExecutor{
                 public void onSuccess(HttpResponse<R> response) {
                     LogManager.i(Https.TAG,"response:" + response);
 //
-
                     if (HttpResponse.isOK(response)){
                         listener.onSuccess(response.getContent());
                     }else {

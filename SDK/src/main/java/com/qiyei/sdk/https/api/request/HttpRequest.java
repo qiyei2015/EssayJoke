@@ -3,6 +3,8 @@ package com.qiyei.sdk.https.api.request;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+
 /**
  * @author Created by qiyei2015 on 2017/10/21.
  * @version: 1.0
@@ -31,6 +33,8 @@ public class HttpRequest<T> {
      * 是否缓存
      */
     protected boolean isCache;
+
+    protected Call mCall;
 
     /**
      * Http请求构造函数
@@ -109,5 +113,19 @@ public class HttpRequest<T> {
      */
     public void setCache(boolean cache) {
         isCache = cache;
+    }
+
+    /**
+     * @return {@link #mCall}
+     */
+    public Call getCall() {
+        return mCall;
+    }
+
+    /**
+     * @param call the {@link #mCall} to set
+     */
+    public void setCall(Call call) {
+        mCall = call;
     }
 }

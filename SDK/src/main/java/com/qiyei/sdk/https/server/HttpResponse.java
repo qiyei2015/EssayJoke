@@ -67,10 +67,12 @@ public class HttpResponse<R> {
      * @return
      */
     public static <R> boolean isOK(HttpResponse<R> response){
-        if (response != null && response.getContent() != null){
-            return true;
-        }
-        return false;
+        // TODO: 2017/10/24 后面要改
+//        if (response != null && response.getContent() != null){
+//            return true;
+//        }
+//        return false;
+        return true;
     }
 
 }

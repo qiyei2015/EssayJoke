@@ -4,12 +4,15 @@ package com.qiyei.appdemo.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.qiyei.appdemo.net.RetrofitApiService;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.https.api.HttpManager;
 import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.api.request.HttpRequest;
+import com.qiyei.sdk.https.server.retrofit.RetrofitFactory;
+import com.qiyei.sdk.https.server.task.HttpGetTask;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -18,6 +21,9 @@ import java.util.Map;
 
 import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.DiscoverListResult;
+
+import retrofit2.Call;
+import retrofit2.Retrofit;
 
 public class EasyJokeMainActivity extends BaseSkinActivity {
 
@@ -65,7 +71,7 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 //            }
 //        });
 
-        new HttpManager().execute(getSupportFragmentManager(), buildRequest(), new IHttpListener<DiscoverListResult>() {
+        new HttpManager().execute(getSupportFragmentManager(), getRetrofitRequest(), new IHttpListener<DiscoverListResult>() {
 
             @Override
             public void onSuccess(DiscoverListResult response) {
@@ -77,7 +83,6 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
                 LogManager.d(TAG,exception.getMessage());
             }
         });
-
     }
 
     @Override
@@ -99,6 +104,7 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     }
 
 
+
     private HttpRequest buildRequest(){
 
         HttpGetRequest request = new HttpGetRequest(null);
@@ -116,6 +122,17 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
         return request;
     }
 
-
+    /**
+     * retrofit请求
+     * @return
+     */
+    private HttpGetRequest getRetrofitRequest(){
+        HttpGetRequest request = new HttpGetRequest(null);
+        request.setBaseUrl("http://is.snssdk.com/2/essay/");
+        request.setPathUrl("discovery/v3/");
+        Retrofit retrofit = RetrofitFactory.createRetrofit(request.getBaseUrl());
+        request.setCall(retrofit.create(RetrofitApiService.class).getDiscoverList());
+        return request;
+    }
 
 }

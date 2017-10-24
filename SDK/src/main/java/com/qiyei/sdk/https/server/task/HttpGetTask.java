@@ -2,6 +2,7 @@ package com.qiyei.sdk.https.server.task;
 
 import android.text.TextUtils;
 
+import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.base.Https;
 
@@ -21,7 +22,8 @@ public class HttpGetTask<T> extends HttpTask{
      * 构造方法
      * @param request http请求
      */
-    public HttpGetTask(HttpGetRequest<T> request) {
+    public HttpGetTask(HttpGetRequest<T> request, IHttpListener listener) {
+        super(listener);
         mTag = Https.GET;
         mRequest = request;
         //baseUrl不能为null

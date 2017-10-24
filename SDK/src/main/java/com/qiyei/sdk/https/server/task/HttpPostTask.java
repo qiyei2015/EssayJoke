@@ -1,5 +1,6 @@
 package com.qiyei.sdk.https.server.task;
 
+import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpPostRequest;
 import com.qiyei.sdk.https.base.Https;
 
@@ -20,7 +21,8 @@ public class HttpPostTask<T> extends HttpTask {
      * 构造方法
      * @param request
      */
-    public HttpPostTask(HttpPostRequest<T> request) {
+    public HttpPostTask(HttpPostRequest<T> request, IHttpListener listener) {
+        super(listener);
         mTag = Https.POST;
         mRequest = request;
         init();
