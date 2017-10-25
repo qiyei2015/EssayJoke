@@ -2,6 +2,7 @@ package com.qiyei.appdemo.activity;
 
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.qiyei.appdemo.net.DiscoverListReq;
@@ -49,21 +50,7 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     @Override
     protected void initData() {
-//        new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
-//            @Override
-//            public void onSuccess(DiscoverListResult result) {
-//                LogManager.d(TAG,"name --> "+result.getData().getCategories().getName());
-//                //ToastUtil.showLongToast(result.getData().getCategories().getName());
-//            }
-//
-//            @Override
-//            public void onFail(Exception e) {
-//                LogManager.d(TAG,e.getMessage());
-//                ToastUtil.showLongToast(e.getMessage());
-//            }
-//        });
-
-        new HttpManager().execute(getSupportFragmentManager(), buildRequest(), new IHttpListener<DiscoverListResult>() {
+        new HttpManager().execute(getSupportFragmentManager(),buildRequest(), new IHttpListener<DiscoverListResult>() {
 
             @Override
             public void onSuccess(DiscoverListResult response) {
@@ -81,38 +68,6 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
     public void onClick(View v) {
 
     }
-
-//    private void addCommonParams(Map<String,String> params){
-//        params.put("app_name","joke_essay");
-//        params.put("version_name","5.7.0");
-//        params.put("ac","wifi");
-//        params.put("device_id","30036118478");
-//        params.put("device_brand","Xiaomi");
-//        params.put("update_version_code","5701");
-//        params.put("manifest_version_code","570");
-//        params.put("longitude","113.000366");
-//        params.put("latitude","28.171377");
-//        params.put("device_platform","android");
-//    }
-//
-//
-//
-//    private HttpRequest buildRequest(){
-//
-//        HttpGetRequest request = new HttpGetRequest(null);
-//        request.setBaseUrl("http://is.snssdk.com/2/essay/");
-//
-//        request.setPathUrl("discovery/v3/");
-//        Map<String,String> params = new HashMap<>();
-//
-//        params.put("iid","6152551759");
-//        params.put("aid","7");
-//
-//        addCommonParams(params);
-//        request.setParams(params);
-//        request.setCache(true);
-//        return request;
-//    }
 
     /**
      * retrofit请求

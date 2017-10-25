@@ -1,6 +1,9 @@
 package com.qiyei.sdk.https.server.okhttp;
 
-import android.text.TextUtils;
+
+import com.qiyei.sdk.https.base.Http;
+import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.util.TimeUtil;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -107,24 +110,34 @@ public class OkHttpFactory {
 //                requestBuilder.addHeader("host", original.url().host());
 //                requestBuilder.url(original.url().toString().replace(original.url().host(), ip));
 //            }
-//
+
             Request request = requestBuilder.build();
-//            if (request.method().toLowerCase().contains("get")) {
-//                log(id, ">> method=" + request.method() + " url=" + request.url());
-//            } else {
-//                RequestBody rb = request.body();
-//                if (rb != null) {
-//                    okio.Buffer buffer = new okio.Buffer();
-//                    rb.writeTo(buffer);
-//                    log(id, ">> method=" + request.method() + " url=" + request.url() + " \nbody=" + buffer.readUtf8());
-//                    buffer.clear();
-//                } else {
-//                    log(id, ">> method=" + request.method() + " url=" + request.url());
-//                }
-//            }
+            //利用okHttp 的tag来保存数据
+            String taskId = (String) request.tag();
+
+            long requestTime = System.currentTimeMillis();
+
+            if (request.method().toLowerCase().contains("get")) {
+
+                LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
+                        + " id: " + taskId  + " url = " + request.url());
+            } else {
+                RequestBody rb = request.body();
+                if (rb != null) {
+                    okio.Buffer buffer = new okio.Buffer();
+                    rb.writeTo(buffer);
+                    LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
+                            + " id: " + taskId  +  " url = " + request.url() + " \nbody = " + buffer.readUtf8());
+                    buffer.clear();
+                } else {
+                    LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
+                            + " id: " + taskId  + " url = " + request.url());
+                }
+            }
             okhttp3.Response response = chain.proceed(request);
             String content = response.body().string();
-//            log(id, (System.currentTimeMillis() - id) + "ms<< " + content);
+            LogManager.i(Http.TAG, "Response --> time: " + TimeUtil.formatTime(System.currentTimeMillis(),TimeUtil.FORMAT_1)
+                    + "  " + (System.currentTimeMillis() - requestTime) + "  id: "  + taskId + " content: " +  content);
             okhttp3.MediaType mediaType = response.body().contentType();
             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
         }

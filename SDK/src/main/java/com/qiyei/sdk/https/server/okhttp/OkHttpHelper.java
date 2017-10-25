@@ -1,13 +1,9 @@
 package com.qiyei.sdk.https.server.okhttp;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-
 
 import com.google.gson.Gson;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.base.Https;
-import com.qiyei.sdk.https.dialog.LoadingDialog;
+import com.qiyei.sdk.https.base.Http;
 import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.log.LogManager;
 
@@ -60,34 +56,6 @@ public class OkHttpHelper {
 
 
     /**
-     * 显示对话框
-     */
-    public static void showDialog(FragmentManager fragmentManager,String tag){
-        if (fragmentManager == null){
-            return;
-        }
-        LoadingDialog dialog = new LoadingDialog();
-        dialog.setCancelable(false);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(dialog, tag);
-        fragmentTransaction.commitNowAllowingStateLoss();//立即执行
-    }
-
-    /**
-     * 取消对话框显示
-     */
-    public static void dismissDialog(FragmentManager fragmentManager,String tag){
-        if (fragmentManager == null){
-            return;
-        }
-        LoadingDialog dialog = (LoadingDialog) fragmentManager.findFragmentByTag(tag);
-        if(dialog != null){
-            dialog.dismissAllowingStateLoss();
-        }
-    }
-
-
-    /**
      * 将json解析为字符串
      * @param json
      * @param clazz
@@ -101,10 +69,10 @@ public class OkHttpHelper {
         Gson gson = new Gson();
         //获取type类型数组的第0个
         Type genType = clazz.getGenericInterfaces()[0];
-        LogManager.d(Https.TAG,"genType:" + genType.toString());
+        LogManager.d(Http.TAG,"genType:" + genType.toString());
         //判断是不是参数化类型
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        LogManager.d(Https.TAG,"params:" + params.toString());
+        LogManager.d(Http.TAG,"params:" + params.toString());
         T obj = (T) gson.fromJson(json,(Class) params[0]);
         return obj;
     }

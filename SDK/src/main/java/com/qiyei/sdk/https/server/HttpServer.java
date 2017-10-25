@@ -5,12 +5,11 @@ import android.content.Context;
 import android.support.v4.app.FragmentManager;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.http.HttpUtil;
 import com.qiyei.sdk.https.IHttpExecutor;
 import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.api.request.HttpRequest;
-import com.qiyei.sdk.https.base.Https;
+import com.qiyei.sdk.https.base.Http;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
 import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
 import com.qiyei.sdk.https.server.task.HttpGetTask;
@@ -40,14 +39,14 @@ public class HttpServer implements IHttpExecutor{
      */
     private HttpServer(Context context,IHttpEngine engine) {
         mEngine = engine;
-        LogManager.i(Https.TAG,"HttpServer created !");
+        LogManager.i(Http.TAG,"HttpServer created !");
     }
 
     /**
      * 静态内部类
      */
     private static class SingleHolder{
-        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new RetrofitEngine());
+        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new OkHttpEngine());
     }
 
     /**
@@ -68,7 +67,7 @@ public class HttpServer implements IHttpExecutor{
 
     @Override
     public <T,R> String execute(HttpRequest<T> request, IHttpListener<R> listener) {
-        return null;
+        return execute((FragmentManager) null,request,listener);
     }
 
     @Override
@@ -84,7 +83,7 @@ public class HttpServer implements IHttpExecutor{
 
                 @Override
                 public void onSuccess(HttpResponse<R> response) {
-                    LogManager.i(Https.TAG,"response:" + response);
+                    LogManager.i(Http.TAG,"response:" + response);
 //
                     if (HttpResponse.isOK(response)){
                         listener.onSuccess(response.getContent());
@@ -95,7 +94,7 @@ public class HttpServer implements IHttpExecutor{
 
                 @Override
                 public void onFailure(Exception exception) {
-                    LogManager.i(Https.TAG,"exception:" + exception.toString());
+                    LogManager.i(Http.TAG,"exception:" + exception.toString());
                     listener.onFailure(exception);
                 }
             });

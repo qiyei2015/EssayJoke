@@ -12,7 +12,7 @@ import retrofit2.Call;
  * @description: https请求
  */
 public class HttpRequest<T> {
-
+    // TODO: 2017/10/25  后续评估采用Builder模式来创建Request
     /**
      * 基础url，为了应对微服务有多个基础url
      */

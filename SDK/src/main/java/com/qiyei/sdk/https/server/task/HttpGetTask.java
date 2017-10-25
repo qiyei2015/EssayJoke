@@ -4,7 +4,7 @@ import android.text.TextUtils;
 
 import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.base.Https;
+import com.qiyei.sdk.https.base.Http;
 
 /**
  * @author Created by qiyei2015 on 2017/10/23.
@@ -23,19 +23,14 @@ public class HttpGetTask<T> extends HttpTask{
      * @param request http请求
      */
     public HttpGetTask(HttpGetRequest<T> request, IHttpListener listener) {
-        super(listener);
-        mTag = Https.GET;
+        super(Http.GET,listener);
         mRequest = request;
-        //baseUrl不能为null
-        if (TextUtils.isEmpty(mRequest.getBaseUrl())){
-            throw new NullPointerException(" the mBaseUrl of request is null");
-        }
-        init();
     }
 
     /**
      * @return {@link #mRequest}
      */
+    @Override
     public HttpGetRequest<T> getRequest() {
         return mRequest;
     }

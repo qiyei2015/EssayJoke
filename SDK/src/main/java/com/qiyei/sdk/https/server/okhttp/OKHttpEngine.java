@@ -7,7 +7,8 @@ import android.support.v4.app.FragmentManager;
 
 
 
-import com.qiyei.sdk.https.base.Https;
+import com.qiyei.sdk.https.base.Http;
+import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -50,15 +51,14 @@ public class OkHttpEngine implements IHttpEngine{
     @Override
     public <T,R> String get(final FragmentManager fragmentManager, final HttpGetTask<T> task, final IHttpCallback<R> callback) {
         String url = OkHttpHelper.buildGetRequest(task.getRequest());
-        LogManager.i(Https.TAG,Https.GET + " url --> " + url);
+        LogManager.i(Http.TAG, Http.GET + " url --> " + url);
 
-        okhttp3.Request.Builder builder = new okhttp3.Request.Builder().url(url);
+        okhttp3.Request.Builder builder = new okhttp3.Request.Builder().url(url).tag(task.getTaskId());
         Call call = mClient.newCall(builder.build());
-        final String taskId = Https.GET + "_" + UUID.randomUUID().toString();
 
-        HttpCallManager.getInstance().addCall(taskId,call);
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
 
-        OkHttpHelper.showDialog(fragmentManager,taskId);
+        LoadingManager.showDialog(fragmentManager,task.getTaskId());
 
         call.enqueue(new Callback() {
             @Override
@@ -66,7 +66,7 @@ public class OkHttpEngine implements IHttpEngine{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        OkHttpHelper.dismissDialog(fragmentManager,taskId);
+                        LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
                         callback.onFailure(e);
                     }
                 });
@@ -78,14 +78,14 @@ public class OkHttpEngine implements IHttpEngine{
                 if (response != null && response.isSuccessful()){
                     result = response.body().string();
                 }
-                LogManager.i(Https.TAG,"OkHttp --> " + result);
+                LogManager.i(Http.TAG,"OkHttp --> " + result);
                 final R obj = (R) HttpUtil.parseJson(result,task.getListener().getClass(),true);
                 final HttpResponse<R> responseObj = new HttpResponse<R>(obj);
 
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        OkHttpHelper.dismissDialog(fragmentManager,taskId);
+                        LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
                         if (responseObj != null){
                             callback.onSuccess(responseObj);
                         }else {
@@ -96,13 +96,13 @@ public class OkHttpEngine implements IHttpEngine{
             }
         });
 
-        return taskId;
+        return task.getTaskId();
     }
 
     @Override
     public void cancelHttpCall(String taskId) {
         Call call = HttpCallManager.getInstance().queryCall(taskId);
-        if (call != null){
+        if (call != null && !call.isCanceled()){
             call.cancel();
         }
     }

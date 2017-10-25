@@ -6,7 +6,7 @@ package com.qiyei.sdk.https.base;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class Https {
+public class Http {
     /**
      * 调试标志
      */

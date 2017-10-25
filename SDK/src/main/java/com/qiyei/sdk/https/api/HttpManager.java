@@ -18,8 +18,14 @@ import com.qiyei.sdk.https.server.HttpServerProxy;
  */
 public class HttpManager implements IHttpExecutor {
 
+    /**
+     * HttpServer 服务代理
+     */
     private HttpServerProxy mProxy;
 
+    /**
+     * 构造方法
+     */
     public HttpManager(){
         mProxy = new HttpServerProxy();
     }
