@@ -34,7 +34,10 @@ public class HttpRequest<T> {
      */
     protected boolean isCache;
 
-    protected Call mCall;
+    /**
+     * retrofit等使用的接口类
+     */
+    protected Class<?> mApiClazz;
 
     /**
      * Http请求构造函数
@@ -53,6 +56,7 @@ public class HttpRequest<T> {
     public String getBaseUrl() {
         return mBaseUrl;
     }
+
     /**
      * @param baseUrl the {@link #mBaseUrl} to set
      */
@@ -116,16 +120,16 @@ public class HttpRequest<T> {
     }
 
     /**
-     * @return {@link #mCall}
+     * @return {@link #mApiClazz}
      */
-    public Call getCall() {
-        return mCall;
+    public Class<?> getApiClazz() {
+        return mApiClazz;
     }
 
     /**
-     * @param call the {@link #mCall} to set
+     * @param apiClazz the {@link #mApiClazz} to set
      */
-    public void setCall(Call call) {
-        mCall = call;
+    public void setApiClazz(Class<?> apiClazz) {
+        mApiClazz = apiClazz;
     }
 }

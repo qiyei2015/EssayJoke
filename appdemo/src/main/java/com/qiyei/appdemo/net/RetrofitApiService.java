@@ -2,9 +2,12 @@ package com.qiyei.appdemo.net;
 
 import com.qiyei.appdemo.model.DiscoverListResult;
 
+import java.util.Map;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.QueryMap;
 
 /**
  * @author Created by qiyei2015 on 2017/10/24.
@@ -14,8 +17,14 @@ import retrofit2.http.Headers;
  */
 public interface RetrofitApiService {
 
+    // TODO: 2017/10/25 后期可以考虑其他的写法形式 
+    /**
+     * 获取发现列表
+     * @param params get请求参数 建议都按照这样写，方便参数传递
+     * @return
+     */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
-    @GET("discovery/v3/?version_name=5.7.0&device_platform=android&iid=6152551759&manifest_version_code=570&device_id=30036118478&longitude=113.000366&latitude=28.171377&device_brand=Xiaomi&ac=wifi&update_version_code=5701&app_name=joke_essay&aid=7")
-    Call<DiscoverListResult> getDiscoverList();
+    @GET("discovery/v3/")
+    Call<DiscoverListResult> getDiscoverList(@QueryMap Map<String, String> params);
 
 }

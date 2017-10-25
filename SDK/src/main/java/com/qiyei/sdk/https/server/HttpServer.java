@@ -99,22 +99,6 @@ public class HttpServer implements IHttpExecutor{
                     listener.onFailure(exception);
                 }
             });
-
-
-//            mEngine.get(fragmentManager,getTask, new IHttpCallback() {
-//                @Override
-//                public void onSuccess(String response) {
-//                    LogManager.i(Https.TAG,"response:" + response);
-//                    final T obj = (T) HttpUtil.parseJson(response,listener.getClass());
-//                    listener.onSuccess(obj);
-//                }
-//
-//                @Override
-//                public void onFailure(Exception exception) {
-//                    LogManager.i(Https.TAG,"exception:" + exception.toString());
-//                    listener.onFailure(exception);
-//                }
-//            });
         }
 
         return taskId;

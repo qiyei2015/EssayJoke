@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
 import com.qiyei.sdk.https.base.Https;
 import com.qiyei.sdk.https.dialog.LoadingDialog;
+import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.ParameterizedType;
@@ -32,7 +33,7 @@ public class OkHttpHelper {
 
         String url = request.getBaseUrl() + request.getPathUrl();
 
-        Map<String,String> params = request.getParams();
+        Map<String,String> params = HttpUtil.gsonToGetParams(request);
 
         if (params == null || (params!=null && params.size() < 0)){
             return url;

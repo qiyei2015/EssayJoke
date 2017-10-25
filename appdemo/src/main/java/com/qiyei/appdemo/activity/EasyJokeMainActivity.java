@@ -4,26 +4,18 @@ package com.qiyei.appdemo.activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.qiyei.appdemo.net.DiscoverListReq;
 import com.qiyei.appdemo.net.RetrofitApiService;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.https.api.HttpManager;
 import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.api.request.HttpRequest;
-import com.qiyei.sdk.https.server.retrofit.RetrofitFactory;
-import com.qiyei.sdk.https.server.task.HttpGetTask;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.DiscoverListResult;
-
-import retrofit2.Call;
-import retrofit2.Retrofit;
 
 public class EasyJokeMainActivity extends BaseSkinActivity {
 
@@ -71,7 +63,7 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 //            }
 //        });
 
-        new HttpManager().execute(getSupportFragmentManager(), getRetrofitRequest(), new IHttpListener<DiscoverListResult>() {
+        new HttpManager().execute(getSupportFragmentManager(), buildRequest(), new IHttpListener<DiscoverListResult>() {
 
             @Override
             public void onSuccess(DiscoverListResult response) {
@@ -90,48 +82,51 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
 
     }
 
-    private void addCommonParams(Map<String,String> params){
-        params.put("app_name","joke_essay");
-        params.put("version_name","5.7.0");
-        params.put("ac","wifi");
-        params.put("device_id","30036118478");
-        params.put("device_brand","Xiaomi");
-        params.put("update_version_code","5701");
-        params.put("manifest_version_code","570");
-        params.put("longitude","113.000366");
-        params.put("latitude","28.171377");
-        params.put("device_platform","android");
-    }
-
-
-
-    private HttpRequest buildRequest(){
-
-        HttpGetRequest request = new HttpGetRequest(null);
-        request.setBaseUrl("http://is.snssdk.com/2/essay/");
-
-        request.setPathUrl("discovery/v3/");
-        Map<String,String> params = new HashMap<>();
-
-        params.put("iid","6152551759");
-        params.put("aid","7");
-
-        addCommonParams(params);
-        request.setParams(params);
-        request.setCache(true);
-        return request;
-    }
+//    private void addCommonParams(Map<String,String> params){
+//        params.put("app_name","joke_essay");
+//        params.put("version_name","5.7.0");
+//        params.put("ac","wifi");
+//        params.put("device_id","30036118478");
+//        params.put("device_brand","Xiaomi");
+//        params.put("update_version_code","5701");
+//        params.put("manifest_version_code","570");
+//        params.put("longitude","113.000366");
+//        params.put("latitude","28.171377");
+//        params.put("device_platform","android");
+//    }
+//
+//
+//
+//    private HttpRequest buildRequest(){
+//
+//        HttpGetRequest request = new HttpGetRequest(null);
+//        request.setBaseUrl("http://is.snssdk.com/2/essay/");
+//
+//        request.setPathUrl("discovery/v3/");
+//        Map<String,String> params = new HashMap<>();
+//
+//        params.put("iid","6152551759");
+//        params.put("aid","7");
+//
+//        addCommonParams(params);
+//        request.setParams(params);
+//        request.setCache(true);
+//        return request;
+//    }
 
     /**
      * retrofit请求
      * @return
      */
-    private HttpGetRequest getRetrofitRequest(){
-        HttpGetRequest request = new HttpGetRequest(null);
+    private HttpGetRequest buildRequest(){
+        DiscoverListReq req = new DiscoverListReq();
+        req.setIid("6152551759");
+        req.setAid("7");
+        HttpGetRequest<DiscoverListReq> request = new HttpGetRequest(req);
         request.setBaseUrl("http://is.snssdk.com/2/essay/");
         request.setPathUrl("discovery/v3/");
-        Retrofit retrofit = RetrofitFactory.createRetrofit(request.getBaseUrl());
-        request.setCall(retrofit.create(RetrofitApiService.class).getDiscoverList());
+        request.setCache(true);
+        request.setApiClazz(RetrofitApiService.class);
         return request;
     }
 
