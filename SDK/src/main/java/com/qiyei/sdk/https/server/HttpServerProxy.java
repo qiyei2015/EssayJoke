@@ -109,10 +109,10 @@ public class HttpServerProxy {
             throw new NullPointerException(" the params listener is null");
         }
 
-        //IHttpListener<R> listener 必须实例化
-        if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
-            throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
-        }
+//        //IHttpListener<R> listener 必须实例化
+//        if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
+//            throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
+//        }
 
     }
 

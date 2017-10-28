@@ -13,6 +13,7 @@ import com.qiyei.sdk.https.server.IHttpCallback;
 import com.qiyei.sdk.https.server.IHttpEngine;
 import com.qiyei.sdk.https.server.okhttp.OkHttpHelper;
 import com.qiyei.sdk.https.server.task.HttpGetTask;
+import com.qiyei.sdk.https.server.task.HttpPostTask;
 import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Field;
@@ -29,6 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 
 /**
  * @author Created by qiyei2015 on 2017/10/22.
@@ -132,6 +134,109 @@ public class RetrofitEngine implements IHttpEngine {
 
         return task.getTaskId();
     }
+
+
+    @Override
+    public <T, R> String post(final FragmentManager fragmentManager, final HttpPostTask<T> task, final IHttpCallback<R> callback) {
+
+        Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
+
+        Object apiService = retrofit.create(task.getRequest().getApiClazz());
+
+        String methodName = null;
+
+        //这个循环找到method
+        for (Method method : task.getRequest().getApiClazz().getDeclaredMethods()){
+            //获取GET注解
+            POST getAnnotation = method.getAnnotation(POST.class);
+            if (getAnnotation != null){
+                LogManager.i(Http.TAG,"pathUrl:" + task.getRequest().getPathUrl());
+                LogManager.i(Http.TAG,"value():" + getAnnotation.value());
+                //通过pathUrl与GET注解来找到，如果相等就返回
+                if (task.getRequest().getPathUrl().equals(getAnnotation.value())){
+                    methodName = method.getName();
+                    LogManager.i(Http.TAG,"method :" + methodName);
+                }
+            }
+        }
+        if (TextUtils.isEmpty(methodName)){
+            LogManager.i(Http.TAG,"cannot find method in " + task.getRequest().getApiClazz());
+            return null;
+        }
+
+        Call call = null;
+
+
+        Object params = task.getRequest().getBody();
+
+
+        LogManager.i(Http.TAG,"paramsClazz "+ params.getClass() + " params:" + params.toString());
+        try {
+            Class<?> paramsClazz = getParamsClazz(apiService.getClass(),params.getClass(),methodName);
+
+            Method method;
+            if (paramsClazz == null){
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[0]);
+                if (method != null){
+                    call = (Call) method.invoke(apiService,new Object[0]);
+                }
+            }else {
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[]{paramsClazz});
+                if (method != null){
+                    call = (Call) method.invoke(apiService,params);
+                }
+            }
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        if (call == null){
+            return null;
+        }
+
+        //将任务加到队列里面
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
+        LoadingManager.showDialog(fragmentManager,task.getTaskId());
+
+        //获取OkHttp的request
+        Request request = call.request();
+        //反射设置 tag
+        Class<?> clazz = request.getClass();
+        try {
+            Field field = clazz.getDeclaredField("tag");
+            field.setAccessible(true);
+            field.set(request,task.getTaskId());
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        call.enqueue(new Callback<R>() {
+            @Override
+            public void onResponse(Call<R> call, Response<R> response) {
+                LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
+                LogManager.i(Http.TAG,"Retrofit --> " + response.body().toString());
+                HttpResponse<R> obj = new HttpResponse<>(response.body());
+                callback.onSuccess(obj);
+            }
+
+            @Override
+            public void onFailure(Call<R> call, Throwable t) {
+                LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
+                callback.onFailure((Exception) t);
+            }
+        });
+
+        return task.getTaskId();
+
+    }
+
 
     @Override
     public void cancelHttpCall(String taskId) {

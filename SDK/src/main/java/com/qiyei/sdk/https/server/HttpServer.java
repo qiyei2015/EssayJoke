@@ -8,11 +8,13 @@ import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.https.IHttpExecutor;
 import com.qiyei.sdk.https.api.listener.IHttpListener;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
+import com.qiyei.sdk.https.api.request.HttpPostRequest;
 import com.qiyei.sdk.https.api.request.HttpRequest;
 import com.qiyei.sdk.https.base.Http;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
 import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
 import com.qiyei.sdk.https.server.task.HttpGetTask;
+import com.qiyei.sdk.https.server.task.HttpPostTask;
 import com.qiyei.sdk.log.LogManager;
 
 /**
@@ -75,11 +77,11 @@ public class HttpServer implements IHttpExecutor{
         String taskId = null;
         if (request instanceof HttpGetRequest){
 
-            HttpGetTask<T> getTask = new HttpGetTask<>((HttpGetRequest<T>) request,listener);
-            taskId = getTask.getTaskId();
+            HttpGetTask<T> task = new HttpGetTask<>((HttpGetRequest<T>) request,listener);
+            taskId = task.getTaskId();
 
 
-            mEngine.get(fragmentManager, getTask, new IHttpCallback<R>() {
+            mEngine.get(fragmentManager, task, new IHttpCallback<R>() {
 
                 @Override
                 public void onSuccess(HttpResponse<R> response) {
@@ -98,6 +100,31 @@ public class HttpServer implements IHttpExecutor{
                     listener.onFailure(exception);
                 }
             });
+        }else if (request instanceof HttpPostRequest){
+            HttpPostTask<T> task = new HttpPostTask<>((HttpPostRequest<T>) request,listener);
+            taskId = task.getTaskId();
+
+
+            mEngine.post(fragmentManager, task, new IHttpCallback<R>() {
+
+                @Override
+                public void onSuccess(HttpResponse<R> response) {
+                    LogManager.i(Http.TAG,"response:" + response);
+//
+                    if (HttpResponse.isOK(response)){
+                        listener.onSuccess(response.getContent());
+                    }else {
+                        listener.onFailure(new Exception("is not ok"));
+                    }
+                }
+
+                @Override
+                public void onFailure(Exception exception) {
+                    LogManager.i(Http.TAG,"exception:" + exception.toString());
+                    listener.onFailure(exception);
+                }
+            });
+
         }
 
         return taskId;

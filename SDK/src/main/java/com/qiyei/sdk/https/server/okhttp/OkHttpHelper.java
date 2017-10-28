@@ -3,6 +3,7 @@ package com.qiyei.sdk.https.server.okhttp;
 
 import com.google.gson.Gson;
 import com.qiyei.sdk.https.api.request.HttpGetRequest;
+import com.qiyei.sdk.https.api.request.HttpPostRequest;
 import com.qiyei.sdk.https.base.Http;
 import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.log.LogManager;
@@ -52,6 +53,16 @@ public class OkHttpHelper {
         buffer.deleteCharAt(buffer.length() - 1);
 
         return buffer.toString();
+    }
+
+    /**
+     * 创建post请求的url
+     * @param request
+     * @return
+     */
+    public static String buildPostRequest(HttpPostRequest request){
+        String url = request.getBaseUrl() + request.getPathUrl();
+        return url;
     }
 
 

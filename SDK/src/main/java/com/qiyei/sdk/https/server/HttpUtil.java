@@ -36,10 +36,10 @@ public class HttpUtil {
      * @param <T>
      */
     public static <T> T parseJson(String json,Class<?> clazz,boolean isInterface){
-        if (json == null){
+        if (json == null && clazz == null){
             return null;
         }
-
+        LogManager.i(TAG,"clazz :" + clazz.getName());
         Type genType = null;
 
         if (isInterface){
@@ -54,7 +54,20 @@ public class HttpUtil {
         if (genType instanceof ParameterizedType){
             Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
             Gson gson = new Gson();
-            Class<?> cla = (Class<?>) params[0];
+            Class<?> cla ;
+
+            for (Type type : params){
+                LogManager.i(TAG,"Type :" + type.toString());
+            }
+
+            // TODO: 2017/10/28 这里有问题，后续参考retrofit的注解来该 
+            if (params[0] instanceof Class<?>){
+                cla = (Class<?>) params[0];
+            }else if (params[0] instanceof ParameterizedType){
+                cla = (Class<?>) params[0];
+            }else {
+                cla = null;
+            }
             LogManager.d(TAG,"Class<?>:" + cla);
             T obj = (T) gson.fromJson(json,cla);
             return obj;

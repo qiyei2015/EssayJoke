@@ -18,8 +18,13 @@ import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.DiscoverListResult;
 
+/**
+ * @author Created by qiyei2015 on 2017/9/28.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
+ */
 public class EasyJokeMainActivity extends BaseSkinActivity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

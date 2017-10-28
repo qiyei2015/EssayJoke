@@ -45,6 +45,12 @@ import com.qiyei.appdemo.model.IControl;
 import com.qiyei.appdemo.model.User;
 import com.taobao.sophix.SophixManager;
 
+/**
+ * @author Created by qiyei2015 on 2017/8/28.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
+ */
 public class MainActivity extends BaseSkinActivity {
 
     @ViewById(R.id.btn1)
@@ -78,6 +84,10 @@ public class MainActivity extends BaseSkinActivity {
 
     @ViewById(R.id.btn13)
     private Button btn13;
+
+    @ViewById(R.id.btn14)
+    private Button btn14;
+
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
@@ -277,6 +287,11 @@ public class MainActivity extends BaseSkinActivity {
     @OnClick(R.id.btn13)
     private void testBtn13(View view){
         startActivity(BinderTestActivity.class);
+    }
+
+    @OnClick(R.id.btn14)
+    private void testBtn14(View view){
+        startActivity(NetworkTestActivity.class);
     }
 
     private void fixBug(){

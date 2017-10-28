@@ -5,8 +5,10 @@ import com.qiyei.appdemo.model.DiscoverListResult;
 import java.util.Map;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.http.QueryMap;
 
 /**
@@ -26,5 +28,14 @@ public interface RetrofitApiService {
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @GET("discovery/v3/")
     Call<DiscoverListResult> getDiscoverList(@QueryMap Map<String, String> params);
+
+    /**
+     *  post请求测试
+     * @param req post请求参数
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @POST("user/register")
+    Call<ResponseObject<Bean2>> getPostCall(@Body RequestObject<Bean2> req);
 
 }

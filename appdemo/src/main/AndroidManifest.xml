@@ -21,13 +21,14 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.taobao.android.hotfix.IDSECRET"
-            android:value="Yours" />
+            android:value="Yours"/>
         <meta-data
             android:name="com.taobao.android.hotfix.APPSECRET"
-            android:value="Yours" />
+            android:value="Yours"/>
         <meta-data
             android:name="com.taobao.android.hotfix.RSASECRET"
-            android:value="Yours" />
+            android:value="Yours"/>
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -78,6 +79,11 @@
         <activity android:name=".activity.DataCenterTestActivity">
         </activity>
         <activity android:name=".activity.BinderTestActivity">
+        </activity>
+        <activity
+            android:name=".activity.NetworkTestActivity"
+            android:label="@string/title_activity_network_test"
+            android:theme="@style/AppTheme">
         </activity>
     </application>
 

@@ -137,7 +137,7 @@ public class OkHttpFactory {
             okhttp3.Response response = chain.proceed(request);
             String content = response.body().string();
             LogManager.i(Http.TAG, "Response --> time: " + TimeUtil.formatTime(System.currentTimeMillis(),TimeUtil.FORMAT_1)
-                    + "  " + (System.currentTimeMillis() - requestTime) + "  id: "  + taskId + " content: " +  content);
+                    + "  " + (System.currentTimeMillis() - requestTime) + "ms" + "  id: "  + taskId + " content: " +  content);
             okhttp3.MediaType mediaType = response.body().contentType();
             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
         }

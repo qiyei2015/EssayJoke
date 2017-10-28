@@ -30,6 +30,10 @@ public class HttpRequest<T> {
      */
     protected T mBody;
     /**
+     * 文件上传，文件下载的路径
+     */
+    protected String mFilePath;
+    /**
      * 是否缓存
      */
     protected boolean isCache;
@@ -103,6 +107,20 @@ public class HttpRequest<T> {
      */
     public void setBody(T body) {
         mBody = body;
+    }
+
+    /**
+     * @return {@link #mFilePath}
+     */
+    public String getFilePath() {
+        return mFilePath;
+    }
+
+    /**
+     * @param filePath the {@link #mFilePath} to set
+     */
+    public void setFilePath(String filePath) {
+        mFilePath = filePath;
     }
 
     /**
