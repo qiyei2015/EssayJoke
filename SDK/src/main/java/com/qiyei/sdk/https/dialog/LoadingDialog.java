@@ -1,4 +1,4 @@
-package com.qiyei.sdk.http.dialog;
+package com.qiyei.sdk.https.dialog;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -10,11 +10,11 @@ import com.qiyei.sdk.R;
 
 
 /**
- * 网络接口请求加载框
- * @Auther veally
- * @Date 2017/1/22.
+ * @author Created by qiyei2015 on 2017/10/21.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: http请求时显示的对话框
  */
-
 public class LoadingDialog extends DialogFragment {
 
     public LoadingDialog(){
@@ -33,4 +33,5 @@ public class LoadingDialog extends DialogFragment {
 //        tvLoadMsg.setText(getTag());
         return root;
     }
+
 }

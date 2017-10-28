@@ -23,7 +23,7 @@ import java.util.Map;
  * Version: 1.0
  * Description:
  */
-public class HttpManager {
+public class HttpManager implements IHttpExecutor{
 
     private static final String TAG = "HTTP";
 
@@ -68,6 +68,7 @@ public class HttpManager {
      * @param callback
      * @return
      */
+    @Override
     public <T> String execute(HttpRequest request, final INetCallback<T> callback){
         return execute(null,request,callback);
     }
@@ -79,6 +80,7 @@ public class HttpManager {
      * @param callback
      * @return
      */
+    @Override
     public <T> String execute(FragmentManager fragmentManager,HttpRequest request, final INetCallback<T> callback){
 
         if (request == null){
@@ -183,6 +185,7 @@ public class HttpManager {
      * 取消任务
      * @param taskId
      */
+    @Override
     public void cancel(String taskId){
 
     }

@@ -63,15 +63,19 @@ public class HttpUtil {
             return null;
         }
 
-        Gson gson = new Gson();
-        //获取type类型数组的第0个
-        Type genType = clazz.getGenericInterfaces()[0];
+        Type genType = null;
+        genType = clazz.getGenericInterfaces()[0];
         LogManager.d(TAG,"genType:" + genType.toString());
+
         //判断是不是参数化类型
-        Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        LogManager.d(TAG,"params:" + params.toString());
-        T obj = (T) gson.fromJson(json,(Class) params[0]);
-        return obj;
+        if (genType instanceof ParameterizedType){
+            Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
+            Gson gson = new Gson();
+            LogManager.d(TAG,"params:" + params.toString());
+            T obj = (T) gson.fromJson(json,(Class) params[0]);
+            return obj;
+        }
+        return null;
     }
 
     /**

@@ -4,10 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.qiyei.appdemo.activity.BannerTestActivity;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
+import com.qiyei.sdk.util.HookUtil;
 import com.qiyei.sdk.util.ToastUtil;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
@@ -20,7 +22,7 @@ import com.taobao.sophix.listener.PatchLoadStatusListener;
  * Description:
  */
 public class BaseApplication extends Application {
-    private static final String TAG = "Application";
+    private static final String TAG = " Sophix";
 
     private static final String APP_ID = "24598257-1";
     private static final String App_Secret = "7b8ceb0c2596b44787e61a9aaf1ff4d3";
@@ -61,6 +63,12 @@ public class BaseApplication extends Application {
         }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
+
+//        try {
+//            HookUtil.hook(this, BannerTestActivity.class);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
@@ -76,6 +84,8 @@ public class BaseApplication extends Application {
                 .setPatchLoadStatusStub(new PatchLoadStatusListener() {
                     @Override
                     public void onLoad(final int mode, final int code, final String info, final int handlePatchVersion) {
+
+                        Log.d(TAG,"code:" + code + ",info:" + info);
                         // 补丁加载回调通知
                         if (code == PatchStatus.CODE_LOAD_SUCCESS) {
                             // 表明补丁加载成功

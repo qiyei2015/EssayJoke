@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 //阿里云仓库配置
 repositories {
     mavenLocal()
@@ -12,16 +11,20 @@ repositories {
     flatDir {
         dirs 'libs'
     }
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "26.0.0"
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
-        applicationId "com.qiyei.appdemo"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 26
+        applicationId "com.qiyei.appdemo"
         versionCode 1
         versionName "1.0.0"
 
@@ -52,22 +55,6 @@ android {
             dirs 'libs' //aar目录
         }
     }
-    //解决多语言未翻译问题
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
-}
-
-// 这个plugin需要放在android配置之后，因为需要读取android中的配置项
-apply plugin: 'replugin-plugin-gradle'
-/***
- * plugin配置
- */
-repluginPluginConfig {
-    pluginName = "appdemo"
-    hostApplicationId = "com.qiyei.essayjoke"
-    hostAppLauncherActivity = "com.qiyei.essayjoke.activity.WelcomeActivity"
 }
 
 dependencies {
@@ -76,8 +63,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.qihoo360.replugin:replugin-plugin-lib:2.2.1'
+    compile 'com.android.support:appcompat-v7:26.0.0'
     testCompile 'junit:junit:4.12'
     compile project(':Framework')
 }

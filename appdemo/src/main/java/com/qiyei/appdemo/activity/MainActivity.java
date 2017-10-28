@@ -29,6 +29,7 @@ import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.permission.PermissionFail;
 import com.qiyei.sdk.permission.PermissionManager;
 import com.qiyei.sdk.permission.PermissionSuccess;
+import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.io.File;
@@ -103,7 +104,7 @@ public class MainActivity extends BaseSkinActivity {
     protected void initView() {
         mTitleBar = new CommonTitleBar.Builder(this)
                 .setTitle("Demo测试")
-                .setRightText("哈哈")
+                .setRightText("哈哈测试移动热修复")
                 .build();
         btn1.setOnClickListener(this);
 
@@ -129,6 +130,9 @@ public class MainActivity extends BaseSkinActivity {
 //
 //        }
 //        fixBug();
+        LogManager.i(TAG,"inner path:" + AndroidUtil.getInnerDataPath());
+        LogManager.i(TAG,"external path:" + AndroidUtil.getExternalDataPath());
+        LogManager.i(TAG,"sdcard path:" + AndroidUtil.getSdCardDataPath());
     }
 
     @Override
@@ -224,6 +228,8 @@ public class MainActivity extends BaseSkinActivity {
         // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
         SophixManager.getInstance().queryAndLoadNewPatch();
         dynamicProxy();
+        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
+        SophixManager.getInstance().queryAndLoadNewPatch();
     }
 
     @OnClick(R.id.btn10)

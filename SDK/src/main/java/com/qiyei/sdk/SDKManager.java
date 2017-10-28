@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.SystemClock;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.common.ExceptionCrashHandler;
 import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.fixbug.FixDexManager;
 import com.qiyei.sdk.http.HttpManager;

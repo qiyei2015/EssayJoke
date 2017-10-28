@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.util.Log;
 
 import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.util.FileUtil;
 
 import java.io.File;
@@ -136,8 +137,7 @@ public class LogManager {
      */
     public static void writeAppInfo(){
         //默认存储在 包名 + log 目录下
-        File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                + File.separator + RuntimeEnv.packageName + File.separator + LogConstant.SUFFIX);
+        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
         if (!dir.exists()){
             dir.mkdirs();
         }
@@ -190,8 +190,7 @@ public class LogManager {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
 
             //文件目录 包名/log/crash/
-            File dir = new File(Environment.getExternalStorageDirectory().getAbsoluteFile()
-                    + File.separator + RuntimeEnv.packageName + File.separator + LogConstant.SUFFIX + File.separator + "crash" + File.separator);
+            File dir = new File(AndroidUtil.getExternalDataPath() + File.separator  + LogConstant.SUFFIX + File.separator + "crash" );
             //文件存在
             if (dir.exists()){
                 FileUtil.deleteFile(dir);

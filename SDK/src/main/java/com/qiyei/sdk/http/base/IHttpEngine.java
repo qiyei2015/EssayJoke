@@ -27,6 +27,4 @@ public interface IHttpEngine {
 
     //文件下载
 
-
-
 }

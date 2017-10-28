@@ -8,6 +8,4 @@ package com.qiyei.sdk.database;
  */
 public interface IDBSession {
 
-
-
 }

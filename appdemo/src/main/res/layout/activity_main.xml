@@ -35,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/btn3"
                 android:text="测试3 ViewPager测试"
-                android:textAllCaps="false"/>
+                android:textAllCaps="false"
+                android:background="@color/main_bg_color"/>
 
             <Button
                 android:layout_width="match_parent"
