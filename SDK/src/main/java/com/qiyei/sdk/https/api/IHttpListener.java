@@ -1,4 +1,4 @@
-package com.qiyei.sdk.https.api.listener;
+package com.qiyei.sdk.https.api;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.

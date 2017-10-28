@@ -3,13 +3,6 @@ package com.qiyei.sdk.https.server;
 
 import android.support.v4.app.FragmentManager;
 
-import com.qiyei.sdk.https.api.request.HttpDownloadRequest;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.api.request.HttpPostRequest;
-import com.qiyei.sdk.https.api.request.HttpUploadRequest;
-import com.qiyei.sdk.https.server.task.HttpGetTask;
-import com.qiyei.sdk.https.server.task.HttpPostTask;
-
 /**
  * @author Created by qiyei2015 on 2017/10/21.
  * @version: 1.0
@@ -25,7 +18,7 @@ public interface IHttpEngine {
      * @param callback
      * @return 返回task id
      */
-    <T,R> String get(final FragmentManager fragmentManager, final HttpGetTask<T> task, final IHttpCallback<R> callback);
+    <T,R> String execute(final FragmentManager fragmentManager, final HttpTask<T> task, final IHttpCallback<R> callback);
 
 
     /**
@@ -35,7 +28,7 @@ public interface IHttpEngine {
      * @param callback
      * @return 返回task id
      */
-    <T,R> String post(final FragmentManager fragmentManager, final HttpPostTask<T> task, final IHttpCallback<R> callback);
+    <T,R> String execute(final android.app.FragmentManager fragmentManager, final HttpTask<T> task, final IHttpCallback<R> callback);
 
     /**
      * 取消http请求

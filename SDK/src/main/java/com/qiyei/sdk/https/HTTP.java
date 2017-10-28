@@ -1,4 +1,4 @@
-package com.qiyei.sdk.https.base;
+package com.qiyei.sdk.https;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -6,7 +6,7 @@ package com.qiyei.sdk.https.base;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class Http {
+public class HTTP {
     /**
      * 调试标志
      */

@@ -3,8 +3,8 @@ package com.qiyei.sdk.https.server;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpListener;
+import com.qiyei.sdk.https.api.HttpRequest;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -101,7 +101,7 @@ public class HttpServerProxy {
         }
 
 //        //HttpRequest<T>必须实例化
-//        if (HttpUtil.getParamsClazz(request.getClass()) == null){
+//        if (HttpUtil.getParamsClazz(request.getClass(),true) == null){
 //            throw new IllegalArgumentException(" the prams request of HttpRequest<T> must be Instantiated !");
 //        }
 
@@ -109,10 +109,10 @@ public class HttpServerProxy {
             throw new NullPointerException(" the params listener is null");
         }
 
-//        //IHttpListener<R> listener 必须实例化
-//        if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
-//            throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
-//        }
+        //IHttpListener<R> listener 必须实例化
+        if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
+            throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
+        }
 
     }
 

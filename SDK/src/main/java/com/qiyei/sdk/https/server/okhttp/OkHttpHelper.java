@@ -2,9 +2,8 @@ package com.qiyei.sdk.https.server.okhttp;
 
 
 import com.google.gson.Gson;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.api.request.HttpPostRequest;
-import com.qiyei.sdk.https.base.Http;
+import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.log.LogManager;
 
@@ -26,7 +25,7 @@ public class OkHttpHelper {
      * @param request
      * @return
      */
-    public static String buildGetRequest(HttpGetRequest request){
+    public static String buildGetRequest(HttpRequest request){
 
         String url = request.getBaseUrl() + request.getPathUrl();
 
@@ -60,7 +59,7 @@ public class OkHttpHelper {
      * @param request
      * @return
      */
-    public static String buildPostRequest(HttpPostRequest request){
+    public static String buildPostRequest(HttpRequest request){
         String url = request.getBaseUrl() + request.getPathUrl();
         return url;
     }
@@ -80,10 +79,10 @@ public class OkHttpHelper {
         Gson gson = new Gson();
         //获取type类型数组的第0个
         Type genType = clazz.getGenericInterfaces()[0];
-        LogManager.d(Http.TAG,"genType:" + genType.toString());
+        LogManager.d(HTTP.TAG,"genType:" + genType.toString());
         //判断是不是参数化类型
         Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-        LogManager.d(Http.TAG,"params:" + params.toString());
+        LogManager.d(HTTP.TAG,"params:" + params.toString());
         T obj = (T) gson.fromJson(json,(Class) params[0]);
         return obj;
     }

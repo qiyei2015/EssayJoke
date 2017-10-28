@@ -1,9 +1,7 @@
-package com.qiyei.sdk.https.server.task;
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpRequest;
+package com.qiyei.sdk.https.server;
+import com.qiyei.sdk.https.api.IHttpListener;
+import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.util.UUIDUtil;
-
-import java.util.UUID;
 
 /**
  * @author Created by qiyei2015 on 2017/10/23.
@@ -11,7 +9,7 @@ import java.util.UUID;
  * @email: 1273482124@qq.com
  * @description:
  */
-public abstract class HttpTask {
+public class HttpTask<T> {
     /**
      * 任务id
      */
@@ -27,6 +25,11 @@ public abstract class HttpTask {
     protected IHttpListener mListener;
 
     /**
+     * HTTP 请求
+     */
+    protected HttpRequest<T> mRequest;
+
+    /**
      * 构造器
      * @param tag
      * @param listener
@@ -38,10 +41,25 @@ public abstract class HttpTask {
     }
 
     /**
+     * 构造器
+     * @param tag taskTAG
+     * @param request Http请求
+     * @param listener 回调Listener
+     */
+    public HttpTask(String tag,HttpRequest<T> request,IHttpListener listener) {
+        mTag = tag;
+        mRequest = request;
+        mListener = listener;
+        mTaskId = mTag + "_" + UUIDUtil.get32UUID();
+    }
+
+    /**
      * 获取请求，由子类实现
      * @return
      */
-    public abstract HttpRequest getRequest();
+    public HttpRequest getRequest(){
+        return mRequest;
+    }
 
     /**
      * @return {@link #mTaskId}

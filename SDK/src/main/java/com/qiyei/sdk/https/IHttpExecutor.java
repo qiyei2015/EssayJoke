@@ -3,8 +3,8 @@ package com.qiyei.sdk.https;
 import android.support.v4.app.FragmentManager;
 
 
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpListener;
+import com.qiyei.sdk.https.api.HttpRequest;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.

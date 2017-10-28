@@ -5,8 +5,6 @@ import android.support.v4.app.FragmentManager;
 
 
 import com.qiyei.sdk.https.IHttpExecutor;
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpRequest;
 import com.qiyei.sdk.https.server.HttpServerProxy;
 
 

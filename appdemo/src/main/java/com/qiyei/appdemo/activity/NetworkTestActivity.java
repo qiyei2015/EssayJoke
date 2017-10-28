@@ -15,9 +15,8 @@ import com.qiyei.appdemo.net.RequestObject;
 import com.qiyei.appdemo.net.ResponseObject;
 import com.qiyei.appdemo.net.RetrofitApiService;
 import com.qiyei.sdk.https.api.HttpManager;
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.api.request.HttpPostRequest;
+import com.qiyei.sdk.https.api.IHttpListener;
+import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.log.LogManager;
 
 /**
@@ -30,7 +29,9 @@ public class NetworkTestActivity extends AppCompatActivity {
 
     private final String TAG = "BaseActivity";
 
-    //本地地址
+    /**
+     * 本地IP地址
+     */
     private final String baseurl = "http://192.168.1.103:8080/";
 
     @Override
@@ -106,20 +107,21 @@ public class NetworkTestActivity extends AppCompatActivity {
 
     }
 
-
     /**
-     * retrofit get请求
+     * retrofit请求
      * @return
      */
-    private HttpGetRequest buildGetRequest(){
+    private HttpRequest buildGetRequest(){
         DiscoverListReq req = new DiscoverListReq();
         req.setIid("6152551759");
         req.setAid("7");
-        HttpGetRequest<DiscoverListReq> request = new HttpGetRequest(req);
-        request.setBaseUrl("http://is.snssdk.com/2/essay/");
-        request.setPathUrl("discovery/v3/");
-        request.setCache(true);
-        request.setApiClazz(RetrofitApiService.class);
+        HttpRequest<DiscoverListReq> request = new HttpRequest.Builder<DiscoverListReq>()
+                .get()
+                .setBaseUrl("http://is.snssdk.com/2/essay/")
+                .setPathUrl("discovery/v3/")
+                .setBody(req)
+                .setApiClazz(RetrofitApiService.class)
+                .build();
         return request;
     }
 
@@ -127,17 +129,19 @@ public class NetworkTestActivity extends AppCompatActivity {
      * retrofit post请求
      * @return
      */
-    private HttpPostRequest buildPostRequest(){
+    private HttpRequest buildPostRequest(){
 
-        Bean2 bean = new Bean2("qiyei2016","123456");
+        Bean2 bean = new Bean2("qiyei2016","123456","别名","1234567890@qq.com");
 
         RequestObject<Bean2> req = new RequestObject<>();
         req.setContent(bean);
-        HttpPostRequest<RequestObject<Bean2>> request = new HttpPostRequest(req);
-        request.setBaseUrl(baseurl);
-        request.setPathUrl("user/register");
-        request.setCache(true);
-        request.setApiClazz(RetrofitApiService.class);
+        HttpRequest<RequestObject<Bean2>> request = new HttpRequest.Builder<>()
+                .post()
+                .setBaseUrl(baseurl)
+                .setPathUrl("user/register")
+                .setBody(req)
+                .setApiClazz(RetrofitApiService.class)
+                .build();
         return request;
     }
 

@@ -12,12 +12,24 @@ public class Bean2 {
 
     private String password;
 
+
+    private String nickName;
+
+    private String email;
+
     public Bean2() {
     }
 
     public Bean2(String name, String password) {
         this.name = name;
         this.password = password;
+    }
+
+    public Bean2(String name, String password,String nickName,String email) {
+        this.name = name;
+        this.password = password;
+        this.nickName = nickName;
+        this.email = email;
     }
 
     /**
@@ -48,11 +60,41 @@ public class Bean2 {
         this.password = password;
     }
 
+    /**
+     * @return {@link #nickName}
+     */
+    public String getNickName() {
+        return nickName;
+    }
+
+    /**
+     * @param nickName the {@link #nickName} to set
+     */
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    /**
+     * @return {@link #email}
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    /**
+     * @param email the {@link #email} to set
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "Bean2{" +
                 "name='" + name + '\'' +
                 ", password='" + password + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

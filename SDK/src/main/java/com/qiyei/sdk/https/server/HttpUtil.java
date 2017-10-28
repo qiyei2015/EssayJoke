@@ -3,8 +3,8 @@ package com.qiyei.sdk.https.server;
 import com.google.gson.Gson;
 import com.google.gson.internal.$Gson$Types;
 import com.google.gson.reflect.TypeToken;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
-import com.qiyei.sdk.https.base.Http;
+import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.server.retrofit.IRetrofitService;
 import com.qiyei.sdk.log.LogManager;
 
@@ -54,22 +54,7 @@ public class HttpUtil {
         if (genType instanceof ParameterizedType){
             Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
             Gson gson = new Gson();
-            Class<?> cla ;
-
-            for (Type type : params){
-                LogManager.i(TAG,"Type :" + type.toString());
-            }
-
-            // TODO: 2017/10/28 这里有问题，后续参考retrofit的注解来该 
-            if (params[0] instanceof Class<?>){
-                cla = (Class<?>) params[0];
-            }else if (params[0] instanceof ParameterizedType){
-                cla = (Class<?>) params[0];
-            }else {
-                cla = null;
-            }
-            LogManager.d(TAG,"Class<?>:" + cla);
-            T obj = (T) gson.fromJson(json,cla);
+            T obj = gson.fromJson(json,params[0]);
             return obj;
         }
         return null;
@@ -86,7 +71,7 @@ public class HttpUtil {
 
         LogManager.d(TAG,"clazz :" + clazz.getName());
 
-        if (isInterface){
+        if (isInterface && clazz.getInterfaces().length > 0){
             //获取type类型数组的第0个
             genType = clazz.getGenericInterfaces()[0];
         }else {
@@ -97,7 +82,9 @@ public class HttpUtil {
         //判断是不是参数化类型
         if (genType instanceof ParameterizedType){
             Type[] params = ((ParameterizedType) genType).getActualTypeArguments();
-            Class<?> cla = (Class<?>) params[0];
+            //利用Gson的TypeToken来获取
+            TypeToken<?> typeToken = TypeToken.get(params[0]);
+            Class<?> cla = typeToken.getRawType();
             LogManager.d(TAG,"Class<?>:" + cla);
             return cla;
         }
@@ -140,7 +127,7 @@ public class HttpUtil {
      * @param <T>
      * @return
      */
-    public static <T> Map<String,String> gsonToGetParams(HttpGetRequest<T> request){
+    public static <T> Map<String,String> gsonToGetParams(HttpRequest<T> request){
         //将对象序列化成字符串
         Class<?> clazz = request.getClass();
         String gsonStr = new Gson().toJson(request.getBody());
@@ -188,14 +175,14 @@ public class HttpUtil {
 
     private void printClazzMethodInfo(Class<?> clazz){
         for (Method method : clazz.getDeclaredMethods()){
-            LogManager.i(Http.TAG,"method: " + method.getName());
+            LogManager.i(HTTP.TAG,"method: " + method.getName());
             printMethodParameterTypes(method.getParameterTypes());
         }
     }
 
     private void printMethodParameterTypes(Class<?>[] classes){
         for (Class<?> clazz : classes){
-            LogManager.i(Http.TAG,"params clazz : " + clazz.getName());
+            LogManager.i(HTTP.TAG,"params clazz : " + clazz.getName());
         }
     }
 

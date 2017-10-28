@@ -1,7 +1,8 @@
 package com.qiyei.sdk.https.server.okhttp;
 
 
-import com.qiyei.sdk.https.base.Http;
+import com.qiyei.sdk.https.HTTP;
+import com.qiyei.sdk.https.server.HttpTask;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.TimeUtil;
 
@@ -113,38 +114,40 @@ public class OkHttpFactory {
 
             Request request = requestBuilder.build();
             //利用okHttp 的tag来保存数据
-            String taskId = (String) request.tag();
+            HttpTask task = (HttpTask) request.tag();
+
+            String taskId = task.getTaskId();
 
             long requestTime = System.currentTimeMillis();
 
-            if (request.method().toLowerCase().contains("get")) {
+            if (request.method().contains("GET")) {
 
-                LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
-                        + " id: " + taskId  + " url = " + request.url());
+                LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()));
             } else {
                 RequestBody rb = request.body();
                 if (rb != null) {
                     okio.Buffer buffer = new okio.Buffer();
                     rb.writeTo(buffer);
-                    LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
-                            + " id: " + taskId  +  " url = " + request.url() + " \nbody = " + buffer.readUtf8());
+                    LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()) + "\nbody = " + buffer.readUtf8());
                     buffer.clear();
                 } else {
-                    LogManager.i(Http.TAG, "Request --> time: " + TimeUtil.formatTime(requestTime,TimeUtil.FORMAT_1)
-                            + " id: " + taskId  + " url = " + request.url());
+                    LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()));
                 }
             }
             okhttp3.Response response = chain.proceed(request);
-            String content = response.body().string();
-            LogManager.i(Http.TAG, "Response --> time: " + TimeUtil.formatTime(System.currentTimeMillis(),TimeUtil.FORMAT_1)
-                    + "  " + (System.currentTimeMillis() - requestTime) + "ms" + "  id: "  + taskId + " content: " +  content);
+            String body = response.body().string();
+
+            LogManager.i(HTTP.TAG, getResponseInfo(taskId,requestTime,System.currentTimeMillis()) + "\nbody: " +  body);
+
             okhttp3.MediaType mediaType = response.body().contentType();
-            return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, content)).build();
+            return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, body)).build();
         }
     }
 
-
-
+    /**
+     * 创建OkHttpClient
+     * @return
+     */
     public static OkHttpClient createOkHttpClient(){
         try {
             sslContext = SSLContext.getDefault();
@@ -166,5 +169,34 @@ public class OkHttpFactory {
                 .retryOnConnectionFailure(false)
                 .build();
         return okHttpClient;
+
     }
+
+    /**
+     * 请求信息整理
+     * @param request
+     * @param taskId
+     * @param time
+     * @return
+     */
+    private static String getRequestInfo(Request request,String taskId,long time){
+        String requestInfo = "Request ---> time: " + TimeUtil.formatTime(time,TimeUtil.FORMAT_1)
+                + " id: " + taskId  + " url = " + request.url();
+
+        return requestInfo;
+    }
+
+    /**
+     * 响应信息格式
+     * @param taskId
+     * @param requestTime
+     * @param time
+     * @return
+     */
+    private static String getResponseInfo(String taskId,long requestTime,long time){
+        String responseInfo = "Response --> time: " + TimeUtil.formatTime(time,TimeUtil.FORMAT_1)
+                + " id: "  + taskId + " " + (System.currentTimeMillis() - requestTime) + "ms";
+        return responseInfo;
+    }
+
 }

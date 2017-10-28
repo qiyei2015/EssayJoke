@@ -2,7 +2,6 @@ package com.qiyei.appdemo.activity;
 
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import com.qiyei.appdemo.net.DiscoverListReq;
@@ -10,8 +9,8 @@ import com.qiyei.appdemo.net.RetrofitApiService;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.https.api.HttpManager;
-import com.qiyei.sdk.https.api.listener.IHttpListener;
-import com.qiyei.sdk.https.api.request.HttpGetRequest;
+import com.qiyei.sdk.https.api.IHttpListener;
+import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -78,15 +77,17 @@ public class EasyJokeMainActivity extends BaseSkinActivity {
      * retrofit请求
      * @return
      */
-    private HttpGetRequest buildRequest(){
+    private HttpRequest buildRequest(){
         DiscoverListReq req = new DiscoverListReq();
         req.setIid("6152551759");
         req.setAid("7");
-        HttpGetRequest<DiscoverListReq> request = new HttpGetRequest(req);
-        request.setBaseUrl("http://is.snssdk.com/2/essay/");
-        request.setPathUrl("discovery/v3/");
-        request.setCache(true);
-        request.setApiClazz(RetrofitApiService.class);
+        HttpRequest<DiscoverListReq> request = new HttpRequest.Builder<DiscoverListReq>()
+                .get()
+                .setBaseUrl("http://is.snssdk.com/2/essay/")
+                .setPathUrl("discovery/v3/")
+                .setBody(req)
+                .setApiClazz(RetrofitApiService.class)
+                .build();
         return request;
     }
 
