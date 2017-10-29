@@ -27,6 +27,20 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp"/>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/download_progress_tv"
+        android:textSize="24sp"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/download_progress"
+        />
+
     <Button
         android:id="@+id/button3"
         android:layout_width="match_parent"
@@ -35,6 +49,21 @@
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="0dp"/>
 
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/upload_progress_tv"
+        android:textSize="24sp"/>
+
+    <ProgressBar
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/upload_progress"
+        />
     <Button
         android:id="@+id/button4"
         android:layout_width="match_parent"

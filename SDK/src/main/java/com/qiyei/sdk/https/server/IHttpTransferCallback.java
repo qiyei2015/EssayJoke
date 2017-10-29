@@ -10,8 +10,8 @@ public interface IHttpTransferCallback extends IHttpCallback {
 
     /**
      * 进度回调
-     * @param currentSize
-     * @param totalSize
+     * @param currentLength
+     * @param totalLength
      */
-    void onProgress(long currentSize, long totalSize);
+    void onProgress(long currentLength, long totalLength);
 }

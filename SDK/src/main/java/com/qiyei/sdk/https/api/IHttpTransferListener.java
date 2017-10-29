@@ -6,13 +6,13 @@ package com.qiyei.sdk.https.api;
  * @email: 1273482124@qq.com
  * @description:
  */
-public interface IHttpTransferListener extends IHttpListener{
+public interface IHttpTransferListener<T> extends IHttpListener{
 
     /**
      * 进度回调
-     * @param currentSize
-     * @param totalSize
+     * @param currentLength
+     * @param totalLength
      */
-    void onProgress(long currentSize, long totalSize);
+    void onProgress(long currentLength, long totalLength);
 
 }

@@ -6,6 +6,8 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.DiscoverListResult;
@@ -17,7 +19,9 @@ import com.qiyei.appdemo.net.RetrofitApiService;
 import com.qiyei.sdk.https.api.HttpManager;
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.util.AndroidUtil;
 
 /**
  * @author Created by qiyei2015 on 2017/10/28.
@@ -28,6 +32,13 @@ import com.qiyei.sdk.log.LogManager;
 public class NetworkTestActivity extends AppCompatActivity {
 
     private final String TAG = "BaseActivity";
+
+
+    private ProgressBar mDownloadProgressBar;
+    private ProgressBar mUploadProgressBar;
+
+    private TextView mDownloadProgressTv;
+    private TextView mUploadProgressTv;
 
     /**
      * 本地IP地址
@@ -40,6 +51,14 @@ public class NetworkTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_network_test);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mDownloadProgressBar = (ProgressBar) findViewById(R.id.download_progress);
+        mUploadProgressBar = (ProgressBar) findViewById(R.id.upload_progress);
+        mDownloadProgressTv = (TextView) findViewById(R.id.download_progress_tv);
+        mUploadProgressTv = (TextView) findViewById(R.id.upload_progress_tv);
+
+
+        mDownloadProgressBar.setMax(100);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +112,26 @@ public class NetworkTestActivity extends AppCompatActivity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                new HttpManager().execute(getSupportFragmentManager(),buildDownloadRequest(), new IHttpTransferListener<String>() {
 
+                    @Override
+                    public void onProgress(long currentLength, long totalLength) {
+                        int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
+                        mDownloadProgressBar.setProgress(progress);
+                        mDownloadProgressTv.setText( progress +"%");
+                        LogManager.i(TAG,"progress:"+ progress +" currentLength :" + currentLength + " totalLength:" + totalLength);
+                    }
+
+                    @Override
+                    public void onSuccess(Object response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Exception exception) {
+
+                    }
+                });
             }
         });
 
@@ -146,4 +184,25 @@ public class NetworkTestActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * 下载请求
+     * @return
+     */
+    private HttpRequest buildDownloadRequest(){
+
+        String url = "http://central.maven.org/maven2/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar";
+
+        String url2  = "http://sw.bos.baidu.com/sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe";
+
+        HttpRequest<String> request = new HttpRequest.Builder<String>()
+                .download()
+                .setBaseUrl("http://sw.bos.baidu.com/")
+                .setPathUrl("sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe")
+                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/QQ.exe")
+                .setBody(null)
+                .setApiClazz(RetrofitApiService.class)
+                .build();
+        return request;
+
+    }
 }

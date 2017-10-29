@@ -9,6 +9,7 @@ import com.qiyei.sdk.https.IHttpExecutor;
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.HTTP;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
 import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
 import com.qiyei.sdk.log.LogManager;
@@ -44,7 +45,7 @@ public class HttpServer implements IHttpExecutor{
      * 静态内部类
      */
     private static class SingleHolder{
-        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new RetrofitEngine());
+        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new OkHttpEngine());
     }
 
     /**
@@ -84,12 +85,42 @@ public class HttpServer implements IHttpExecutor{
 
     @Override
     public <T,R> String execute(final FragmentManager fragmentManager, HttpRequest<T> request, final IHttpListener<R> listener) {
-        String taskId = null;
-
         HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener);
+        String taskId = task.getTaskId();
+        //将请求进行分发
+        switch (request.getMethod()){
+            case HTTP.GET:
+                executeHttp(fragmentManager,task,listener);
+                break;
+            case HTTP.POST:
+                executeHttp(fragmentManager,task,listener);
+                break;
+            case HTTP.DOWNLOAD:
+                executeHttp2(fragmentManager,task,(IHttpTransferListener)listener);
+                break;
+            case HTTP.UPLOAD:
+                executeHttp2(fragmentManager,task,(IHttpTransferListener)listener);
+                break;
+            default:
+                return null;
+        }
+        return taskId;
+    }
 
-        taskId = task.getTaskId();
+    @Override
+    public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener) {
+        return null;
+    }
 
+    @Override
+    public void cancel(String taskId) {
+        mEngine.cancelHttpCall(taskId);
+    }
+
+    /**
+     * 执行GET POST请求
+     */
+    private <R> void executeHttp(FragmentManager fragmentManager,HttpTask task,final IHttpListener<R> listener){
         mEngine.execute(fragmentManager, task, new IHttpCallback<R>() {
 
             @Override
@@ -107,18 +138,31 @@ public class HttpServer implements IHttpExecutor{
                 listener.onFailure(exception);
             }
         });
-
-        return taskId;
     }
 
-    @Override
-    public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener) {
-        return null;
-    }
+    /**
+     *
+     * @param fragmentManager
+     * @param task
+     * @param listener
+     * @param <R>
+     */
+    private <R> void executeHttp2(FragmentManager fragmentManager,HttpTask task,final IHttpTransferListener<R> listener){
+        mEngine.execute(fragmentManager, task, new IHttpTransferCallback() {
+            @Override
+            public void onProgress(long currentLength, long totalLength) {
+                listener.onProgress(currentLength,totalLength);
+            }
 
-    @Override
-    public void cancel(String taskId) {
-        mEngine.cancelHttpCall(taskId);
-    }
+            @Override
+            public void onSuccess(HttpResponse response) {
+                listener.onSuccess(response);
+            }
 
+            @Override
+            public void onFailure(Exception exception) {
+                listener.onFailure(exception);
+            }
+        });
+    }
 }

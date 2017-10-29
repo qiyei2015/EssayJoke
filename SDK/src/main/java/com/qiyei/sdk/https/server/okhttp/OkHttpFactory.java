@@ -92,6 +92,9 @@ public class OkHttpFactory {
         }
     };
 
+
+
+
     /**
      * 拦截器
      */
@@ -115,13 +118,17 @@ public class OkHttpFactory {
             Request request = requestBuilder.build();
             //利用okHttp 的tag来保存数据
             HttpTask task = (HttpTask) request.tag();
-
             String taskId = task.getTaskId();
-
             long requestTime = System.currentTimeMillis();
 
-            if (request.method().contains("GET")) {
+            //下载 或者上传直接返回
+            if (task.getRequest().getMethod().equals(HTTP.DOWNLOAD) || task.getRequest().getMethod().equals(HTTP.UPLOAD)){
+                // TODO: 2017/10/29 只用显示url即可
+//                LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()));
+                return chain.proceed(request);
+            }
 
+            if (request.method().contains(HTTP.GET)) {
                 LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()));
             } else {
                 RequestBody rb = request.body();
@@ -134,9 +141,9 @@ public class OkHttpFactory {
                     LogManager.i(HTTP.TAG, getRequestInfo(request,taskId,System.currentTimeMillis()));
                 }
             }
+
             okhttp3.Response response = chain.proceed(request);
             String body = response.body().string();
-
             LogManager.i(HTTP.TAG, getResponseInfo(taskId,requestTime,System.currentTimeMillis()) + "\nbody: " +  body);
 
             okhttp3.MediaType mediaType = response.body().contentType();
