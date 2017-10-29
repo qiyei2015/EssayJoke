@@ -124,7 +124,7 @@ public class NetworkTestActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(Object response) {
-
+                        LogManager.i(TAG,"response:" + response);
                     }
 
                     @Override
