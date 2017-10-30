@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -67,6 +68,21 @@ public class HttpServerProxy {
         return mHttpServer.execute(fragmentManager,request,listener);
     }
 
+    public <T, R> String execute(HttpRequest<T> request, IHttpTransferListener<R> listener) {
+//        checkParams(request,listener);
+        return mHttpServer.execute(request,listener);
+    }
+
+    public <T, R> String execute(FragmentManager fragmentManager, HttpRequest<T> request, IHttpTransferListener<R> listener) {
+//        checkParams(request,listener);
+        return mHttpServer.execute(fragmentManager,request,listener);
+    }
+
+    public <T, R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpTransferListener<R> listener) {
+//        checkParams(request,listener);
+        return mHttpServer.execute(fragmentManager,request,listener);
+    }
+
     /**
      * 取消网络请求
      * @param taskId 需要取消的 taskId
@@ -113,7 +129,6 @@ public class HttpServerProxy {
         if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
             throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
         }
-
     }
 
 }

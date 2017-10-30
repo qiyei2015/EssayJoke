@@ -6,7 +6,14 @@ package com.qiyei.sdk.https.api;
  * @email: 1273482124@qq.com
  * @description:
  */
-public interface IHttpTransferListener<T> extends IHttpListener{
+public interface IHttpTransferListener<T> extends IHttpListener<T>{
+
+    /**
+     * 成功的回调
+     * @param response
+     */
+    @Override
+    void onSuccess(T response);
 
     /**
      * 进度回调
@@ -14,5 +21,12 @@ public interface IHttpTransferListener<T> extends IHttpListener{
      * @param totalLength
      */
     void onProgress(long currentLength, long totalLength);
+
+    /**
+     * 失败的回调
+     * @param exception
+     */
+    @Override
+    void onFailure(Exception exception);
 
 }

@@ -13,30 +13,52 @@ public class LoadingManager {
 
     /**
      * 显示对话框
-     * @param fragmentManager
+     * @param manager
      * @param tag
      */
-    public static void showDialog(FragmentManager fragmentManager, String tag){
-        if (fragmentManager == null){
+    public static void showDialog(Object manager, String tag){
+        if (manager == null){
             return;
         }
         LoadingDialog dialog = new LoadingDialog();
         dialog.setCancelable(false);
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(dialog, tag);
-        fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+        if (manager instanceof FragmentManager){
+
+            FragmentManager fragmentManager = (FragmentManager) manager;
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(dialog, tag);
+            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+        }else if (manager instanceof android.app.FragmentManager){
+            android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
+            android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.add(dialog, tag);
+//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+        }
     }
 
     /**
      * 取消对话框显示
-     * @param fragmentManager
+     * @param manager
      * @param tag
      */
-    public static void dismissDialog(FragmentManager fragmentManager,String tag){
-        if (fragmentManager == null){
+    public static void dismissDialog(Object manager,String tag){
+        if (manager == null){
             return;
         }
-        LoadingDialog dialog = (LoadingDialog) fragmentManager.findFragmentByTag(tag);
+        if (manager instanceof FragmentManager){
+
+            FragmentManager fragmentManager = (FragmentManager) manager;
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(dialog, tag);
+            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+        }else if (manager instanceof android.app.FragmentManager){
+            android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
+            android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//            fragmentTransaction.add(dialog, tag);
+//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+        }
+        
+        LoadingDialog dialog = (LoadingDialog) manager.findFragmentByTag(tag);
         if(dialog != null){
             dialog.dismissAllowingStateLoss();
         }

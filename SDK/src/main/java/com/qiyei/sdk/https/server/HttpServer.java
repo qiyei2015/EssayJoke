@@ -11,7 +11,6 @@ import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
-import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
 import com.qiyei.sdk.log.LogManager;
 
 /**
@@ -85,31 +84,16 @@ public class HttpServer implements IHttpExecutor{
 
     @Override
     public <T,R> String execute(final FragmentManager fragmentManager, HttpRequest<T> request, final IHttpListener<R> listener) {
-        HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener);
-        String taskId = task.getTaskId();
-        //将请求进行分发
-        switch (request.getMethod()){
-            case HTTP.GET:
-                executeHttp(fragmentManager,task,listener);
-                break;
-            case HTTP.POST:
-                executeHttp(fragmentManager,task,listener);
-                break;
-            case HTTP.DOWNLOAD:
-                executeHttp2(fragmentManager,task,(IHttpTransferListener)listener);
-                break;
-            case HTTP.UPLOAD:
-                executeHttp2(fragmentManager,task,(IHttpTransferListener)listener);
-                break;
-            default:
-                return null;
-        }
-        return taskId;
+        HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener,fragmentManager);
+        executeHttpTask(task,listener);
+        return task.getTaskId();
     }
 
     @Override
     public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener) {
-        return null;
+        HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener,fragmentManager);
+        executeHttpTask(task,listener);
+        return task.getTaskId();
     }
 
     @Override
@@ -118,11 +102,59 @@ public class HttpServer implements IHttpExecutor{
     }
 
     /**
+     * Task进行分流
+     * @param task
+     * @param listener
+     * @param <T>
+     * @param <R>
+     */
+    private <T,R> void executeHttpTask(HttpTask<T> task,IHttpListener<R> listener){
+        //将请求进行分发
+        switch (task.getRequest().getMethod()){
+            case HTTP.GET:
+                executeGet(task,listener);
+                break;
+            case HTTP.POST:
+                executePost(task,listener);
+                break;
+            case HTTP.DOWNLOAD:
+                executeDownload(task,(IHttpTransferListener)listener);
+                break;
+            case HTTP.UPLOAD:
+                executeUpload(task,(IHttpTransferListener)listener);
+                break;
+            default:
+        }
+    }
+
+
+    /**
      * 执行GET POST请求
      */
-    private <R> void executeHttp(FragmentManager fragmentManager,HttpTask task,final IHttpListener<R> listener){
-        mEngine.execute(fragmentManager, task, new IHttpCallback<R>() {
+    private <T,R> void executeGet(HttpTask<T> task,final IHttpListener<R> listener){
+        mEngine.enqueueGetCall(task, new IHttpCallback<R>() {
+            @Override
+            public void onSuccess(HttpResponse<R> response) {
+                if (HttpResponse.isOK(response)){
+                    listener.onSuccess(response.getContent());
+                }else {
+                    listener.onFailure(new Exception("is not ok"));
+                }
+            }
 
+            @Override
+            public void onFailure(Exception exception) {
+                LogManager.i(HTTP.TAG,"exception:" + exception.toString());
+                listener.onFailure(exception);
+            }
+        });
+    }
+
+    /**
+     * 执行GET POST请求
+     */
+    private <T,R> void executePost(HttpTask<T> task,final IHttpListener<R> listener){
+        mEngine.enqueuePostCall(task, new IHttpCallback<R>() {
             @Override
             public void onSuccess(HttpResponse<R> response) {
                 if (HttpResponse.isOK(response)){
@@ -142,21 +174,20 @@ public class HttpServer implements IHttpExecutor{
 
     /**
      *
-     * @param fragmentManager
      * @param task
      * @param listener
      * @param <R>
      */
-    private <R> void executeHttp2(FragmentManager fragmentManager,HttpTask task,final IHttpTransferListener<R> listener){
-        mEngine.execute(fragmentManager, task, new IHttpTransferCallback() {
+    private <T,R> void executeDownload(HttpTask<T> task, final IHttpTransferListener<R> listener){
+        mEngine.enqueueDownloadCall(task, new IHttpTransferCallback<R>() {
             @Override
             public void onProgress(long currentLength, long totalLength) {
                 listener.onProgress(currentLength,totalLength);
             }
 
             @Override
-            public void onSuccess(HttpResponse response) {
-                listener.onSuccess(response);
+            public void onSuccess(HttpResponse<R> response) {
+                listener.onSuccess(response.getContent());
             }
 
             @Override
@@ -165,4 +196,30 @@ public class HttpServer implements IHttpExecutor{
             }
         });
     }
+
+    /**
+     *
+     * @param task
+     * @param listener
+     * @param <R>
+     */
+    private <T,R> void executeUpload(HttpTask<T> task, final IHttpTransferListener<R> listener){
+        mEngine.enqueueUploadCall(task, new IHttpTransferCallback<R>() {
+            @Override
+            public void onProgress(long currentLength, long totalLength) {
+                listener.onProgress(currentLength,totalLength);
+            }
+
+            @Override
+            public void onSuccess(HttpResponse<R> response) {
+                listener.onSuccess(response.getContent());
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+                listener.onFailure(exception);
+            }
+        });
+    }
+
 }

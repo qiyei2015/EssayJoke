@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentManager;
 
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.

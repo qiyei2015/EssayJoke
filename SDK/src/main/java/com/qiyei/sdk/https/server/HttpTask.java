@@ -1,4 +1,6 @@
 package com.qiyei.sdk.https.server;
+import android.app.FragmentManager;
+
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.util.UUIDUtil;
@@ -30,6 +32,11 @@ public class HttpTask<T> {
     protected HttpRequest<T> mRequest;
 
     /**
+     * FragmentManager
+     */
+    protected Object mFragmentManager;
+
+    /**
      * 构造器
      * @param tag
      * @param listener
@@ -46,11 +53,12 @@ public class HttpTask<T> {
      * @param request Http请求
      * @param listener 回调Listener
      */
-    public HttpTask(String tag,HttpRequest<T> request,IHttpListener listener) {
+    public HttpTask(String tag, HttpRequest<T> request, IHttpListener listener,Object object) {
         mTag = tag;
         mRequest = request;
         mListener = listener;
         mTaskId = mTag + "_" + UUIDUtil.get32UUID();
+        mFragmentManager = object;
     }
 
     /**
@@ -75,4 +83,10 @@ public class HttpTask<T> {
         return mListener;
     }
 
+    /**
+     * @return {@link #mFragmentManager}
+     */
+    public Object getFragmentManager() {
+        return mFragmentManager;
+    }
 }
