@@ -11,6 +11,7 @@ import com.qiyei.sdk.https.server.HttpUtil;
 import com.qiyei.sdk.https.server.IHttpCallback;
 import com.qiyei.sdk.https.server.IHttpEngine;
 import com.qiyei.sdk.https.server.HttpTask;
+import com.qiyei.sdk.https.server.IHttpTransferCallback;
 import com.qiyei.sdk.log.LogManager;
 
 import java.lang.reflect.Field;
@@ -36,9 +37,9 @@ import retrofit2.http.POST;
  */
 public class RetrofitEngine implements IHttpEngine {
 
-    @Override
-    public <T,R> String execute(final FragmentManager fragmentManager, final HttpTask<T> task, final IHttpCallback<R> callback) {
 
+    @Override
+    public <T, R> void enqueueGetCall(final HttpTask<T> task, final IHttpCallback<R> callback) {
         Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
         Object apiService = retrofit.create(task.getRequest().getApiClazz());
 
@@ -46,19 +47,13 @@ public class RetrofitEngine implements IHttpEngine {
 
         if (TextUtils.isEmpty(methodName)){
             LogManager.i(HTTP.TAG,"cannot find method in " + task.getRequest().getApiClazz());
-            return null;
+            return;
         }
 
-        Object params = null;
-
-        if (task.getRequest().getMethod().equals(HTTP.GET)){
-            params = HttpUtil.gsonToGetParams(task.getRequest());
-        }else if (task.getRequest().getMethod().equals(HTTP.POST)){
-            params = task.getRequest().getBody();
-        }
+        Object params = HttpUtil.gsonToGetParams(task.getRequest());;
 
         if (params == null){
-            return null;
+            return ;
         }
 
         Call call = null;
@@ -86,13 +81,13 @@ public class RetrofitEngine implements IHttpEngine {
             e.printStackTrace();
         }
         if (call == null){
-            return null;
+            return ;
         }
 
         //将任务加到队列里面
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
 
-        LoadingManager.showDialog(fragmentManager,task.getTaskId());
+        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
 
         //获取OkHttp的request
         Request request = call.request();
@@ -112,26 +107,188 @@ public class RetrofitEngine implements IHttpEngine {
         call.enqueue(new Callback<R>() {
             @Override
             public void onResponse(Call<R> call, Response<R> response) {
-                LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 HttpResponse<R> obj = new HttpResponse<>(response.body());
                 callback.onSuccess(obj);
             }
 
             @Override
             public void onFailure(Call<R> call, Throwable t) {
-                LoadingManager.dismissDialog(fragmentManager,task.getTaskId());
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 callback.onFailure((Exception) t);
             }
         });
 
-        return task.getTaskId();
     }
 
     @Override
-    public <T, R> String execute(android.app.FragmentManager fragmentManager, HttpTask<T> task, IHttpCallback<R> callback) {
-        return null;
+    public <T, R> void enqueuePostCall(final HttpTask<T> task, final IHttpCallback<R> callback) {
+        Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
+        Object apiService = retrofit.create(task.getRequest().getApiClazz());
+
+        String methodName = getMethodName(task);
+
+        if (TextUtils.isEmpty(methodName)){
+            LogManager.i(HTTP.TAG,"cannot find method in " + task.getRequest().getApiClazz());
+            return;
+        }
+
+        Object params = HttpUtil.gsonToGetParams(task.getRequest());;
+
+        if (params == null){
+            return ;
+        }
+
+        Call call = null;
+        try {
+            Class<?> paramsClazz = getParamsClazz(apiService.getClass(),params.getClass(),methodName);
+
+            Method method;
+            if (paramsClazz == null){
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[0]);
+                if (method != null){
+                    call = (Call) method.invoke(apiService,new Object[0]);
+                }
+            }else {
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[]{paramsClazz});
+                if (method != null){
+                    call = (Call) method.invoke(apiService,params);
+                }
+            }
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        if (call == null){
+            return ;
+        }
+
+        //将任务加到队列里面
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
+        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
+
+        //获取OkHttp的request
+        Request request = call.request();
+        //反射设置 tag
+        Class<?> clazz = request.getClass();
+        try {
+            Field field = clazz.getDeclaredField("tag");
+            field.setAccessible(true);
+            //将task设置成tag字段，保存数据
+            field.set(request,task);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        call.enqueue(new Callback<R>() {
+            @Override
+            public void onResponse(Call<R> call, Response<R> response) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+                HttpResponse<R> obj = new HttpResponse<>(response.body());
+                callback.onSuccess(obj);
+            }
+
+            @Override
+            public void onFailure(Call<R> call, Throwable t) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+                callback.onFailure((Exception) t);
+            }
+        });
     }
 
+    @Override
+    public <T, R> void enqueueDownloadCall(final HttpTask<T> task, final IHttpTransferCallback<R> callback) {
+        Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
+        Object apiService = retrofit.create(task.getRequest().getApiClazz());
+
+        String methodName = getMethodName(task);
+
+        if (TextUtils.isEmpty(methodName)){
+            LogManager.i(HTTP.TAG,"cannot find method in " + task.getRequest().getApiClazz());
+            return;
+        }
+
+        Object params = HttpUtil.gsonToGetParams(task.getRequest());;
+
+        if (params == null){
+            return ;
+        }
+
+        Call call = null;
+        try {
+            Class<?> paramsClazz = getParamsClazz(apiService.getClass(),params.getClass(),methodName);
+
+            Method method;
+            if (paramsClazz == null){
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[0]);
+                if (method != null){
+                    call = (Call) method.invoke(apiService,new Object[0]);
+                }
+            }else {
+                method = apiService.getClass().getDeclaredMethod(methodName,new Class[]{paramsClazz});
+                if (method != null){
+                    call = (Call) method.invoke(apiService,params);
+                }
+            }
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        if (call == null){
+            return ;
+        }
+
+        //将任务加到队列里面
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
+        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
+
+        //获取OkHttp的request
+        Request request = call.request();
+        //反射设置 tag
+        Class<?> clazz = request.getClass();
+        try {
+            Field field = clazz.getDeclaredField("tag");
+            field.setAccessible(true);
+            //将task设置成tag字段，保存数据
+            field.set(request,task);
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        call.enqueue(new Callback<R>() {
+            @Override
+            public void onResponse(Call<R> call, Response<R> response) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+                HttpResponse<R> obj = new HttpResponse<>(response.body());
+                callback.onSuccess(obj);
+            }
+
+            @Override
+            public void onFailure(Call<R> call, Throwable t) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+                callback.onFailure((Exception) t);
+            }
+        });
+    }
+
+    @Override
+    public <T, R> void enqueueUploadCall(HttpTask<T> task, IHttpTransferCallback<R> callback) {
+
+    }
 
     @Override
     public void cancelHttpCall(String taskId) {

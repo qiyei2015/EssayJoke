@@ -28,7 +28,7 @@ public class LoadingDialog extends DialogFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_loadingdialog, null, false);
+        View root = inflater.inflate(R.layout.fragment_loading_dialog, null, false);
 //        TextView tvLoadMsg = (TextView) root.findViewById(R.id.load_msg);
 //        tvLoadMsg.setText(getTag());
         return root;

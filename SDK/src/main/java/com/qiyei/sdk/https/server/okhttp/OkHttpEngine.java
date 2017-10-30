@@ -2,11 +2,11 @@ package com.qiyei.sdk.https.server.okhttp;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.FragmentManager;
+
 
 
 import com.google.gson.Gson;
-import com.qiyei.sdk.https.HTTP;
+
 import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
@@ -179,7 +179,7 @@ public class OkHttpEngine implements IHttpEngine{
         builder = new okhttp3.Request.Builder().url(url).get().tag(task);
         call = mClient.newCall(builder.build());
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
+
         if (call == null){
             return ;
         }
@@ -189,7 +189,6 @@ public class OkHttpEngine implements IHttpEngine{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                         callback.onFailure(e);
                     }
                 });

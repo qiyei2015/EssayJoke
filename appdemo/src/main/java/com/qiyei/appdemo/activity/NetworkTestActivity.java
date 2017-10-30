@@ -123,7 +123,7 @@ public class NetworkTestActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSuccess(Object response) {
+                    public void onSuccess(String response) {
                         LogManager.i(TAG,"response:" + response);
                     }
 

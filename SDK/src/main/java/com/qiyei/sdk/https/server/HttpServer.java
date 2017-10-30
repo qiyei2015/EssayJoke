@@ -10,6 +10,7 @@ import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.api.IHttpTransferListener;
+import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
 import com.qiyei.sdk.log.LogManager;
 
@@ -132,6 +133,8 @@ public class HttpServer implements IHttpExecutor{
      * 执行GET POST请求
      */
     private <T,R> void executeGet(HttpTask<T> task,final IHttpListener<R> listener){
+
+
         mEngine.enqueueGetCall(task, new IHttpCallback<R>() {
             @Override
             public void onSuccess(HttpResponse<R> response) {
@@ -178,20 +181,27 @@ public class HttpServer implements IHttpExecutor{
      * @param listener
      * @param <R>
      */
-    private <T,R> void executeDownload(HttpTask<T> task, final IHttpTransferListener<R> listener){
+    private <T,R> void executeDownload(final HttpTask<T> task, final IHttpTransferListener<R> listener){
+
+        LoadingManager.showProgressDialog(task.getFragmentManager(),task.getTaskId());
+
         mEngine.enqueueDownloadCall(task, new IHttpTransferCallback<R>() {
             @Override
             public void onProgress(long currentLength, long totalLength) {
+                int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
+                LoadingManager.setProgress(task.getFragmentManager(),task.getTaskId(),progress);
                 listener.onProgress(currentLength,totalLength);
             }
 
             @Override
             public void onSuccess(HttpResponse<R> response) {
+                LoadingManager.dismissProgressDialog(task.getFragmentManager(),task.getTaskId());
                 listener.onSuccess(response.getContent());
             }
 
             @Override
             public void onFailure(Exception exception) {
+                LoadingManager.dismissProgressDialog(task.getFragmentManager(),task.getTaskId());
                 listener.onFailure(exception);
             }
         });

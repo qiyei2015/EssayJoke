@@ -3,6 +3,7 @@ package com.qiyei.sdk.https.server;
 import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 
+import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.api.IHttpTransferListener;
@@ -68,21 +69,6 @@ public class HttpServerProxy {
         return mHttpServer.execute(fragmentManager,request,listener);
     }
 
-    public <T, R> String execute(HttpRequest<T> request, IHttpTransferListener<R> listener) {
-//        checkParams(request,listener);
-        return mHttpServer.execute(request,listener);
-    }
-
-    public <T, R> String execute(FragmentManager fragmentManager, HttpRequest<T> request, IHttpTransferListener<R> listener) {
-//        checkParams(request,listener);
-        return mHttpServer.execute(fragmentManager,request,listener);
-    }
-
-    public <T, R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpTransferListener<R> listener) {
-//        checkParams(request,listener);
-        return mHttpServer.execute(fragmentManager,request,listener);
-    }
-
     /**
      * 取消网络请求
      * @param taskId 需要取消的 taskId
@@ -128,6 +114,13 @@ public class HttpServerProxy {
         //IHttpListener<R> listener 必须实例化
         if (HttpUtil.getParamsClazz(listener.getClass(),true) == null){
             throw new IllegalArgumentException(" the prams listener of IHttpListener<R> must be Instantiated !");
+        }
+
+        //检查listener的类型
+        if (request.getMethod().equals(HTTP.DOWNLOAD) || request.getMethod().equals(HTTP.UPLOAD)){
+            if (!(listener instanceof IHttpTransferListener)){
+                throw new IllegalArgumentException("the listener must be Instantiated of IHttpTransferListener");
+            }
         }
     }
 
