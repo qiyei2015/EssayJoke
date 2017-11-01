@@ -5,19 +5,13 @@ import com.google.gson.internal.$Gson$Types;
 import com.google.gson.reflect.TypeToken;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.HTTP;
-import com.qiyei.sdk.https.server.retrofit.IRetrofitService;
 import com.qiyei.sdk.log.LogManager;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-
-import retrofit2.http.GET;
 
 /**
  * @author Created by qiyei2015 on 2017/10/24.
@@ -133,43 +127,6 @@ public class HttpUtil {
         String gsonStr = new Gson().toJson(request.getBody());
         Map<String,String> map = new Gson().fromJson(gsonStr, new TypeToken<HashMap<String,String>>(){}.getType());
         return map;
-    }
-
-    /**
-     * 设置参数的path
-     * @param clazz
-     * @param path
-     */
-    private void setPath(Class<?> clazz,String path){
-        Class<?> retrofitServiceClazz = IRetrofitService.class;
-
-        try {
-            Method method = retrofitServiceClazz.getDeclaredMethod("createGetCall",new Class<?>[]{});
-
-            if (method != null){
-                method.setAccessible(true);
-            }
-            GET getAnnotation = method.getAnnotation(GET.class);
-            if (getAnnotation != null){
-                //获取AnnotationInvocationHandler
-                InvocationHandler handler = Proxy.getInvocationHandler(getAnnotation);
-                //获取获取AnnotationInvocationHandler的memberValues字段
-//                Class<?> clazzAnnotationInvocationHandler = Class.forName("sun.reflect.annotation.AnnotationInvocationHandler");
-                Field memberValuesField = handler.getClass().getDeclaredField("memberValues");
-                if (memberValuesField != null){
-                    memberValuesField.setAccessible(true);
-                    Map<String,Object> memberValues = (Map<String, Object>) memberValuesField.get(handler);
-                    memberValues.put("values",path);
-                    memberValuesField.set(handler,memberValues);
-                }
-            }
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
     }
 
 

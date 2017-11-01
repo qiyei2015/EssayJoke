@@ -1,10 +1,9 @@
 package com.qiyei.sdk.https.server.retrofit;
 
-import android.support.v4.app.FragmentManager;
+
 import android.text.TextUtils;
 
 import com.qiyei.sdk.https.HTTP;
-import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -87,8 +86,6 @@ public class RetrofitEngine implements IHttpEngine {
         //将任务加到队列里面
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
 
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
-
         //获取OkHttp的request
         Request request = call.request();
         //反射设置 tag
@@ -107,14 +104,12 @@ public class RetrofitEngine implements IHttpEngine {
         call.enqueue(new Callback<R>() {
             @Override
             public void onResponse(Call<R> call, Response<R> response) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 HttpResponse<R> obj = new HttpResponse<>(response.body());
                 callback.onSuccess(obj);
             }
 
             @Override
             public void onFailure(Call<R> call, Throwable t) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 callback.onFailure((Exception) t);
             }
         });
@@ -170,8 +165,6 @@ public class RetrofitEngine implements IHttpEngine {
         //将任务加到队列里面
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
 
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
-
         //获取OkHttp的request
         Request request = call.request();
         //反射设置 tag
@@ -190,14 +183,12 @@ public class RetrofitEngine implements IHttpEngine {
         call.enqueue(new Callback<R>() {
             @Override
             public void onResponse(Call<R> call, Response<R> response) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 HttpResponse<R> obj = new HttpResponse<>(response.body());
                 callback.onSuccess(obj);
             }
 
             @Override
             public void onFailure(Call<R> call, Throwable t) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 callback.onFailure((Exception) t);
             }
         });
@@ -251,9 +242,6 @@ public class RetrofitEngine implements IHttpEngine {
 
         //将任务加到队列里面
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
-
         //获取OkHttp的request
         Request request = call.request();
         //反射设置 tag
@@ -272,14 +260,12 @@ public class RetrofitEngine implements IHttpEngine {
         call.enqueue(new Callback<R>() {
             @Override
             public void onResponse(Call<R> call, Response<R> response) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 HttpResponse<R> obj = new HttpResponse<>(response.body());
                 callback.onSuccess(obj);
             }
 
             @Override
             public void onFailure(Call<R> call, Throwable t) {
-                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 callback.onFailure((Exception) t);
             }
         });
@@ -288,17 +274,30 @@ public class RetrofitEngine implements IHttpEngine {
     @Override
     public <T, R> void enqueueUploadCall(HttpTask<T> task, IHttpTransferCallback<R> callback) {
 
+
     }
 
     @Override
     public void cancelHttpCall(String taskId) {
-        Call call = HttpCallManager.getInstance().queryCall(taskId,"");
-        if (call != null && !call.isCanceled()){
-            call.cancel();
+        Object object = HttpCallManager.getInstance().queryCall(taskId);
+        if (object == null){
+            return;
+        }
+
+        if (object instanceof Call){
+            Call call = (Call) object;
+            if (call != null && !call.isCanceled()){
+                call.cancel();
+            }
         }
     }
 
 
+    /**
+     * 找到method
+     * @param task
+     * @return
+     */
     private String getMethodName(HttpTask task){
         String methodName = null;
 

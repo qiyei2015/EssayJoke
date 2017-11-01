@@ -5,9 +5,7 @@ import android.os.Looper;
 
 
 
-import com.google.gson.Gson;
 
-import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -25,9 +23,7 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import okio.BufferedSink;
@@ -61,26 +57,25 @@ public class OkHttpEngine implements IHttpEngine{
 
     @Override
     public <T, R> void enqueueGetCall(final HttpTask<T> task, final IHttpCallback<R> callback) {
-        String url = null;
-        Call call = null;
 
-        okhttp3.Request.Builder builder = null;
-
-        url = OkHttpHelper.buildGetRequest(task.getRequest());
-        builder = new okhttp3.Request.Builder().url(url).tag(task);
-        call = mClient.newCall(builder.build());
-        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
+        Call call = OkHttpHelper.buildGetCall(mClient,task);
         if (call == null){
             return ;
         }
+
+        //添加call
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                         callback.onFailure(e);
                     }
                 });
@@ -88,6 +83,10 @@ public class OkHttpEngine implements IHttpEngine{
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
                 String result = null;
                 if (response != null && response.isSuccessful()) {
                     result = response.body().string();
@@ -98,7 +97,6 @@ public class OkHttpEngine implements IHttpEngine{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingManager.dismissDialog(task.getFragmentManager(), task.getTaskId());
                         if (responseObj != null) {
                             callback.onSuccess(responseObj);
                         } else {
@@ -112,33 +110,26 @@ public class OkHttpEngine implements IHttpEngine{
 
     @Override
     public <T, R> void enqueuePostCall(final HttpTask<T> task, final IHttpCallback<R> callback) {
-        String url = null;
-        Call call = null;
 
-        okhttp3.Request.Builder builder = null;
-
-        url = OkHttpHelper.buildPostRequest(task.getRequest());
-        final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-
-        Gson gson = new Gson();
-        String json = gson.toJson(task.getRequest().getBody());
-        RequestBody body = RequestBody.create(JSON, json);
-
-        builder = new okhttp3.Request.Builder().url(url).post(body).tag(task);
-        call = mClient.newCall(builder.build());
-        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
+        Call call = OkHttpHelper.buildPostCall(mClient,task);
         if (call == null){
             return ;
         }
 
+        //添加call
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+
                         callback.onFailure(e);
                     }
                 });
@@ -146,6 +137,9 @@ public class OkHttpEngine implements IHttpEngine{
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
                 String result = null;
                 if (response != null && response.isSuccessful()) {
                     result = response.body().string();
@@ -156,7 +150,6 @@ public class OkHttpEngine implements IHttpEngine{
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
-                        LoadingManager.dismissDialog(task.getFragmentManager(), task.getTaskId());
                         if (responseObj != null) {
                             callback.onSuccess(responseObj);
                         } else {
@@ -170,22 +163,22 @@ public class OkHttpEngine implements IHttpEngine{
 
     @Override
     public <T, R> void enqueueDownloadCall(final HttpTask<T> task, final IHttpTransferCallback<R> callback) {
-        String url = null;
-        Call call = null;
 
-        okhttp3.Request.Builder builder = null;
-
-        url = OkHttpHelper.buildGetRequest(task.getRequest());
-        builder = new okhttp3.Request.Builder().url(url).get().tag(task);
-        call = mClient.newCall(builder.build());
-        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-
+        Call call = OkHttpHelper.buildDownloadCall(mClient,task);
         if (call == null){
             return ;
         }
+
+        //添加call
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
                 mHandler.post(new Runnable() {
                     @Override
                     public void run() {
@@ -216,21 +209,81 @@ public class OkHttpEngine implements IHttpEngine{
                         callback.onSuccess(responseObj);
                     }
                 });
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
             }
         });
     }
 
     @Override
-    public <T, R> void enqueueUploadCall(HttpTask<T> task, IHttpTransferCallback<R> callback) {
+    public <T, R> void enqueueUploadCall(final HttpTask<T> task, final IHttpTransferCallback<R> callback) {
 
+        Call call = OkHttpHelper.buildUploadCall(mClient,task,callback);
+        if (call == null){
+            return ;
+        }
+
+        //添加call
+        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        callback.onFailure(e);
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+
+                ResponseBody responseBody = new ProgressResponseBody(response.body(),(IHttpTransferCallback) callback);
+                //read the body to file
+                BufferedSource source = responseBody.source();
+                File outFile = new File(task.getRequest().getFilePath());
+                outFile.delete();
+                outFile.getParentFile().mkdirs();
+                outFile.createNewFile();
+                BufferedSink sink = Okio.buffer(Okio.sink(outFile));
+                source.readAll(sink);
+                sink.flush();
+                source.close();
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        String success = "success";
+                        final HttpResponse responseObj = new HttpResponse(success);
+                        callback.onSuccess(responseObj);
+                    }
+                });
+
+                //移除call
+                HttpCallManager.getInstance().removeCall(task.getTaskId());
+            }
+        });
     }
 
 
     @Override
     public void cancelHttpCall(String taskId) {
-        Call call = HttpCallManager.getInstance().queryCall(taskId);
-        if (call != null && !call.isCanceled()){
-            call.cancel();
+        Object object = HttpCallManager.getInstance().queryCall(taskId);
+        if (object == null){
+            return;
+        }
+
+        if (object instanceof Call){
+            Call call = (Call) object;
+            if (call != null && !call.isCanceled()){
+                call.cancel();
+            }
         }
     }
 

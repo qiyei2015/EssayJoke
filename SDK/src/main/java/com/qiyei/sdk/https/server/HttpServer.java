@@ -132,12 +132,17 @@ public class HttpServer implements IHttpExecutor{
     /**
      * 执行GET POST请求
      */
-    private <T,R> void executeGet(HttpTask<T> task,final IHttpListener<R> listener){
+    private <T,R> void executeGet(final HttpTask<T> task,final IHttpListener<R> listener){
 
+        //显示对话框
+        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
 
         mEngine.enqueueGetCall(task, new IHttpCallback<R>() {
             @Override
             public void onSuccess(HttpResponse<R> response) {
+
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+
                 if (HttpResponse.isOK(response)){
                     listener.onSuccess(response.getContent());
                 }else {
@@ -147,6 +152,7 @@ public class HttpServer implements IHttpExecutor{
 
             @Override
             public void onFailure(Exception exception) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 LogManager.i(HTTP.TAG,"exception:" + exception.toString());
                 listener.onFailure(exception);
             }
@@ -156,10 +162,14 @@ public class HttpServer implements IHttpExecutor{
     /**
      * 执行GET POST请求
      */
-    private <T,R> void executePost(HttpTask<T> task,final IHttpListener<R> listener){
+    private <T,R> void executePost(final HttpTask<T> task,final IHttpListener<R> listener){
+        //显示对话框
+        LoadingManager.showDialog(task.getFragmentManager(),task.getTaskId());
         mEngine.enqueuePostCall(task, new IHttpCallback<R>() {
             @Override
             public void onSuccess(HttpResponse<R> response) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
+
                 if (HttpResponse.isOK(response)){
                     listener.onSuccess(response.getContent());
                 }else {
@@ -169,6 +179,7 @@ public class HttpServer implements IHttpExecutor{
 
             @Override
             public void onFailure(Exception exception) {
+                LoadingManager.dismissDialog(task.getFragmentManager(),task.getTaskId());
                 LogManager.i(HTTP.TAG,"exception:" + exception.toString());
                 listener.onFailure(exception);
             }
@@ -213,20 +224,27 @@ public class HttpServer implements IHttpExecutor{
      * @param listener
      * @param <R>
      */
-    private <T,R> void executeUpload(HttpTask<T> task, final IHttpTransferListener<R> listener){
+    private <T,R> void executeUpload(final HttpTask<T> task, final IHttpTransferListener<R> listener){
+
+        LoadingManager.showProgressDialog(task.getFragmentManager(),task.getTaskId());
+
         mEngine.enqueueUploadCall(task, new IHttpTransferCallback<R>() {
             @Override
             public void onProgress(long currentLength, long totalLength) {
+                int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
+                LoadingManager.setProgress(task.getFragmentManager(),task.getTaskId(),progress);
                 listener.onProgress(currentLength,totalLength);
             }
 
             @Override
             public void onSuccess(HttpResponse<R> response) {
+                LoadingManager.dismissProgressDialog(task.getFragmentManager(),task.getTaskId());
                 listener.onSuccess(response.getContent());
             }
 
             @Override
             public void onFailure(Exception exception) {
+                LoadingManager.dismissProgressDialog(task.getFragmentManager(),task.getTaskId());
                 listener.onFailure(exception);
             }
         });
