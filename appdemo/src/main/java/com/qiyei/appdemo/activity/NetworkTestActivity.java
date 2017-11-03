@@ -23,6 +23,8 @@ import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
 
+import okhttp3.ResponseBody;
+
 /**
  * @author Created by qiyei2015 on 2017/10/28.
  * @version: 1.0
@@ -112,7 +114,7 @@ public class NetworkTestActivity extends AppCompatActivity {
         findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new HttpManager().execute(getSupportFragmentManager(),buildDownloadRequest(), new IHttpTransferListener<String>() {
+                new HttpManager().execute(getSupportFragmentManager(),buildDownloadRequest(), new IHttpTransferListener<ResponseBody>() {
 
                     @Override
                     public void onProgress(long currentLength, long totalLength) {
@@ -123,7 +125,7 @@ public class NetworkTestActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onSuccess(String response) {
+                    public void onSuccess(ResponseBody response) {
                         LogManager.i(TAG,"response:" + response);
                     }
 

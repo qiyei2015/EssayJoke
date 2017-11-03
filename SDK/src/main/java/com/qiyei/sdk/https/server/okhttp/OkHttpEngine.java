@@ -3,9 +3,6 @@ package com.qiyei.sdk.https.server.okhttp;
 import android.os.Handler;
 import android.os.Looper;
 
-
-
-
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -15,11 +12,8 @@ import com.qiyei.sdk.https.server.HttpTask;
 import com.qiyei.sdk.https.server.IHttpTransferCallback;
 import com.qiyei.sdk.https.server.ProgressResponseBody;
 
-
-
 import java.io.File;
 import java.io.IOException;
-
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -190,7 +184,7 @@ public class OkHttpEngine implements IHttpEngine{
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                ResponseBody responseBody = new ProgressResponseBody(response.body(),(IHttpTransferCallback) callback);
+                ResponseBody responseBody = new ProgressResponseBody(response.body(), callback);
                 //read the body to file
                 BufferedSource source = responseBody.source();
                 File outFile = new File(task.getRequest().getFilePath());
@@ -245,7 +239,7 @@ public class OkHttpEngine implements IHttpEngine{
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
 
-                ResponseBody responseBody = new ProgressResponseBody(response.body(),(IHttpTransferCallback) callback);
+                ResponseBody responseBody = new ProgressResponseBody(response.body(),callback);
                 //read the body to file
                 BufferedSource source = responseBody.source();
                 File outFile = new File(task.getRequest().getFilePath());
@@ -287,4 +281,8 @@ public class OkHttpEngine implements IHttpEngine{
         }
     }
 
+    @Override
+    public String toString() {
+        return "OkHttpEngine";
+    }
 }

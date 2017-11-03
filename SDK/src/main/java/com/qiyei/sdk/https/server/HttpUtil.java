@@ -122,9 +122,10 @@ public class HttpUtil {
      * @return
      */
     public static <T> Map<String,String> gsonToGetParams(HttpRequest<T> request){
+
         //将对象序列化成字符串
-        Class<?> clazz = request.getClass();
         String gsonStr = new Gson().toJson(request.getBody());
+
         Map<String,String> map = new Gson().fromJson(gsonStr, new TypeToken<HashMap<String,String>>(){}.getType());
         return map;
     }

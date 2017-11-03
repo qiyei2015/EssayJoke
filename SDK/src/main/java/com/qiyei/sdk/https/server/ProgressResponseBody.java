@@ -26,7 +26,7 @@ public class ProgressResponseBody extends ResponseBody{
     /**
      * 带包装的实体
      */
-    private final ResponseBody mResponseBody;
+    private ResponseBody mResponseBody;
 
     /**
      * 传输的回调
@@ -37,6 +37,11 @@ public class ProgressResponseBody extends ResponseBody{
      * 包装完成的BufferedSource
      */
     private BufferedSource mBufferedSource;
+
+    public ProgressResponseBody(IHttpTransferCallback callback) {
+        mCallback = callback;
+        mResponseBody = null;
+    }
 
     /**
      * 构造方法
@@ -102,5 +107,12 @@ public class ProgressResponseBody extends ResponseBody{
                 return byteRead;
             }
         };
+    }
+
+    /**
+     * @param responseBody the {@link #mResponseBody} to set
+     */
+    public void setResponseBody(ResponseBody responseBody) {
+        mResponseBody = responseBody;
     }
 }

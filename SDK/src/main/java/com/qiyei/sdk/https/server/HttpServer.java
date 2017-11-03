@@ -12,6 +12,7 @@ import com.qiyei.sdk.https.HTTP;
 import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.okhttp.OkHttpEngine;
+import com.qiyei.sdk.https.server.retrofit.RetrofitEngine;
 import com.qiyei.sdk.log.LogManager;
 
 /**
@@ -45,7 +46,7 @@ public class HttpServer implements IHttpExecutor{
      * 静态内部类
      */
     private static class SingleHolder{
-        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new OkHttpEngine());
+        private final static HttpServer sServer = new HttpServer(RuntimeEnv.appContext,new RetrofitEngine());
     }
 
     /**
@@ -60,7 +61,7 @@ public class HttpServer implements IHttpExecutor{
      * 创建函数
      */
     public void onCreate(){
-        LogManager.i(HTTP.TAG,"HttpServer created !");
+        LogManager.i(HTTP.TAG,"HttpServer created ! engine is " + mEngine.toString());
     }
 
     /**
@@ -78,11 +79,28 @@ public class HttpServer implements IHttpExecutor{
         mEngine = engine;
     }
 
+    /**
+     * 执行https请求
+     * @param request 请求参数
+     * @param listener 回调listener
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
+     * @return 该任务的taskId
+     */
     @Override
     public <T,R> String execute(HttpRequest<T> request, IHttpListener<R> listener) {
         return execute((FragmentManager) null,request,listener);
     }
 
+    /**
+     * 执行https请求
+     * @param fragmentManager 显示对话框的fragment
+     * @param request 请求参数
+     * @param listener 回调listener
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
+     * @return 该任务的taskId
+     */
     @Override
     public <T,R> String execute(final FragmentManager fragmentManager, HttpRequest<T> request, final IHttpListener<R> listener) {
         HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener,fragmentManager);
@@ -90,6 +108,15 @@ public class HttpServer implements IHttpExecutor{
         return task.getTaskId();
     }
 
+    /**
+     * 执行https请求
+     * @param fragmentManager 显示对话框的fragment
+     * @param request 请求参数
+     * @param listener 回调listener
+     * @param <T> 请求泛型参数
+     * @param <R> 响应泛型参数
+     * @return 该任务的taskId
+     */
     @Override
     public <T,R> String execute(android.app.FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener) {
         HttpTask<T> task = new HttpTask<T>(request.getMethod(),request, listener,fragmentManager);
@@ -97,6 +124,10 @@ public class HttpServer implements IHttpExecutor{
         return task.getTaskId();
     }
 
+    /**
+     * 取消网络请求
+     * @param taskId 需要取消的 taskId
+     */
     @Override
     public void cancel(String taskId) {
         mEngine.cancelHttpCall(taskId);

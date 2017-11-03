@@ -4,12 +4,19 @@ import com.qiyei.appdemo.model.DiscoverListResult;
 
 import java.util.Map;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Streaming;
+import retrofit2.http.Url;
 
 /**
  * @author Created by qiyei2015 on 2017/10/24.
@@ -38,4 +45,31 @@ public interface RetrofitApiService {
     @POST("user/register")
     Call<ResponseObject<Bean2>> getPostCall(@Body RequestObject<Bean2> req);
 
+    /**
+     * 下载文件1
+     * @return
+     */
+    @Streaming
+    @GET("sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe")
+    Call<ResponseBody> downloadFileWithFixedUrl();
+
+    /**
+     * 下载文件2
+     * @param fileUrl
+     * @return
+     */
+    @Streaming
+    @GET
+    Call<ResponseBody> downloadFileWithDynamicUrlSync(@Url String fileUrl);
+
+    /**
+     * 上传文件
+     * @param description
+     * @param file
+     * @return
+     */
+    @Multipart
+    @POST("upload")
+    Call<ResponseBody> upload(@Part("description") RequestBody description,
+                              @Part MultipartBody.Part file);
 }

@@ -23,7 +23,7 @@ public class ProgressRequestBody extends RequestBody {
     /**
      * 带包装的实体
      */
-    private final RequestBody mRequestBody;
+    private RequestBody mRequestBody;
 
     /**
      * 传输的回调
@@ -35,6 +35,10 @@ public class ProgressRequestBody extends RequestBody {
      */
     private BufferedSink mBufferedSink;
 
+    public ProgressRequestBody(IHttpTransferCallback callback) {
+        mCallback = callback;
+    }
+
     /**
      * 构造方法
      * @param requestBody
@@ -44,7 +48,6 @@ public class ProgressRequestBody extends RequestBody {
         mRequestBody = requestBody;
         mCallback = callback;
     }
-
 
     @Nullable
     @Override
@@ -98,4 +101,10 @@ public class ProgressRequestBody extends RequestBody {
         };
     }
 
+    /**
+     * @param requestBody the {@link #mRequestBody} to set
+     */
+    public void setRequestBody(RequestBody requestBody) {
+        mRequestBody = requestBody;
+    }
 }

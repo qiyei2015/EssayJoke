@@ -97,7 +97,7 @@ public class LogImpl {
             return 0;
         }
 
-        Log.d(LogConstant.TAG,"log print --> level:" + level);
+//        Log.v(LogConstant.TAG,"log print --> level:" + level);
         //大于等于该级别才会打印
         if (level >= mLevel){
             if (isWriteFile){

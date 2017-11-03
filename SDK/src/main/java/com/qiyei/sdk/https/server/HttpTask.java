@@ -3,6 +3,7 @@ import android.app.FragmentManager;
 
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.util.UUIDUtil;
 
 /**
