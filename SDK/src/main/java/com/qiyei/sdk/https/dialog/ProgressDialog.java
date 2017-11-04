@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.qiyei.sdk.R;
+import com.qiyei.sdk.view.ProgressView;
 
 /**
  * @author Created by qiyei2015 on 2017/10/30.
@@ -21,13 +22,9 @@ import com.qiyei.sdk.R;
 public class ProgressDialog extends DialogFragment {
 
     /**
-     * 进度bar
+     * 自定义进度View
      */
-    private ProgressBar mProgressBar;
-    /**
-     * 文字显示
-     */
-    private TextView mProgressTv;
+    private ProgressView mProgressView;
 
     public ProgressDialog(){
 
@@ -42,10 +39,7 @@ public class ProgressDialog extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_progress_dialog, null, false);
-        mProgressBar = root.findViewById(R.id.progress);
-        mProgressTv = root.findViewById(R.id.progress_tv);
-        //100最大
-        mProgressBar.setMax(100);
+        mProgressView = (ProgressView) root.findViewById(R.id.progress_view);
         return root;
     }
 
@@ -60,8 +54,8 @@ public class ProgressDialog extends DialogFragment {
      * @param progress
      */
     public void setProgress(int progress){
-        mProgressTv.setText(progress + "%");
-        mProgressBar.setProgress(progress);
+        mProgressView.setProgress(progress);
     }
+
 
 }

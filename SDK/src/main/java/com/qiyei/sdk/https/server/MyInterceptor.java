@@ -90,7 +90,7 @@ public class MyInterceptor implements Interceptor{
                 break;
         }
 
-        // TODO: 2017/11/4 后续再优化一下，保存缓存的响应等 
+        // TODO: 2017/11/4 后续再优化一下，保存缓存的响应等
         //获取到响应
         okhttp3.Response response = chain.proceed(newRequest);
 
