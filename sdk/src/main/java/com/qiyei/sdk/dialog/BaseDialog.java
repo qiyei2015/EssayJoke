@@ -25,10 +25,10 @@ import java.util.Map;
 
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/13.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/5/13.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
  */
 public class BaseDialog extends DialogFragment {
     /**
@@ -154,16 +154,22 @@ public class BaseDialog extends DialogFragment {
     }
 
     /**
-     * 还是使用builder模式
+     * 使用builder模式
      */
     public static class Builder{
 
         private Context mBuilderContext;
-        //参数
+        /**
+         * 参数
+         */
         private DialogParams mBuilderParams ;
-        //helper
+        /**
+         * helper
+         */
         private DialogViewHolder mHolder;
-        //所引用的dialog
+        /**
+         * 所引用的dialog
+         */
         BaseDialog dialog;
 
         /**

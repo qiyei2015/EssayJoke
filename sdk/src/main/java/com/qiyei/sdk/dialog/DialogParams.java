@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/13.
- * Version: 1.0
- * Description: Dialog的控制类，控制其中的ContentView等的操作
+ * @author Created by qiyei2015 on 2017/5/13.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: Dialog的控制类，控制其中的ContentView等的操作
  */
 public class DialogParams implements Serializable{
 

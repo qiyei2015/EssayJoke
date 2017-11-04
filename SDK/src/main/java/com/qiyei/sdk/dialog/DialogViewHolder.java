@@ -12,10 +12,10 @@ import com.qiyei.sdk.log.LogManager;
 import java.lang.ref.WeakReference;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/13.
- * Version: 1.0
- * Description: Dialog辅助类
+ * @author Created by qiyei2015 on 2017/5/13.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: Dialog辅助类
  */
 public class DialogViewHolder {
 
