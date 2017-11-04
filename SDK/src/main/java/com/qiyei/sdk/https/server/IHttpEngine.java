@@ -1,6 +1,8 @@
 package com.qiyei.sdk.https.server;
 
 
+import android.os.Handler;
+
 /**
  * @author Created by qiyei2015 on 2017/10/21.
  * @version: 1.0
@@ -47,4 +49,9 @@ public interface IHttpEngine {
      */
     void cancelHttpCall(String taskId);
 
+    /**
+     * 获取主线程的Hanlder
+     * @return
+     */
+    Handler getHandler();
 }

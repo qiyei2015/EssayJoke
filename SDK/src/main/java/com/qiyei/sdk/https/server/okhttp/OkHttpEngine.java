@@ -285,4 +285,12 @@ public class OkHttpEngine implements IHttpEngine{
     public String toString() {
         return "OkHttpEngine";
     }
+
+    /**
+     * @return {@link #mHandler}
+     */
+    @Override
+    public Handler getHandler() {
+        return mHandler;
+    }
 }

@@ -230,9 +230,15 @@ public class HttpServer implements IHttpExecutor{
         mEngine.enqueueDownloadCall(task, new IHttpTransferCallback<R>() {
             @Override
             public void onProgress(long currentLength, long totalLength) {
-                int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
-                LoadingManager.setProgress(task.getFragmentManager(),task.getTaskId(),progress);
-                listener.onProgress(currentLength,totalLength);
+                final int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
+
+                mEngine.getHandler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        LoadingManager.setProgress(task.getFragmentManager(),task.getTaskId(),progress);
+                        listener.onProgress(currentLength,totalLength);
+                    }
+                });
             }
 
             @Override

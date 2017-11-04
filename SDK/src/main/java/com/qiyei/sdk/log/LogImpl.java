@@ -146,7 +146,7 @@ public class LogImpl {
         }
         //打印进程ID 线程ID 当前类 当前方法
         String message = time + " " + preTAG + " "
-                + ""+ android.os.Process.myPid() + "|" +""+ android.os.Process.myTid()
+                + ""+ android.os.Process.myPid() + "|" + android.os.Process.myTid()
                 + "[" + RuntimeEnv.getCurrentFileName() + "->" + RuntimeEnv.getCurrentMethodName()+"]"
                 + "[" + tag +"]" + msg;
         printMessage(message);

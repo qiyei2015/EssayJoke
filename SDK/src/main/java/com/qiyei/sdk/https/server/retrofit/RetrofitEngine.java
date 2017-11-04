@@ -211,6 +211,11 @@ public class RetrofitEngine implements IHttpEngine {
                         try {
                             InputStream is = responseBody.byteStream();
                             File file = new File(task.getRequest().getFilePath());
+                            //创建父目录
+                            file.getParentFile().mkdirs();
+                            if (file.exists()){
+                                file.delete();
+                            }
                             FileOutputStream fos = new FileOutputStream(file);
                             BufferedInputStream bis = new BufferedInputStream(is);
                             byte[] buffer = new byte[1024];
@@ -269,6 +274,14 @@ public class RetrofitEngine implements IHttpEngine {
                 call.cancel();
             }
         }
+    }
+
+    /**
+     * @return {@link #mHandler}
+     */
+    @Override
+    public Handler getHandler() {
+        return mHandler;
     }
 
     /**

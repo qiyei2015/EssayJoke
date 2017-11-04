@@ -155,7 +155,7 @@ public class ProgressView extends View {
         //发出重绘的命令，会出发onDraw执行
         invalidate();
     }
-    
+
     /**
      * 初始化属性
      */
