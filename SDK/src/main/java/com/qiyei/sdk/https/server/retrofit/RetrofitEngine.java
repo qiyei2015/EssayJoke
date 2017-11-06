@@ -24,12 +24,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -67,7 +72,6 @@ public class RetrofitEngine implements IHttpEngine {
     @Override
     public <T, R> void enqueueGetCall(final HttpTask<T> task, final IHttpCallback<R> callback) {
 
-        //获取task要执行的方法的参数
         Object params = HttpUtil.gsonToGetParams(task.getRequest());
 
         //构造Call
@@ -242,7 +246,6 @@ public class RetrofitEngine implements IHttpEngine {
                         });
                     }
                 }.start();
-
             }
 
             @Override
@@ -602,4 +605,110 @@ public class RetrofitEngine implements IHttpEngine {
 //            e.printStackTrace();
 //        }
 //    }
+
+    /**
+     * 先自行
+     */
+//    private void test2(){
+//        test(IRetrofitService.class,"getDiscoverList","discovery/v3/",Map.class);
+//
+//        //获取task要执行的方法的参数
+//        Map<String,String> params = HttpUtil.gsonToGetParams(task.getRequest());
+//
+//        Retrofit retrofit = RetrofitFactory.createRetrofit(task.getRequest().getBaseUrl());
+//
+//        //构造Call
+//        IRetrofitService service = retrofit.create(IRetrofitService.class);
+//        Call<Object> call = service.getDiscoverList(params);
+//
+//        if (call == null){
+//            return ;
+//        }
+//        //设置task到okHttp拦截器中
+//        setOkHttpInterceptorTag(call,task);
+//        //将任务加到队列里面
+//        HttpCallManager.getInstance().addCall(task.getTaskId(),call);
+//
+//        call.enqueue(new Callback<Object>() {
+//
+//            @Override
+//            public void onResponse(Call<Object> call, Response<Object> response) {
+//                //移除task
+//                HttpCallManager.getInstance().removeCall(task.getTaskId());
+//
+//                HttpResponse<R> obj = new HttpResponse<>((R)response.body());
+//                callback.onSuccess(obj);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Object> call, Throwable t) {
+//                //移除task
+//                HttpCallManager.getInstance().removeCall(task.getTaskId());
+//
+//                callback.onFailure((Exception) t);
+//            }
+//        });
+//    }
+
+    private void test(Class<?> clazz,String methodName,String annotationValue,Class<?>... parameterTypes){
+
+        try {
+            Method method = clazz.getDeclaredMethod(methodName,parameterTypes);
+            if (method == null){
+                return;
+            }
+            method.setAccessible(true);
+
+            GET getAnnotation = method.getAnnotation(GET.class);
+            if (getAnnotation == null){
+                return;
+            }
+
+            //获取这个代理的InvocationHandler,这里的Handler是AnnotationFactory libcore.reflect.AnnotationFactory
+            InvocationHandler handler = Proxy.getInvocationHandler(getAnnotation);
+            if (handler == null){
+                return;
+            }
+            for (Field field : handler.getClass().getDeclaredFields()){
+                LogManager.i(HTTP.TAG,"field:" + field.getName() + "  type:" + field.getType().getName());
+            }
+
+            Field field = handler.getClass().getDeclaredField("elements");
+            if (field == null){
+                return;
+            }
+            field.setAccessible(true);
+
+            //是AnnotationMember[] 数组
+            Object objects = field.get(handler);
+            Class<?> type = objects.getClass();
+            if (type.isArray()){
+                LogManager.i(HTTP.TAG,"length:" + Array.getLength(objects));
+                Object object = Array.get(objects,0);
+                if (object == null){
+                    return;
+                }
+                Class<?> annotationMemberClazz = object.getClass();
+                Field valueField = annotationMemberClazz.getDeclaredField("value");
+                if (valueField == null){
+                    return;
+                }
+                valueField.setAccessible(true);
+                valueField.set(object,annotationValue);
+
+                //数组设置回去
+                Array.set(objects,0,object);
+                LogManager.i(HTTP.TAG,"annotationValue:" + annotationValue);
+
+                field.set(handler,objects);
+            }
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
 }
