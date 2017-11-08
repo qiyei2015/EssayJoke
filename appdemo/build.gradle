@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao' // apply plugin
 //阿里云仓库配置
 repositories {
     mavenLocal()
@@ -58,6 +59,12 @@ android {
         flatDir {
             dirs 'libs' //aar目录
         }
+    }
+
+    greendao {
+        schemaVersion 1
+//        daoPackage 'com.qiyei.funny.greendao.gen'
+//        targetGenDir 'src/main/java'
     }
 }
 

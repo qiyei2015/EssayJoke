@@ -1,5 +1,7 @@
 package com.qiyei.appdemo.model;
 
+import org.greenrobot.greendao.annotation.Entity;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/6/3.

@@ -6,29 +6,30 @@ package com.qiyei.sdk.database;
  * @email: 1273482124@qq.com
  * @description: 数据库管理者
  */
-public class DatabaseManager {
-
+public class DBManager implements IDBManager{
 
     /**
      * 单例方式提供对象
      */
     private static class SingleHolder{
-        private static final DatabaseManager sInstance = new DatabaseManager();
+        private static final DBManager sInstance = new DBManager();
     }
 
     /**
      * 内部类方式提供单例
      * @return
      */
-    public static DatabaseManager getInstance(){
+    public static DBManager getInstance(){
         return SingleHolder.sInstance;
     }
 
     /**
      * 创建数据库
-     * @param dbName
+     * @param path 数据库路径
+     * @param dbName 数据库名称
      */
-    public boolean createDatabase(String dbName){
+    @Override
+    public boolean initDatabase(String path,String dbName){
 
         return false;
     }
@@ -39,26 +40,26 @@ public class DatabaseManager {
      * @param oldVersion
      * @param newVersion
      */
-    public void undateDatabase(String dbName,int oldVersion,int newVersion){
+    @Override
+    public void updateDatabase(String dbName,int oldVersion,int newVersion){
 
     }
 
     /**
-     * 设置数据路径
-     * @param path
+     * 删除数据库
+     * @param dbName
      */
-    public void setDatabasePath(String path){
+    @Override
+    public void dropDatabase(String dbName) {
 
     }
 
     /**
      * 数据库引擎
      */
-    public void setDatabaseEngine(IDatabaseEngine engine){
+    public void setDatabaseEngine(IDBEngine engine){
 
     }
-
-
 
     /**
      * 打开数据库会话，开始操作

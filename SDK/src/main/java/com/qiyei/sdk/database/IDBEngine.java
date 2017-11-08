@@ -6,7 +6,7 @@ package com.qiyei.sdk.database;
  * @email: 1273482124@qq.com
  * @description: 数据库引擎
  */
-public interface IDatabaseEngine {
+public interface IDBEngine {
 
 
 
