@@ -85,6 +85,11 @@
             android:label="@string/title_activity_network_test"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".activity.DatabaseTestActivity"
+            android:label="@string/title_activity_database_test"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

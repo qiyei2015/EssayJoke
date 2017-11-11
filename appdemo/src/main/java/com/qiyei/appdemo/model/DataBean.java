@@ -59,4 +59,12 @@ public class DataBean {
         String value = "value";
     }
 
+    @Override
+    public String toString() {
+        return "DataBean{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

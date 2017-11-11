@@ -107,6 +107,12 @@
                 android:text="测试14 网络框架测试"
                 android:textAllCaps="false"/>
 
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn15"
+                android:text="15 数据库框架测试"
+                android:textAllCaps="false"/>
 
         </LinearLayout>
     </ScrollView>
