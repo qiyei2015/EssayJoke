@@ -58,7 +58,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
         }
 
         userIDBSession.insert(list);
-        userIDBSession.querySupport();
+        userIDBSession.queryBuilder();
 
     }
 

@@ -2,8 +2,6 @@ package com.qiyei.sdk.database;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.qiyei.sdk.db.QuerySupport;
-
 import java.util.List;
 
 /**
@@ -39,7 +37,7 @@ public interface IDBSession<T> {
      * 获取查询支持
      * @return
      */
-    QuerySupport querySupport();
+    IQueryBuilder<T> queryBuilder();
 
     /**
      * 更新

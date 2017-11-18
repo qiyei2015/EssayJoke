@@ -12,6 +12,7 @@ import com.qiyei.sdk.database.bean.DaoMaster;
 import com.qiyei.sdk.database.bean.DaoSession;
 
 import org.greenrobot.greendao.AbstractDao;
+import org.greenrobot.greendao.AbstractDaoSession;
 import org.greenrobot.greendao.database.Database;
 
 import java.io.File;
@@ -35,9 +36,9 @@ public class GreenDaoDBEngine implements IDBEngine {
 
     private DaoMaster.DevOpenHelper mDevOpenHelper;
 
-    private DaoMaster mMaster;
+    private GreenDaoMaster mMaster;
 
-    private DaoSession mDaoSession;
+    private AbstractDaoSession mDaoSession;
 
     @Override
     public boolean initDatabase(Context context,String path, String dbName) {
@@ -60,13 +61,14 @@ public class GreenDaoDBEngine implements IDBEngine {
 
     @Override
     public <T> IDBSession<T> getDBSession(String dbName,Class<T> clazz) {
-        //获取DaoMaster
-        mMaster = new DaoMaster(mDevOpenHelper.getWritableDb());
-        mDaoSession = mMaster.newSession();
+        //获取DaoMaster,要在DaoMaster中实现registerDaoClass(XXXDao.class)
+        mMaster = new GreenDaoMaster(mDevOpenHelper.getWritableDb(),clazz);
+
+        mDaoSession = mMaster.newSession(clazz);
 
         // TODO: 2017/11/11 具体的业务逻辑相关 ,可能需要使用装饰器模式，新建一个IDBSession对象来包装它
         AbstractDao<?,?> dao = mDaoSession.getDao(clazz);
-        return new GreenDaoDBSession(dao);
+        return new GreenDaoDBSession(mDevOpenHelper,dao,clazz);
     }
 
     /**
@@ -79,9 +81,17 @@ public class GreenDaoDBEngine implements IDBEngine {
         }
 
         @Override
+        public void onCreate(Database db) {
+            super.onCreate(db);
+
+        }
+
+        @Override
         public void onUpgrade(Database db, int oldVersion, int newVersion) {
             super.onUpgrade(db, oldVersion, newVersion);
+
         }
+
     }
 
     /**
