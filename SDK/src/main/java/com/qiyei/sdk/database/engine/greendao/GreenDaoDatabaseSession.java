@@ -4,13 +4,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.qiyei.sdk.database.DB;
-import com.qiyei.sdk.database.IDBSession;
+import com.qiyei.sdk.database.IDatabaseSession;
 import com.qiyei.sdk.database.IQueryBuilder;
-import com.qiyei.sdk.database.bean.DaoMaster;
+import com.qiyei.sdk.database.test.bean.DaoMaster;
 import com.qiyei.sdk.log.LogManager;
 
 import org.greenrobot.greendao.AbstractDao;
-import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 
 import java.lang.reflect.Field;
@@ -24,7 +23,7 @@ import java.util.List;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class GreenDaoDBSession<T> implements IDBSession<T> {
+public class GreenDaoDatabaseSession<T> implements IDatabaseSession<T> {
 
     AbstractDao<T, ?> mDao;
 
@@ -33,7 +32,7 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
     private DaoMaster.DevOpenHelper mDevOpenHelper;
 
 
-    public GreenDaoDBSession(DaoMaster.DevOpenHelper helper, AbstractDao<T, ?> dao,Class<T> clazz) {
+    public GreenDaoDatabaseSession(DaoMaster.DevOpenHelper helper, AbstractDao<T, ?> dao, Class<T> clazz) {
         mDevOpenHelper = helper;
         mDao = dao;
         mClazz = clazz;
@@ -50,6 +49,7 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
                     field.setAccessible(true);
                     String tableName = (String) field.get(null);
                     //创建数据表XXXDao
+                    dropAllTables(clazz,mDevOpenHelper.getWritableDb(),isTableExist(database,tableName));
                     createAllTables(clazz,mDevOpenHelper.getWritableDb(),isTableExist(database,tableName));
                 }
             } catch (NoSuchFieldException e) {
@@ -74,17 +74,10 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
 
     @Override
     public IQueryBuilder queryBuilder() {
-
         QueryBuilder<T> builder = mDao.queryBuilder();
 
-        List<T> list = builder.list();
-        LogManager.i("DB",list.toString());
-
         // TODO: 2017/11/18 使用装饰器或者适配器模式进行转换？
-        Database database = mDao.getDatabase();
-
-        com.qiyei.sdk.database.QueryBuilder queryBuilder = new com.qiyei.sdk.database.QueryBuilder(mDevOpenHelper.getWritableDatabase(),mClazz);
-
+        GreenDaoQueryBuilder queryBuilder = new GreenDaoQueryBuilder(builder);
         return queryBuilder;
     }
 
@@ -101,17 +94,17 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
     /**
      * 创建表
      * @param clazz
-     * @param db
+     * @param database
      * @param ifNotExists
      */
-    private void createAllTables(Class<?> clazz,Database db, boolean ifNotExists){
+    private void createAllTables(Class<?> clazz, org.greenrobot.greendao.database.Database database, boolean ifNotExists){
         try {
             Class<? extends AbstractDao<?, ?>> daoClass = GreenDaoUtil.getDaoClass(clazz);
-            Method method = daoClass.getDeclaredMethod("createTable",Database.class,boolean.class);
+            Method method = daoClass.getDeclaredMethod("createTable", org.greenrobot.greendao.database.Database.class,boolean.class);
 
             if (method != null){
                 method.setAccessible(true);
-                method.invoke(null,db,ifNotExists);
+                method.invoke(null, database,ifNotExists);
             }
         }catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -125,19 +118,19 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
     /**
      * 删除表
      * @param clazz
-     * @param db
+     * @param database
      * @param ifExists
      */
-    private void dropAllTables(Class<?> clazz,Database db, boolean ifExists) {
+    private void dropAllTables(Class<?> clazz, org.greenrobot.greendao.database.Database database, boolean ifExists) {
         try {
             Class<? extends AbstractDao<?, ?>> daoClass = GreenDaoUtil.getDaoClass(clazz);
             for (Method method : daoClass.getDeclaredMethods()){
                 LogManager.i(DB.TAG,"method:" + method.getName());
             }
-            Method method = daoClass.getDeclaredMethod("dropTable",Database.class,boolean.class);
+            Method method = daoClass.getDeclaredMethod("dropTable", org.greenrobot.greendao.database.Database.class,boolean.class);
             if (method != null){
                 method.setAccessible(true);
-                method.invoke(null,db,ifExists);
+                method.invoke(null, database,ifExists);
             }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -164,7 +157,6 @@ public class GreenDaoDBSession<T> implements IDBSession<T> {
             }
         }
         c.close();
-        db.close();
         return isTableExist;
     }
 

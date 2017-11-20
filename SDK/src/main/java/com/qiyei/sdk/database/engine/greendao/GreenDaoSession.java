@@ -1,13 +1,11 @@
 package com.qiyei.sdk.database.engine.greendao;
 
 import com.qiyei.sdk.database.DB;
-import com.qiyei.sdk.database.bean.DaoSession;
 import com.qiyei.sdk.log.LogManager;
 
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.AbstractDaoSession;
-import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.identityscope.IdentityScopeType;
 import org.greenrobot.greendao.internal.DaoConfig;
 
@@ -28,8 +26,8 @@ public class GreenDaoSession<T> extends AbstractDaoSession {
 
     private AbstractDao<T, ?>  mDao;
 
-    public GreenDaoSession(Database db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig> daoConfigMap,Class<T> clazz) {
-        super(db);
+    public GreenDaoSession(org.greenrobot.greendao.database.Database database, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig> daoConfigMap, Class<T> clazz) {
+        super(database);
 
         Class<? extends AbstractDao<?, ?>> daoClass = GreenDaoUtil.getDaoClass(clazz);
 

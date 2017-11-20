@@ -10,7 +10,7 @@ import android.content.Context;
  * @email: 1273482124@qq.com
  * @description: 数据库引擎
  */
-public interface IDBEngine {
+public interface IDatabaseEngine {
 
     /**
      * 初始化数据库
@@ -40,5 +40,5 @@ public interface IDBEngine {
      * @param dbName
      * @return
      */
-    <T> IDBSession<T> getDBSession(String dbName,Class<T> clazz);
+    <T> IDatabaseSession<T> getDBSession(String dbName, Class<T> clazz);
 }

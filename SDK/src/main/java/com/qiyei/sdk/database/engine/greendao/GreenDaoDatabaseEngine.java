@@ -6,10 +6,10 @@ import android.content.ContextWrapper;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.qiyei.sdk.database.IDBEngine;
-import com.qiyei.sdk.database.IDBSession;
-import com.qiyei.sdk.database.bean.DaoMaster;
-import com.qiyei.sdk.database.bean.DaoSession;
+import com.qiyei.sdk.database.DB;
+import com.qiyei.sdk.database.IDatabaseEngine;
+import com.qiyei.sdk.database.IDatabaseSession;
+import com.qiyei.sdk.database.test.bean.DaoMaster;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.AbstractDaoSession;
@@ -23,7 +23,7 @@ import java.io.File;
  * @email: 1273482124@qq.com
  * @description: 数据库引擎
  */
-public class GreenDaoDBEngine implements IDBEngine {
+public class GreenDaoDatabaseEngine implements IDatabaseEngine {
     /**
      * 数据库路径
      */
@@ -60,7 +60,7 @@ public class GreenDaoDBEngine implements IDBEngine {
     }
 
     @Override
-    public <T> IDBSession<T> getDBSession(String dbName,Class<T> clazz) {
+    public <T> IDatabaseSession<T> getDBSession(String dbName, Class<T> clazz) {
         //获取DaoMaster,要在DaoMaster中实现registerDaoClass(XXXDao.class)
         mMaster = new GreenDaoMaster(mDevOpenHelper.getWritableDb(),clazz);
 
@@ -68,7 +68,7 @@ public class GreenDaoDBEngine implements IDBEngine {
 
         // TODO: 2017/11/11 具体的业务逻辑相关 ,可能需要使用装饰器模式，新建一个IDBSession对象来包装它
         AbstractDao<?,?> dao = mDaoSession.getDao(clazz);
-        return new GreenDaoDBSession(mDevOpenHelper,dao,clazz);
+        return new GreenDaoDatabaseSession(mDevOpenHelper,dao,clazz);
     }
 
     /**
@@ -105,7 +105,7 @@ public class GreenDaoDBEngine implements IDBEngine {
 
         public GreenDaoContextWrapper(String path,Context base) {
             super(base);
-            mPath = path;
+            mPath = DB.DATABASE_PATH + path;
         }
 
         @Override

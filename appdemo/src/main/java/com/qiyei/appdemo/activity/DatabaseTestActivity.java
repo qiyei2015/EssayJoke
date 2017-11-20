@@ -9,9 +9,10 @@ import android.view.View;
 
 import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.DataBean;
-import com.qiyei.sdk.database.DBManager;
-import com.qiyei.sdk.database.IDBSession;
-import com.qiyei.sdk.database.bean.User;
+import com.qiyei.sdk.database.DB;
+import com.qiyei.sdk.database.DatabaseManager;
+import com.qiyei.sdk.database.IDatabaseSession;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
 
 import java.util.ArrayList;
@@ -36,9 +37,9 @@ public class DatabaseTestActivity extends AppCompatActivity {
         });
 
         String db = "test.db";
-        DBManager.getInstance().initDatabase(AndroidUtil.getExternalDataPath(),db);
+        DatabaseManager.getInstance().initDatabase(db);
 
-//        IDBSession<User> userIDBSession = DBManager.getInstance().openSession(db, User.class);
+//        IDatabaseSession<User> userIDatabaseSession = DatabaseManager.getInstance().openSession(db, User.class);
 //        List<User> list = new ArrayList<>();
 //
 //        for (int i = 0;i < 10;i++){
@@ -46,10 +47,10 @@ public class DatabaseTestActivity extends AppCompatActivity {
 //            list.add(user);
 //        }
 //
-//        userIDBSession.insert(list);
-//        userIDBSession.querySupport();
+//        userIDatabaseSession.insert(list);
+//        userIDatabaseSession.querySupport();
 
-        IDBSession<DataBean> userIDBSession = DBManager.getInstance().openSession(db, DataBean.class);
+        IDatabaseSession<DataBean> userIDatabaseSession = DatabaseManager.getInstance().openSession(db, DataBean.class);
         List<DataBean> list = new ArrayList<>();
 
         for (int i = 0;i < 10;i++){
@@ -57,8 +58,8 @@ public class DatabaseTestActivity extends AppCompatActivity {
             list.add(dataBean);
         }
 
-        userIDBSession.insert(list);
-        userIDBSession.queryBuilder();
+        userIDatabaseSession.insert(list);
+        LogManager.i(DB.TAG,"data:" + userIDatabaseSession.queryBuilder().queryAll().toString());
 
     }
 

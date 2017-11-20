@@ -10,7 +10,7 @@ import java.util.List;
  * @email: 1273482124@qq.com
  * @description: 数据库会话，主要会完成数据的建表，查询，删除等操作
  */
-public interface IDBSession<T> {
+public interface IDatabaseSession<T> {
 
     /**
      * 初始化

@@ -1,4 +1,4 @@
-package com.qiyei.sdk.database.bean;
+package com.qiyei.sdk.database.test.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;

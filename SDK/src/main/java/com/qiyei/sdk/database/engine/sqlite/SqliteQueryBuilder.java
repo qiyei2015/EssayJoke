@@ -1,8 +1,9 @@
-package com.qiyei.sdk.database;
+package com.qiyei.sdk.database.engine.sqlite;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.qiyei.sdk.database.IQueryBuilder;
 import com.qiyei.sdk.db.DaoUtil;
 
 import java.lang.reflect.Field;
@@ -13,13 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Created by qiyei2015 on 2017/11/18.
- * @version: 1.0
- * @email: 1273482124@qq.com
- * @description: 查询支持
+ * Email: 1273482124@qq.com
+ * Created by qiyei2015 on 2017/6/5.
+ * Version: 1.0
+ * Description:
  */
-public class QueryBuilder<T> implements IQueryBuilder<T>{
-
+public class SqliteQueryBuilder<T> implements IQueryBuilder{
     /**
      * 查询的列
      */
@@ -57,66 +57,77 @@ public class QueryBuilder<T> implements IQueryBuilder<T>{
      */
     private SQLiteDatabase mDatabase;
 
-    public QueryBuilder(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
-
+    public SqliteQueryBuilder(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
         this.mClass = clazz;
         this.mDatabase = sqLiteDatabase;
     }
 
-
+    /**
+     * 设置查询的行数
+     * @param columns
+     * @return
+     */
     @Override
-    public IQueryBuilder columns(String... columns) {
+    public SqliteQueryBuilder columns(String... columns) {
         this.mColumns = columns;
         return this;
     }
 
     @Override
-    public IQueryBuilder selectionArgs(String... selectionArgs) {
+    public SqliteQueryBuilder selectionArgs(String... selectionArgs) {
         this.mSelectionArgs = selectionArgs;
         return this;
     }
 
     @Override
-    public IQueryBuilder having(String having) {
+    public SqliteQueryBuilder having(String having) {
         this.mHaving = having;
         return this;
     }
 
     @Override
-    public IQueryBuilder orderBy(String orderBy) {
+    public SqliteQueryBuilder orderBy(String orderBy) {
         this.mOrderBy = orderBy;
         return this;
     }
 
     @Override
-    public IQueryBuilder limit(String limit) {
+    public SqliteQueryBuilder limit(String limit) {
         this.mLimit = limit;
         return this;
     }
 
     @Override
-    public IQueryBuilder groupBy(String groupBy) {
+    public SqliteQueryBuilder groupBy(String groupBy) {
         this.mGroupBy = groupBy;
         return this;
     }
 
     @Override
-    public IQueryBuilder selection(String selection) {
+    public SqliteQueryBuilder selection(String selection) {
         this.mSelection = selection;
         return this;
     }
 
+    /**
+     * 返回查询条件说查询到的
+     * @return
+     */
     @Override
     public List<T> query() {
-        Cursor cursor = mDatabase.query(DaoUtil.getTableName(mClass),mColumns,mSelection
+        Cursor cursor = mDatabase.query(com.qiyei.sdk.db.DaoUtil.getTableName(mClass),mColumns,mSelection
                 ,mSelectionArgs,mGroupBy,mHaving,mOrderBy);
         clearQueryParams();
         return cursorToList(cursor);
     }
 
+    /**
+     * 查询所有
+     * @return
+     */
     @Override
     public List<T> queryAll() {
-        Cursor cursor = mDatabase.query(DaoUtil.getTableName(mClass),null,null,null,null,null,null);
+        Cursor cursor = mDatabase.query(com.qiyei.sdk.db.DaoUtil.getTableName(mClass),null,null,null,null,null,null);
         return cursorToList(cursor);
     }
 

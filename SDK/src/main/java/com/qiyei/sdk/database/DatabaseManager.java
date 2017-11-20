@@ -1,7 +1,8 @@
 package com.qiyei.sdk.database;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.database.engine.greendao.GreenDaoDBEngine;
+import com.qiyei.sdk.database.engine.greendao.GreenDaoDatabaseEngine;
+import com.qiyei.sdk.database.engine.sqlite.SqliteDatabaseEngine;
 
 /**
  * @author Created by qiyei2015 on 2017/9/9.
@@ -9,42 +10,42 @@ import com.qiyei.sdk.database.engine.greendao.GreenDaoDBEngine;
  * @email: 1273482124@qq.com
  * @description: 数据库管理者
  */
-public class DBManager implements IDBManager{
+public class DatabaseManager implements IDatabaseManager {
 
     /**
      * 数据库引擎
      */
-    private IDBEngine mEngine;
+    private IDatabaseEngine mEngine;
 
     /**
      * 单例方式提供对象
      */
     private static class SingleHolder{
-        private static final DBManager sInstance = new DBManager();
+        private static final DatabaseManager sInstance = new DatabaseManager();
     }
 
     /**
      * 构造方法
      */
-    private DBManager(){
-        initEngine(new GreenDaoDBEngine());
+    private DatabaseManager(){
+        initEngine(new SqliteDatabaseEngine());
     }
 
     /**
      * 内部类方式提供单例
      * @return
      */
-    public static DBManager getInstance(){
+    public static DatabaseManager getInstance(){
         return SingleHolder.sInstance;
     }
 
     /**
      * 创建数据库
-     * @param path 数据库路径
      * @param dbName 数据库名称
      */
     @Override
-    public boolean initDatabase(String path,String dbName){
+    public boolean initDatabase(String dbName){
+        String path = "";
         return mEngine.initDatabase(RuntimeEnv.appContext,path,dbName);
     }
 
@@ -71,7 +72,7 @@ public class DBManager implements IDBManager{
     /**
      * 数据库引擎
      */
-    protected void initEngine(IDBEngine engine){
+    protected void initEngine(IDatabaseEngine engine){
         mEngine = engine;
     }
 
@@ -80,7 +81,7 @@ public class DBManager implements IDBManager{
      * @param dbName
      * @return
      */
-    public <T> IDBSession<T> openSession(String dbName,Class<T> clazz){
+    public <T> IDatabaseSession<T> openSession(String dbName, Class<T> clazz){
         return mEngine.getDBSession(dbName,clazz);
     }
 

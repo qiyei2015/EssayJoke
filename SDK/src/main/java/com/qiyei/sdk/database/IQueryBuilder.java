@@ -20,6 +20,11 @@ public interface IQueryBuilder<T> {
      */
     IQueryBuilder columns(String... columns);
 
+    /**
+     * 查询的行数参数
+     * @param selectionArgs
+     * @return
+     */
     IQueryBuilder selectionArgs(String... selectionArgs);
 
     IQueryBuilder having(String having);

@@ -2,11 +2,9 @@ package com.qiyei.sdk.database.engine.greendao;
 
 import android.database.sqlite.SQLiteDatabase;
 
-import com.qiyei.sdk.database.DB;
-import com.qiyei.sdk.database.bean.DaoMaster;
-import com.qiyei.sdk.database.bean.DaoSession;
-import com.qiyei.sdk.database.bean.UserDao;
-import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.database.test.bean.DaoMaster;
+import com.qiyei.sdk.database.test.bean.DaoSession;
+import com.qiyei.sdk.database.test.bean.UserDao;
 
 import org.greenrobot.greendao.AbstractDao;
 import org.greenrobot.greendao.AbstractDaoSession;
@@ -34,10 +32,19 @@ public class GreenDaoMaster extends DaoMaster {
         UserDao.dropTable(db, ifExists);
     }
 
+    /**
+     * 构造方法
+     * @param db
+     */
     public GreenDaoMaster(SQLiteDatabase db) {
         super(db);
     }
 
+    /**
+     * 构造方法
+     * @param db
+     * @param clazz
+     */
     public GreenDaoMaster(Database db,Class<?> clazz) {
         super(db);
         //要在DaoMaster中实现registerDaoClass(XXXDao.class)
@@ -63,7 +70,5 @@ public class GreenDaoMaster extends DaoMaster {
 
         return new GreenDaoSession(db, IdentityScopeType.Session, daoConfigMap,clazz);
     }
-
-
 
 }

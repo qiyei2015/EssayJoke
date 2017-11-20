@@ -6,15 +6,14 @@ package com.qiyei.sdk.database;
  * @email: 1273482124@qq.com
  * @description:  数据库管理接口
  */
-public interface IDBManager {
+public interface IDatabaseManager {
 
     /**
      * 创建及初始化数据库
-     * @param path 数据库存储路径
      * @param dbName 数据库名称
      * @return true 初始化成功，false 失败
      */
-    boolean initDatabase(String path,String dbName);
+    boolean initDatabase(String dbName);
 
     /**
      * 更新数据库
