@@ -14,12 +14,12 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/6/5.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/6/5.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
  */
-public class SqliteQueryBuilder<T> implements IQueryBuilder{
+public class SQLiteQueryBuilder<T> implements IQueryBuilder{
     /**
      * 查询的列
      */
@@ -57,7 +57,7 @@ public class SqliteQueryBuilder<T> implements IQueryBuilder{
      */
     private SQLiteDatabase mDatabase;
 
-    public SqliteQueryBuilder(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
+    public SQLiteQueryBuilder(SQLiteDatabase sqLiteDatabase, Class<T> clazz) {
         this.mClass = clazz;
         this.mDatabase = sqLiteDatabase;
     }
@@ -68,43 +68,43 @@ public class SqliteQueryBuilder<T> implements IQueryBuilder{
      * @return
      */
     @Override
-    public SqliteQueryBuilder columns(String... columns) {
+    public SQLiteQueryBuilder columns(String... columns) {
         this.mColumns = columns;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder selectionArgs(String... selectionArgs) {
+    public SQLiteQueryBuilder selectionArgs(String... selectionArgs) {
         this.mSelectionArgs = selectionArgs;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder having(String having) {
+    public SQLiteQueryBuilder having(String having) {
         this.mHaving = having;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder orderBy(String orderBy) {
+    public SQLiteQueryBuilder orderBy(String orderBy) {
         this.mOrderBy = orderBy;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder limit(String limit) {
+    public SQLiteQueryBuilder limit(String limit) {
         this.mLimit = limit;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder groupBy(String groupBy) {
+    public SQLiteQueryBuilder groupBy(String groupBy) {
         this.mGroupBy = groupBy;
         return this;
     }
 
     @Override
-    public SqliteQueryBuilder selection(String selection) {
+    public SQLiteQueryBuilder selection(String selection) {
         this.mSelection = selection;
         return this;
     }

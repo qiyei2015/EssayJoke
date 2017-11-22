@@ -9,10 +9,8 @@ import com.qiyei.sdk.database.DB;
 import com.qiyei.sdk.database.IDatabaseSession;
 import com.qiyei.sdk.database.IQueryBuilder;
 import com.qiyei.sdk.db.DaoUtil;
-import com.qiyei.sdk.db.QuerySupport;
 import com.qiyei.sdk.log.LogManager;
 
-import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -25,7 +23,7 @@ import java.util.Map;
  * @email: 1273482124@qq.com
  * @description: 数据库会话，主要会完成数据的建表，查询，删除等操作
  */
-public class SqliteDatabaseSession<T> implements IDatabaseSession<T>{
+public class SQLiteDatabaseSession<T> implements IDatabaseSession<T>{
 
     /**
      * 数据库
@@ -49,7 +47,7 @@ public class SqliteDatabaseSession<T> implements IDatabaseSession<T>{
      * @param database
      * @param clazz
      */
-    public SqliteDatabaseSession(SQLiteDatabase database,Class<T> clazz) {
+    public SQLiteDatabaseSession(SQLiteDatabase database, Class<T> clazz) {
         mDatabase = database;
         mClass = clazz;
         init(mDatabase,mClass);
@@ -124,7 +122,7 @@ public class SqliteDatabaseSession<T> implements IDatabaseSession<T>{
 
     @Override
     public IQueryBuilder<T> queryBuilder() {
-        SqliteQueryBuilder<T> queryBuilder = new SqliteQueryBuilder<>(mDatabase,mClass);
+        SQLiteQueryBuilder<T> queryBuilder = new SQLiteQueryBuilder<>(mDatabase,mClass);
         return queryBuilder;
     }
 

@@ -18,7 +18,7 @@ import java.io.IOException;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class SqliteDatabaseEngine implements IDatabaseEngine{
+public class SQLiteDatabaseEngine implements IDatabaseEngine{
 
     /**
      * 数据库路径
@@ -93,7 +93,7 @@ public class SqliteDatabaseEngine implements IDatabaseEngine{
         }else {
             database = SQLiteDatabase.openDatabase(DB.DATABASE_PATH + mDatabasePath + File.separator + dbName,null,SQLiteDatabase.OPEN_READWRITE);
         }
-        return new SqliteDatabaseSession<T>(database,clazz);
+        return new SQLiteDatabaseSession<T>(database,clazz);
     }
 
 

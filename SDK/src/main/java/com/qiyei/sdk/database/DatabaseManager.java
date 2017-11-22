@@ -1,8 +1,7 @@
 package com.qiyei.sdk.database;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.database.engine.greendao.GreenDaoDatabaseEngine;
-import com.qiyei.sdk.database.engine.sqlite.SqliteDatabaseEngine;
+import com.qiyei.sdk.database.engine.sqlite.SQLiteDatabaseEngine;
 
 /**
  * @author Created by qiyei2015 on 2017/9/9.
@@ -28,7 +27,7 @@ public class DatabaseManager implements IDatabaseManager {
      * 构造方法
      */
     private DatabaseManager(){
-        initEngine(new SqliteDatabaseEngine());
+        initEngine(new SQLiteDatabaseEngine());
     }
 
     /**
