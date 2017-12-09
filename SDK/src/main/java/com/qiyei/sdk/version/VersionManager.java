@@ -7,9 +7,16 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Parcel;
+import android.support.v4.app.FragmentManager;
 import android.util.DisplayMetrics;
 
+import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.https.api.HttpManager;
+import com.qiyei.sdk.https.api.HttpRequest;
+import com.qiyei.sdk.https.api.IHttpTransferListener;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.util.AndroidUtil;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
@@ -18,11 +25,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import okhttp3.ResponseBody;
+
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/8/2.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/8/2.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
  */
 public class VersionManager {
 
@@ -112,9 +121,69 @@ public class VersionManager {
         return null;
     }
 
+    /**
+     * 将old APK 与 patch 生成new APK
+     * @param oldApkPath 原来的apk  1.0 本地安装的apk
+     * @param newApkPath 合并后新的apk路径   需要生成的2.0
+     * @param patchPath 差分包路径， 从服务器上下载下来
+     */
+    public static void combineVersionAPK(String oldApkPath,String newApkPath,String patchPath){
+        versionCombine(oldApkPath,newApkPath,patchPath);
+    }
 
     /**
-     *
+     * 获取某个路径下apk的包名信息
+     * @param path
+     * @return
+     */
+    public static PackageInfo getPackageInfo(String path){
+        PackageManager pm = RuntimeEnv.appContext.getPackageManager();
+        PackageInfo info = pm.getPackageArchiveInfo(path, PackageManager.GET_ACTIVITIES);
+        return info;
+    }
+
+    /**
+     * 下载版本
+     * @param url
+     * @param filePath
+     */
+    public static void downloadAPK(String url, String filePath, FragmentManager fragmentManager){
+
+        Uri uri = Uri.parse(url);
+
+        HttpRequest<String> request = new HttpRequest.Builder<String>()
+                .download()
+                .setBaseUrl("http://sw.bos.baidu.com/")
+                .setPathUrl("sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe")
+                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/QQ.exe")
+                .setBody(null)
+                .setApiClazz(null)
+                .build();
+
+        new HttpManager().execute(fragmentManager,request, new IHttpTransferListener<ResponseBody>() {
+
+            @Override
+            public void onProgress(long currentLength, long totalLength) {
+                int progress = (int) ((currentLength * 1.0 / totalLength) * 100);
+//                mDownloadProgressBar.setProgress(progress);
+//                mDownloadProgressTv.setText( progress +"%");
+                LogManager.i(TAG,"progress:"+ progress +" currentLength :" + currentLength + " totalLength:" + totalLength);
+            }
+
+            @Override
+            public void onSuccess(ResponseBody response) {
+                LogManager.i(TAG,"response:" + response);
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+    }
+
+    /**
+     * 获取对应的包相关信息
      * @param path
      * @param packageParser
      * @return
@@ -212,11 +281,10 @@ public class VersionManager {
     }
 
     /**
-     *
+     * 本地合并方法
      * @param oldApkPath 原来的apk  1.0 本地安装的apk
      * @param newApkPath 合并后新的apk路径   需要生成的2.0
      * @param patchPath 差分包路径， 从服务器上下载下来
      */
-    public static native void versionCombine(String oldApkPath,String newApkPath,String patchPath);
-
+    private static native void versionCombine(String oldApkPath,String newApkPath,String patchPath);
 }
