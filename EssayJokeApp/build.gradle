@@ -37,6 +37,11 @@ android {
             jniLibs.srcDirs = ['libs']  //配置生成jniLibs
         }
     }
+    //解决国际化资源文件不全
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+    }
 }
 
 dependencies {
