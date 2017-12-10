@@ -19,15 +19,17 @@ repositories {
 }
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         applicationId "com.qiyei.appdemo"
         versionCode 1
         versionName "1.0.0"
+
+        flavorDimensions "versionCode"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -39,16 +41,24 @@ android {
             abiFilters 'armeabi', 'armeabi-v7a'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
+
     sourceSets {
         main {
             jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
@@ -67,6 +77,45 @@ android {
             dirs 'libs' //aar目录
         }
     }
+
+    /**
+     * 多渠道打包
+     */
+    productFlavors{
+        kuan{
+            //这里可以配置不同的包名
+//            applicationId="com.cn"
+            applicationIdSuffix ".kuan"
+            //这里是在 applicationId 中添加了一个后缀
+//            manifestPlaceholders = [app_icon: "@mipmap/login_logo",
+//                                    app_name: "app1"]
+            manifestPlaceholders = [app_name: "kuan"]
+        }
+
+        xiaomi{
+            applicationIdSuffix ".xiaomi"
+            manifestPlaceholders = [app_name: "xiaomi"]
+        }
+
+        qh360{
+            applicationIdSuffix ".qh360"
+            manifestPlaceholders = [app_name: "qh360"]
+        }
+
+        baidu{
+            applicationIdSuffix ".baidu"
+            manifestPlaceholders = [app_name: "baidu"]
+        }
+    }
+
+//    signingConfigs {
+//        config {
+//            keyAlias 'qiyei2015'
+//            keyPassword '510726'
+//            storeFile file('F:\\android_project\android_keystore.jks')
+//            storePassword '510726'
+//        }
+//    }
 
     //解决国际化资源文件不全
     lintOptions{

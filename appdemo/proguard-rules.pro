@@ -27,3 +27,20 @@
 -keep class com.ta.utdid2.device.**{*;}
 #防止inline
 -dontoptimize
+
+#ProGuard不要警告找不到xx.xx.xxx.**这个包里面的类的相关引用
+#保持xx.xx.xx.**这个包里面的所有类和所有方法而不混淆
+-dontwarn okhttp3.**
+-keep class okhttp3.** {*;}
+
+-dontwarn okio.**
+-keep class okio.** {*;}
+
+-dontwarn retrofit2.**
+-keep class retrofit2.** {*;}
+
+-dontwarn org.greenrobot.greendao.**
+-keep class org.greenrobot.greendao.** { *;}
+
+#ProGuard不要警告找不到xx.xx.xxx.**这个包里面的类的相关引用
+-dontwarn com.qiyei.**
