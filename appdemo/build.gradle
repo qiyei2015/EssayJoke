@@ -81,8 +81,8 @@ android {
     /**
      * 多渠道打包
      */
-    productFlavors{
-        kuan{
+    productFlavors {
+        kuan {
             //这里可以配置不同的包名
 //            applicationId="com.cn"
             applicationIdSuffix ".kuan"
@@ -92,17 +92,17 @@ android {
             manifestPlaceholders = [app_name: "kuan"]
         }
 
-        xiaomi{
+        xiaomi {
             applicationIdSuffix ".xiaomi"
             manifestPlaceholders = [app_name: "xiaomi"]
         }
 
-        qh360{
+        qh360 {
             applicationIdSuffix ".qh360"
             manifestPlaceholders = [app_name: "qh360"]
         }
 
-        baidu{
+        baidu {
             applicationIdSuffix ".baidu"
             manifestPlaceholders = [app_name: "baidu"]
         }
@@ -118,7 +118,7 @@ android {
 //    }
 
     //解决国际化资源文件不全
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }

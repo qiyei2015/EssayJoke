@@ -1,19 +1,24 @@
 package com.qiyei.appdemo.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
 
+import com.qiyei.appdemo.model.MainMenu;
 import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.appdemo.service.TestService;
 import com.qiyei.framework.activity.BaseSkinActivity;
@@ -43,6 +48,10 @@ import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.Control;
 import com.qiyei.appdemo.model.IControl;
 import com.qiyei.appdemo.model.User;
+import com.qiyei.sdk.view.xrecycler.XRecyclerAdapter;
+import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
+import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
+import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
 import com.taobao.sophix.SophixManager;
 
 /**
@@ -52,46 +61,44 @@ import com.taobao.sophix.SophixManager;
  * @description:
  */
 public class MainActivity extends BaseSkinActivity {
+    private RecyclerView mRecyclerView;
+    private List<MainMenu> mMenuList = new ArrayList<>();
 
-    @ViewById(R.id.btn1)
-    private Button btn1;
-    @ViewById(R.id.btn2)
-    private Button btn2;
-    @ViewById(R.id.btn3)
-    private Button btn3;
-    @ViewById(R.id.btn4)
-    private Button btn4;
-    @ViewById(R.id.btn5)
-    private Button btn5;
-    @ViewById(R.id.btn6)
-    private Button btn6;
+    private String[] names = new String[]{"测试1","测试2 对话框测试","测试3 ViewPager测试","测试4 RecyclerViewTest","测试5 EasyJokeMain"
+            ,"测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试","测试9 动态代理","测试10 数据中心"
+            ,"测试11 测试异常信息","测试12 进程保活","测试13 Binder测试","测试14 网络框架测试","测试15 数据库框架测试"
+            ,"测试16 加密测试"};
 
-    @ViewById(R.id.btn7)
-    private Button btn7;
-    @ViewById(R.id.btn8)
-    private Button btn8;
-    @ViewById(R.id.btn9)
-    private Button btn9;
-
-    @ViewById(R.id.btn10)
-    private Button btn10;
-
-    @ViewById(R.id.btn11)
-    private Button btn11;
-
-    @ViewById(R.id.btn12)
-    private Button btn12;
-
-    @ViewById(R.id.btn13)
-    private Button btn13;
-
-    @ViewById(R.id.btn14)
-    private Button btn14;
-
-    @ViewById(R.id.btn15)
-    private Button btn15;
+    private Class<?>[] clazzs = new Class[]{TestActivity.class,null,ViewPagerTestActivity.class,RecyclerViewTestActivity.class,EasyJokeMainActivity.class
+            ,SkinTestActivity.class,BannerTestActivity.class,ImageSelectedTestActivity.class,null,DataCenterTestActivity.class
+            ,null,null,BinderTestActivity.class,NetworkTestActivity.class,DatabaseTestActivity.class
+            ,EncryptActivity.class};
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
+
+    /**
+     * adapter
+     */
+    private class MenuAdapter extends BaseRecyclerAdapter<MainMenu>{
+
+        public MenuAdapter() {
+        }
+
+        public MenuAdapter(Context context, List<MainMenu> datas, int layoutId) {
+            super(context, datas, layoutId);
+        }
+
+        @Override
+        public void convert(BaseViewHolder holder, MainMenu item, int position) {
+            holder.setText(R.id.tv,item.getName());
+            holder.setOnClickListener(R.id.tv, new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    gotoMenuActivity(item);
+                }
+            });
+        }
+    }
 
     /**
      * 标题栏
@@ -101,7 +108,6 @@ public class MainActivity extends BaseSkinActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 //        PermissionManager.requestAllDangerousPermission(this);
         initData();
         initView();
@@ -118,8 +124,11 @@ public class MainActivity extends BaseSkinActivity {
                 .setTitle("Demo测试")
                 .setRightText("哈哈测试移动热修复")
                 .build();
-        btn1.setOnClickListener(this);
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(new CategoryItemDecoration(getDrawable(R.drawable.recyclerview_decoration)));
+        mRecyclerView.setAdapter(new MenuAdapter(this,mMenuList,R.layout.recyclerview_item));
     }
 
     @Override
@@ -131,192 +140,29 @@ public class MainActivity extends BaseSkinActivity {
 
 
         PermissionManager.requestPermission(this,MY_PERMISSIONS_REQUEST_WRITE_STORE,permission);
-
-//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-//                || ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-//                || ContextCompat.checkSelfPermission(this, Manifest.permission.VIBRATE) != PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(this,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
-//        }else {
-//            initDataBase();
-//
-//        }
 //        fixBug();
         LogManager.i(TAG,"inner path:" + AndroidUtil.getInnerDataPath());
         LogManager.i(TAG,"external path:" + AndroidUtil.getExternalDataPath());
         LogManager.i(TAG,"sdcard path:" + AndroidUtil.getSdCardDataPath());
+
+        for (int i = 0 ; i < names.length ; i++){
+            MainMenu menu = new MainMenu(i+1,names[i],clazzs[i]);
+            mMenuList.add(menu);
+        }
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.btn1){
-            ToastUtil.showLongToast(2/1 + "测试");
-            startActivity(TestActivity.class);
-        }
+
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        if (requestCode == MY_PERMISSIONS_REQUEST_WRITE_STORE){
-//            LogManager.d(TAG,"onRequestPermissionsResult,size:" + grantResults.length);
-//
-//            if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-//                    && grantResults[1] == PackageManager.PERMISSION_GRANTED){
-//                initDataBase();
-//            }else {
-//                ToastUtil.showLongToast("你拒绝了获取存储卡的权限");
-//            }
-//            return;
-//        }
         PermissionManager.onRequestPermissionsResult(this,requestCode,permissions,grantResults);
 
     }
 
-    @OnClick(R.id.btn2)
-    private void testBtn2(View view){
-
-        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_test,null,false);
-
-        BaseDialog dialog = new BaseDialog.Builder(this)
-                .setCancelable(true)
-                //.setContentView(R.layout.dialog_test)
-                .setContentView(R.layout.dialog_test)
-                .setText(R.id.dialog_content,"这是一个对话框，哈哈哈！")
-                .setDialogListener(R.id.dialog_ok, new DialogListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.showLongToast("对话框点击了确认");
-
-                    }
-                })
-                .setDialogListener(R.id.dialog_cancel, new DialogListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.showLongToast("对话框点击了取消");
-                    }
-                })
-//                .setGravity(Gravity.BOTTOM)
-//                .fullWidth()
-                .setFragmentManager(getSupportFragmentManager())
-                .build();
-
-        dialog.show();
-
-    }
-
-    @OnClick(R.id.btn3)
-    private void testBtn3(View view){
-        startActivity(ViewPagerTestActivity.class);
-    }
-
-    @OnClick(R.id.btn4)
-    private void testBtn4(View view){
-        startActivity(RecyclerViewTestActivity.class);
-    }
-
-    @OnClick(R.id.btn5)
-    private void testBtn5(View view){
-        startActivity(EasyJokeMainActivity.class);
-    }
-
-    @OnClick(R.id.btn6)
-    private void testBtn6(View view){
-        startActivity(SkinTestActivity.class);
-    }
-
-    @OnClick(R.id.btn7)
-    private void testBtn7(View view){
-        startActivity(BannerTestActivity.class);
-    }
-
-    @OnClick(R.id.btn8)
-    private void testBtn8(View view){
-        startActivity(ImageSelectedTestActivity.class);
-    }
-
-    @OnClick(R.id.btn9)
-    private void testBtn9(View view){
-        dynamicProxy();
-        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
-        SophixManager.getInstance().queryAndLoadNewPatch();
-    }
-
-    @OnClick(R.id.btn10)
-    private void testBtn10(View view){
-        startActivity(DataCenterTestActivity.class);
-    }
-
-    @OnClick(R.id.btn11)
-    private void testBtn11(View view){
-
-        BaseDialog dialog = new BaseDialog.Builder(this)
-                .setCancelable(true)
-                .setContentView(R.layout.common_dialog)
-                //.setContentView(contentView)
-                .setText(R.id.id_dialog_title,"这是一个对话框标题！")
-                .setText(R.id.id_tv_content,"对话框内容")
-                .setText(R.id.id_tv_confirm,"确认")
-                .setText(R.id.id_tv_cancel,"取消")
-                .setDrawable(R.id.id_dialog_title_imv,R.drawable.icon_login_single)
-                .setDialogListener(R.id.id_tv_confirm, new DialogListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.showLongToast("对话框点击了确认");
-
-                    }
-                })
-                .setDialogListener(R.id.id_tv_cancel, new DialogListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.showLongToast("对话框点击了取消");
-                    }
-                })
-//                .setGravity(Gravity.BOTTOM)
-//                .fullWidth()
-                .setFragmentManager(getSupportFragmentManager())
-                .build();
-
-        dialog.show();
-    }
-
-    @OnClick(R.id.btn12)
-    private void testBtn12(View view){
-        startService(new Intent(this,RemoteService.class));
-        startService(new Intent(this, TestService.class));
-    }
-
-    @OnClick(R.id.btn13)
-    private void testBtn13(View view){
-        startActivity(BinderTestActivity.class);
-    }
-
-    @OnClick(R.id.btn14)
-    private void testBtn14(View view){
-        startActivity(NetworkTestActivity.class);
-    }
-
-    @OnClick(R.id.btn15)
-    private void testBtn15(View view){
-        startActivity(DatabaseTestActivity.class);
-    }
-
-    private void fixBug(){
-        File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.dex");
-        if (!fixFile.exists()){
-            ToastUtil.showLongToast("fixFile is not exists !");
-            return;
-        }
-
-        try {
-            FixDexManager fixDexManager = new FixDexManager(this);
-            fixDexManager.fixDex(fixFile.getAbsolutePath());
-            ToastUtil.showLongToast("修复成功");
-        } catch (Exception e) {
-            e.printStackTrace();
-            ToastUtil.showLongToast("修复失败");
-        }
-    }
 
     /**
      * 初始化数据库
@@ -351,5 +197,120 @@ public class MainActivity extends BaseSkinActivity {
 
         controlProxy.printHello("hello world !");
     }
+
+    /**
+     * 跳转到菜单
+     * @param menu
+     */
+    private void gotoMenuActivity(MainMenu menu){
+        switch (menu.getId()){
+            case 2:
+                testBtn2(null);
+                break;
+            case 9:
+                testBtn9(null);
+                break;
+            case 11:
+                testBtn11(null);
+                break;
+            case 12:
+                testBtn12(null);
+                break;
+            default:
+                startActivity(menu.getClazz());
+                break;
+        }
+    }
+
+    private void testBtn2(View view){
+
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_test,null,false);
+
+        BaseDialog dialog = new BaseDialog.Builder(this)
+                .setCancelable(true)
+                //.setContentView(R.layout.dialog_test)
+                .setContentView(R.layout.dialog_test)
+                .setText(R.id.dialog_content,"这是一个对话框，哈哈哈！")
+                .setDialogListener(R.id.dialog_ok, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了确认");
+
+                    }
+                })
+                .setDialogListener(R.id.dialog_cancel, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了取消");
+                    }
+                })
+//                .setGravity(Gravity.BOTTOM)
+//                .fullWidth()
+                .setFragmentManager(getSupportFragmentManager())
+                .build();
+
+        dialog.show();
+    }
+
+    private void testBtn9(View view){
+        dynamicProxy();
+        // queryAndLoadNewPatch不可放在attachBaseContext 中，否则无网络权限，建议放在后面任意时刻，如onCreate中
+        SophixManager.getInstance().queryAndLoadNewPatch();
+    }
+
+    private void testBtn11(View view){
+
+        BaseDialog dialog = new BaseDialog.Builder(this)
+                .setCancelable(true)
+                .setContentView(R.layout.common_dialog)
+                //.setContentView(contentView)
+                .setText(R.id.id_dialog_title,"这是一个对话框标题！")
+                .setText(R.id.id_tv_content,"对话框内容")
+                .setText(R.id.id_tv_confirm,"确认")
+                .setText(R.id.id_tv_cancel,"取消")
+                .setDrawable(R.id.id_dialog_title_imv,R.drawable.icon_login_single)
+                .setDialogListener(R.id.id_tv_confirm, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了确认");
+
+                    }
+                })
+                .setDialogListener(R.id.id_tv_cancel, new DialogListener() {
+                    @Override
+                    public void onClick(View v) {
+                        ToastUtil.showLongToast("对话框点击了取消");
+                    }
+                })
+//                .setGravity(Gravity.BOTTOM)
+//                .fullWidth()
+                .setFragmentManager(getSupportFragmentManager())
+                .build();
+
+        dialog.show();
+    }
+
+    private void testBtn12(View view){
+        startService(new Intent(this,RemoteService.class));
+        startService(new Intent(this, TestService.class));
+    }
+
+    private void fixBug(){
+        File fixFile = new File(Environment.getExternalStorageDirectory(),"fix.dex");
+        if (!fixFile.exists()){
+            ToastUtil.showLongToast("fixFile is not exists !");
+            return;
+        }
+
+        try {
+            FixDexManager fixDexManager = new FixDexManager(this);
+            fixDexManager.fixDex(fixFile.getAbsolutePath());
+            ToastUtil.showLongToast("修复成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.showLongToast("修复失败");
+        }
+    }
+
 
 }
