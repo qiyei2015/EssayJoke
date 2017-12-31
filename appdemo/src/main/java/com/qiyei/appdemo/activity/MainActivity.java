@@ -52,6 +52,7 @@ import com.qiyei.sdk.view.xrecycler.XRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
+import com.qiyei.sdk.xml.XmlManager;
 import com.taobao.sophix.SophixManager;
 
 /**
@@ -206,6 +207,7 @@ public class MainActivity extends BaseSkinActivity {
         switch (menu.getId()){
             case 2:
                 testBtn2(null);
+                XmlManager.readConfigure();
                 break;
             case 9:
                 testBtn9(null);
