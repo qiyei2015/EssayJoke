@@ -167,20 +167,23 @@ public class BannerViewPager extends ViewPager {
          */
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
-            final int pos = position % mAdapter.getCount();
-            View itemView = mAdapter.getView(pos,getConvertView());
-            container.addView(itemView);
+            if (mAdapter.getCount() > 0){
+                final int pos = position % mAdapter.getCount();
+                View itemView = mAdapter.getView(pos,getConvertView());
+                container.addView(itemView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListener != null){
-                        mListener.click(pos);
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mListener != null){
+                            mListener.click(pos);
+                        }
                     }
-                }
-            });
+                });
+                return itemView;
+            }
 
-            return itemView;
+            return null;
         }
 
         /**

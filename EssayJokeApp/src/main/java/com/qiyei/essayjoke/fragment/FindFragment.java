@@ -166,7 +166,12 @@ public class FindFragment extends BaseFragment{
 
             @Override
             public String getBannerDesc(int position) {
-                return list.get(position).getBanner_url().getTitle();
+                if (list.size() > 0 && list.get(position) != null){
+                    return list.get(position).getBanner_url().getTitle();
+                }else {
+                    return null;
+                }
+
             }
         });
         //开启轮播

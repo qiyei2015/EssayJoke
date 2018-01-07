@@ -93,8 +93,9 @@ public class BannerView extends FrameLayout {
 
             @Override
             public void onPageSelected(int position) {
-
-                pageSelect(position % mViewPager.getBannerAdapter().getCount());
+                if (mViewPager.getBannerAdapter().getCount() > 0){
+                    pageSelect(position % mViewPager.getBannerAdapter().getCount());
+                }
             }
 
             @Override
@@ -314,10 +315,15 @@ public class BannerView extends FrameLayout {
 
         //设置之前的为Normal
         DotView oldDot = (DotView) mDotContainer.getChildAt(mCurrentIndex);
-        oldDot.setDrawable(mNormalDrawable);
+        if (oldDot != null){
+            oldDot.setDrawable(mNormalDrawable);
+        }
+
         //更新当前的dot为选中
         DotView newDot = (DotView) mDotContainer.getChildAt(position);
-        newDot.setDrawable(mFocusDrawable);
+        if (newDot != null){
+            newDot.setDrawable(mFocusDrawable);
+        }
 
         mCurrentIndex = position;
         //更新Banner的描述
