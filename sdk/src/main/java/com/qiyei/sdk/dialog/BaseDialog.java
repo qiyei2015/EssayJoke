@@ -315,7 +315,7 @@ public class BaseDialog extends DialogFragment {
          * @param listener
          */
         public Builder setDialogListener(int viewId, DialogListener listener) {
-            LogManager.i(TAG,"setOnClickListener viewId : " + viewId + ",listener :" + listener);
+            LogManager.i(TAG,"setOnItemClickListener viewId : " + viewId + ",listener :" + listener);
             mBuilderParams.mEventMap.get(LISTENER).put(viewId,listener);
             mBuilderParams.mHolder.setOnClickListener(viewId,listener);
             return this;

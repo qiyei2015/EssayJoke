@@ -123,9 +123,9 @@ public class WrapRecyclerView extends RecyclerView {
         if (adapter instanceof XRecyclerAdapter){
             mWarpAdapter = (XRecyclerAdapter) adapter;
         }else {
-            mWarpAdapter = new XRecyclerAdapter(mAdapter){
+            mWarpAdapter = new XRecyclerAdapter(this.getContext(),null,0){
                 @Override
-                public void convert(BaseViewHolder holder, Object data, int position) {
+                public void convert(BaseViewHolder holder, Object item, int position) {
 
                 }
             };

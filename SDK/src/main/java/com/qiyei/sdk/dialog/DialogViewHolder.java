@@ -128,7 +128,7 @@ public class DialogViewHolder {
      */
     public void setOnClickListener(int viewId, final DialogListener listener){
         View view = getView(viewId);
-        LogManager.i(TAG,"setOnClickListener view : " + view + ",listener:" + listener);
+        LogManager.i(TAG,"setOnItemClickListener view : " + view + ",listener:" + listener);
         if (view != null){
             view.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -2,6 +2,7 @@ package com.qiyei.sdk.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.constraint.ConstraintLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,7 +110,7 @@ public abstract class BaseTitleBar<T extends BaseTitleParams> implements ITitleB
         mNavigationView = LayoutInflater.from(mParams.mContext)
                 .inflate(bindLayoutId(),activityRoot,false);
 
-        if (mParams.mActivityRoot instanceof RelativeLayout){
+        if (mParams.mActivityRoot instanceof RelativeLayout || mParams.mActivityRoot instanceof ConstraintLayout){
             //相对布局
             //先构造一个线性布局,指定垂直排列
             LinearLayout newActivityRoot = new LinearLayout(mParams.mContext);

@@ -42,15 +42,15 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     /**
      * item点击事件
      */
-    protected View.OnClickListener mClickListener;
+    protected OnItemClickListener mClickListener;
     /**
      * 长按事件
      */
-    protected View.OnLongClickListener mLongClickListener;
+    protected OnItemLongClickListener<T> mLongClickListener;
 
-    public BaseRecyclerAdapter(){
-
-    }
+//    public BaseRecyclerAdapter(){
+//
+//    }
 
     public BaseRecyclerAdapter(Context context, List<T> datas, int layoutId) {
         mContext = context;
@@ -80,10 +80,21 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     @Override
     public void onBindViewHolder(BaseViewHolder holder, int position) {
         if (mClickListener != null){
-            holder.itemView.setOnClickListener(mClickListener);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mClickListener.click(v,mDatas.get(position));
+                }
+            });
         }
         if (mLongClickListener != null){
-            holder.itemView.setOnLongClickListener(mLongClickListener);
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    mClickListener.click(v,mDatas.get(position));
+                    return true;
+                }
+            });
         }
         convert(holder,mDatas.get(position),position);
     }
@@ -105,14 +116,14 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     /**
      * @param clickListener the {@link #mClickListener} to set
      */
-    public void setOnClickListener(View.OnClickListener clickListener) {
+    public void setOnItemClickListener(OnItemClickListener<T> clickListener) {
         mClickListener = clickListener;
     }
 
     /**
      * @param longClickListener the {@link #mLongClickListener} to set
      */
-    public void setOnLongClickListener(View.OnLongClickListener longClickListener) {
+    public void setOnLongClickListener(OnItemLongClickListener<T> longClickListener) {
         mLongClickListener = longClickListener;
     }
 
