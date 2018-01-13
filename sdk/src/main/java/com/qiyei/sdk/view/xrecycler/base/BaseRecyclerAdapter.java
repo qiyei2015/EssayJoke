@@ -83,7 +83,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mClickListener.click(v,mDatas.get(position));
+                    mClickListener.click(v,mDatas.get(position),position);
                 }
             });
         }
@@ -91,7 +91,7 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
-                    mClickListener.click(v,mDatas.get(position));
+                    mClickListener.click(v,mDatas.get(position),position);
                     return true;
                 }
             });

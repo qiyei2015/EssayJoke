@@ -14,7 +14,8 @@ public interface OnItemClickListener<T>{
      * 点击到item
      * @param view
      * @param t
+     * @param position
      */
-    void click(View view, T t);
+    void click(View view, T t,int position);
 
 }
