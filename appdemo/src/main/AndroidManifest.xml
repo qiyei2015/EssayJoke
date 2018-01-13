@@ -92,6 +92,8 @@
         </activity>
         <activity android:name=".activity.EncryptActivity">
         </activity>
+        <activity android:name="com.qiyei.architecture.ui.activity.ArchitectureActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -3,24 +3,19 @@ package com.qiyei.appdemo.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 
 
 import com.qiyei.appdemo.model.MainMenu;
 import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.appdemo.service.TestService;
+import com.qiyei.architecture.ui.activity.ArchitectureActivity;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.db.DaoSupportFactory;
@@ -28,8 +23,6 @@ import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.dialog.BaseDialog;
 import com.qiyei.sdk.dialog.DialogListener;
 import com.qiyei.sdk.fixbug.FixDexManager;
-import com.qiyei.sdk.ioc.OnClick;
-import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.permission.PermissionFail;
 import com.qiyei.sdk.permission.PermissionManager;
@@ -48,7 +41,6 @@ import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.Control;
 import com.qiyei.appdemo.model.IControl;
 import com.qiyei.appdemo.model.User;
-import com.qiyei.sdk.view.xrecycler.XRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
@@ -68,12 +60,12 @@ public class MainActivity extends BaseSkinActivity {
     private String[] names = new String[]{"测试1","测试2 对话框测试","测试3 ViewPager测试","测试4 RecyclerViewTest","测试5 EasyJokeMain"
             ,"测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试","测试9 动态代理","测试10 数据中心"
             ,"测试11 测试异常信息","测试12 进程保活","测试13 Binder测试","测试14 网络框架测试","测试15 数据库框架测试"
-            ,"测试16 加密测试"};
+            ,"测试16 加密测试","测试17 Android架构组件"};
 
     private Class<?>[] clazzs = new Class[]{TestActivity.class,null,ViewPagerTestActivity.class,RecyclerViewTestActivity.class,EasyJokeMainActivity.class
             ,SkinTestActivity.class,BannerTestActivity.class,ImageSelectedTestActivity.class,null,DataCenterTestActivity.class
             ,null,null,BinderTestActivity.class,NetworkTestActivity.class,DatabaseTestActivity.class
-            ,EncryptActivity.class};
+            ,EncryptActivity.class,ArchitectureActivity.class};
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
@@ -82,8 +74,8 @@ public class MainActivity extends BaseSkinActivity {
      */
     private class MenuAdapter extends BaseRecyclerAdapter<MainMenu>{
 
-        public MenuAdapter() {
-        }
+//        public MenuAdapter() {
+//        }
 
         public MenuAdapter(Context context, List<MainMenu> datas, int layoutId) {
             super(context, datas, layoutId);
