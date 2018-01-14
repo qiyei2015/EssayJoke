@@ -7,7 +7,7 @@ import android.arch.lifecycle.ViewModel;
 import com.qiyei.architecture.model.Product;
 import com.qiyei.architecture.repository.ProductRepository;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
