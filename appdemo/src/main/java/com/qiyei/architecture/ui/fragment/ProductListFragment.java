@@ -64,7 +64,6 @@ public class ProductListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_product_list,container,false);
         mTextView = rootView.findViewById(R.id.tv1);
         mRecyclerView = rootView.findViewById(R.id.recycler_view);
-
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,11 +72,8 @@ public class ProductListFragment extends Fragment {
         });
 
         productAdapter = new ProductAdapter(getContext(),new ArrayList<>(),R.layout.recyclerview_item);
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
         mRecyclerView.setAdapter(productAdapter);
-
         productAdapter.setOnItemClickListener(new OnItemClickListener<Product>() {
             @Override
             public void click(View view, Product product,int position) {
