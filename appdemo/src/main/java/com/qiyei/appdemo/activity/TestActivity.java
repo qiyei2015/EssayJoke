@@ -4,6 +4,7 @@ package com.qiyei.appdemo.activity;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.XmlResourceParser;
 import android.os.Bundle;
@@ -117,6 +118,7 @@ public class TestActivity extends AppCompatActivity {
         });
 
     }
+
 
 
 }

@@ -1,8 +1,10 @@
 package com.qiyei.architecture.viewmodel;
 
+import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
+import android.util.AndroidException;
 
 import com.qiyei.architecture.model.Product;
 import com.qiyei.architecture.repository.ProductRepository;
