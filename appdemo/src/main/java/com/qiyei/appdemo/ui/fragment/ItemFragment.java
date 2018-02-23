@@ -1,4 +1,4 @@
-package com.qiyei.appdemo.fragment;
+package com.qiyei.appdemo.ui.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

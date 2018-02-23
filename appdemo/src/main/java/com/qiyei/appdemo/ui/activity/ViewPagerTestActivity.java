@@ -1,4 +1,4 @@
-package com.qiyei.appdemo.activity;
+package com.qiyei.appdemo.ui.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.qiyei.appdemo.R;
-import com.qiyei.appdemo.fragment.ItemFragment;
+import com.qiyei.appdemo.ui.fragment.ItemFragment;
 
 public class ViewPagerTestActivity extends BaseSkinActivity {
 

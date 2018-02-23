@@ -1,21 +1,26 @@
-package com.qiyei.appdemo.activity;
+package com.qiyei.appdemo.ui.activity;
 
 import android.Manifest;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 
 
+import com.qiyei.appdemo.adapter.MainMenuAdapter;
+import com.qiyei.appdemo.listener.MainMenuListener;
 import com.qiyei.appdemo.model.MainMenu;
 import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.appdemo.service.TestService;
-import com.qiyei.architecture.ui.activity.ArchitectureActivity;
+import com.qiyei.appdemo.viewmodel.MainMenuViewModel;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.db.DaoSupportFactory;
@@ -41,8 +46,6 @@ import com.qiyei.appdemo.R;
 import com.qiyei.appdemo.model.Control;
 import com.qiyei.appdemo.model.IControl;
 import com.qiyei.appdemo.model.User;
-import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
-import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
 import com.qiyei.sdk.xml.XmlManager;
 import com.taobao.sophix.SophixManager;
@@ -54,44 +57,17 @@ import com.taobao.sophix.SophixManager;
  * @description:
  */
 public class MainActivity extends BaseSkinActivity {
+
     private RecyclerView mRecyclerView;
-    private List<MainMenu> mMenuList = new ArrayList<>();
-
-    private String[] names = new String[]{"测试1","测试2 对话框测试","测试3 ViewPager测试","测试4 RecyclerViewTest","测试5 EasyJokeMain"
-            ,"测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试","测试9 动态代理","测试10 数据中心"
-            ,"测试11 测试异常信息","测试12 进程保活","测试13 Binder测试","测试14 网络框架测试","测试15 数据库框架测试"
-            ,"测试16 加密测试","测试17 Android架构组件"};
-
-    private Class<?>[] clazzs = new Class[]{TestActivity.class,null,ViewPagerTestActivity.class,RecyclerViewTestActivity.class,EasyJokeMainActivity.class
-            ,SkinTestActivity.class,BannerTestActivity.class,ImageSelectedTestActivity.class,null,DataCenterTestActivity.class
-            ,null,null,BinderTestActivity.class,NetworkTestActivity.class,DatabaseTestActivity.class
-            ,EncryptActivity.class,ArchitectureActivity.class};
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE_STORE = 1;
 
     /**
-     * adapter
+     * ViewModel
      */
-    private class MenuAdapter extends BaseRecyclerAdapter<MainMenu>{
+    private MainMenuViewModel mMenuViewModel;
 
-//        public MenuAdapter() {
-//        }
-
-        public MenuAdapter(Context context, List<MainMenu> datas, int layoutId) {
-            super(context, datas, layoutId);
-        }
-
-        @Override
-        public void convert(BaseViewHolder holder, MainMenu item, int position) {
-            holder.setText(R.id.tv,item.getName());
-            holder.setOnClickListener(R.id.tv, new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    gotoMenuActivity(item);
-                }
-            });
-        }
-    }
+    private MainMenuAdapter mMenuAdapter;
 
     /**
      * 标题栏
@@ -120,17 +96,26 @@ public class MainActivity extends BaseSkinActivity {
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
         mRecyclerView.addItemDecoration(new CategoryItemDecoration(getDrawable(R.drawable.recyclerview_decoration)));
-        mRecyclerView.setAdapter(new MenuAdapter(this,mMenuList,R.layout.recyclerview_item));
+
+        mRecyclerView.setAdapter(mMenuAdapter);
+
+        mMenuViewModel = ViewModelProviders.of(this).get(MainMenuViewModel.class);
+        mMenuViewModel.getMenuList().observe(this, new Observer<List<MainMenu>>() {
+            @Override
+            public void onChanged(@Nullable List<MainMenu> mainMenus) {
+                //update UI
+                mMenuAdapter.setDatas(mainMenus);
+            }
+        });
     }
 
     @Override
     protected void initData() {
         //如果没有权限
-
         String[] permission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE
                 ,Manifest.permission.VIBRATE,Manifest.permission.CAMERA,Manifest.permission.SEND_SMS};
-
 
         PermissionManager.requestPermission(this,MY_PERMISSIONS_REQUEST_WRITE_STORE,permission);
 //        fixBug();
@@ -138,10 +123,8 @@ public class MainActivity extends BaseSkinActivity {
         LogManager.i(TAG,"external path:" + AndroidUtil.getExternalDataPath());
         LogManager.i(TAG,"sdcard path:" + AndroidUtil.getSdCardDataPath());
 
-        for (int i = 0 ; i < names.length ; i++){
-            MainMenu menu = new MainMenu(i+1,names[i],clazzs[i]);
-            mMenuList.add(menu);
-        }
+        mMenuAdapter = new MainMenuAdapter(this,null,R.layout.recyclerview_item);
+        mMenuAdapter.setListener(new MyListener());
     }
 
     @Override
@@ -306,5 +289,17 @@ public class MainActivity extends BaseSkinActivity {
         }
     }
 
+    private class MyListener implements MainMenuListener{
+        @Override
+        public void onClick(View v, MainMenu item, int position) {
+            gotoMenuActivity(item);
+        }
+    }
 
+    @Override
+    protected void onDestroy() {
+        mMenuAdapter.removeListener();
+
+        super.onDestroy();
+    }
 }

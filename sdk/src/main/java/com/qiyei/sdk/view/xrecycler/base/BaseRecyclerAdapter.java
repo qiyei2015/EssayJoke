@@ -48,6 +48,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
      */
     protected OnItemLongClickListener<T> mLongClickListener;
 
+    protected BaseViewHolder mViewHolder;
+
 //    public BaseRecyclerAdapter(){
 //
 //    }
@@ -74,7 +76,8 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
         }
 
         View view = LayoutInflater.from(mContext).inflate(mLayoutId,parent,false);
-        return new BaseViewHolder(view);
+        mViewHolder = new BaseViewHolder(view);
+        return mViewHolder;
     }
 
     @Override

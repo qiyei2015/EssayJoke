@@ -4,13 +4,9 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.qiyei.appdemo.activity.BannerTestActivity;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
-import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
-import com.qiyei.sdk.util.HookUtil;
-import com.qiyei.sdk.util.ToastUtil;
 import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;

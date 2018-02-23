@@ -1,4 +1,4 @@
-package com.qiyei.appdemo.activity;
+package com.qiyei.appdemo.ui.activity;
 
 import android.os.IBinder;
 import android.os.RemoteException;

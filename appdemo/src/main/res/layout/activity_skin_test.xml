@@ -6,7 +6,7 @@
               android:layout_height="match_parent"
               android:orientation="vertical"
               android:background="@color/main_bg_color"
-              tools:context=".activity.SkinTestActivity">
+              tools:context=".ui.activity.SkinTestActivity">
 
     <Button
         android:layout_width="wrap_content"

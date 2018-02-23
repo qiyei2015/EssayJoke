@@ -1,12 +1,10 @@
-package com.qiyei.appdemo.activity;
+package com.qiyei.appdemo.ui.activity;
 
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
-import android.app.Activity;
 import android.content.Context;
-import android.content.res.XmlResourceParser;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;

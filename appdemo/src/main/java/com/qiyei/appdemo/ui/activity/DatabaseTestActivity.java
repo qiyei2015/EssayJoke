@@ -1,4 +1,4 @@
-package com.qiyei.appdemo.activity;
+package com.qiyei.appdemo.ui.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,7 +13,6 @@ import com.qiyei.sdk.database.DB;
 import com.qiyei.sdk.database.DatabaseManager;
 import com.qiyei.sdk.database.IDatabaseSession;
 import com.qiyei.sdk.log.LogManager;
-import com.qiyei.sdk.util.AndroidUtil;
 
 import java.util.ArrayList;
 import java.util.List;
