@@ -180,7 +180,6 @@ public class MainActivity extends BaseSkinActivity {
                 return method.invoke(control,args);
             }
         });
-        ArrayMap
         controlProxy.printHello("hello world !");
     }
 
