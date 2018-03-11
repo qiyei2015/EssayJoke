@@ -49,7 +49,12 @@ public class CoreWakeUpService extends JobService {
         // 判断服务有没有在运行
         boolean alive = serviceAlive(CoreService.class.getName());
         if(!alive){
-            startService(new Intent(this,CoreService.class));
+            //startService Android 8.0以上不支持启动在后台的service
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1){
+                startForegroundService(new Intent(this,CoreService.class));
+            }else {
+                startService(new Intent(this,CoreService.class));
+            }
             LogManager.i(TAG,"startService CoreService");
         }
 

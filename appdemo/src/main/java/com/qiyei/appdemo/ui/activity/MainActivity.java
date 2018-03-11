@@ -1,6 +1,7 @@
 package com.qiyei.appdemo.ui.activity;
 
 import android.Manifest;
+import android.arch.lifecycle.MediatorLiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -21,6 +23,7 @@ import com.qiyei.appdemo.model.MainMenu;
 import com.qiyei.appdemo.service.RemoteService;
 import com.qiyei.appdemo.service.TestService;
 import com.qiyei.appdemo.viewmodel.MainMenuViewModel;
+import com.qiyei.appdemo.viewmodel.NetworkLiveData;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.db.DaoSupportFactory;
@@ -97,7 +100,7 @@ public class MainActivity extends BaseSkinActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecyclerView.addItemDecoration(new CategoryItemDecoration(getDrawable(R.drawable.recyclerview_decoration)));
+        mRecyclerView.addItemDecoration(new CategoryItemDecoration(AndroidUtil.getDrawable(R.drawable.recyclerview_decoration)));
 
         mRecyclerView.setAdapter(mMenuAdapter);
 
@@ -107,6 +110,13 @@ public class MainActivity extends BaseSkinActivity {
             public void onChanged(@Nullable List<MainMenu> mainMenus) {
                 //update UI
                 mMenuAdapter.setDatas(mainMenus);
+            }
+        });
+
+        NetworkLiveData.getInstance(this).observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(@Nullable Integer networkState) {
+                //your code
             }
         });
     }
@@ -170,7 +180,7 @@ public class MainActivity extends BaseSkinActivity {
                 return method.invoke(control,args);
             }
         });
-
+        ArrayMap
         controlProxy.printHello("hello world !");
     }
 
