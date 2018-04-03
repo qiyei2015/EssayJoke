@@ -83,6 +83,7 @@ public class MainActivity extends BaseSkinActivity {
 //        PermissionManager.requestAllDangerousPermission(this);
         initData();
         initView();
+        LogManager.i(TAG,"onCreate");
     }
 
     @Override
@@ -296,6 +297,7 @@ public class MainActivity extends BaseSkinActivity {
             e.printStackTrace();
             ToastUtil.showLongToast("修复失败");
         }
+
     }
 
     private class MyListener implements MainMenuListener{
@@ -306,9 +308,39 @@ public class MainActivity extends BaseSkinActivity {
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        LogManager.i(TAG,"onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LogManager.i(TAG,"onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        LogManager.i(TAG,"onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        LogManager.i(TAG,"onStop");
+    }
+
+    @Override
     protected void onDestroy() {
         mMenuAdapter.removeListener();
-
+        LogManager.i(TAG,"onDestroy");
         super.onDestroy();
     }
+
 }

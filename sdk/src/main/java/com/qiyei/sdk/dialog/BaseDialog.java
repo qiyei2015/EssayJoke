@@ -79,7 +79,7 @@ public class BaseDialog extends DialogFragment {
         setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
         //保存数据，防止重建Dialog时出现数据丢失的情况
         if (savedInstanceState != null){
-            mParams = (DialogParams) savedInstanceState.getSerializable(KEY);
+//            mParams = (DialogParams) savedInstanceState.getSerializable(KEY);
             LogManager.i(TAG,"savedInstanceState mParams:" + mParams.toString());
             isSavedInstanceState = true;
         }
@@ -90,7 +90,7 @@ public class BaseDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putSerializable(KEY,mParams);
+//        outState.putSerializable(KEY,mParams);
     }
 
 

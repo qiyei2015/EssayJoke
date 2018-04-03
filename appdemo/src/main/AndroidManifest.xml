@@ -53,6 +53,11 @@
         <activity android:name=".ui.activity.TestActivity">
         </activity>
 
+        <!--指定其风格为Dialog-->
+        <activity android:name=".ui.dialog.ActivityDialog"
+            android:theme="@style/activity_dialog">
+        </activity>
+
         <service
             android:name=".service.LocalService"
             android:enabled="true"

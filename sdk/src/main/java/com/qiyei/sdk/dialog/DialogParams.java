@@ -15,7 +15,7 @@ import java.util.Map;
  * @email: 1273482124@qq.com
  * @description: Dialog的控制类，控制其中的ContentView等的操作
  */
-public class DialogParams implements Serializable{
+public class DialogParams{
 
     /**
      * Dialog辅助类
