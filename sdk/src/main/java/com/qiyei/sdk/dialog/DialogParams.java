@@ -15,17 +15,17 @@ import java.util.Map;
  * @email: 1273482124@qq.com
  * @description: Dialog的控制类，控制其中的ContentView等的操作
  */
-public class DialogParams{
+public class DialogParams implements Serializable{
 
     /**
      * Dialog辅助类
      */
-    public DialogViewHolder mHolder;
+    public transient DialogViewHolder mHolder;
 
     /**
      * 显示DialogFragment需要的FragmentManager
      */
-    public FragmentManager mFragmentManager;
+    public transient FragmentManager mFragmentManager;
     /**
      * 宽度
      */
@@ -45,7 +45,7 @@ public class DialogParams{
     /**
      * 内容View
      */
-    public View mContentView;
+    public transient View mContentView;
     /**
      * 内容布局id
      */
