@@ -50,9 +50,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
 
     protected BaseViewHolder mViewHolder;
 
-//    public BaseRecyclerAdapter(){
-//
-//    }
+    public BaseRecyclerAdapter(){
+
+    }
 
     public BaseRecyclerAdapter(Context context, List<T> datas, int layoutId) {
         mContext = context;

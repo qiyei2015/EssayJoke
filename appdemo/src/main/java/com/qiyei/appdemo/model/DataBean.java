@@ -3,6 +3,7 @@ package com.qiyei.appdemo.model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Keep;
 
 
 /**
@@ -18,14 +19,14 @@ public class DataBean {
     private String name;
     private String value;
 
-    @Generated(hash = 1564057376)
+    @Keep()
     public DataBean(long id, String name, String value) {
         this.id = id;
         this.name = name;
         this.value = value;
     }
 
-    @Generated(hash = 908697775)
+    @Keep()
     public DataBean() {
     }
 

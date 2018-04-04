@@ -252,7 +252,7 @@ public class MainActivity extends BaseSkinActivity {
                 .setContentView(R.layout.common_dialog)
                 //.setContentView(contentView)
                 .setText(R.id.id_dialog_title,"这是一个对话框标题！")
-                .setText(R.id.id_tv_content,"对话框内容")
+                .setText(R.id.id_tv_content,"对话框内容55555")
                 .setText(R.id.id_tv_confirm,"确认")
                 .setText(R.id.id_tv_cancel,"取消")
                 .setDrawable(R.id.id_dialog_title_imv,R.drawable.icon_login_single)

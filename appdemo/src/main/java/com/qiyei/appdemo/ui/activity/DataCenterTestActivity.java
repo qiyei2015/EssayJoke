@@ -86,13 +86,13 @@ public class DataCenterTestActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        LogManager.i(TAG,"onStart");
+        LogManager.i(TAG,"onStart555");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        LogManager.i(TAG,"onResume");
+        LogManager.i(TAG,"onResume5");
     }
 
     @Override

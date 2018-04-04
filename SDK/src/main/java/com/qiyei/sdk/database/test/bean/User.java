@@ -2,6 +2,7 @@ package com.qiyei.sdk.database.test.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Keep;
 
 /**
  * @author Created by qiyei2015 on 2017/11/11.
@@ -13,12 +14,12 @@ import org.greenrobot.greendao.annotation.Generated;
 public class User {
     int id;
     String name;
-    @Generated(hash = 1332540676)
+    @Keep()
     public User(int id, String name) {
         this.id = id;
         this.name = name;
     }
-    @Generated(hash = 586692638)
+    @Keep()
     public User() {
     }
     public int getId() {

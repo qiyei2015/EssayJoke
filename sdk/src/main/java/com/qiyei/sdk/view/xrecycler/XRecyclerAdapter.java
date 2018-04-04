@@ -60,10 +60,10 @@ public abstract class XRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         init();
     }
 
-//    public XRecyclerAdapter(BaseRecyclerAdapter adapter) {
-//        mAdapter = adapter;
-//        init();
-//    }
+    public XRecyclerAdapter(BaseRecyclerAdapter adapter) {
+        mAdapter = adapter;
+        init();
+    }
 
     public void init(BaseRecyclerAdapter adapter){
         mAdapter = adapter;
