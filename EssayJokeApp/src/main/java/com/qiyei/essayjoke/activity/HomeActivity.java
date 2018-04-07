@@ -18,6 +18,7 @@ import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.ioc.ViewById;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.SystemStatusBarUtil;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -56,6 +57,7 @@ public class HomeActivity extends BaseSkinActivity {
         super.onCreate(savedInstanceState);
         initData();
         initView();
+        LogManager.i("ddddd","4444444446666");
     }
 
     @Override

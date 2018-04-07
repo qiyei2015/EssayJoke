@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
+import com.qiyei.sdk.log.LogManager;
 
 /**
  * Email: 1273482124@qq.com
@@ -23,6 +24,9 @@ public class BaseApplication extends Application {
         }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
+
+        LogManager.i("ddddd","444444444");
+
     }
 
 }

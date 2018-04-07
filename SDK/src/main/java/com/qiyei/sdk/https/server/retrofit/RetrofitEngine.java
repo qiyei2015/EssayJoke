@@ -1,13 +1,11 @@
 package com.qiyei.sdk.https.server.retrofit;
 
 
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 
 import com.qiyei.sdk.https.HTTP;
-import com.qiyei.sdk.https.dialog.LoadingManager;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -15,8 +13,9 @@ import com.qiyei.sdk.https.server.IHttpCallback;
 import com.qiyei.sdk.https.server.IHttpEngine;
 import com.qiyei.sdk.https.server.HttpTask;
 import com.qiyei.sdk.https.server.IHttpTransferCallback;
-import com.qiyei.sdk.https.server.MyInterceptor;
+import com.qiyei.sdk.https.server.okhttp.MyInterceptor;
 import com.qiyei.sdk.https.server.ProgressResponseBody;
+import com.qiyei.sdk.https.server.okhttp.ProgressInterceptor;
 import com.qiyei.sdk.log.LogManager;
 
 import java.io.BufferedInputStream;
@@ -24,7 +23,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
@@ -34,15 +32,10 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.ResponseBody;
-import okio.BufferedSink;
-import okio.BufferedSource;
-import okio.Okio;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -148,7 +141,7 @@ public class RetrofitEngine implements IHttpEngine {
         OkHttpClient client = (OkHttpClient) retrofit.callFactory();
 
         //找到Interceptor
-        MyInterceptor interceptor = new MyInterceptor();
+        ProgressInterceptor interceptor = new ProgressInterceptor();
         interceptor.setProgressResponseBody(new ProgressResponseBody(callback));
         client = client.newBuilder().addInterceptor(interceptor).build();
 
@@ -176,7 +169,6 @@ public class RetrofitEngine implements IHttpEngine {
         }
         //设置task到okHttp拦截器中
         setOkHttpInterceptorTag(call,task);
-
 
         //将任务加到队列里面
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);

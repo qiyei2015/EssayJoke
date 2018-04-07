@@ -1,6 +1,9 @@
-package com.qiyei.sdk.https.server;
+package com.qiyei.sdk.https.server.okhttp;
 
 import com.qiyei.sdk.https.HTTP;
+import com.qiyei.sdk.https.server.HttpTask;
+import com.qiyei.sdk.https.server.ProgressRequestBody;
+import com.qiyei.sdk.https.server.ProgressResponseBody;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.TimeUtil;
 
@@ -20,8 +23,6 @@ import okhttp3.Response;
  */
 public class MyInterceptor implements Interceptor{
 
-    private final static String TAG = MyInterceptor.class.getSimpleName();
-
     /**
      * 带进度的响应体,用于文件下载
      */
@@ -40,6 +41,7 @@ public class MyInterceptor implements Interceptor{
         if (task == null){
             return chain.proceed(original);
         }
+
         //获取taskId
         String taskId = task.getTaskId();
 
@@ -49,10 +51,6 @@ public class MyInterceptor implements Interceptor{
         long requestTime = System.currentTimeMillis();
 
         switch (task.getRequest().getMethod()){
-            case HTTP.GET:
-                LogManager.i(HTTP.TAG, getRequestInfo(newRequest,taskId,System.currentTimeMillis()));
-                break;
-
             case HTTP.POST:
                 RequestBody rb = newRequest.body();
                 //只有普通的post请求打印 body UPLOAD 请求不打印
@@ -64,28 +62,12 @@ public class MyInterceptor implements Interceptor{
                 } else {
                     LogManager.i(HTTP.TAG, getRequestInfo(newRequest,taskId,System.currentTimeMillis()) + "\nbody = null");
                 }
-
                 break;
-
+            case HTTP.GET:
             case HTTP.DOWNLOAD:
-                //Download时GET请求
-                if (newRequest.method().equals(HTTP.GET)){
-                    LogManager.i(HTTP.TAG, getRequestInfo(newRequest,taskId,System.currentTimeMillis()));
-                }
-                break;
-
             case HTTP.UPLOAD:
                 LogManager.i(HTTP.TAG, getRequestInfo(newRequest,taskId,System.currentTimeMillis()));
-
-                //设置带进度的响应实体
-                if (mProgressRequestBody != null){
-                    LogManager.i(TAG,"mProgressRequestBody:" + mProgressRequestBody);
-                    mProgressRequestBody.setRequestBody(newRequest.body());
-                    newRequest = newRequest.newBuilder().post(mProgressRequestBody).build();
-                }
-
                 break;
-
             default:
                 break;
         }
@@ -94,53 +76,18 @@ public class MyInterceptor implements Interceptor{
         //获取到响应
         okhttp3.Response response = chain.proceed(newRequest);
 
-        //设置带进度的响应实体
-        if (mProgressResponseBody != null){
-            LogManager.i(TAG,"mProgressResponseBody:" + mProgressResponseBody);
-            mProgressResponseBody.setResponseBody(response.body());
-            return response.newBuilder().body(mProgressResponseBody).build();
-        }
-
         //下载请求 直接返回 防止崩溃OOM
         if (task.getRequest().getMethod().equals(HTTP.DOWNLOAD)){
+            LogManager.i(HTTP.TAG, getResponseInfo(taskId,requestTime,System.currentTimeMillis()));
             return response;
         }
 
+        //打印response信息
         okhttp3.MediaType mediaType = response.body().contentType();
         String body = response.body().string();
         LogManager.i(HTTP.TAG, getResponseInfo(taskId,requestTime,System.currentTimeMillis()) + "\nbody: " +  body);
         return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, body)).build();
     }
-
-
-    /**
-     * @return {@link #mProgressResponseBody}
-     */
-    public ProgressResponseBody getProgressResponseBody() {
-        return mProgressResponseBody;
-    }
-
-    /**
-     * @param progressResponseBody the {@link #mProgressResponseBody} to set
-     */
-    public void setProgressResponseBody(ProgressResponseBody progressResponseBody) {
-        mProgressResponseBody = progressResponseBody;
-    }
-
-    /**
-     * @return {@link #mProgressRequestBody}
-     */
-    public ProgressRequestBody getProgressRequestBody() {
-        return mProgressRequestBody;
-    }
-
-    /**
-     * @param progressRequestBody the {@link #mProgressRequestBody} to set
-     */
-    public void setProgressRequestBody(ProgressRequestBody progressRequestBody) {
-        mProgressRequestBody = progressRequestBody;
-    }
-
 
     /**
      * 添加DNS和Header

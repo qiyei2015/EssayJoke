@@ -1,15 +1,6 @@
 package com.qiyei.sdk.https.server.okhttp;
 
 
-import com.qiyei.sdk.https.HTTP;
-import com.qiyei.sdk.https.server.HttpTask;
-import com.qiyei.sdk.https.server.MyInterceptor;
-import com.qiyei.sdk.https.server.ProgressRequestBody;
-import com.qiyei.sdk.https.server.ProgressResponseBody;
-import com.qiyei.sdk.log.LogManager;
-import com.qiyei.sdk.util.TimeUtil;
-
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -21,11 +12,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
