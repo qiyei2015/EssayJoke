@@ -23,15 +23,6 @@ import okhttp3.Response;
  */
 public class MyInterceptor implements Interceptor{
 
-    /**
-     * 带进度的响应体,用于文件下载
-     */
-    private ProgressResponseBody mProgressResponseBody;
-    /**
-     * 带进度的请求体，用于文件上传
-     */
-    private ProgressRequestBody mProgressRequestBody;
-
     @Override
     public Response intercept(Chain chain) throws IOException {
 

@@ -53,8 +53,9 @@
         <activity android:name=".ui.activity.TestActivity">
         </activity>
 
-        <!--指定其风格为Dialog-->
-        <activity android:name=".ui.dialog.ActivityDialog"
+        <!-- 指定其风格为Dialog -->
+        <activity
+            android:name=".ui.dialog.ActivityDialog"
             android:theme="@style/activity_dialog">
         </activity>
 
@@ -98,6 +99,8 @@
         <activity android:name=".ui.activity.EncryptActivity">
         </activity>
         <activity android:name="com.qiyei.architecture.ui.activity.ArchitectureActivity">
+        </activity>
+        <activity android:name=".ui.activity.RxjavaTestActivity">
         </activity>
     </application>
 
