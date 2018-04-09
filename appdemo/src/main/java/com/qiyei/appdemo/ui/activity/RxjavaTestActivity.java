@@ -66,7 +66,6 @@ public class RxjavaTestActivity extends AppCompatActivity {
                 testConcatMap();
             }
         });
-
     }
 
     private void testCreate(){
