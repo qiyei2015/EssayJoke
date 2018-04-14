@@ -1,1 +1,1 @@
-include ':EssayJokeApp', ':SDK', ':Framework', ':appdemo'
+include ':EssayJokeApp', ':SDK', ':Framework', ':appdemo', ':ioc-annotation', ':ioc-compiler'

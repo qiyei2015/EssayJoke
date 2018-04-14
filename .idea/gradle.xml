@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/Framework" />
             <option value="$PROJECT_DIR$/SDK" />
             <option value="$PROJECT_DIR$/appdemo" />
+            <option value="$PROJECT_DIR$/ioc-annotation" />
+            <option value="$PROJECT_DIR$/ioc-compiler" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

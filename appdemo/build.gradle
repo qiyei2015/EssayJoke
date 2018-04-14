@@ -147,4 +147,6 @@ dependencies {
     api 'com.android.support:appcompat-v7:26.0.0'
     testImplementation 'junit:junit:4.12'
     api project(':Framework')
+    api project(':ioc-annotation')
+    annotationProcessor project(':ioc-compiler')
 }

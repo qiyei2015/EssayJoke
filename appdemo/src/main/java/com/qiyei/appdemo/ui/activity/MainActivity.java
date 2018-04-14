@@ -26,6 +26,7 @@ import com.qiyei.appdemo.viewmodel.MainMenuViewModel;
 import com.qiyei.appdemo.viewmodel.NetworkLiveData;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.titlebar.CommonTitleBar;
+import com.qiyei.ioc.annotation.Bind;
 import com.qiyei.sdk.db.DaoSupportFactory;
 import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.dialog.BaseDialog;
@@ -59,6 +60,7 @@ import com.taobao.sophix.SophixManager;
  * @email: 1273482124@qq.com
  * @description:
  */
+@Bind(10)
 public class MainActivity extends BaseSkinActivity {
 
     private RecyclerView mRecyclerView;
