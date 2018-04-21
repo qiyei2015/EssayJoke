@@ -164,7 +164,6 @@ public class BindProcessor extends AbstractProcessor{
             JavaFile javaFile = JavaFile.builder(packageName,type).build();
             //写入源文件
             javaFile.writeTo(mFiler);
-
         }
     }
 

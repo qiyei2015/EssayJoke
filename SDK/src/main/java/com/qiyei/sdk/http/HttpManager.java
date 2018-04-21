@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
+import android.util.LruCache;
 
 import com.qiyei.sdk.http.base.IHttpCallback;
 import com.qiyei.sdk.http.base.IHttpEngine;
@@ -45,7 +46,6 @@ public class HttpManager implements IHttpExecutor{
     private String tag = "";
 
     private Handler mHandler = new Handler(Looper.getMainLooper());
-
     /**
      * 初始化引擎
      * @param engine

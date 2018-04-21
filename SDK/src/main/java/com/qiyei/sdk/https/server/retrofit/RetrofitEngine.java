@@ -145,19 +145,24 @@ public class RetrofitEngine implements IHttpEngine {
         interceptor.setProgressResponseBody(new ProgressResponseBody(callback));
         client = client.newBuilder().addInterceptor(interceptor).build();
 
-        try {
-            Field callFactoryField = retrofit.getClass().getDeclaredField("callFactory");
-            if (callFactoryField == null) {
-                LogManager.i(HTTP.TAG, "callFactoryField is null");
-                return;
-            }
-            callFactoryField.setAccessible(true);
-            callFactoryField.set(retrofit,client);
-        } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        //改变okHttpClient，向其中添加拦截器
+        Retrofit.Builder newBuilder = retrofit.newBuilder();
+        newBuilder.client(client);
+        retrofit = newBuilder.build();
+
+//        try {
+//            Field callFactoryField = retrofit.getClass().getDeclaredField("callFactory");
+//            if (callFactoryField == null) {
+//                LogManager.i(HTTP.TAG, "callFactoryField is null");
+//                return;
+//            }
+//            callFactoryField.setAccessible(true);
+//            callFactoryField.set(retrofit,client);
+//        } catch (NoSuchFieldException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
 
         //获取task要执行的方法的参数
         Object params = task.getRequest().getBody();
