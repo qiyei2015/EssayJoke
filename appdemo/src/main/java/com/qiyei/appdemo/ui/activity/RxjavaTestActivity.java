@@ -11,8 +11,11 @@ import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.Observer;
+import io.reactivex.Scheduler;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class RxjavaTestActivity extends AppCompatActivity {
 
@@ -25,45 +28,57 @@ public class RxjavaTestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rxjava_test);
 
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testCreate();
             }
         });
 
-        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testMap();
             }
         });
 
-        findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button3).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testZip();
             }
         });
 
-        findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button4).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testConcat();
             }
         });
 
-        findViewById(R.id.button8).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testFlatMap();
             }
         });
 
-        findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button6).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 testConcatMap();
+            }
+        });
+
+        findViewById(R.id.button7).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        testThreadChange();
+                    }
+                }).start();
             }
         });
     }
@@ -197,5 +212,48 @@ public class RxjavaTestActivity extends AppCompatActivity {
 
     private void testConcatMap(){
 
+    }
+
+    private void testThreadChange(){
+        Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) {
+                emitter.onNext("111");
+                emitter.onNext("222");
+                emitter.onNext("333");
+                //Schedulers.newThread()线程
+                LogManager.i(TAG,"subscribe " + Thread.currentThread());
+//                emitter.onComplete();
+//                emitter.onComplete();
+//                emitter.onNext("444");
+                emitter.onError(new UnknownError("ahhh"));
+                emitter.onComplete();
+            }
+        })
+         .subscribeOn(Schedulers.newThread())
+         .observeOn(AndroidSchedulers.mainThread())
+         .subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                //当前线程，指调用该方法线程
+                LogManager.i(TAG,"onSubscribe " + Thread.currentThread());
+            }
+
+            @Override
+            public void onNext(String s) {
+                //主线程
+                LogManager.i(TAG,"onNext " + s + Thread.currentThread());
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogManager.i(TAG,"onError " + Thread.currentThread());
+            }
+
+            @Override
+            public void onComplete() {
+                LogManager.i(TAG,"onComplete " + Thread.currentThread());
+            }
+        });
     }
 }
