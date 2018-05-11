@@ -15,14 +15,14 @@ public interface IDataOperator {
      * @param key 该类型下的key
      * @return
      */
-    String getUri(String type,String key);
+    String getUri(Class<?> type,String key);
     /**
      * 获取加密状态下的uri
      * @param type 存储类型
      * @param key 该类型下的key
      * @return
      */
-    String getUriForSecret(String type,String key);
+    String getUriForSecret(Class<?> type,String key);
 
     /**
      * 删除指定uri的数据
@@ -39,10 +39,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    int getInt(String uri,int defValue);
+    Integer getInt(String uri);
 
 
     /**
@@ -54,10 +53,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    long getLong(String uri,long defValue);
+    Long getLong(String uri);
 
     /**
      *
@@ -68,10 +66,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    float getFloat(String uri,float defValue);
+    Float getFloat(String uri);
 
 
     /**
@@ -83,10 +80,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    double getDouble(String uri,double defValue);
+    Double getDouble(String uri);
 
     /**
      *
@@ -97,10 +93,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    char getChar(String uri,char defValue);
+    Character getChar(String uri);
 
     /**
      *
@@ -111,10 +106,9 @@ public interface IDataOperator {
     /**
      *
      * @param uri
-     * @param defValue
      * @return
      */
-    boolean getBoolean(String uri,boolean defValue);
+    Boolean getBoolean(String uri);
 
     /**
      * 存储String 类型数据
@@ -127,6 +121,6 @@ public interface IDataOperator {
      * @param uri
      * @return
      */
-    String getString(String uri,String defValue);
+    String getString(String uri);
 
 }

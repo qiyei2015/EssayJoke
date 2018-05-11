@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.qiyei.appdemo.common.AppdemoConstant;
 import com.qiyei.appdemo.service.TestService;
-import com.qiyei.appdemo.ui.dialog.ActivityDialog;
-import com.qiyei.sdk.dc.DCConstant;
 import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.dc.DataObserver;
+import com.qiyei.sdk.dc.impl.DCConstant;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -37,10 +37,11 @@ public class DataCenterTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_center_test);
         mButton = (Button) findViewById(R.id.btn1);
 
-        final String uri1 = DataManager.getInstance().getUri(DCConstant.MEM_DATA,"11");
-        final String uri2 = DataManager.getInstance().getUri(DCConstant.SP_DATA,"12");
-        final String uri3 = DataManager.getInstance().getUri(DCConstant.MEM_DATA,"13");
-        final String uri4 = DataManager.getInstance().getUri("444","13");
+        final String uri1 = DataManager.getInstance().getUri(AppdemoConstant.StoreData.class, AppdemoConstant.StoreData.KEY_11);
+        final String uri2 = DataManager.getInstance().getUri(AppdemoConstant.UserData.class,AppdemoConstant.UserData.KEY_12);
+        final String uri3 = DataManager.getInstance().getUri(AppdemoConstant.MemoryData.class, AppdemoConstant.MemoryData.KEY_13);
+        final String uri4 = DataManager.getInstance().getUri(AppdemoConstant.DefaultData.class,AppdemoConstant.DefaultData.KEY_14);
+        final String uri5 = DataManager.getInstance().getUriForSecret(AppdemoConstant.DefaultData.class,AppdemoConstant.DefaultData.KEY_15);
 
         final Float d = 124.00000f;
         intent = new Intent(DataCenterTestActivity.this, TestService.class);
@@ -50,7 +51,8 @@ public class DataCenterTestActivity extends AppCompatActivity {
                 DataManager.getInstance().setInt(uri1,1234567890);
                 DataManager.getInstance().setFloat(uri2,d);
                 DataManager.getInstance().setString(uri3,"90");
-                DataManager.getInstance().setString(uri4,"90");
+                DataManager.getInstance().setString(uri4,"100");
+                DataManager.getInstance().setString(uri5,"10000");
 //                Intent intent = new Intent(DataCenterTestActivity.this, ActivityDialog.class);
 //                startActivity(intent);
                 Intent intent = new Intent(DataCenterTestActivity.this, TestService.class);
@@ -70,13 +72,17 @@ public class DataCenterTestActivity extends AppCompatActivity {
         });
 
         Set<String> uris = new HashSet<>();
+        uris.add(uri1);
         uris.add(uri2);
+        uris.add(uri3);
         uris.add(uri4);
+        uris.add(uri5);
 
         DataManager.getInstance().registerDataObserver(uris,new DataObserver() {
             @Override
             public void onDataChanged(Set<String> uris) {
-                LogManager.d("DataCenter"," uris ---->" + uris.toString());
+                LogManager.d(DCConstant.TAG," uris ---->" + uris.toString());
+
                 ToastUtil.showLongToast(DataManager.getInstance().getFloat(uri4,0) + "");
             }
         });

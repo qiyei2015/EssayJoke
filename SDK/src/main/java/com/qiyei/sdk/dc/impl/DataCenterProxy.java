@@ -3,7 +3,6 @@ package com.qiyei.sdk.dc.impl;
 import android.content.Context;
 import android.text.TextUtils;
 
-import com.qiyei.sdk.dc.DCConstant;
 import com.qiyei.sdk.log.LogManager;
 
 /**

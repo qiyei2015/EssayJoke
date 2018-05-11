@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.qiyei.sdk.dc.DCConstant;
 import com.qiyei.sdk.log.LogManager;
 
 /**

@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.text.TextUtils;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.dc.DCConstant;
 import com.qiyei.sdk.log.LogManager;
 
 import java.util.ArrayList;
@@ -53,7 +52,7 @@ public final class DataCenter{
         IDataBuffer sqlBuffer = new SQLDataBuffer(context);
 
         mBufferMap.put(DCConstant.MEM_DATA,memoryBuffer);
-        mBufferMap.put(DCConstant.SP_DATA,spBuffer);
+        mBufferMap.put(DCConstant.STORE_DATA,spBuffer);
         mBufferMap.put(DCConstant.SQL_DATA,sqlBuffer);
     }
 

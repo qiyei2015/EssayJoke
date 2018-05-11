@@ -1,14 +1,7 @@
 package com.qiyei.sdk.dc;
 
+import com.qiyei.sdk.dc.impl.DataManagerProxy;
 
-
-import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.dc.impl.DataCenterProxy;
-import com.qiyei.sdk.dc.impl.IDataCenterObserver;
-
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -17,15 +10,12 @@ import java.util.Set;
  * Version: 1.0
  * Description: 数据中心的Manager，对外提供数据的统一访问
  */
-public class DataManager implements IDataOperator{
-    /**
-     * 数据观察者，外部使用
-     */
-    private List<DataObserver> mObservers = new ArrayList<>();
+public class DataManager{
+
     /**
      * DataCenter的代理
      */
-    private DataCenterProxy mProxy;
+    private DataManagerProxy mProxy;
 
     /**
      * 内部类方式构造单例
@@ -38,35 +28,7 @@ public class DataManager implements IDataOperator{
      * 构造方法私有化
      */
     private DataManager(){
-        mProxy = new DataCenterProxy(RuntimeEnv.appContext,new IDataCenterObserver() {
-
-            @Override
-            public void onDataChanged(Set<String> urlSet) {
-                Set<String> updateUris = new HashSet<String>();
-
-                for (DataObserver observer : mObservers){
-                    //只更新关心的
-                    for (String uri : urlSet){
-                        if (observer.getUri().contains(uri)){
-                            updateUris.add(uri);
-                        }
-                    }
-                    //updateUris有内容才更新
-                    if (updateUris.size() > 0){
-                        observer.onDataChanged(updateUris);
-                    }
-                    //清除，便于下一次循环使用
-                    updateUris.clear();
-                }
-            }
-
-            @Override
-            public void onDataDeleted(Set<String> urlSet) {
-                for (DataObserver observer : mObservers){
-                    observer.onDataDeleted(urlSet);
-                }
-            }
-        });
+        mProxy = new DataManagerProxy();
     }
 
     /**
@@ -83,12 +45,7 @@ public class DataManager implements IDataOperator{
      * @param observer
      */
     public void registerDataObserver(Set<String> uriSet,DataObserver observer){
-        if (!mObservers.contains(observer)){
-            //添加感兴趣的uri
-            observer.addUri(uriSet);
-            //添加到mObservers中
-            mObservers.add(observer);
-        }
+        mProxy.registerDataObserver(uriSet,observer);
     }
 
     /**
@@ -96,9 +53,7 @@ public class DataManager implements IDataOperator{
      * @param observer
      */
     public void unregisterDataObserver(DataObserver observer){
-        if (mObservers.contains(observer)){
-            mObservers.remove(observer);
-        }
+        mProxy.unregisterDataObserver(observer);
     }
 
     /**
@@ -107,9 +62,8 @@ public class DataManager implements IDataOperator{
      * @param key
      * @return
      */
-    @Override
-    public String getUri(String type,String key){
-        return DCConstant.URI + "/" + type + "/" + key;
+    public String getUri(Class<?> type,String key){
+        return mProxy.getUri(type,key);
     }
 
     /**
@@ -118,81 +72,133 @@ public class DataManager implements IDataOperator{
      * @param key
      * @return
      */
-    @Override
-    public String getUriForSecret(String type,String key){
-        return DCConstant.URI_SECRET + "/" + type + "/" + key;
+    public String getUriForSecret(Class<?> type,String key){
+        return mProxy.getUriForSecret(type,key);
     }
 
     /**
      * 删除指定的uri的数据
      * @param uri
      */
-    @Override
     public void deleteValue(String uri) {
         mProxy.deleteValue(uri);
     }
 
-    @Override
+    /**
+     * 设置整形数据
+     * @param uri
+     * @param value
+     */
     public void setInt(String uri, int value) {
         mProxy.setInt(uri,value);
     }
 
-    @Override
+    /**
+     * 读取整形数据
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public int getInt(String uri, int defValue) {
         Integer value = mProxy.getInt(uri);
         return value == null ? defValue : value;
     }
 
-    @Override
+    /**
+     * 设置Long新数据
+     * @param uri
+     * @param value
+     */
     public void setLong(String uri, long value) {
         mProxy.setLong(uri,value);
     }
 
-    @Override
+    /**
+     * 读取Long数据
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public long getLong(String uri, long defValue) {
         Long value = mProxy.getLong(uri);
         return value == null ? defValue : value;
     }
 
-    @Override
+    /**
+     * 设置Float数据
+     * @param uri
+     * @param value
+     */
     public void setFloat(String uri, float value) {
         mProxy.setFloat(uri,value);
     }
 
-    @Override
+    /**
+     * 读取Float数据
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public float getFloat(String uri, float defValue) {
         Float value = mProxy.getFloat(uri);
         return value == null ? defValue : value;
     }
 
-    @Override
+    /**
+     * 设置Double数据
+     * @param uri
+     * @param value
+     */
     public void setDouble(String uri, double value) {
         mProxy.setDouble(uri,value);
     }
 
-    @Override
+    /**
+     * 读取Double数据
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public double getDouble(String uri, double defValue) {
         Double value = mProxy.getDouble(uri);
         return value == null ? defValue : value;
     }
 
-    @Override
+    /**
+     * 设置Char数据
+     * @param uri
+     * @param value
+     */
     public void setChar(String uri, char value) {
         mProxy.setChar(uri,value);
     }
 
-    @Override
+    /**
+     * 读取Char数据
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public char getChar(String uri, char defValue) {
         Character value = mProxy.getChar(uri);
         return value == null ? defValue : value;
     }
 
-    @Override
+    /**
+     * 设置Boolean变量
+     * @param uri
+     * @param value
+     */
     public void setBoolean(String uri, boolean value) {
         mProxy.setBoolean(uri,value);
     }
 
-    @Override
+    /**
+     * 读取Boolean类型
+     * @param uri
+     * @param defValue
+     * @return
+     */
     public boolean getBoolean(String uri, boolean defValue) {
         Boolean value = mProxy.getBoolean(uri);
         return value == null ? defValue : value;
@@ -203,7 +209,6 @@ public class DataManager implements IDataOperator{
      * @param uri
      * @param value
      */
-    @Override
     public void setString(String uri,String value){
         mProxy.setString(uri,value);
     }
@@ -212,7 +217,6 @@ public class DataManager implements IDataOperator{
      * 存储String类型数据
      * @param uri
      */
-    @Override
     public String getString(String uri,String defValue){
         String value = mProxy.getString(uri);
         return value == null ? defValue : value;
