@@ -15,7 +15,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.qiyei.sdk.dc.impl.DCConstant.DEFAULT_DATA;
+import static com.qiyei.sdk.dc.impl.DC.DEFAULT_DATA;
 
 /**
  * @author Created by qiyei2015 on 2018/5/11.
@@ -95,22 +95,22 @@ public class DataManagerProxy implements IDataOperator {
     @Override
     public String getUri(Class<?> type,String key){
         if (type == null || TextUtils.isEmpty(key)){
-            LogManager.e(DCConstant.TAG,"getUri(Class<?> type,String key) params has null");
+            LogManager.e(DC.TAG,"getUri(Class<?> type,String key) params has null");
             return null;
         }
         if (type.isInterface()){
-            LogManager.e(DCConstant.TAG,"" + type + " is interface");
+            LogManager.e(DC.TAG,"" + type + " is interface");
             return null;
         }
 
         String realType = getRealTypeByType(type);
         boolean isExist = checkField(type, key);
         if (!isExist){
-            LogManager.e(DCConstant.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
+            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
             return null;
         }
 
-        return DCConstant.URI + "/" + realType + "/" + key;
+        return DC.URI + "/" + realType + "/" + key;
     }
 
     /**
@@ -122,21 +122,21 @@ public class DataManagerProxy implements IDataOperator {
     @Override
     public String getUriForSecret(Class<?> type,String key){
         if (type == null || TextUtils.isEmpty(key)){
-            LogManager.e(DCConstant.TAG,"getUriForSecret(Class<?> type,String key) params has null");
+            LogManager.e(DC.TAG,"getUriForSecret(Class<?> type,String key) params has null");
             return null;
         }
         if (type.isInterface()){
-            LogManager.e(DCConstant.TAG,"" + type + " is interface");
+            LogManager.e(DC.TAG,"" + type + " is interface");
             return null;
         }
 
         String realType = getRealTypeByType(type);
         boolean isExist = checkField(type, key);
         if (!isExist){
-            LogManager.e(DCConstant.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
+            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
             return null;
         }
-        return DCConstant.URI_SECRET + "/" + realType + "/" + key;
+        return DC.URI_SECRET + "/" + realType + "/" + key;
     }
 
     /**
@@ -261,12 +261,12 @@ public class DataManagerProxy implements IDataOperator {
         }
         Class supperClazz = classList.get(classList.size() - 1);
         //遍历找到其DCConstant中的父类
-        if (DCConstant.StoreData.class == supperClazz){
-            realType = DCConstant.STORE_DATA;
-        }else if (DCConstant.UserData.class == supperClazz){
-            realType = DCConstant.USER_DATA;
-        }else if (DCConstant.MemoryData.class == supperClazz){
-            realType = DCConstant.MEM_DATA;
+        if (DC.StoreData.class == supperClazz){
+            realType = DC.STORE_DATA;
+        }else if (DC.UserData.class == supperClazz){
+            realType = DC.USER_DATA;
+        }else if (DC.MemoryData.class == supperClazz){
+            realType = DC.MEM_DATA;
         }else {
             realType = DEFAULT_DATA;
         }

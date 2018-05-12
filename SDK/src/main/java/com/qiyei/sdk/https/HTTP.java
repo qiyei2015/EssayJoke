@@ -10,7 +10,7 @@ public class HTTP {
     /**
      * 调试标志
      */
-    public static final String TAG = "<HTTPS>";
+    public static final String TAG = "HTTPS";
     /**
      * GET请求
      */

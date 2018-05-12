@@ -8,11 +8,11 @@ import com.qiyei.sdk.common.RuntimeEnv;
  * Version: 1.0
  * Description: 数据中心的常量 ,继承内部类有利于解耦
  */
-public class DCConstant {
+public class DC {
     /**
      * 调试用的标志
      */
-    public static final String TAG = "<DC>";
+    public static final String TAG = "DC";
 
     /**
      * 加密标志

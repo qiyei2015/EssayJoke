@@ -32,13 +32,13 @@ public class SQLDataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQLDataBuffer.SQL_CREATE_TABLE);
 
-        LogManager.i(DCConstant.TAG,"SQLDataHelper,  onCreate(SQLiteDatabase db) ");
+        LogManager.i(DC.TAG,"SQLDataHelper,  onCreate(SQLiteDatabase db) ");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(SQLDataBuffer.SQL_UPDATE_TABLE);
-        LogManager.i(DCConstant.TAG,"SQLDataHelper,  onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) ");
+        LogManager.i(DC.TAG,"SQLDataHelper,  onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) ");
     }
 
 }

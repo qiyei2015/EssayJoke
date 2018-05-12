@@ -14,7 +14,7 @@ import com.qiyei.appdemo.common.AppdemoConstant;
 import com.qiyei.appdemo.service.TestService;
 import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.dc.DataObserver;
-import com.qiyei.sdk.dc.impl.DCConstant;
+import com.qiyei.sdk.dc.impl.DC;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
@@ -81,7 +81,7 @@ public class DataCenterTestActivity extends AppCompatActivity {
         DataManager.getInstance().registerDataObserver(uris,new DataObserver() {
             @Override
             public void onDataChanged(Set<String> uris) {
-                LogManager.d(DCConstant.TAG," uris ---->" + uris.toString());
+                LogManager.d(DC.TAG," uris ---->" + uris.toString());
 
                 ToastUtil.showLongToast(DataManager.getInstance().getFloat(uri4,0) + "");
             }

@@ -51,9 +51,9 @@ public final class DataCenter{
         IDataBuffer spBuffer = new SPDataBuffer(context);
         IDataBuffer sqlBuffer = new SQLDataBuffer(context);
 
-        mBufferMap.put(DCConstant.MEM_DATA,memoryBuffer);
-        mBufferMap.put(DCConstant.STORE_DATA,spBuffer);
-        mBufferMap.put(DCConstant.SQL_DATA,sqlBuffer);
+        mBufferMap.put(DC.MEM_DATA,memoryBuffer);
+        mBufferMap.put(DC.STORE_DATA,spBuffer);
+        mBufferMap.put(DC.SQL_DATA,sqlBuffer);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class DataCenter{
 
         //如果没找到，就默认保存为MEM类型数据
         if (dataBuffer == null){
-            dataBuffer = mBufferMap.get(DCConstant.MEM_DATA);
+            dataBuffer = mBufferMap.get(DC.MEM_DATA);
         }
         return dataBuffer;
     }
@@ -141,7 +141,7 @@ public final class DataCenter{
      * @param value
      */
     private void setValue(String uri,String value){
-        LogManager.i(DCConstant.TAG,"setValue,uri --> " + uri + " value --> " + value);
+        LogManager.i(DC.TAG,"setValue,uri --> " + uri + " value --> " + value);
 
         mDataBuffer = getDataBuffer(uri);
         mDataBuffer.setValue(uri,value);
@@ -158,7 +158,7 @@ public final class DataCenter{
      * @param uri
      */
     private String getValue(String uri){
-        LogManager.i(DCConstant.TAG,"getValue,uri --> " + uri);
+        LogManager.i(DC.TAG,"getValue,uri --> " + uri);
         mDataBuffer = getDataBuffer(uri);
         return mDataBuffer.getValue(uri);
     }
@@ -168,7 +168,7 @@ public final class DataCenter{
      * @param uri
      */
     private void deleteValue(String uri){
-        LogManager.i(DCConstant.TAG,"deleteValue,uri --> " + uri);
+        LogManager.i(DC.TAG,"deleteValue,uri --> " + uri);
 
         mDataBuffer = getDataBuffer(uri);
         mDataBuffer.deleteValue(uri);

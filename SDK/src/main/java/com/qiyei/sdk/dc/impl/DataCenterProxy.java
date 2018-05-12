@@ -30,7 +30,7 @@ public class DataCenterProxy {
      */
     public void deleteValue(String  uri){
         if (TextUtils.isEmpty(uri)){
-            LogManager.w(DCConstant.TAG,"deleteValue(String  uri),the uri is null");
+            LogManager.w(DC.TAG,"deleteValue(String  uri),the uri is null");
             return;
         }
         mDataCenter.deleteStringValue(uri);
@@ -211,7 +211,7 @@ public class DataCenterProxy {
      */
     private void setValue(String uri,String value){
         if (TextUtils.isEmpty(uri) || TextUtils.isEmpty(value)){
-            LogManager.w(DCConstant.TAG,"setValue(String uri,String value),the uri or value is null");
+            LogManager.w(DC.TAG,"setValue(String uri,String value),the uri or value is null");
             return;
         }
         mDataCenter.setStringValue(uri,value);
@@ -224,7 +224,7 @@ public class DataCenterProxy {
      */
     private String getValue(String uri){
         if (TextUtils.isEmpty(uri)){
-            LogManager.w(DCConstant.TAG,"getValue(String uri),the uri is null");
+            LogManager.w(DC.TAG,"getValue(String uri),the uri is null");
             return null;
         }
         return mDataCenter.getStringValue(uri);
