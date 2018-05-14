@@ -7,13 +7,25 @@ import android.view.View;
 import com.qiyei.appdemo.R;
 import com.qiyei.sdk.log.LogManager;
 
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
+import io.reactivex.FlowableEmitter;
+import io.reactivex.FlowableOnSubscribe;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiFunction;
+import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
@@ -59,7 +71,7 @@ public class RxjavaTestActivity extends AppCompatActivity {
         findViewById(R.id.button5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                testFlatMap();
+                testFlowable();
             }
         });
 
@@ -164,8 +176,6 @@ public class RxjavaTestActivity extends AppCompatActivity {
                 emitter.onNext(4);
             }
         }).map(new Function<Integer, String>() {
-
-
             @Override
             public String apply(Integer integer) throws Exception {
                 LogManager.i(TAG, "Function apply for:" + integer);
@@ -194,19 +204,158 @@ public class RxjavaTestActivity extends AppCompatActivity {
             }
         });
 
+        //测试FlatMap
+        Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) {
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+            }
+        }).flatMap(new Function<Integer, ObservableSource<String>>() {
+            @Override
+            public ObservableSource<String> apply(Integer integer) throws Exception {
+                ArrayList<String> list = new ArrayList<>();
+
+                //将一个发射器变为5个发射器，并应用函数
+                for (int i = 0 ;i < 5;i++){
+                    list.add(integer + "_" + i);
+                }
+                return Observable.fromIterable(list).delay(3, TimeUnit.SECONDS);
+
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                LogManager.i(TAG, "Consumer accept " + s);
+            }
+        });
+
+
     }
 
 
     private void testZip(){
+        //两个在不同的线程中
+        Observable observable1 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> emitter) {
+                emitter.onNext(1);
+                emitter.onNext(2);
+                emitter.onNext(3);
+            }
+        }).subscribeOn(Schedulers.io());
+
+        Observable observable2 = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) {
+                emitter.onNext("a");
+                emitter.onNext("b");
+                emitter.onNext("c");
+                emitter.onNext("d");
+                emitter.onNext("e");
+            }
+        }).subscribeOn(Schedulers.io());
+
+        Observable.zip(observable1, observable2, new BiFunction<Integer, String, String>() {
+
+            @Override
+            public String apply(Integer integer, String s) {
+
+                return s + "_" + integer;
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String o) throws Exception {
+                LogManager.i(TAG, "Consumer accept " + o);
+            }
+        });
 
     }
 
     private void testConcat(){
 
-
     }
 
-    private void testFlatMap(){
+    private void testFlowable(){
+
+        //背压适合数据量比较大的场景
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) {
+                //一直发送事件
+                for (int i = 0 ;i< 100;i++){
+                    LogManager.i(TAG, "FlowableOnSubscribe subscribe " + i);
+                    emitter.onNext(i);
+                }
+
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribe(new Subscriber<Integer>() {
+                    Subscription mSubscription;
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        mSubscription = s;
+                        //去掉下面这一行会抛异常
+                        s.request(100);
+                        LogManager.i(TAG, "1 Subscriber onSubscribe " + s);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        LogManager.i(TAG, "1 Subscriber onNext " + integer);
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        //取消发送，要不然的话，会卡死系统
+                        mSubscription.cancel();
+                        LogManager.i(TAG, "1 Subscriber onError " + t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
+        //异步订阅
+        Flowable.create(new FlowableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(FlowableEmitter<Integer> emitter) {
+                //一直发送事件
+                for (int i = 0 ;i < 100;i++){
+                    emitter.onNext(i);
+                    LogManager.i(TAG, "FlowableOnSubscribe subscribe " + i + " " + Thread.currentThread());
+                }
+
+            }
+        }, BackpressureStrategy.ERROR)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Integer>() {
+                    @Override
+                    public void onSubscribe(Subscription s) {
+                        //不加这一句代码，onNext不会执行
+                        s.request(1000);
+                        LogManager.i(TAG, "2 Subscriber onSubscribe " + s);
+                    }
+
+                    @Override
+                    public void onNext(Integer integer) {
+                        LogManager.i(TAG, "2 Subscriber onNext " + integer + " " + Thread.currentThread());
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        LogManager.i(TAG, "2 Subscriber onError " + t);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
     }
 
