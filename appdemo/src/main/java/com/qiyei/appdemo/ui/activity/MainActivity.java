@@ -325,6 +325,18 @@ public class MainActivity extends BaseSkinActivity {
     protected void onResume() {
         super.onResume();
         LogManager.i(TAG,"onResume");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+//                测试只能主线程更新UI
+//                try {
+//                    Thread.sleep(3000);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+                mTitleBar.setTitle("HHHHHHHHH");
+            }
+        }).start();
     }
 
     @Override
