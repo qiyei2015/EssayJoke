@@ -1,0 +1,73 @@
+// project config
+
+
+/**
+ * 定义一些公共变量 ext 为闭包
+ */
+ext{
+
+    /**
+     * 公共部分
+     */
+    common = [
+            compileSdkVersion: 26,
+            buildToolsVersion: '27.0.3',
+            minSdkVersion    : 16,
+            targetSdkVersion : 26,
+    ]
+
+    /**
+     * EssayJokeApp
+     */
+    EssayJokeApp = {
+        applicationId  = "com.qiyei.essayjoke"
+        versionCode  = 1
+        versionName  = "1.0"
+    }
+
+    /**
+     * AppDemo
+     */
+    AppDemo = [
+            applicationId  :"com.qiyei.appdemo",
+            versionCode  :1,
+            versionName  :"1.0",
+    ]
+
+//    buildTypes = {
+//        release =  {
+//            minifyEnabled  = true // 开启混淆
+//            zipAlignEnabled  = true // 对齐zip
+//            shrinkResources  = false // 删除无用资源
+//            debuggable  = false // 是否debug
+//            versionNameSuffix = "_release" // 版本命名后缀
+//        }
+//
+//        debug = {
+//            zipAlignEnabled  = false
+//            shrinkResources  = false
+//            minifyEnabled  = false
+//            versionNameSuffix  = "_debug"
+////            signingConfig  = signingConfigs.debug
+//        }
+//    }
+
+//    /**
+//     * 签名配置
+//     */
+//    signingConfigs {
+//        //正式版签名
+//        release {
+//            keyAlias 'qiyei2015'
+//            keyPassword '510726'
+//            storeFile file('../android_keystore.jks')
+//            storePassword '510726'
+//        }
+//
+//        //调试版签名
+//        debug {
+//
+//        }
+//    }
+
+}

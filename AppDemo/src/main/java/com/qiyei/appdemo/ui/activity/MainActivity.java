@@ -14,8 +14,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.ArrayMap;
 import android.util.LruCache;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 
 import com.qiyei.appdemo.adapter.MainMenuAdapter;
@@ -44,6 +46,7 @@ import java.io.File;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -337,6 +340,7 @@ public class MainActivity extends BaseSkinActivity {
                 mTitleBar.setTitle("HHHHHHHHH");
             }
         }).start();
+
     }
 
     @Override

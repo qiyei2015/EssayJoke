@@ -12,22 +12,18 @@ repositories {
     flatDir {
         dirs 'libs'
     }
-    maven {
-        url 'https://maven.google.com/'
-        name 'Google'
-    }
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
+    buildToolsVersion rootProject.ext.common.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        applicationId "com.qiyei.appdemo"
-        versionCode 1
-        versionName "1.0.0"
+        minSdkVersion 16
+        targetSdkVersion 26
+        applicationId rootProject.ext.AppDemo.applicationId
+        versionCode rootProject.ext.AppDemo.versionCode
+        versionName rootProject.ext.AppDemo.versionName
 
         flavorDimensions "versionCode"
 
@@ -50,11 +46,17 @@ android {
     buildTypes {
         debug {
             minifyEnabled false
+////            zipAlignEnabled
+////            shrinkResources
+////            debuggable
+////            versionNameSuffix
+//            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
         release {
             minifyEnabled true
+//            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -108,14 +110,21 @@ android {
         }
     }
 
-//    signingConfigs {
-//        config {
-//            keyAlias 'qiyei2015'
-//            keyPassword '510726'
-//            storeFile file('F:\\android_project\android_keystore.jks')
-//            storePassword '510726'
-//        }
-//    }
+    signingConfigs {
+
+        //正式版签名
+        release {
+            keyAlias 'qiyei2015'
+            keyPassword '510726'
+            storeFile file('../android_keystore.jks')
+            storePassword '510726'
+        }
+
+        //调试版签名
+        debug {
+
+        }
+    }
 
     //解决国际化资源文件不全
     lintOptions {

@@ -1,8 +1,12 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+// 引入配置文件
+apply from:"config.gradle"
+
 buildscript {
     repositories {
         jcenter()
         mavenCentral()
+        mavenLocal()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
@@ -20,6 +24,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
+        mavenLocal()
+        google()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
@@ -28,17 +35,6 @@ allprojects {
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-/**
- * 定义一些公共变量
- */
-ext{
-    compileSdkVersion = 26
-    buildToolsVersion = '27.0.3'
-
-    minSdkVersion = 16
-    targetSdkVersion = 26
 }
 
 dependencies {

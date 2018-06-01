@@ -11,6 +11,7 @@ import com.squareup.javapoet.TypeSpec;
 import java.io.IOException;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.logging.LogManager;
 
 import javax.annotation.processing.AbstractProcessor;
 import javax.annotation.processing.Filer;
@@ -97,7 +98,8 @@ public class BindProcessor extends AbstractProcessor{
      */
     @Override
     public boolean process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv) {
-
+        mMessager.printMessage(Diagnostic.Kind.WARNING,"process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)");
+        System.out.println("process(Set<? extends TypeElement> annotations, RoundEnvironment roundEnv)");
         if (!annotations.isEmpty()){
             //获取Bind注解类型的元素，这里是类类型TypeElement
             Set<? extends Element> bindElement = roundEnv.getElementsAnnotatedWith(Bind.class);
