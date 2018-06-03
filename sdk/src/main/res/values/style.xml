@@ -2,17 +2,28 @@
 <resources>
 
     <style name="dialog" parent="@android:style/Theme.Dialog">
+
+        <!-- 去黑边 -->
         <item name="android:windowFrame">@null</item>
-        <!-- 边框 -->
+        <!-- 设置是否可滑动 -->
         <item name="android:windowIsFloating">true</item>
-        <!-- 是否浮现在activity之上 -->
+        <!-- 设置是否透明 -->
         <item name="android:windowIsTranslucent">true</item>
         <!-- 无标题 -->
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <!-- 背景透明 -->
-        <item name="android:backgroundDimEnabled">true</item>
-        <!-- 模糊 -->
         <item name="android:windowNoTitle">true</item>
+        <!-- 背景 -->
+        <item name="android:background">@null</item>
+        <!-- 窗口背景 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否变暗 -->
+        <item name="android:backgroundDimEnabled">false</item>
+        <!-- 点击空白部分activity不消失 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
+
+    <style name="activity_dialog" parent="dialog">
+
     </style>
 
 </resources>

@@ -29,6 +29,13 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ moduleName : project.getName() ]
+            }
+        }
+
         //ndk配置
         ndk {
             // Specifies the ABI configurations of your native
@@ -158,4 +165,10 @@ dependencies {
     api project(':Framework')
     api project(':ioc-annotation')
     annotationProcessor project(':ioc-compiler')
+
+    //ARouter
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+    api project(':Router')
+
+    api project(':ModuleA')
 }

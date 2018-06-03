@@ -104,6 +104,11 @@
         </activity>
         <activity android:name=".ui.activity.OkioTestActivity">
         </activity>
+        <activity
+            android:name="com.qiyei.componentdemo.ComponentDemoActivity"
+            android:label="@string/title_activity_component_demo"
+            android:theme="@style/AppTheme">
+        </activity>
     </application>
 
 </manifest>

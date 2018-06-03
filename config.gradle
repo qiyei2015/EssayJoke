@@ -5,6 +5,10 @@
  * 定义一些公共变量 ext 为闭包
  */
 ext{
+    /**
+     * 是否是Module 每次更改“isModule”的值后，需要点击 "Sync Project" 按钮
+     */
+    isModule = false
 
     /**
      * 公共部分
