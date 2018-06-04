@@ -2,7 +2,11 @@ package com.qiyei.appdemo;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.qiyei.framework.skin.SkinManager;

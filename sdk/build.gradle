@@ -65,23 +65,23 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+    androidTestImplementation(com_android_support_test_espresso_espresso_core, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    api 'com.android.support.constraint:constraint-layout:1.1.0'
-    api 'com.android.support:appcompat-v7:26.0.0'
-    testImplementation 'junit:junit:4.12'
-    api 'com.android.support:recyclerview-v7:26.0.0'
-    api 'com.squareup.okhttp3:okhttp:3.10.0'
-    api 'com.squareup.retrofit2:retrofit:2.3.0'
-    api 'com.squareup.retrofit2:converter-gson:2.3.0'
-    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    api 'io.reactivex.rxjava2:rxjava:2.1.12'
-    api 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    api 'com.google.code.gson:gson:2.8.0'
-    api 'com.github.bumptech.glide:glide:3.7.0'
-    api 'org.greenrobot:greendao:3.2.2'
-    
+    api com_android_support_constraint_constraint_layout
+    api com_android_support_appcompat_v7
+    testImplementation junit
+    api com_android_support_recyclerview_v7
+    api com_squareup_okhttp3_okhttp
+    api com_squareup_retrofit2_retrofit
+    api com_squareup_retrofit2_converter_gson
+    api com_squareup_retrofit2_adapter_rxjava2
+    api io_reactivex_rxjava2_rxjava
+    api io_reactivex_rxjava2_rxandroid
+    api com_google_code_gson_gson
+    api com_github_bumptech_glide_glide
+    api org_greenrobot_greendao
+
     // add library
     api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/dom4j-2.1.0.jar')

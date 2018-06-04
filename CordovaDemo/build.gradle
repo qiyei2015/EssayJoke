@@ -1,0 +1,41 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    repositories {
+        // 本地的libs目录
+        flatDir {
+            dirs 'libs' //aar目录
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+
+    implementation rootProject.ext.com_android_support_appcompat_v7
+
+    testImplementation rootProject.ext.junit
+    androidTestImplementation rootProject.ext.com_android_support_test_runner
+    androidTestImplementation rootProject.ext.com_android_support_test_espresso_espresso_core
+}

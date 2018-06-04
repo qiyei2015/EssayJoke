@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/AppDemo/AppDemo.iml" filepath="$PROJECT_DIR$/AppDemo/AppDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CordovaDemo/CordovaDemo.iml" filepath="$PROJECT_DIR$/CordovaDemo/CordovaDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
