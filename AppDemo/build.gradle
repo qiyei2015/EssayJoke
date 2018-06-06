@@ -19,8 +19,8 @@ android {
     buildToolsVersion rootProject.ext.common.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
         applicationId rootProject.ext.AppDemo.applicationId
         versionCode rootProject.ext.AppDemo.versionCode
         versionName rootProject.ext.AppDemo.versionName
@@ -174,6 +174,7 @@ dependencies {
     api project(':ModuleA')
     api project(':Framework')
     api project(':ioc-annotation')
+    api project(':CordovaDemo')
     annotationProcessor project(':ioc-compiler')
 
 }

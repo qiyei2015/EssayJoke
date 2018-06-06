@@ -7,11 +7,11 @@ if (isModule) {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
         versionName "1.0"
 

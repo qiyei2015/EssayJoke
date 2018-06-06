@@ -1,13 +1,11 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-
-
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -21,7 +19,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
+    
+    sourceSets {
+        main {
+            jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
+            jniLibs.srcDirs = ['libs']  //配置生成jniLibs
+        }
+    }
+    
     repositories {
         // 本地的libs目录
         flatDir {
@@ -31,10 +36,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar','*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-    implementation rootProject.ext.com_android_support_appcompat_v7
+    implementation rootProject.ext.com_android_support_constraint_constraint_layout
 
+    implementation rootProject.ext.com_android_support_test_runner
     testImplementation rootProject.ext.junit
     androidTestImplementation rootProject.ext.com_android_support_test_runner
     androidTestImplementation rootProject.ext.com_android_support_test_espresso_espresso_core
