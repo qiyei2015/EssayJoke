@@ -32,7 +32,7 @@ android {
         //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [moduleName: project.getName()]
             }
         }
 
@@ -165,6 +165,10 @@ dependencies {
     })
     api com_android_support_appcompat_v7
     testImplementation junit
+
+    //dagger2
+    api com_google_dagger_dagger
+    annotationProcessor com_google_dagger_dagger_compiler
 
     //ARouter
     annotationProcessor com_alibaba_arouter_compiler

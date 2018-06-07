@@ -109,6 +109,8 @@
             android:label="@string/title_activity_component_demo"
             android:theme="@style/AppTheme">
         </activity>
+        <activity android:name=".ui.activity.DaggerDemoActivity">
+        </activity>
     </application>
 
 </manifest>

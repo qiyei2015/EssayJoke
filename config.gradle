@@ -79,7 +79,7 @@ ext{
      */
     com_android_support_appcompat_v7 = 'com.android.support:appcompat-v7:27.1.1'
     com_android_support_constraint_constraint_layout = 'com.android.support.constraint:constraint-layout:1.1.0'
-    com_android_support_design = 'com.android.support:design:27.0.2'
+    com_android_support_design = 'com.android.support:design:27.1.1'
     com_android_support_recyclerview_v7 = 'com.android.support:recyclerview-v7:26.0.0'
 
 
@@ -87,12 +87,12 @@ ext{
     /**
      * Android架构组件
      */
-    android_arch_lifecycle_runtime = "android.arch.lifecycle:runtime:1.0.0"
-    android_arch_lifecycle_extensions = "android.arch.lifecycle:extensions:1.0.0"
-    android_arch_lifecycle_compiler = "android.arch.lifecycle:compiler:1.0.0"
-    android_arch_persistence_room_runtime = "android.arch.persistence.room:runtime:1.0.0"
-    android_arch_persistence_room_compiler = "android.arch.persistence.room:compiler:1.0.0"
-    android_arch_persistence_room_testing = "android.arch.persistence.room:testing:1.0.0"
+    android_arch_lifecycle_runtime = "android.arch.lifecycle:runtime:1.1.0"
+    android_arch_lifecycle_extensions = "android.arch.lifecycle:extensions:1.1.0"
+    android_arch_lifecycle_compiler = "android.arch.lifecycle:compiler:1.1.0"
+    android_arch_persistence_room_runtime = "android.arch.persistence.room:runtime:1.1.0"
+    android_arch_persistence_room_compiler = "android.arch.persistence.room:compiler:1.1.0"
+    android_arch_persistence_room_testing = "android.arch.persistence.room:testing:1.1.0"
 
 
     /**
@@ -100,7 +100,9 @@ ext{
      */
     com_google_auto_service_auto_service = 'com.google.auto.service:auto-service:1.0-rc4'
     com_google_code_gson_gson = 'com.google.code.gson:gson:2.8.0'
-    
+    com_google_dagger_dagger =  'com.google.dagger:dagger:2.16'
+    com_google_dagger_dagger_compiler =  'com.google.dagger:dagger-compiler:2.16'
+
     /**
      * squareup
      */

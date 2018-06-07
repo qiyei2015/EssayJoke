@@ -41,4 +41,8 @@ task clean(type: Delete) {
 }
 
 dependencies {
+    //解决 Program type already present: android.support.design.widget.CoordinatorLayout$1
+//    configurations {
+//        all*.exclude group: 'com.android.support', module: 'support-v13'
+//    }
 }
