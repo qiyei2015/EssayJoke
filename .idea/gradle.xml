@@ -9,10 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AppDemo" />
-            <option value="$PROJECT_DIR$/CordovaDemo" />
+            <option value="$PROJECT_DIR$/Cordova" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
             <option value="$PROJECT_DIR$/Framework" />
             <option value="$PROJECT_DIR$/ModuleA" />
+            <option value="$PROJECT_DIR$/ReactNative" />
             <option value="$PROJECT_DIR$/Router" />
             <option value="$PROJECT_DIR$/SDK" />
             <option value="$PROJECT_DIR$/ioc-annotation" />

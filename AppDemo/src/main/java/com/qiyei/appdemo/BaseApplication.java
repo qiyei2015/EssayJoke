@@ -2,13 +2,13 @@ package com.qiyei.appdemo;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
+import com.facebook.react.ReactPackage;
+import com.facebook.react.shell.MainReactPackage;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.util.AndroidUtil;
@@ -16,13 +16,16 @@ import com.taobao.sophix.PatchStatus;
 import com.taobao.sophix.SophixManager;
 import com.taobao.sophix.listener.PatchLoadStatusListener;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/5/8.
  * Version: 1.0
  * Description:
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends Application implements ReactApplication{
     private static final String TAG = " Sophix";
 
     private static final String APP_ID = "24598257-1";
@@ -47,6 +50,23 @@ public class BaseApplication extends Application {
             "BQjxr5x0vzJp/btdAoGAEdjBqXc4j0VOy7nPrW8bWjeCY0COtp5QqYEgao1HtiqPrVXf7nEqgxY1uI4FHxLUEI" +
             "T6QarUe9JiEi5VL+StcJ30VSL9hDuEh92Z3AUTGVMyL9Q2VfQwjpn4Yyuw+SqLAn6v5vu5QBdcxFlCotMES03H" +
             "2RDTRTJjn1zaDNjOULM=";
+
+    /**
+     * ReactNative的host
+     */
+    private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+        @Override
+        public boolean getUseDeveloperSupport() {
+            return BuildConfig.DEBUG;
+        }
+
+        @Override
+        protected List<ReactPackage> getPackages() {
+            return Arrays.<ReactPackage>asList(
+                    new MainReactPackage()
+            );
+        }
+    };
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -75,6 +95,15 @@ public class BaseApplication extends Application {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    /**
+     * ReactNative的host
+     * @return
+     */
+    @Override
+    public ReactNativeHost getReactNativeHost() {
+        return mReactNativeHost;
     }
 
     /**

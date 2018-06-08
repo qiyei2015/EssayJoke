@@ -104,6 +104,11 @@ ext{
     com_google_dagger_dagger_compiler =  'com.google.dagger:dagger-compiler:2.16'
 
     /**
+     * Facebook
+     */
+    com_facebook_react_react_native = "com.facebook.react:react-native:+"
+
+    /**
      * squareup
      */
     // java代码编写开源库

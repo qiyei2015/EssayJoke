@@ -178,7 +178,8 @@ dependencies {
     api project(':ModuleA')
     api project(':Framework')
     api project(':ioc-annotation')
-    api project(':CordovaDemo')
     annotationProcessor project(':ioc-compiler')
 
+    api project(':Cordova')
+    api project(':ReactNative')
 }
