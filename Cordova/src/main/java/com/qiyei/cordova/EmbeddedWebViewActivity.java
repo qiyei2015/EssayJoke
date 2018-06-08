@@ -26,7 +26,7 @@ public class EmbeddedWebViewActivity extends CordovaActivity {
 
     private CordovaWebView mWebInterface;
 
-    private CordovaInterfaceImpl mCordovaInterfaceImpl;
+    private CordovaInterfaceImpl mCordovaInterfaceImpl = new CordovaInterfaceImpl(this);
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,6 @@ public class EmbeddedWebViewActivity extends CordovaActivity {
         //初始化webview
         ConfigXmlParser parser = new ConfigXmlParser();
         parser.parse(this);
-
-        mCordovaInterfaceImpl = new CordovaInterfaceImpl(this);
 
         SystemWebView systemWebView = (SystemWebView) findViewById(R.id.system_webview);
         //初始化CordovaWebView对象
