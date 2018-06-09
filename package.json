@@ -4,7 +4,7 @@
   "description": "这本来是一个仿内涵段子项目，作为自己的学习使用",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "repository": {
     "type": "git",
