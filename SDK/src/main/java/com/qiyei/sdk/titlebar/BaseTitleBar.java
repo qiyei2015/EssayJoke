@@ -3,6 +3,7 @@ package com.qiyei.sdk.titlebar;
 import android.app.Activity;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -129,7 +130,10 @@ public abstract class BaseTitleBar<T extends BaseTitleParams> implements ITitleB
 
             LogManager.i(TAG,"mParams.mActivityRoot,child at 0 view:");
 
-        }else {
+        }else if (mParams.mActivityRoot instanceof CoordinatorLayout){
+
+
+        } else {
             //添加View到mParams.mParent中
             mParams.mActivityRoot.addView(mNavigationView,0);
         }

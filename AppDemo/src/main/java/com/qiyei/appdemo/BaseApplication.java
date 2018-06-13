@@ -1,7 +1,15 @@
 package com.qiyei.appdemo;
 
 import android.app.Application;
+import android.content.ContentProvider;
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -25,7 +33,7 @@ import java.util.List;
  * Version: 1.0
  * Description:
  */
-public class BaseApplication extends Application implements ReactApplication{
+public class BaseApplication extends MultiDexApplication implements ReactApplication{
     private static final String TAG = " Sophix";
 
     private static final String APP_ID = "24598257-1";
@@ -68,10 +76,50 @@ public class BaseApplication extends Application implements ReactApplication{
         }
     };
 
+    class MyContent extends ContentProvider{
+
+        @Override
+        public boolean onCreate() {
+            return false;
+        }
+
+        @Nullable
+        @Override
+        public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String sortOrder) {
+            return null;
+        }
+
+        @Nullable
+        @Override
+        public String getType(@NonNull Uri uri) {
+            return null;
+        }
+
+        @Nullable
+        @Override
+        public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+            return null;
+        }
+
+        @Override
+        public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+            return 0;
+        }
+
+        @Override
+        public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
+            return 0;
+        }
+    }
+
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        MultiDex.install(base);
         initSophix();
+
+
     }
 
     @Override

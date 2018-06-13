@@ -43,6 +43,8 @@ android {
 //            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
             abiFilters 'armeabi', 'armeabi-v7a'
         }
+        //分包
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -153,6 +155,7 @@ dependencies {
     api com_android_support_design
     api android_arch_lifecycle_runtime
     api android_arch_lifecycle_extensions
+    implementation com_android_support_constraint_constraint_layout
     annotationProcessor android_arch_lifecycle_compiler
     api android_arch_persistence_room_runtime
     annotationProcessor android_arch_persistence_room_compiler
@@ -165,6 +168,8 @@ dependencies {
     })
     api com_android_support_appcompat_v7
     testImplementation junit
+
+    api com_android_support_multidex
 
     //dagger2
     api com_google_dagger_dagger

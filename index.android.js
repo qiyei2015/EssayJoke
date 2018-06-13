@@ -6,6 +6,18 @@ import {
   Text,
   View
 } from 'react-native';
+
+import {
+  StackNavigator,
+} from 'react-navigation';
+
+//常量
+// const MainScreen extends React.Component{
+//   Main:{screen: MainScreen},
+//   Profile:{screen: ProfileScreen},
+// }
+
+
 class EssayJokeReactNativeDemo extends React.Component {
   render() {
     return (

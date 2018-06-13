@@ -1,36 +1,33 @@
 'use strict';
 
-var typeOf = require('kind-of');
+var isObject = require('is-extendable');
 
-/**
- * Expose `extend`
- */
+module.exports = function extend(o/*, objects*/) {
+  if (!isObject(o)) { o = {}; }
 
-module.exports = extend;
+  var len = arguments.length;
+  for (var i = 1; i < len; i++) {
+    var obj = arguments[i];
 
-/**
- * Extend `o` with properties of other `objects`.
- *
- * @param  {Object} `o` The target object. Pass an empty object to shallow clone.
- * @param  {Object} `objects`
- * @return {Object}
- */
-
-function extend(o) {
-  if (typeOf(o) !== 'object') { return {}; }
-  var args = arguments;
-  var len = args.length - 1;
-
-  for (var i = 0; i < len; i++) {
-    var obj = args[i + 1];
-
-    if (typeOf(obj) === 'object' && typeOf(obj) !== 'regexp') {
-      for (var key in obj) {
-        if (obj.hasOwnProperty(key)) {
-          o[key] = obj[key];
-        }
-      }
+    if (isObject(obj)) {
+      assign(o, obj);
     }
   }
   return o;
 };
+
+function assign(a, b) {
+  for (var key in b) {
+    if (hasOwn(b, key)) {
+      a[key] = b[key];
+    }
+  }
+}
+
+/**
+ * Returns true if the given `key` is an own property of `obj`.
+ */
+
+function hasOwn(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}

@@ -111,6 +111,8 @@
         </activity>
         <activity android:name=".ui.activity.DaggerDemoActivity">
         </activity>
+        <activity android:name=".ui.activity.DisplaySupportActivity">
+        </activity>
     </application>
 
 </manifest>

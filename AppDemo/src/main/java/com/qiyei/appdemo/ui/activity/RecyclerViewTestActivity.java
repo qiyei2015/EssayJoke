@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -51,6 +52,10 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
         setContentView(R.layout.activity_recycler_view_test);
 
         mRecyclerView = (XRecyclerView) findViewById(R.id.recycler_view);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("RecyclerTest");
+
         initData();
 
         initView();
@@ -127,10 +132,10 @@ public class RecyclerViewTestActivity extends AppCompatActivity implements XRecy
     }
 
     private void initData(){
-        CommonTitleBar titleBar = new CommonTitleBar.Builder(this)
-                .setTitle("recyclerView下拉刷新上拉加载测试")
-                .setRightText("待添加")
-                .build();
+//        CommonTitleBar titleBar = new CommonTitleBar.Builder(this)
+//                .setTitle("recyclerView下拉刷新上拉加载测试")
+//                .setRightText("待添加")
+//                .build();
         mDatas = new ArrayList<>();
         for (int i = 0;i < 50;i++){
             String s = new String("测试 " + i);
