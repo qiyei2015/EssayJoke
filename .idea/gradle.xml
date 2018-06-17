@@ -8,10 +8,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AppDemo" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
             <option value="$PROJECT_DIR$/Framework" />
             <option value="$PROJECT_DIR$/SDK" />
-            <option value="$PROJECT_DIR$/appdemo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

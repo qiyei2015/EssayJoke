@@ -1,6 +1,8 @@
 package com.qiyei.sdk.base;
 
 
+import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 
@@ -8,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 import com.qiyei.sdk.ioc.ViewUtils;
@@ -75,7 +79,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         startActivity(new Intent(this,clazz));
     }
 
-<<<<<<< HEAD
+
     /**
      * 设置系统顶部栏和程序主题颜色统一
      * @param activity 当前活动Activity实例
@@ -99,7 +103,4 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         win.setAttributes(winParams);
     }
 
-
-=======
->>>>>>> master
 }
