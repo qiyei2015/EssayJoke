@@ -36,11 +36,11 @@ public class ImageUtil {
      */
     public static final int CENTER = 5;
 
-    static {
-        //加载lib库
-        System.loadLibrary("jpeg");
-        System.loadLibrary("compressimg");
-    }
+//    static {
+//        //加载lib库
+//        System.loadLibrary("jpeg");
+//        System.loadLibrary("compressimg");
+//    }
 
     /**
      * 缩放图片,根据给定的宽和高进行缩放

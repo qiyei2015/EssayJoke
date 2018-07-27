@@ -40,9 +40,9 @@ public class VersionManager {
      */
     private static final String TAG = VersionManager.class.getSimpleName();
 
-    static {
-        System.loadLibrary("diffpatch");
-    }
+//    static {
+//        System.loadLibrary("diffpatch");
+//    }
 
     /**
      * 获取当前APK的签名
