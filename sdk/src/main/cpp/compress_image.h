@@ -28,10 +28,10 @@
 extern "C"{
 #endif
 
-#include "jpeg/jpeglib.h"
-#include "jpeg/cdjpeg.h"        /* Common decls for cjpeg/djpeg applications */
-#include "jpeg/jversion.h"        /* for version message */
-#include "jpeg/jconfig.h"
+//#include "jpeg/jpeglib.h"
+//#include "jpeg/cdjpeg.h"        /* Common decls for cjpeg/djpeg applications */
+//#include "jpeg/jversion.h"        /* for version message */
+//#include "jpeg/jconfig.h"
 
 JNIEXPORT jint JNICALL
         Java_com_qiyei_sdk_util_ImageUtil_jpegCompressBitmap(JNIEnv *env, jclass type, jobject bitmap,
