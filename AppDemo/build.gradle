@@ -50,6 +50,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        encoding "UTF-8"
     }
 
     buildTypes {
@@ -160,6 +161,7 @@ dependencies {
     api android_arch_lifecycle_runtime
     api android_arch_lifecycle_extensions
     implementation com_android_support_constraint_constraint_layout
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     annotationProcessor android_arch_lifecycle_compiler
     api android_arch_persistence_room_runtime
     annotationProcessor android_arch_persistence_room_compiler
@@ -191,4 +193,5 @@ dependencies {
 
     api project(':Cordova')
     api project(':ReactNative')
+    api project(':Scan')
 }

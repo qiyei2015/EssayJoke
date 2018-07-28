@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
       <module fileurl="file://$PROJECT_DIR$/Router/Router.iml" filepath="$PROJECT_DIR$/Router/Router.iml" />
       <module fileurl="file://$PROJECT_DIR$/SDK/SDK.iml" filepath="$PROJECT_DIR$/SDK/SDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Scan/Scan.iml" filepath="$PROJECT_DIR$/Scan/Scan.iml" />
       <module fileurl="file://$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" filepath="$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" filepath="$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" />
     </modules>

@@ -1,1 +1,3 @@
-include ':EssayJokeApp', ':SDK', ':Framework', ':AppDemo', ':ioc-annotation', ':ioc-compiler',':ModuleA', ':Router', ':Cordova', ':ReactNative'
+include ':EssayJokeApp',':AppDemo'
+include  ':Cordova', ':ReactNative'
+include  ':SDK', ':Framework', ':ioc-annotation', ':ioc-compiler',':ModuleA', ':Router', ':Cordova', ':ReactNative', ':Scan'
