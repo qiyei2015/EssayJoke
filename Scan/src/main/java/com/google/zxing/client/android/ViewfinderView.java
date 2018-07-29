@@ -18,12 +18,14 @@ package com.google.zxing.client.android;
 
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
+import com.qiyei.scan.DisplayUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.util.AttributeSet;
@@ -57,6 +59,13 @@ public final class ViewfinderView extends View {
   private List<ResultPoint> possibleResultPoints;
   private List<ResultPoint> lastPossibleResultPoints;
 
+  private static final int LONG_SIZE = 20;
+  private static final int SHORT_SIZE = 2;
+  private int movingColor;
+  private int movingOffsetY = 0;
+  //扫描速度
+  private static int MOVING_SPEED = 20;
+  private boolean first;
   // This constructor is used when the class is built from an XML resource.
   public ViewfinderView(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -68,6 +77,7 @@ public final class ViewfinderView extends View {
     resultColor = resources.getColor(R.color.result_view);
     laserColor = resources.getColor(R.color.viewfinder_laser);
     resultPointColor = resources.getColor(R.color.possible_result_points);
+    movingColor = resources.getColor(R.color.viewfinder_moving);
     scannerAlpha = 0;
     possibleResultPoints = new ArrayList<>(5);
     lastPossibleResultPoints = null;
@@ -104,11 +114,40 @@ public final class ViewfinderView extends View {
       canvas.drawBitmap(resultBitmap, null, frame, paint);
     } else {
 
+      //显示四个角
+      paint.setColor(Color.GREEN);
+      canvas.drawRect(frame.left,frame.top,frame.left + DisplayUtil.dip2px(getContext(), SHORT_SIZE)
+              ,frame.top + DisplayUtil.dip2px(getContext(), LONG_SIZE),paint);
+      canvas.drawRect(frame.left,frame.top,frame.left + DisplayUtil.dip2px(getContext(), LONG_SIZE)
+              ,frame.top + DisplayUtil.dip2px(getContext(), SHORT_SIZE),paint);
+      canvas.drawRect(frame.right - DisplayUtil.dip2px(getContext(), LONG_SIZE),frame.top,frame.right
+              ,frame.top + DisplayUtil.dip2px(getContext(), SHORT_SIZE),paint);
+      canvas.drawRect(frame.right - DisplayUtil.dip2px(getContext(), SHORT_SIZE),frame.top,frame.right
+              ,frame.top + DisplayUtil.dip2px(getContext(), LONG_SIZE),paint);
+      canvas.drawRect(frame.right - DisplayUtil.dip2px(getContext(), SHORT_SIZE)
+              ,frame.bottom - DisplayUtil.dip2px(getContext(), LONG_SIZE),frame.right,frame.bottom ,paint);
+      canvas.drawRect(frame.right- DisplayUtil.dip2px(getContext(), LONG_SIZE)
+              ,frame.bottom - DisplayUtil.dip2px(getContext(), SHORT_SIZE),frame.right,frame.bottom ,paint);
+      canvas.drawRect(frame.left,frame.bottom - DisplayUtil.dip2px(getContext(), SHORT_SIZE)
+              ,frame.left + DisplayUtil.dip2px(getContext(), LONG_SIZE),frame.bottom ,paint);
+      canvas.drawRect(frame.left,frame.bottom - DisplayUtil.dip2px(getContext(), LONG_SIZE)
+              ,frame.left + DisplayUtil.dip2px(getContext(), SHORT_SIZE),frame.bottom,paint);
+
       // Draw a red "laser scanner" line through the middle to show decoding is active
-      paint.setColor(laserColor);
-      paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
+      paint.setColor(movingColor);
+      paint.setAlpha(SCANNER_ALPHA[3]);
       scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
-      int middle = frame.height() / 2 + frame.top;
+
+      //移动中间的扫描线
+      if (!first){
+        movingOffsetY = frame.top;
+        first = true;
+      }
+      movingOffsetY += MOVING_SPEED;
+      if (movingOffsetY > frame.bottom){
+        movingOffsetY = frame.top;
+      }
+      int middle = movingOffsetY;
       canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
       
       float scaleX = frame.width() / (float) previewFrame.width();
