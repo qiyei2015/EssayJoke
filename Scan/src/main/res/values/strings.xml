@@ -140,4 +140,6 @@
   <string name="result_wifi">Found WLAN Configuration</string>
   <string name="sbc_name">Google Book Search</string>
   <string name="wifi_changing_network">Requesting connection to network\u2026</string>
+
+  <string name="scan_code_tips">Automatically scan the QR code/bar code in the box</string>
 </resources>

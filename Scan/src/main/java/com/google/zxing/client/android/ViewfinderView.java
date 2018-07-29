@@ -19,6 +19,7 @@ package com.google.zxing.client.android;
 import com.google.zxing.ResultPoint;
 import com.google.zxing.client.android.camera.CameraManager;
 import com.qiyei.scan.DisplayUtil;
+import com.qiyei.scan.DrawUtil;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -28,6 +29,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -149,7 +151,11 @@ public final class ViewfinderView extends View {
       }
       int middle = movingOffsetY;
       canvas.drawRect(frame.left + 2, middle - 1, frame.right - 1, middle + 2, paint);
-      
+
+      //绘制提示文字
+      DrawUtil.drawText(getContext(),R.string.scan_code_tips,12,Color.LTGRAY,canvas
+              ,frame.left + (frame.right - frame.left)/2,frame.bottom + DisplayUtil.dip2px(getContext(),30));
+
       float scaleX = frame.width() / (float) previewFrame.width();
       float scaleY = frame.height() / (float) previewFrame.height();
 
