@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/Router" />
             <option value="$PROJECT_DIR$/SDK" />
             <option value="$PROJECT_DIR$/Scan" />
+            <option value="$PROJECT_DIR$/Video" />
             <option value="$PROJECT_DIR$/ioc-annotation" />
             <option value="$PROJECT_DIR$/ioc-compiler" />
           </set>
