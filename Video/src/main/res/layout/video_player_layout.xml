@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/black">
+
+    <TextureView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textureView"
+        android:layout_centerInParent="true"
+        android:duplicateParentState="true"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/framing_view"
+        android:background="@color/video_frame_bg"
+        android:scaleType="fitCenter"
+        android:src="@drawable/video_img_error"
+        android:visibility="gone"/>
+
+</RelativeLayout>
