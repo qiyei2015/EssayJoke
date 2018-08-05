@@ -14,10 +14,41 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/framing_view"
+        android:id="@+id/video_frame_view"
         android:background="@color/video_frame_bg"
         android:scaleType="fitCenter"
         android:src="@drawable/video_img_error"
         android:visibility="gone"/>
+
+
+    <ImageView
+        android:id="@+id/video_to_full_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+        android:layout_marginTop="14dp"
+        android:padding="10dp"
+        android:scaleType="center"
+        android:src="@drawable/video_ad_mini"
+
+        />
+
+    <Button
+        android:id="@+id/video_small_play_btn"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/video_ad_play"
+        android:visibility="gone"
+        />
+
+    <ImageView
+        android:id="@+id/loading_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/xadsdk_ad_loading_anim"
+        />
 
 </RelativeLayout>

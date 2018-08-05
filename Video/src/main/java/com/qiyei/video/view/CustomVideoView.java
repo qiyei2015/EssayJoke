@@ -4,12 +4,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -275,6 +277,20 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
         return true;
     }
 
+    @Override
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        if (visibility == VISIBLE && playerState == LifeCycle.PAUSE) {
+            if (isRealPause() || isComplete()) {
+                pause();
+            } else {
+                decideCanPlay();
+            }
+        } else {
+            pause();
+        }
+    }
+
     /**
      * 暂停
      */
@@ -311,7 +327,32 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     }
 
     /**
-     * 决定是否可以开始播放
+     * 显示全屏按钮
+     */
+    public void showFullButton(boolean show){
+        mFullBtn.setImageResource(show ? R.drawable.video_ad_mini:R.drawable.video_ad_mini_null);
+        mFullBtn.setVisibility(show ? View.VISIBLE:View.GONE);
+    }
+
+    /**
+     * 真的停止
+     * @return
+     */
+    public boolean isRealPause(){
+        return isRealPause;
+    }
+
+    /**
+     * 是否播放完成
+     * @return
+     */
+    public boolean isComplete(){
+        return isComplete;
+    }
+
+
+    /**
+     * 决定是否可以开始播放 开始播放？
      */
     private void decideCanPlay(){
 
@@ -340,8 +381,20 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
      * 初始化为小布局
      */
     private void initSmallLayoutMode(){
+        LayoutParams params = new LayoutParams(mScreenWidth,mDestationHeight);
+        params.addRule(RelativeLayout.CENTER_IN_PARENT);
+        //居中在父容器
+        mPlayerView.setLayoutParams(params);
 
+        mMiniPlayBtn = (Button) mPlayerView.findViewById(R.id.video_small_play_btn);
+        mFullBtn = (ImageView) mPlayerView.findViewById(R.id.video_to_full_image_view);
+        mFrameView = (ImageView) mPlayerView.findViewById(R.id.video_frame_view);
+        mMiniPlayBtn.setOnClickListener(this);
+        mFullBtn.setOnClickListener(this);
     }
+
+
+
 
     /**
      * 初始化广播接收器
@@ -409,6 +462,20 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
 
     }
 
+    /**
+     * 广告加载监听器
+     */
+    public interface ADLoadListener {
 
+        void onStartLoad(String url, ImageLoaderListener listener);
+    }
 
+    public interface ImageLoaderListener {
+        /**
+         * 如果图片下载不成功，传null
+         *
+         * @param loadedImage
+         */
+        void onLoadingComplete(Bitmap loadedImage);
+    }
 }
