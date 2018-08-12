@@ -335,6 +335,17 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
     }
 
     /**
+     * 是否正在播放
+     * @return
+     */
+    public boolean isPlaying(){
+        if (mMediaPlayer != null && mMediaPlayer.isPlaying()){
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * 真的停止
      * @return
      */
@@ -355,17 +366,11 @@ public class CustomVideoView extends RelativeLayout implements View.OnClickListe
      * 决定是否可以开始播放 开始播放？
      */
     private void decideCanPlay(){
-
-    }
-
-
-    /**
-     * 是否正在播放
-     * @return
-     */
-    private boolean isPlaying(){
-
-        return true;
+//        if (Utils.getVisiblePercent(mParentContainer) > VIDEO_SCREEN_PERCENT)
+//            //来回切换页面时，只有 >50,且满足自动播放条件才自动播放
+//            resume();
+//        else
+//            pause();
     }
 
     /**
