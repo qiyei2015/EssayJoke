@@ -34,8 +34,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         initContentView();
         ViewUtils.inject(this);
-        //initData();
-        //initView();
+//        initData();
+//        initView();
     }
 
     @Override

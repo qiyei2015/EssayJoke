@@ -172,6 +172,7 @@ dependencies {
     androidTestImplementation(com_android_support_test_espresso_espresso_core, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     api com_android_support_appcompat_v7
     testImplementation junit
 

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.activity.HomeActivity">
+
+    <FrameLayout
+        android:id="@+id/main_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:background="@color/title_bar_bg_day"
+        android:id="@+id/tab_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tab_height"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/ui_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_home"
+            android:text="@string/ui_page" />
+
+        <RadioButton
+            android:id="@+id/open_source_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_home"
+            android:text="@string/open_source_page" />
+
+        <RadioButton
+            android:id="@+id/architecture_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_discovery"
+            android:text="@string/architecture_page" />
+
+        <RadioButton
+            android:id="@+id/media_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_fresh"
+            android:text="@string/media_page" />
+
+        <RadioButton
+            android:id="@+id/ndk_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_msg"
+            android:text="@string/ndk_page" />
+    </RadioGroup>
+
+</LinearLayout>

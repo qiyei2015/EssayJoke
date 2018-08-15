@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/Android" />
             <option value="$PROJECT_DIR$/AppDemo" />
             <option value="$PROJECT_DIR$/Cordova" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
