@@ -244,7 +244,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private File getOutputMediaFile(int type) {
 
         File mediaStorageDir = new File(Environment.getExternalStoragePublicDirectory(
-                Environment.DIRECTORY_PICTURES), TAG);
+                Environment.DIRECTORY_DCIM), TAG);
         if (!mediaStorageDir.exists()) {
             //创建路径
             if (!mediaStorageDir.mkdirs()) {
