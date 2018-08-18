@@ -41,4 +41,5 @@ dependencies {
     testImplementation junit
 
     api project(':SDK')
+    api project(':Resource')
 }

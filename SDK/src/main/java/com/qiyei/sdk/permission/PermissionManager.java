@@ -61,7 +61,6 @@ public class PermissionManager {
     public static void requestPermission(Activity activity , int requestCode,String[] permissions){
         PermissionManager manager = new PermissionManager(activity,requestCode,permissions);
         manager.request();
-
     }
 
     /**

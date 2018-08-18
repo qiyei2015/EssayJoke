@@ -1,8 +1,8 @@
-package com.qiyei.android.common.listener;
+package com.qiyei.framework.common.listener;
 
 import android.view.View;
 
-import com.qiyei.android.common.model.MainMenu;
+import com.qiyei.framework.common.model.MainMenu;
 
 
 /**

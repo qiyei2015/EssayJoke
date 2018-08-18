@@ -1,27 +1,28 @@
-package com.qiyei.android.media.fragment;
+package com.qiyei.media.ui.fragment;
 
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 
-import com.qiyei.android.R;
-import com.qiyei.android.common.adapter.MainMenuAdapter;
-import com.qiyei.android.common.listener.MainMenuListener;
-import com.qiyei.android.common.model.MainMenu;
-import com.qiyei.android.media.viewmodel.MediaViewModel;
+import com.qiyei.media.viewmodel.MediaViewModel;
 import com.qiyei.framework.fragment.BaseFragment;
+import com.qiyei.framework.common.adapter.MainMenuAdapter;
+import com.qiyei.framework.common.listener.MainMenuListener;
+import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
-import com.qiyei.sdk.xml.XmlManager;
+
+import com.qiyei.media.R;
 
 import java.util.List;
 
@@ -58,6 +59,11 @@ public class MediaFragment extends BaseFragment {
         initView(contentView);
         initData();
         return contentView;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
     @Override

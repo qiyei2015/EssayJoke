@@ -8,6 +8,7 @@
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Media/Media.iml" filepath="$PROJECT_DIR$/Media/Media.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleA/ModuleA.iml" filepath="$PROJECT_DIR$/ModuleA/ModuleA.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
       <module fileurl="file://$PROJECT_DIR$/Resource/Resource.iml" filepath="$PROJECT_DIR$/Resource/Resource.iml" />

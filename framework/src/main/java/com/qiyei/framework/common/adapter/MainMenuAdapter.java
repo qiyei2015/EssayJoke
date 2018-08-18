@@ -1,11 +1,12 @@
-package com.qiyei.android.common.adapter;
+package com.qiyei.framework.common.adapter;
 
 import android.content.Context;
 import android.view.View;
 
-import com.qiyei.android.R;
-import com.qiyei.android.common.listener.MainMenuListener;
-import com.qiyei.android.common.model.MainMenu;
+
+import com.qiyei.framework.R;
+import com.qiyei.framework.common.listener.MainMenuListener;
+import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter;
 import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder;
 

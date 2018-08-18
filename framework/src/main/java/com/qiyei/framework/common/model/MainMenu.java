@@ -1,4 +1,4 @@
-package com.qiyei.android.common.model;
+package com.qiyei.framework.common.model;
 
 /**
  * @author Created by qiyei2015 on 2018/8/18.

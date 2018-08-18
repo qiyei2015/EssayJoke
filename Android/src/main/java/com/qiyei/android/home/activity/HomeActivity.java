@@ -7,12 +7,12 @@ import android.widget.RadioButton;
 
 import com.qiyei.android.R;
 import com.qiyei.android.home.fragment.ArchitectureFragment;
-import com.qiyei.android.media.fragment.MediaFragment;
 import com.qiyei.android.ndk.fragment.NDKFragment;
 import com.qiyei.android.opensource.fragment.OpenSourceFragment;
 import com.qiyei.android.ui.fragment.UIFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;
+import com.qiyei.media.ui.fragment.MediaFragment;
 import com.qiyei.sdk.ioc.ViewById;
 
 /**

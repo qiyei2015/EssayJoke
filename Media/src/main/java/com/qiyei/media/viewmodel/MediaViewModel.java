@@ -1,10 +1,11 @@
-package com.qiyei.android.media.viewmodel;
+package com.qiyei.media.viewmodel;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.qiyei.android.common.model.MainMenu;
-import com.qiyei.android.media.activity.MediaRecordActivity;
+
+import com.qiyei.framework.common.model.MainMenu;
+import com.qiyei.media.ui.activity.MediaRecordActivity;
 
 import java.util.ArrayList;
 import java.util.List;

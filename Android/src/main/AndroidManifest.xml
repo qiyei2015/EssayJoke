@@ -19,8 +19,6 @@
         </activity>
         <activity android:name=".home.activity.HomeActivity">
         </activity>
-        <activity android:name=".media.activity.MediaRecordActivity">
-        </activity>
     </application>
 
 </manifest>

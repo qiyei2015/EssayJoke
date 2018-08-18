@@ -1,11 +1,9 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
-    buildToolsVersion rootProject.ext.common.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.qiyei.android"
         minSdkVersion rootProject.ext.common.minSdkVersion
         targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
@@ -15,45 +13,17 @@ android {
 
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-
     buildTypes {
-
-        debug {
+        release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-
-    }
-
-    sourceSets {
-        main {
-            jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
-            jniLibs.srcDirs = ['libs']  //配置生成jniLibs
-        }
-    }
-
-    //解决国际化资源文件不全
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
     }
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    implementation com_android_support_appcompat_v7
-    implementation com_android_support_constraint_constraint_layout
 
 
     implementation android_arch_lifecycle_runtime
@@ -62,9 +32,13 @@ dependencies {
     annotationProcessor android_arch_lifecycle_compiler
     implementation android_arch_persistence_room_runtime
 
+
+    implementation com_android_support_appcompat_v7
     testImplementation junit
     androidTestImplementation com_android_support_test_runner
     androidTestImplementation com_android_support_test_espresso_espresso_core
 
-    api project(':Media')
+
+    api project(':Framework')
+
 }
