@@ -6,14 +6,14 @@ import android.view.View;
 import android.widget.RadioButton;
 
 import com.qiyei.android.R;
-import com.qiyei.android.home.fragment.ArchitectureFragment;
-import com.qiyei.android.ndk.fragment.NDKFragment;
-import com.qiyei.android.opensource.fragment.OpenSourceFragment;
-import com.qiyei.android.ui.fragment.UIFragment;
+import com.qiyei.architecture.ui.fragment.ArchitectureFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;
 import com.qiyei.media.ui.fragment.MediaFragment;
+import com.qiyei.ndk.ui.fragment.NDKFragment;
+import com.qiyei.opensource.ui.fragment.OpenSourceFragment;
 import com.qiyei.sdk.ioc.ViewById;
+import com.qiyei.ui.ui.fragment.UIFragment;
 
 /**
  * @author Created by qiyei2015 on 2018/6/7.

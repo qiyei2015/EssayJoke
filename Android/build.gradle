@@ -66,5 +66,9 @@ dependencies {
     androidTestImplementation com_android_support_test_runner
     androidTestImplementation com_android_support_test_espresso_espresso_core
 
+    api project(':UI')
+    api project(':OpenSource')
+    api project(':Architecture')
     api project(':Media')
+    api project(':NDK')
 }
