@@ -1,4 +1,4 @@
-package com.qiyei.android.ui.fragment;
+package com.qiyei.android.home.fragment;
 
 
 import android.os.Bundle;
@@ -13,10 +13,10 @@ import com.qiyei.framework.fragment.BaseFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MediaFragment extends BaseFragment {
+public class ArchitectureFragment extends BaseFragment {
 
 
-    public MediaFragment() {
+    public ArchitectureFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +25,7 @@ public class MediaFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_media, container, false);
+        return inflater.inflate(R.layout.fragment_architecture, container, false);
     }
 
 }

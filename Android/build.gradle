@@ -42,7 +42,7 @@ android {
     }
 
     //解决国际化资源文件不全
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -54,6 +54,14 @@ dependencies {
 
     implementation com_android_support_appcompat_v7
     implementation com_android_support_constraint_constraint_layout
+
+
+    implementation android_arch_lifecycle_runtime
+    implementation android_arch_lifecycle_extensions
+
+    annotationProcessor android_arch_lifecycle_compiler
+    implementation android_arch_persistence_room_runtime
+
     testImplementation junit
     androidTestImplementation com_android_support_test_runner
     androidTestImplementation com_android_support_test_espresso_espresso_core

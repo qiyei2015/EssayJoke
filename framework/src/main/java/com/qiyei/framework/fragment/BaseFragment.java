@@ -1,6 +1,7 @@
 package com.qiyei.framework.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,7 +19,7 @@ public class BaseFragment extends Fragment{
     /**
      * 调试用的TAG
      */
-    protected static final String TAG = Fragment.class.getSimpleName();
+    private static final String TAG = Fragment.class.getSimpleName();
     /**
      * Activity中的context
      */
@@ -60,5 +61,22 @@ public class BaseFragment extends Fragment{
         mContext = getContext();
     }
 
+    /**
+     * 获取调试TAG
+     * @return
+     */
+    protected String getTAG(){
+        return TAG;
+    }
+
+    /**
+     * 启动Activity
+     * @param clazz
+     */
+    protected void startActivity(Class<?> clazz){
+        if (mContext != null){
+            startActivity(new Intent(mContext,clazz));
+        }
+    }
 
 }

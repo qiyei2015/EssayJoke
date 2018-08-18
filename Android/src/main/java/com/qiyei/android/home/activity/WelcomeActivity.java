@@ -1,4 +1,4 @@
-package com.qiyei.android.ui.activity;
+package com.qiyei.android.home.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

@@ -78,7 +78,7 @@ ext{
      * Android 公共依赖
      */
     com_android_support_appcompat_v7 = 'com.android.support:appcompat-v7:27.1.1'
-    com_android_support_constraint_constraint_layout = 'com.android.support.constraint:constraint-layout:1.1.0'
+    com_android_support_constraint_constraint_layout = 'com.android.support.constraint:constraint-layout:1.1.2'
     com_android_support_design = 'com.android.support:design:27.1.1'
     com_android_support_recyclerview_v7 = 'com.android.support:recyclerview-v7:26.0.0'
     com_android_support_multidex = 'com.android.support:multidex:1.0.3'

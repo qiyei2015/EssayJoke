@@ -1,17 +1,15 @@
-package com.qiyei.android.ui.activity;
+package com.qiyei.android.home.activity;
 
-import android.content.Intent;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 
 import com.qiyei.android.R;
-import com.qiyei.android.ui.fragment.ArchitectureFragment;
-import com.qiyei.android.ui.fragment.MediaFragment;
-import com.qiyei.android.ui.fragment.NDKFragment;
-import com.qiyei.android.ui.fragment.OpenSourceFragment;
+import com.qiyei.android.home.fragment.ArchitectureFragment;
+import com.qiyei.android.media.fragment.MediaFragment;
+import com.qiyei.android.ndk.fragment.NDKFragment;
+import com.qiyei.android.opensource.fragment.OpenSourceFragment;
 import com.qiyei.android.ui.fragment.UIFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.framework.fragment.FragmentHelper;

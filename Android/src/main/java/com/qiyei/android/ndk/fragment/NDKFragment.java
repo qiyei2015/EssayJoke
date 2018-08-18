@@ -1,8 +1,9 @@
-package com.qiyei.android.ui.fragment;
+package com.qiyei.android.ndk.fragment;
 
 
 import android.os.Bundle;
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,10 @@ import com.qiyei.framework.fragment.BaseFragment;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ArchitectureFragment extends BaseFragment {
+public class NDKFragment extends BaseFragment {
 
 
-    public ArchitectureFragment() {
+    public NDKFragment() {
         // Required empty public constructor
     }
 
@@ -25,7 +26,7 @@ public class ArchitectureFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_architecture, container, false);
+        return inflater.inflate(R.layout.fragment_ndk, container, false);
     }
 
 }
