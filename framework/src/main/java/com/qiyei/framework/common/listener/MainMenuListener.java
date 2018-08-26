@@ -4,9 +4,8 @@ import android.view.View;
 
 import com.qiyei.framework.common.model.MainMenu;
 
-
 /**
- * @author Created by qiyei2015 on 2018/2/23.
+ * @author Created by qiyei2015 on 2018/8/24.
  * @version: 1.0
  * @email: 1273482124@qq.com
  * @description:
@@ -19,6 +18,6 @@ public interface MainMenuListener {
      * @param item
      * @param position
      */
-    void onClick(View v, MainMenu item, int position);
+    void click(View v , MainMenu item, int position);
 
 }

@@ -1,6 +1,11 @@
 package com.qiyei.media.util;
 
+import android.content.Context;
 import android.hardware.Camera;
+import android.view.Surface;
+import android.view.WindowManager;
+
+import com.qiyei.sdk.log.LogManager;
 
 import java.util.List;
 
@@ -12,6 +17,7 @@ import java.util.List;
  */
 public class CameraHelper {
 
+    private static final String TAG = "CameraHelper";
 
     public static Camera.Size getOptimalVideoSize(List<Camera.Size> supportPreviewSizes,List<Camera.Size> supportedVideoSizes,int width, int height){
 
@@ -62,4 +68,82 @@ public class CameraHelper {
         return optimalSize;
     }
 
+    /**
+     * 设置显示方向
+     * @param context
+     * @return
+     */
+    public static int getDisplayRotation(Context context) {
+        WindowManager windowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int rotation = windowManager.getDefaultDisplay()
+                .getRotation();
+        switch (rotation) {
+            case Surface.ROTATION_0: return 0;
+            case Surface.ROTATION_90: return 90;
+            case Surface.ROTATION_180: return 180;
+            case Surface.ROTATION_270: return 270;
+        }
+        return 0;
+    }
+
+    /**
+     * 设置摄像头角度
+     * @param cameraId
+     * @param camera
+     * @param degrees
+     */
+    public static void setCameraDisplayOrientation(int cameraId, Camera camera,int degrees) {
+        // See android.hardware.Camera.setCameraDisplayOrientation for
+        // documentation.
+        Camera.CameraInfo info = new Camera.CameraInfo();
+        Camera.getCameraInfo(cameraId, info);
+        int result;
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360; // compensate the mirror
+        } else { // back-facing
+            result = (info.orientation - degrees + 360) % 360;
+        }
+        camera.setDisplayOrientation(result);
+    }
+
+    /**
+     *
+     * @param cameraId
+     * @param degree
+     * @return
+     */
+    public static int getRecorderDegree(int cameraId,int degree){
+        int angle = 0;
+        /**
+         * 后置
+         */
+        if (cameraId == 0) {
+            switch (degree) {
+                case 0:
+                    angle = 90;
+                    break;
+                case 90:
+                    angle = 90;
+                    break;
+                default:
+                    angle = 90;
+                    break;
+            }
+        } else if (cameraId == 1) {
+            switch (degree) {
+                case 0:
+                    angle = 90;
+                    break;
+                case 90:
+                    angle = 90;
+                    break;
+                default:
+                    angle = 90;
+                    break;
+            }
+        }
+        LogManager.i(TAG, "record degree:" + angle);
+        return angle;
+    }
 }

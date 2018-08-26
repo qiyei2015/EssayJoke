@@ -45,7 +45,7 @@ public class MainMenuAdapter extends BaseRecyclerAdapter<MainMenu> {
             @Override
             public void onClick(View v) {
                 if (mListener != null){
-                    mListener.onClick(v,item,position);
+                    mListener.click(v,item,position);
                 }
             }
         });

@@ -1,7 +1,7 @@
 package com.qiyei.media.ui.fragment;
 
-
-
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,30 +10,26 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 
-import com.qiyei.media.viewmodel.MediaViewModel;
-import com.qiyei.framework.fragment.BaseFragment;
 import com.qiyei.framework.common.adapter.MainMenuAdapter;
 import com.qiyei.framework.common.listener.MainMenuListener;
 import com.qiyei.framework.common.model.MainMenu;
+import com.qiyei.framework.fragment.BaseFragment;
+import com.qiyei.media.R;
+import com.qiyei.media.viewmodel.MediaViewModel;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
 import com.qiyei.sdk.view.xrecycler.base.CategoryItemDecoration;
 
-import com.qiyei.media.R;
-
 import java.util.List;
 
 /**
- * @author Created by qiyei2015 on 2018/8/17.
+ * @author Created by qiyei2015 on 2018/8/24.
  * @version: 1.0
  * @email: 1273482124@qq.com
  * @description:
  */
-public class MediaFragment extends BaseFragment {
-
+public class MediaFragment extends BaseFragment{
 
     private RecyclerView mRecyclerView;
 
@@ -46,11 +42,10 @@ public class MediaFragment extends BaseFragment {
 
     private MainMenuAdapter mMenuAdapter;
 
-
     public MediaFragment() {
 
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,13 +66,6 @@ public class MediaFragment extends BaseFragment {
         return "MediaFragment";
     }
 
-
-    private class MyListener implements MainMenuListener {
-        @Override
-        public void onClick(View v, MainMenu item, int position) {
-            gotoMenuActivity(item);
-        }
-    }
 
     private void initView(View view){
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
@@ -114,5 +102,12 @@ public class MediaFragment extends BaseFragment {
         }
     }
 
+    private class MyListener implements MainMenuListener{
+
+        @Override
+        public void click(View v, MainMenu item, int position) {
+            gotoMenuActivity(item);
+        }
+    }
 
 }

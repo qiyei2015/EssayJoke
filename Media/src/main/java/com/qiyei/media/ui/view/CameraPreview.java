@@ -29,6 +29,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     private static final String TAG = "CameraPreview";
 
+    /**
+     * 后置相机
+     */
+    public static final int CAMERA_FACING_BACK = 0;
+    /**
+     * 前置相机
+     */
+    public static final int CAMERA_FACING_FRONT = 1;
 
     /**
      * SurfaceHolder
@@ -56,6 +64,12 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
      */
     private static int mOptVideoWidth = 1920;
     private static int mOptVideoHeight = 1080;
+
+    /**
+     * Context
+     */
+    private Context mContext;
+
     /**
      * 输出的uri
      */
@@ -64,9 +78,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
      * 输出的文件类型
      */
     private String mOutputMediaFileType;
+    /**
+     * 角度
+     */
+    private int mDegree = 0;
+    /**
+     * 相机参数
+     */
+    private Camera.Parameters mParameters;
+
 
     public CameraPreview(Context context) {
         super(context);
+        mContext = context;
         mSurfaceHolder = getHolder();
         //设置监听回调
         mSurfaceHolder.addCallback(this);
@@ -80,7 +104,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     private static Camera getCameraInstance() {
         Camera camera = null;
         try {
-            camera = Camera.open();
+            camera = Camera.open(CAMERA_FACING_BACK);
         } catch (Exception e) {
             e.printStackTrace();
             LogManager.i(TAG, "getCameraInstance:" + e.toString());
@@ -94,8 +118,14 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mCamera = getCameraInstance();
         //设置预览的holder
         try {
+            mDegree = CameraHelper.getDisplayRotation(mContext);
+            LogManager.i(TAG,"camera degree:" + mDegree);
+            //设置相机预览角度
+            CameraHelper.setCameraDisplayOrientation(CAMERA_FACING_BACK,mCamera,mDegree);
             mCamera.setPreviewDisplay(holder);
             mCamera.startPreview();
+            mCamera.autoFocus(new MyAutoFocusCallback());
+            mCamera.cancelAutoFocus();
             getCameraOptimalVideoSize();
         } catch (IOException e) {
             e.printStackTrace();
@@ -170,6 +200,20 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     /**
+     * 自动对焦回调
+     */
+    private class MyAutoFocusCallback implements Camera.AutoFocusCallback{
+
+        @Override
+        public void onAutoFocus(boolean success, Camera camera) {
+            if (success){
+                camera.cancelAutoFocus();
+                doAutoFocus();
+            }
+        }
+    }
+
+    /**
      * 获取可选的size
      */
     private void getCameraOptimalVideoSize() {
@@ -203,6 +247,10 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         mMediaRecorder.setCamera(mCamera);
         //设置音频来源
         mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+        //设置视频宽高
+        //mMediaRecorder.setVideoSize(mOptVideoWidth,mOptVideoHeight);
+        //设置视频录制时的角度
+        mMediaRecorder.setOrientationHint(CameraHelper.getRecorderDegree(CAMERA_FACING_BACK,mDegree));
         //设置视频来源
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
         //设置质量
@@ -273,4 +321,24 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         return mediaFile;
     }
 
+
+    /**
+     * 设置聚焦
+     */
+    private void doAutoFocus() {
+        mParameters = mCamera.getParameters();
+        mParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+        mCamera.setParameters(mParameters);
+        mCamera.autoFocus(new Camera.AutoFocusCallback() {
+            @Override
+            public void onAutoFocus(boolean success, Camera camera) {
+                if (success) {
+                    camera.cancelAutoFocus();// 只有加上了这一句，才会自动对焦。
+                    mParameters = camera.getParameters();
+                    mParameters.setFocusMode(Camera.Parameters.FOCUS_MODE_AUTO);
+                    camera.setParameters(mParameters);
+                }
+            }
+        });
+    }
 }
