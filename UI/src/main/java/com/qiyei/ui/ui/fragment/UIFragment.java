@@ -1,14 +1,14 @@
 package com.qiyei.ui.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
-import com.qiyei.ui.R;
-import com.qiyei.framework.fragment.BaseFragment;
-import com.qiyei.sdk.ioc.ViewUtils;
+import android.view.View;
+
+import com.qiyei.framework.common.model.MainMenu;
+import com.qiyei.framework.fragment.CommonListFragment;
+import com.qiyei.ui.ui.activity.ScanCodeActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -17,20 +17,35 @@ import com.qiyei.sdk.ioc.ViewUtils;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class UIFragment extends BaseFragment{
+public class UIFragment extends CommonListFragment{
 
-    @Nullable
+
+    /**
+     * 菜单item
+     */
+    private List<MainMenu> mMenuList = new ArrayList<>();
+
+    private String[] names = new String[]{"测试1 二维码扫描"};
+    private Class<?>[] clazzs = new Class[]{ScanCodeActivity.class};
+
+
+    public UIFragment() {
+        super();
+        for (int i = 0 ; i < names.length ; i++){
+            MainMenu menu = new MainMenu(i+1,names[i],clazzs[i]);
+            mMenuList.add(menu);
+        }
+    }
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ui,container,false);
-        ViewUtils.inject(this,view);
-        return view;
+    protected void initView(View view) {
 
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    protected void initData() {
+        setLiveData(mMenuList);
     }
+
 
 }

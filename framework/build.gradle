@@ -37,6 +37,11 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
+    api android_arch_lifecycle_runtime
+    api android_arch_lifecycle_extensions
+    api android_arch_persistence_room_runtime
+    annotationProcessor android_arch_lifecycle_compiler
+
     api com_android_support_appcompat_v7
     testImplementation junit
 

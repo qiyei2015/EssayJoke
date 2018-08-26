@@ -1,16 +1,15 @@
-package com.qiyei.appdemo.ui.activity;
+package com.qiyei.ui.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.zxing.client.android.CaptureActivity;
-import com.qiyei.appdemo.R;
+
 import com.qiyei.sdk.util.ToastUtil;
+import com.qiyei.ui.R;
 
 /**
  * @author Created by qiyei2015 on 2018/7/28.

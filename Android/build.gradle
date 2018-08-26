@@ -18,6 +18,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        encoding "UTF-8"
     }
 
     buildTypes {
@@ -55,12 +56,7 @@ dependencies {
     implementation com_android_support_appcompat_v7
     implementation com_android_support_constraint_constraint_layout
 
-
-    implementation android_arch_lifecycle_runtime
-    implementation android_arch_lifecycle_extensions
-
     annotationProcessor android_arch_lifecycle_compiler
-    implementation android_arch_persistence_room_runtime
 
     testImplementation junit
     androidTestImplementation com_android_support_test_runner
