@@ -31,7 +31,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:background="@color/result_view"
-                android:visibility="gone"
+                android:visibility="visible"
                 android:baselineAligned="false">
 
     <LinearLayout

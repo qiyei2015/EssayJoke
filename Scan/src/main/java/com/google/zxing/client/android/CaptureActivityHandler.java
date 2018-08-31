@@ -77,10 +77,12 @@ public final class CaptureActivityHandler extends Handler {
 
   @Override
   public void handleMessage(Message message) {
+
     if (message.what == R.id.restart_preview) {
       restartPreviewAndDecode();
-
+      Log.i(TAG,"R.id.restart_preview");
     } else if (message.what == R.id.decode_succeeded) {
+      Log.i(TAG,"R.id.decode_succeeded");
       state = State.SUCCESS;
       Bundle bundle = message.getData();
       Bitmap barcode = null;
@@ -97,6 +99,7 @@ public final class CaptureActivityHandler extends Handler {
       activity.handleDecode((Result) message.obj, barcode, scaleFactor);
 
     } else if (message.what == R.id.decode_failed) {// We're decoding as fast as possible, so when one decode fails, start another.
+      Log.i(TAG,"R.id.decode_failed");
       state = State.PREVIEW;
       cameraManager.requestPreviewFrame(decodeThread.getHandler(), R.id.decode);
 

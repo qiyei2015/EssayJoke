@@ -40,7 +40,7 @@ public class ScanCodeActivity extends AppCompatActivity {
         switch (requestCode){
             case REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK){
-                    ToastUtil.showShortToast("扫描返回成功");
+                    ToastUtil.showShortToast("扫描返回成功:" + data.getExtras().get(CaptureActivity.DATA));
                 }
                 break;
             default:
