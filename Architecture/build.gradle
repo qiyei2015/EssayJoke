@@ -14,7 +14,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -28,6 +31,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation com_android_support_appcompat_v7
+    implementation com_android_support_constraint_constraint_layout
     testImplementation junit
     androidTestImplementation com_android_support_test_runner
     androidTestImplementation com_android_support_test_espresso_espresso_core
