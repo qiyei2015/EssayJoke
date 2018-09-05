@@ -5,6 +5,12 @@
     <application>
         <activity android:name=".ui.activity.ANRActivity">
         </activity>
+
+        <service
+            android:name=".service.ANRService"
+            android:enabled="true"
+            android:exported="true">
+        </service>
     </application>
 
 </manifest>

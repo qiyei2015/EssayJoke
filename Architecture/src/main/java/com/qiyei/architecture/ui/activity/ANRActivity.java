@@ -4,19 +4,19 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
 import com.qiyei.architecture.R;
+import com.qiyei.architecture.service.ANRService;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import static com.qiyei.architecture.util.Utils.writeFile;
 
 /**
  * 1、主线程对输入事件在5秒内没有处理完毕
@@ -25,12 +25,43 @@ import java.io.IOException;
  */
 public class ANRActivity extends AppCompatActivity {
 
+    private static final String TAG = "ANRActivity";
+
     Button btn0;
     Button btn1;
     Button btn2;
     Button btn3;
+    Button btn4;
+    Button btn5;
 
-    private static final String ACTION = "com.qiyei.action";
+    private static final String ACTION1 = "com.qiyei.action1";
+
+    private static final String ACTION2 = "com.qiyei.action2";
+
+    Object mLock = new Object();
+
+
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    LogManager.i(TAG,"receive message 1");
+                    break;
+                case 2:
+                    LogManager.i(TAG,"receive message 2");
+                    break;
+                case 3:
+                    LogManager.i(TAG,"receive message 3");
+                    break;
+                case 4:
+                    LogManager.i(TAG,"receive message 4");
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +70,8 @@ public class ANRActivity extends AppCompatActivity {
 
         initView();
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ACTION);
+        intentFilter.addAction(ACTION1);
+        intentFilter.addAction(ACTION2);
         registerReceiver(new MyReceiver(),intentFilter);
 
     }
@@ -50,7 +82,8 @@ public class ANRActivity extends AppCompatActivity {
         btn1 = findViewById(R.id.button1);
         btn2 = findViewById(R.id.button2);
         btn3 = findViewById(R.id.button3);
-
+        btn4 = findViewById(R.id.button4);
+        btn5 = findViewById(R.id.button5);
 
         btn0.setOnClickListener((view)->{
             ToastUtil.showLongToast("点击事件");
@@ -70,9 +103,7 @@ public class ANRActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                while (true){
-                    writeFile();
-                }
+                writeFile();
             }
         });
 
@@ -82,40 +113,57 @@ public class ANRActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ACTION);
+                Intent intent = new Intent(ACTION1);
                 ANRActivity.this.sendBroadcast(intent);
             }
         });
-    }
 
-
-    private void writeFile(){
-        File file = new File(getCacheDir().getAbsolutePath()+"/write.txt");
-
-        try {
-            if (!file.exists()){
-                file.createNewFile();
+        /**
+         * service超时
+         */
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ANRActivity.this, ANRService.class);
+                startService(intent);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        FileOutputStream fileOutputStream = null;
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            String text = "hello world";
-            byte[] bytes = text.getBytes();
-            fileOutputStream.write(bytes);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }finally {
-            try {
-                if (fileOutputStream != null){
-                    fileOutputStream.close();
+        });
+
+        /**
+         * service超时
+         */
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        synchronized (mLock){
+                            LogManager.i(TAG,Thread.currentThread().getName() + " get mLock in Thread");
+                            while (true){
+                                ;
+                            }
+                        }
+                    }
+                }).start();
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
+                mHandler.sendEmptyMessageDelayed(1,7 * 1000);
+                mHandler.sendEmptyMessageDelayed(2,8 * 1000);
+                mHandler.sendEmptyMessageDelayed(3,9 * 1000);
+                mHandler.sendEmptyMessageDelayed(4,10 * 1000);
+                LogManager.i(TAG,"wait for mLock in OnClickListener");
+                synchronized (mLock){
+                    LogManager.i(TAG,"get mLock in OnClickListener");
+                }
+
+//                Intent intent = new Intent(ACTION2);
+//                ANRActivity.this.sendBroadcast(intent);
             }
-        }
+        });
 
     }
 
@@ -124,11 +172,12 @@ public class ANRActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            if (ACTION.equals(intent.getAction())){
-                try {
-                    Thread.sleep(30*1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            if (ACTION1.equals(intent.getAction())){
+                writeFile();
+            }else if (ACTION2.equals(intent.getAction())){
+                LogManager.i(TAG,"wait for mLock in receiver");
+                synchronized (mLock){
+                    LogManager.i(TAG,"get mLock in receiver");
                 }
             }
         }
