@@ -37,4 +37,8 @@ dependencies {
     androidTestImplementation com_android_support_test_espresso_espresso_core
 
     api project(':Framework')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'

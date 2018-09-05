@@ -5,6 +5,8 @@ package com.qiyei.architecture.ui.fragment;
 import android.view.View;
 
 import com.qiyei.architecture.ui.activity.ANRActivity;
+import com.qiyei.architecture.ui.activity.MemoryLeakActivity;
+import com.qiyei.architecture.ui.activity.UIDrawActivity;
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.fragment.CommonListFragment;
 
@@ -24,8 +26,8 @@ public class ArchitectureFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 ANR"};
-    private Class<?>[] clazzs = new Class[]{ANRActivity.class};
+    private String[] names = new String[]{"测试1 UI绘制优化","测试2 ANR","测试3 内存泄漏"};
+    private Class<?>[] clazzs = new Class[]{UIDrawActivity.class,ANRActivity.class, MemoryLeakActivity.class};
 
 
     public ArchitectureFragment() {

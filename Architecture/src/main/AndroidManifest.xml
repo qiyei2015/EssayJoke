@@ -11,6 +11,11 @@
             android:enabled="true"
             android:exported="true">
         </service>
+
+        <activity android:name=".ui.activity.UIDrawActivity">
+        </activity>
+        <activity android:name=".ui.activity.MemoryLeakActivity">
+        </activity>
     </application>
 
 </manifest>
