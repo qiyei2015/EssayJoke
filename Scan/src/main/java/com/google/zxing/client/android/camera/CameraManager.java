@@ -324,9 +324,9 @@ public final class CameraManager {
     if (rect == null) {
       return null;
     }
-    // Go ahead and assume it's YUV rather than die.
-    return new PlanarYUVLuminanceSource(data, width, height, rect.left, rect.top,
-                                        rect.width(), rect.height(), false);
+    // Go ahead and assume it's YUV rather than die. 增加二维码面积，提高扫描成功率
+    return new PlanarYUVLuminanceSource(data, width, height, 0, 0,
+                                        width, height, false);
   }
 
 }
