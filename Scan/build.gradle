@@ -26,8 +26,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation com_android_support_appcompat_v7
-    //依赖最新的core包
-    api 'com.google.zxing:core:3.3.3'
+//    //不依赖最新的core包 使用源码
+//    api 'com.google.zxing:core:3.3.3'
 
     testImplementation junit
     androidTestImplementation com_android_support_test_runner
