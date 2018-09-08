@@ -16,6 +16,8 @@
 
 package com.google.zxing;
 
+import android.util.Log;
+
 import com.google.zxing.aztec.AztecReader;
 import com.google.zxing.datamatrix.DataMatrixReader;
 import com.google.zxing.maxicode.MaxiCodeReader;
@@ -153,6 +155,7 @@ public final class MultiFormatReader implements Reader {
       }
     }
     this.readers = readers.toArray(new Reader[readers.size()]);
+    Log.i("Reader","readrs.size:" + this.readers.length);
   }
 
   @Override
