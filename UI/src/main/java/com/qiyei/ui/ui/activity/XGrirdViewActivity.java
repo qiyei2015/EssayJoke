@@ -78,7 +78,7 @@ public class XGrirdViewActivity extends AppCompatActivity {
 
     private void initData() {
         mContext = this;
-        for (int i = 0; i < 30;i++){
+        for (int i = 0; i < 50;i++){
             HashMap<String,Object> itemMap = new HashMap<>();
             itemMap.put("item_image",R.drawable.ic_alipay_main_icon);
             itemMap.put("item_text","拖拽" + i);
@@ -117,5 +117,13 @@ public class XGrirdViewActivity extends AppCompatActivity {
             }
         });
 
+        //添加进度更新
+        rotateAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Float value = (Float) animation.getAnimatedValue();
+                tv1.setText(""+value);
+            }
+        });
     }
 }
