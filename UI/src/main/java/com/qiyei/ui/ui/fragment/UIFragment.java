@@ -6,6 +6,7 @@ import android.view.View;
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.fragment.CommonListFragment;
 import com.qiyei.ui.ui.activity.ScanCodeActivity;
+import com.qiyei.ui.ui.activity.XGrirdViewActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +26,8 @@ public class UIFragment extends CommonListFragment{
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 二维码扫描"};
-    private Class<?>[] clazzs = new Class[]{ScanCodeActivity.class};
+    private String[] names = new String[]{"测试1 XGridView","测试2 二维码扫描"};
+    private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,ScanCodeActivity.class};
 
 
     public UIFragment() {
