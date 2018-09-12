@@ -104,7 +104,7 @@ ext{
     com_google_dagger_dagger_compiler =  'com.google.dagger:dagger-compiler:2.16'
 
     /**
-     * Facebook
+     * Facebook 指定版本
      */
     com_facebook_react_react_native = "com.facebook.react:react-native:+"
 
