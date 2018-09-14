@@ -2,6 +2,7 @@ package com.qiyei.android;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.StrictMode;
 
 import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
@@ -41,6 +42,12 @@ public class BaseApplication extends Application {
         }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
+        //使用严格模式，检测内存泄漏
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()//监测所以内容
+                .penaltyLog()//违规对log日志
+                .penaltyDeath()
+                .build());
 
 
     }
