@@ -2,7 +2,7 @@
 // 引入配置文件
 apply from: "config.gradle"
 
-buildscript { 
+buildscript {
     ext.kotlin_version = '1.2.50'
 
     repositories {
@@ -24,7 +24,8 @@ buildscript {
 
 //        //ARouter
 //        classpath "com.alibaba:arouter-register:1.0.2"
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version" }
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
 }
 allprojects {
     repositories {

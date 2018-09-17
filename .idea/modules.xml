@@ -9,10 +9,12 @@
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mall/Mall.iml" filepath="$PROJECT_DIR$/Mall/Mall.iml" />
       <module fileurl="file://$PROJECT_DIR$/Media/Media.iml" filepath="$PROJECT_DIR$/Media/Media.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleA/ModuleA.iml" filepath="$PROJECT_DIR$/ModuleA/ModuleA.iml" />
       <module fileurl="file://$PROJECT_DIR$/NDK/NDK.iml" filepath="$PROJECT_DIR$/NDK/NDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/OpenSource/OpenSource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
       <module fileurl="file://$PROJECT_DIR$/Resource/Resource.iml" filepath="$PROJECT_DIR$/Resource/Resource.iml" />
       <module fileurl="file://$PROJECT_DIR$/Router/Router.iml" filepath="$PROJECT_DIR$/Router/Router.iml" />
