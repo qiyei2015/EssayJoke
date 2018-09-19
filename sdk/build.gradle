@@ -67,22 +67,22 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation(com_android_support_test_espresso_espresso_core, {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    api com_android_support_constraint_constraint_layout
-    api com_android_support_appcompat_v7
-    testImplementation junit
-    api com_android_support_recyclerview_v7
-    api com_squareup_okhttp3_okhttp
-    api com_squareup_retrofit2_retrofit
-    api com_squareup_retrofit2_converter_gson
-    api com_squareup_retrofit2_adapter_rxjava2
-    api io_reactivex_rxjava2_rxjava
-    api io_reactivex_rxjava2_rxandroid
-    api com_google_code_gson_gson
-    api com_github_bumptech_glide_glide
-    api org_greenrobot_greendao
+    api "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    api "com.android.support:appcompat-v7:$appcompat_v7_version"
+    testImplementation "junit:junit:$junit_version"
+    api "com.android.support:recyclerview-v7:$recyclerview_v7_version"
+    api "com.squareup.okhttp3:okhttp:okhttp_version"
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$converter_gson_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$adapter_rxjava2_version"
+    api "io.reactivex.rxjava2:rxjava:$rxjava_version"
+    api "io.reactivex.rxjava2:rxandroid:$rxandroid_version"
+    api "com.google.code.gson:gson:$gson_version"
+    api "com.github.bumptech.glide:glide:$glide_version"
+    api "org.greenrobot:greendao:$greendao_version"
 
     // add library
     api files('libs/nineoldandroids-2.4.0.jar')

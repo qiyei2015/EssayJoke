@@ -26,17 +26,17 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
 
-    implementation android_arch_lifecycle_runtime
-    implementation android_arch_lifecycle_extensions
+    implementation "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
 
-    annotationProcessor android_arch_lifecycle_compiler
-    implementation android_arch_persistence_room_runtime
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
+    implementation "android.arch.persistence.room:runtime:$room_runtime_version"
 
 
-    implementation com_android_support_appcompat_v7
-    testImplementation junit
-    androidTestImplementation com_android_support_test_runner
-    androidTestImplementation com_android_support_test_espresso_espresso_core
+    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
 
     api project(':Framework')

@@ -33,17 +33,17 @@ android {
 
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation(com_android_support_test_espresso_espresso_core, {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    api android_arch_lifecycle_runtime
-    api android_arch_lifecycle_extensions
-    api android_arch_persistence_room_runtime
-    annotationProcessor android_arch_lifecycle_compiler
+    api "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
+    api "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
+    api "android.arch.persistence.room:runtime:$room_runtime_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
 
-    api com_android_support_appcompat_v7
-    testImplementation junit
+    api "com.android.support:appcompat-v7:$appcompat_v7_version"
+    testImplementation "junit:junit:$junit_version"
 
     api project(':SDK')
     api project(':Resource')

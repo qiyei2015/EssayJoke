@@ -38,10 +38,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
 
-    implementation rootProject.ext.com_android_support_constraint_constraint_layout
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
 
-    implementation rootProject.ext.com_android_support_test_runner
-    testImplementation rootProject.ext.junit
-    androidTestImplementation rootProject.ext.com_android_support_test_runner
-    androidTestImplementation rootProject.ext.com_android_support_test_espresso_espresso_core
+    implementation "com.android.support.test:runner:$support_test_runner_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 }

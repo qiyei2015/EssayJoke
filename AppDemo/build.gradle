@@ -156,34 +156,33 @@ android {
 dependencies {
     api fileTree(include: ['*.jar'], dir: 'libs')
 
-    api com_android_support_constraint_constraint_layout
-    api com_android_support_design
-    api android_arch_lifecycle_runtime
-    api android_arch_lifecycle_extensions
-    implementation com_android_support_constraint_constraint_layout
-    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
-    annotationProcessor android_arch_lifecycle_compiler
-    api android_arch_persistence_room_runtime
-    annotationProcessor android_arch_persistence_room_compiler
-    testImplementation android_arch_persistence_room_testing
+    api "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    api "com.android.support:design:$support_design_version"
+    api "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
+    api "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
 
-    api com_aliyun_ams_alicloud_android_hotfix
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
+    api "android.arch.persistence.room:runtime:$room_runtime_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_compiler_version"
+    testImplementation "android.arch.persistence.room:testing:$room_testing_version"
 
-    androidTestImplementation(com_android_support_test_espresso_espresso_core, {
+    api "com.aliyun.ams:alicloud-android-hotfix:$hotfix_version"
+
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    api com_android_support_appcompat_v7
-    testImplementation junit
+    api "com.android.support:appcompat-v7:$appcompat_v7_version"
+    testImplementation "junit:junit:$junit_version"
 
-    api com_android_support_multidex
+    api "com.android.support:multidex:$support_multidex_version"
 
     //dagger2
-    api com_google_dagger_dagger
-    annotationProcessor com_google_dagger_dagger_compiler
+    api "com.google.dagger:dagger:$dagger_version"
+    annotationProcessor "com.google.dagger:dagger:$dagger_compiler_version"
 
     //ARouter
-    annotationProcessor com_alibaba_arouter_compiler
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
     api project(':Router')
 

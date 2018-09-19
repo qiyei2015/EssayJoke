@@ -30,14 +30,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation com_android_support_appcompat_v7
-    testImplementation junit
-    androidTestImplementation com_android_support_test_runner
-    androidTestImplementation com_android_support_test_espresso_espresso_core
+    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
     //ARouter
-    api com_alibaba_arouter_api
-    annotationProcessor com_alibaba_arouter_compiler
+    api "com.alibaba:arouter-api:$arouter_api_version"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
     api project(':SDK')
 

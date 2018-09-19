@@ -54,13 +54,13 @@ android {
 dependencies {
 
     api fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation(com_android_support_test_espresso_espresso_core, {
+    androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    api com_android_support_appcompat_v7
-    api com_makeramen_roundedimageview
-    testImplementation junit
+    api "com.android.support:appcompat-v7:$appcompat_v7_version"
+    api "com.makeramen:roundedimageview:$roundedimageview_version"
+    testImplementation "junit:junit:$junit_version"
 
     api project(':Framework')
 }
