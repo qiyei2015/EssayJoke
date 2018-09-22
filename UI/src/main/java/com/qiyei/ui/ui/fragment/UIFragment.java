@@ -4,7 +4,8 @@ package com.qiyei.ui.ui.fragment;
 import android.view.View;
 
 import com.qiyei.framework.common.model.MainMenu;
-import com.qiyei.framework.fragment.CommonListFragment;
+
+import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.ui.ui.activity.ScanCodeActivity;
 import com.qiyei.ui.ui.activity.XGrirdViewActivity;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class UIFragment extends CommonListFragment{
+public class UIFragment extends CommonListFragment {
 
 
     /**

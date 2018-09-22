@@ -6,7 +6,8 @@ package com.qiyei.media.ui.fragment;
 import android.view.View;
 
 import com.qiyei.framework.common.model.MainMenu;
-import com.qiyei.framework.fragment.CommonListFragment;
+
+import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.media.ui.activity.MediaRecordActivity;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.List;
  * @email: 1273482124@qq.com
  * @description:
  */
-public class MediaFragment extends CommonListFragment{
+public class MediaFragment extends CommonListFragment {
 
     /**
      * 菜单item

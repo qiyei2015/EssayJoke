@@ -7,8 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.qiyei.framework.ui.fragment.BaseFragment;
 import com.qiyei.ndk.R;
-import com.qiyei.framework.fragment.BaseFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.

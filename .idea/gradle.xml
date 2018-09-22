@@ -15,11 +15,14 @@
             <option value="$PROJECT_DIR$/Cordova" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
             <option value="$PROJECT_DIR$/Framework" />
+            <option value="$PROJECT_DIR$/GoodsManager" />
             <option value="$PROJECT_DIR$/Mall" />
             <option value="$PROJECT_DIR$/Media" />
+            <option value="$PROJECT_DIR$/MessageManager" />
             <option value="$PROJECT_DIR$/ModuleA" />
             <option value="$PROJECT_DIR$/NDK" />
             <option value="$PROJECT_DIR$/OpenSource" />
+            <option value="$PROJECT_DIR$/OrderManager" />
             <option value="$PROJECT_DIR$/Provider" />
             <option value="$PROJECT_DIR$/ReactNative" />
             <option value="$PROJECT_DIR$/Resource" />
@@ -27,6 +30,7 @@
             <option value="$PROJECT_DIR$/SDK" />
             <option value="$PROJECT_DIR$/Scan" />
             <option value="$PROJECT_DIR$/UI" />
+            <option value="$PROJECT_DIR$/UserManager" />
             <option value="$PROJECT_DIR$/Video" />
             <option value="$PROJECT_DIR$/ioc-annotation" />
             <option value="$PROJECT_DIR$/ioc-compiler" />

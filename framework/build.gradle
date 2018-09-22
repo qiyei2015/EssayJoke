@@ -1,4 +1,9 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+repositories {
+    mavenCentral()
+}
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -47,4 +52,8 @@ dependencies {
 
     api project(':SDK')
     api project(':Resource')
+
+    //依赖anko框架 kotlin扩展
+    api "org.jetbrains.anko:anko:$anko_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.adapter.FindAdapter;
 import com.qiyei.essayjoke.model.DiscoverListResult;
-import com.qiyei.framework.fragment.BaseFragment;
+import com.qiyei.framework.ui.fragment.BaseFragment;
 import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
@@ -41,7 +41,7 @@ import java.util.Map;
  * Version: 1.0
  * Description:
  */
-public class FindFragment extends BaseFragment{
+public class FindFragment extends BaseFragment {
 
     @ViewById(R.id.recycler_view)
     private XRecyclerView mXRecyclerView;

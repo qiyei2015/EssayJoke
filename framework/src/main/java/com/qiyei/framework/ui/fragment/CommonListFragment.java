@@ -1,4 +1,4 @@
-package com.qiyei.framework.fragment;
+package com.qiyei.framework.ui.fragment;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;

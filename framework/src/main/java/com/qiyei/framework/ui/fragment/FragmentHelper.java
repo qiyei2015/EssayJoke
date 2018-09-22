@@ -1,4 +1,4 @@
-package com.qiyei.framework.fragment;
+package com.qiyei.framework.ui.fragment;
 
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;

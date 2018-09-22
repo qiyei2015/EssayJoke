@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<style name="WrapMatch">-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchWrap">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapWrap">-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchMatch">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchAuto">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:layout_height">0dp</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoMatch">-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapAuto">-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:layout_height">0dp</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoWrap">-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapMatch.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapMatch.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchWrap.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchWrap.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapWrap.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapWrap.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchMatch.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchMatch.Common">-->
+        <!--<item name="android:background">@color/common_bg</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchWrap.Common">-->
+        <!--<item name="android:background">@color/common_bg</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchMatch.Vertical.Common">-->
+        <!--<item name="android:background">@color/common_bg</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchMatch.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchAuto.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchAuto.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoMatch.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoMatch.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapAuto.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="WrapAuto.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoWrap.Vertical">-->
+        <!--<item name="android:orientation">vertical</item>-->
+    <!--</style>-->
+
+    <!--<style name="AutoWrap.Horizontal">-->
+        <!--<item name="android:orientation">horizontal</item>-->
+    <!--</style>-->
+
+    <!--<style name="MatchOne">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">1px</item>-->
+    <!--</style>-->
+
+    <!--<style name="OneMatch">-->
+        <!--<item name="android:layout_width">1px</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+    <!--</style>-->
+
+    <!--<style name="WeightMatch">-->
+        <!--<item name="android:layout_width">0dp</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+        <!--<item name="android:layout_weight">1</item>-->
+    <!--</style>-->
+
+
+    <!--&lt;!&ndash;&lt;!&ndash; 主题样式 &ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:windowContentOverlay">@null</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textSize">@dimen/text_middle_size</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="windowActionBar">false</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="windowNoTitle">true</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="colorPrimary">@color/common_black</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="colorPrimaryDark">@color/common_black</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="colorAccent">@color/colorAccent</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+
+    <!--&lt;!&ndash; Window黑色背景主题 &ndash;&gt;-->
+    <!--<style name="AppTheme.Black" parent="@style/AppTheme">-->
+        <!--<item name="android:windowBackground">@color/common_black</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; 多状态视图样式&ndash;&gt;-->
+    <!--<style name="MultiStateStyle">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+        <!--<item name="msv_loadingView">@layout/layout_state_loading</item>-->
+        <!--<item name="msv_emptyView">@layout/layout_state_empty</item>-->
+        <!--<item name="msv_errorView">@layout/layout_state_error</item>-->
+        <!--<item name="msv_viewState">loading</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; 加载弹框样式 &ndash;&gt;-->
+    <!--<style name="LightDialog" parent="@android:style/Theme.Dialog">-->
+        <!--<item name="android:windowFrame">@null</item>-->
+        <!--<item name="android:windowIsFloating">true</item>-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>-->
+        <!--<item name="android:windowSoftInputMode">stateUnspecified|adjustPan-->
+        <!--</item>-->
+    <!--</style>-->
+    <!--<style name="LightProgressDialog" parent="@style/LightDialog">-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash; 通用列表样式&ndash;&gt;-->
+    <!--<style name="commonRecyclerView">-->
+        <!--<item name="android:scrollbars">none</item>-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+        <!--<item name="android:overScrollMode">never</item>-->
+    <!--</style>-->
+
+    <!--&lt;!&ndash;&lt;!&ndash; 搜索输入框样式&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;<style name="SearchHeaderEtStyle">&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColor">@color/common_white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textColorHint">@color/common_white</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:background">@drawable/home_header_corner_bg</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:paddingLeft">@dimen/common_padding</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:paddingTop">@dimen/common_padding_small</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:paddingBottom">@dimen/common_padding_small</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_width">0dp</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_height">match_parent</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_marginTop">@dimen/common_margin_small</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_marginRight">@dimen/common_margin</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_marginBottom">@dimen/common_margin_small</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:drawableLeft">@drawable/icon_search</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:drawablePadding">@dimen/common_padding_middle</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:layout_weight">1</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:textCursorDrawable">@null</item>&ndash;&gt;-->
+        <!--&lt;!&ndash;<item name="android:maxLines">1</item>&ndash;&gt;-->
+    <!--&lt;!&ndash;</style>&ndash;&gt;-->
+    <!--&lt;!&ndash; 带搜索的Header样式 &ndash;&gt;-->
+    <!--<style name="SearchHeaderStyle">-->
+        <!--<item name="android:gravity">center_vertical</item>-->
+        <!--<item name="android:orientation">horizontal</item>-->
+        <!--<item name="android:background">@color/common_blue</item>-->
+        <!--<item name="android:paddingTop">@dimen/common_padding_small</item>-->
+        <!--<item name="android:paddingRight">@dimen/common_padding</item>-->
+        <!--<item name="android:paddingBottom">@dimen/common_padding_small</item>-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">@dimen/common_header_bar_height-->
+        <!--</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; TabLayout文字样式&ndash;&gt;-->
+    <!--<style name="TabLayoutTextStyle">-->
+        <!--<item name="android:textSize">@dimen/text_big_size</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; TabLayout通用样式&ndash;&gt;-->
+    <!--<style name="TabsStyle">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="tabIndicatorColor">@color/common_white</item>-->
+        <!--<item name="tabBackground">@drawable/tab_selector</item>-->
+        <!--<item name="tabTextAppearance">@style/TabLayoutTextStyle</item>-->
+        <!--<item name="tabTextColor">@color/text_light_dark</item>-->
+        <!--<item name="tabSelectedTextColor">@color/common_white</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 订单中Tab样式&ndash;&gt;-->
+    <!--<style name="TabsStyle.Order" parent="@style/TabsStyle">-->
+        <!--<item name="tabIndicatorColor">@color/common_blue</item>-->
+        <!--<item name="tabBackground">@drawable/border_bottom</item>-->
+        <!--<item name="tabTextColor">@color/text_normal</item>-->
+        <!--<item name="tabSelectedTextColor">@color/common_blue</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 横向分隔线 &ndash;&gt;-->
+    <!--<style name="DividerFixedHeight">-->
+        <!--<item name="android:background">@color/common_divider</item>-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">@dimen/common_divider_height</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 竖向分隔线 &ndash;&gt;-->
+    <!--<style name="DividerFixedWidth">-->
+        <!--<item name="android:background">@color/common_divider</item>-->
+        <!--<item name="android:layout_width">@dimen/common_divider_width</item>-->
+        <!--<item name="android:layout_height">match_parent</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 竖向分隔线 带上下间距 &ndash;&gt;-->
+    <!--<style name="DividerFixedWidth.MarginTopBottom" parent="@style/DividerFixedWidth">-->
+        <!--<item name="android:layout_marginTop">@dimen/common_margin_middle</item>-->
+        <!--<item name="android:layout_marginBottom">@dimen/common_margin_middle</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 底部出入动画 &ndash;&gt;-->
+    <!--<style name="AnimBottom" parent="@android:style/Animation">-->
+        <!--<item name="android:windowEnterAnimation">@anim/push_bottom_in</item>-->
+        <!--<item name="android:windowExitAnimation">@anim/push_bottom_out</item>-->
+    <!--</style>-->
+    <!-- 自定义标签字体样式 -->
+    <!--<style name="LabelTitleTextStyle">-->
+        <!--<item name="android:textSize">@dimen/text_middle_size</item>-->
+        <!--<item name="android:textColor">@color/text_normal</item>-->
+        <!--<item name="android:layout_width">wrap_content</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--</style>-->
+    <!--&lt;!&ndash; 自定义标签内容字体样式 &ndash;&gt;-->
+    <!--<style name="LabelContentTextStyle" parent="@style/LabelTitleTextStyle">-->
+        <!--<item name="android:textColor">@color/text_light_dark</item>-->
+    <!--</style>-->
+    <!-- 横屏按钮样式，带不可用状态 -->
+    <!-- 按钮样式-->
+    <!--<style name="FullBtnStyle">-->
+        <!--<item name="android:layout_width">match_parent</item>-->
+        <!--<item name="android:layout_height">wrap_content</item>-->
+        <!--<item name="android:textColor">@color/common_white</item>-->
+        <!--<item name="android:background">@drawable/btn_common_selector</item>-->
+        <!--<item name="android:padding">@dimen/common_padding_middle</item>-->
+        <!--<item name="android:layout_margin">@dimen/common_margin</item>-->
+        <!--<item name="android:enabled">false</item>-->
+    <!--</style>-->
+</resources>

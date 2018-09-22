@@ -11,6 +11,11 @@ ext{
     isModule = false
 
     /**
+     * 是否是Module 每次更改“isModule”的值后，需要点击 "Sync Project" 按钮
+     */
+    isLibrary = true
+
+    /**
      * 公共部分
      */
     common = [

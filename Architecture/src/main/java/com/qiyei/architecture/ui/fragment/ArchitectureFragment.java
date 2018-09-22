@@ -8,7 +8,8 @@ import com.qiyei.architecture.ui.activity.ANRActivity;
 import com.qiyei.architecture.ui.activity.MemoryLeakActivity;
 import com.qiyei.architecture.ui.activity.UIDrawActivity;
 import com.qiyei.framework.common.model.MainMenu;
-import com.qiyei.framework.fragment.CommonListFragment;
+import com.qiyei.framework.ui.fragment.CommonListFragment;
+
 
 import java.util.ArrayList;
 import java.util.List;

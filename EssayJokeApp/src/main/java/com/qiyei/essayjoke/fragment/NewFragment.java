@@ -7,7 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.qiyei.essayjoke.R;
-import com.qiyei.framework.fragment.BaseFragment;
+
+import com.qiyei.framework.ui.fragment.BaseFragment;
 import com.qiyei.sdk.ioc.ViewUtils;
 
 /**
@@ -16,7 +17,7 @@ import com.qiyei.sdk.ioc.ViewUtils;
  * Version: 1.0
  * Description:
  */
-public class NewFragment extends BaseFragment{
+public class NewFragment extends BaseFragment {
 
     @Nullable
     @Override
