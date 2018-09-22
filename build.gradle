@@ -3,7 +3,7 @@
 apply from: "config.gradle"
 
 buildscript {
-    ext.kotlin_version = '1.2.50'
+    ext.kotlin_version = '1.2.70'
     ext.anko_version='0.10.6'
 
     repositories {

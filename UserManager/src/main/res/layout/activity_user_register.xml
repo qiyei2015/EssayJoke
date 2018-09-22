@@ -30,7 +30,7 @@
                       android:drawablePadding="@dimen/common_padding_small"
                       android:layout_weight="1.0"
                       android:inputType="phone"/>
-            <!--<View style="@style/DividerFixedWidth.MarginTopBottom"/>-->
+            <View style="@style/DividerFixedWidth.MarginTopBottom"/>
             <!--<com.kotlin.base.widgets.VerifyButton-->
                 <!--android:id="@+id/mVerifyCodeBtn"-->
                 <!--style="@style/WrapMatch"-->
@@ -38,7 +38,7 @@
                 <!--android:background="@null"-->
                 <!--android:text="获取验证码"/>-->
         </LinearLayout>
-        <!--<View style="@style/DividerFixedHeight"/>-->
+        <View style="@style/DividerFixedHeight"/>
         <EditText android:id="@+id/mVerifyCodeEt"
                   android:background="@null"
                   android:paddingLeft="@dimen/common_padding_small"
@@ -49,7 +49,7 @@
                   android:drawablePadding="@dimen/common_padding_small"
                   android:inputType="number"
             />
-        <!--<View style="@style/DividerFixedHeight"/>-->
+        <View style="@style/DividerFixedHeight"/>
         <EditText android:id="@+id/mPwdEt"
                   android:background="@null"
                   android:paddingLeft="@dimen/common_padding_small"
@@ -59,7 +59,7 @@
                   android:drawableLeft="@drawable/icon_pwd"
                   android:drawablePadding="@dimen/common_padding_small"
                   android:inputType="textPassword"/>
-        <!--<View style="@style/DividerFixedHeight"/>-->
+        <View style="@style/DividerFixedHeight"/>
         <EditText android:id="@+id/mPwdConfirmEt"
                   android:background="@null"
                   android:paddingLeft="@dimen/common_padding_small"

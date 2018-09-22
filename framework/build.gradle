@@ -41,7 +41,6 @@ dependencies {
     androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     api "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
     api "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
     api "android.arch.persistence.room:runtime:$room_runtime_version"
