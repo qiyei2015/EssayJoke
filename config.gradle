@@ -124,10 +124,11 @@ ext{
     adapter_rxjava2_version = '2.3.0'
 
     /**
-     * Rxjava
+     * Rx系列
      */
-    rxjava_version = '2.1.12'
-    rxandroid_version = '2.0.2'
+    rxjava_version = '2.2.2'
+    rxandroid_version = '2.1.0'
+    rxkotlin_version = '2.3.0'
 
     /**
      * Glide
