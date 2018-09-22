@@ -78,14 +78,14 @@ public class FindFragment extends BaseFragment {
         new HttpManager().execute(getChildFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
             @Override
             public void onSuccess(DiscoverListResult result) {
-                LogManager.d(TAG,"name --> "+result.getData().getCategories().getName());
+                LogManager.d(getTAG(),"name --> "+result.getData().getCategories().getName());
                 mAdapter.setDatas(result.getData().getCategories().getCategory_list());
                 initBanner(result.getData().getRotate_banner().getBanners());
             }
 
             @Override
             public void onFail(Exception e) {
-                LogManager.d(TAG,e.getMessage());
+                LogManager.d(getTAG(),e.getMessage());
                 ToastUtil.showLongToast(e.getMessage());
             }
         });
@@ -140,7 +140,7 @@ public class FindFragment extends BaseFragment {
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public int getCount() {
-                LogManager.d(TAG,"banner size  --> " + list.size());
+                LogManager.d(getTAG(),"banner size  --> " + list.size());
                 return list.size();
             }
 

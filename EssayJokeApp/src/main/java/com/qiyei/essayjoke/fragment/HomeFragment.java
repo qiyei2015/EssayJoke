@@ -14,7 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.qiyei.essayjoke.R;
-import com.qiyei.framework.fragment.BaseFragment;
+
+import com.qiyei.framework.ui.fragment.BaseFragment;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.ioc.ViewUtils;
 import com.qiyei.sdk.log.LogManager;
@@ -136,14 +137,14 @@ public class HomeFragment extends BaseFragment {
             public void highLightIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.RED);
-                LogManager.d(TAG,"highLightIndicator,textView:" + Color.RED);
+                LogManager.d(getTAG(),"highLightIndicator,textView:" + Color.RED);
             }
 
             @Override
             public void restoreIndicator(View view) {
                 TextView textView = (TextView) view;
                 textView.setTextColor(Color.BLACK);
-                LogManager.d(TAG,"restoreIndicator,textView:" + Color.BLACK);
+                LogManager.d(getTAG(),"restoreIndicator,textView:" + Color.BLACK);
             }
 
             @Override

@@ -15,8 +15,9 @@ import com.qiyei.essayjoke.fragment.HomeFragment;
 import com.qiyei.essayjoke.fragment.MessageFragment;
 import com.qiyei.essayjoke.fragment.NewFragment;
 import com.qiyei.framework.activity.BaseSkinActivity;
-import com.qiyei.framework.fragment.FragmentHelper;
+
 import com.qiyei.framework.titlebar.CommonTitleBar;
+import com.qiyei.framework.ui.fragment.FragmentHelper;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.SystemStatusBarUtil;
