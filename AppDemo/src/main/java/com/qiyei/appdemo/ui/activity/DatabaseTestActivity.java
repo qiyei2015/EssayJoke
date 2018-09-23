@@ -38,7 +38,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
         String db = "test.db";
         DatabaseManager.getInstance().initDatabase(db);
 
-//        IDatabaseSession<User> userIDatabaseSession = DatabaseManager.getInstance().openSession(db, User.class);
+//        IDatabaseSession<User> userIDatabaseSession = DatabaseManager.getINSTANCE().openSession(db, User.class);
 //        List<User> list = new ArrayList<>();
 //
 //        for (int i = 0;i < 10;i++){

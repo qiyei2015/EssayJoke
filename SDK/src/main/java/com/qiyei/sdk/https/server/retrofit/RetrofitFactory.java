@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -38,4 +39,22 @@ public class RetrofitFactory {
         return retrofit;
     }
 
+    /**
+     * 创建Retrofit实例
+     * @param baseUrl 基础url
+     * @param supportRx 是否支持Rxjava
+     * @return
+     */
+    public static Retrofit createRetrofit(String baseUrl,boolean supportRx){
+        Retrofit retrofit = sRetrofitMap.get(baseUrl);
+        if (retrofit == null){
+            retrofit = new Retrofit.Builder()
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl(baseUrl)
+                    .client(OkHttpFactory.createOkHttpClient())
+                    .build();
+        }
+        return retrofit;
+    }
 }

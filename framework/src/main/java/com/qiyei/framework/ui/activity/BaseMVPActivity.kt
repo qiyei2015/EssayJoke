@@ -2,6 +2,7 @@ package com.qiyei.framework.ui.activity
 
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
+import org.jetbrains.anko.toast
 
 /**
  * @author Created by qiyei2015 on 2018/9/22.
@@ -22,7 +23,7 @@ open class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
     }
 
     override fun onError(text: String) {
-
+        toast(text)
     }
 
 }

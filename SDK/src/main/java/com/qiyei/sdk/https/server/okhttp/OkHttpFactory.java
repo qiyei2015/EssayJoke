@@ -12,7 +12,9 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @author Created by qiyei2015 on 2017/10/21.
@@ -96,6 +98,7 @@ public class OkHttpFactory {
                 .readTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
                 .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(getHttpInterceptor())
                 .addInterceptor(new MyInterceptor())
                 .hostnameVerifier(new HostnameVerifier() {
                     @Override
@@ -110,4 +113,42 @@ public class OkHttpFactory {
 
     }
 
+    /**
+     * 创建OkHttpClient
+     * @return
+     */
+    public static OkHttpClient createOkHttpClient(Interceptor interceptor){
+        try {
+            sslContext = SSLContext.getDefault();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .connectTimeout(TIMEOUT, TimeUnit.SECONDS)
+                .addInterceptor(interceptor)
+                .addInterceptor(getHttpInterceptor())
+                .hostnameVerifier(new HostnameVerifier() {
+                    @Override
+                    public boolean verify(String hostname, SSLSession session) {
+                        return true;
+                    }
+                })
+                .sslSocketFactory(sslContext.getSocketFactory(),mX509TrustManager)
+                .retryOnConnectionFailure(false)
+                .build();
+        return okHttpClient;
+
+    }
+
+    /**
+     * 返回HTTP拦截器
+     * @return
+     */
+    private static Interceptor getHttpInterceptor(){
+        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
+    }
 }

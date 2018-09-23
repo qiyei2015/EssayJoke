@@ -27,7 +27,7 @@ open class BaseObserver<T>(val baseView:IBaseView) : Observer<T>{
 
     override fun onError(e: Throwable) {
         baseView.hideLoading()
-        baseView.onError(e.getStackTraceString())
+        baseView.onError(e.toString())
     }
 
 }

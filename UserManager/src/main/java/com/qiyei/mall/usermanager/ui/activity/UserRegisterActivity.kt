@@ -27,7 +27,7 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
 
         //可以直接使用id,kotlin-android-extensions
         mRegisterBtn.setOnClickListener{
-            mPresenter.register("","","")
+            mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
         }
 
     }
@@ -39,9 +39,5 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
             toast("注册失败")
         }
     }
-
-
-
-
 
 }
