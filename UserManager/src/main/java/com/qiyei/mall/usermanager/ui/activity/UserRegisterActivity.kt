@@ -47,8 +47,5 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
                 .inject(this)
         mPresenter.mView = this
 
-//        //初始化Presenter与View
-//        mPresenter = UserRegisterPresenter()
-//        mPresenter.mView = this
     }
 }
