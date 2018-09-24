@@ -1,6 +1,7 @@
 package com.qiyei.mall
 
 import android.app.Application
+import com.qiyei.framework.FrameworkApplication
 import com.qiyei.sdk.SDKManager
 
 /**
@@ -9,7 +10,7 @@ import com.qiyei.sdk.SDKManager
  * @email: 1273482124@qq.com
  * @description:
  */
-class MallApplication :Application() {
+class MallApplication :FrameworkApplication() {
 
     override fun onCreate() {
         super.onCreate()

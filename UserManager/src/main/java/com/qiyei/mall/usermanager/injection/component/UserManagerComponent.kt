@@ -1,6 +1,8 @@
 package com.qiyei.mall.usermanager.injection.component
 
 
+import com.qiyei.framework.injection.component.ActivityComponent
+import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.ui.activity.UserRegisterActivity
 import dagger.Component
@@ -11,7 +13,8 @@ import dagger.Component
  * @email: 1273482124@qq.com
  * @description:
  */
-@Component(modules = arrayOf(UserManagerModule::class))
+@PreComponentScope
+@Component(modules = arrayOf(UserManagerModule::class),dependencies = arrayOf(ActivityComponent::class))
 interface UserManagerComponent {
 
     /**

@@ -2,6 +2,9 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+kapt {
+    generateStubs = true
+}
 
 repositories {
     mavenCentral()
@@ -36,10 +39,6 @@ android {
             jniLibs.srcDirs = ['libs']  //配置生成jniLibs
         }
     }
-}
-
-kapt {
-    generateStubs = true
 }
 
 dependencies {

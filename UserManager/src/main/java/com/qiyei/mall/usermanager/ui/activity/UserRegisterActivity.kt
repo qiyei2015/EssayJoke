@@ -17,11 +17,6 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
-        //注入点
-        DaggerUserManagerComponent.builder().userManagerModule(UserManagerModule()).build().inject(this)
-        //初始化Presenter与View
-        mPresenter = UserRegisterPresenter()
-        mPresenter.mView = this
 
         //anko 框架
         var value = intent.getIntExtra("key",-1)
@@ -43,4 +38,17 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
         }
     }
 
+    override fun initComponentInject() {
+        //注入点
+        DaggerUserManagerComponent.builder()
+                .activityComponent(mActivityComponet)
+                .userManagerModule(UserManagerModule())
+                .build()
+                .inject(this)
+        mPresenter.mView = this
+
+//        //初始化Presenter与View
+//        mPresenter = UserRegisterPresenter()
+//        mPresenter.mView = this
+    }
 }
