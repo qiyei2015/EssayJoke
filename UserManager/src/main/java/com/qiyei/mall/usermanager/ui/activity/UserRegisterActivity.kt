@@ -4,6 +4,8 @@ package com.qiyei.mall.usermanager.ui.activity
 import android.os.Bundle
 import com.qiyei.framework.ui.activity.BaseMVPActivity
 import com.qiyei.mall.usermanager.R
+import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
+import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.mvp.presenter.UserRegisterPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserRegisterView
 import kotlinx.android.synthetic.main.activity_user_register.*
@@ -15,9 +17,10 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
-
-//        //初始化Presenter与View
-//        mPresenter = UserRegisterPresenter()
+        //注入点
+        DaggerUserManagerComponent.builder().userManagerModule(UserManagerModule()).build().inject(this)
+        //初始化Presenter与View
+        mPresenter = UserRegisterPresenter()
         mPresenter.mView = this
 
         //anko 框架

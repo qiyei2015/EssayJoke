@@ -1,6 +1,7 @@
 package com.qiyei.framework.inject
 
 
+import android.app.Activity
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.framework.ui.activity.BaseMVPActivity
@@ -16,6 +17,6 @@ import dagger.Component
 @Component
 interface ActivityComponent{
 
-    fun inject(activity:BaseActivity)
+    fun inject(activity:Activity)
 
 }

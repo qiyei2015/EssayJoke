@@ -4,12 +4,19 @@ if (isLibrary.toBoolean()) {
     apply plugin: 'com.android.application'
 }
 
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    generateStubs = true
+}
+
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -35,12 +42,9 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
-//    //Dagger2
-//    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+    //Dagger2
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     api project(':Framework')
 }
-
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'

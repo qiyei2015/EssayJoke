@@ -1,5 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
+kapt {
+    generateStubs = true
+}
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -26,10 +32,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-//    //解决duplicate entry on Kotlin classes
-//    configurations {
-//        compile.exclude group : 'org.jetbrains' , module : 'annotations'
-//    }
 }
 
 dependencies {
@@ -47,13 +49,11 @@ dependencies {
     implementation project(':GoodsManager')
     implementation project(':MessageManager')
 
-//    //Dagger2
-//    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-//    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+    //Dagger2
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+

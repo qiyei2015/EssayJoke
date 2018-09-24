@@ -1,12 +1,11 @@
 package com.qiyei.mall.usermanager.data.respository
 
-import android.util.Log
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.net.RetrofitFactory
 import com.qiyei.mall.usermanager.data.api.IUserManagerApi
 import com.qiyei.mall.usermanager.data.protocol.RegisterReq
-import com.qiyei.sdk.https.HTTP
 import io.reactivex.Observable
+import javax.inject.Inject
 
 /**
  * @author Created by qiyei2015 on 2018/9/23.
@@ -14,7 +13,7 @@ import io.reactivex.Observable
  * @email: 1273482124@qq.com
  * @description:
  */
-class UserManagerRespository {
+class UserManagerRepository @Inject constructor() {
 
     /**
      * 负责发起网络请求或者从缓存中拿去数据

@@ -4,6 +4,7 @@ import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.usermanager.mvp.view.IUserRegisterView
+import com.qiyei.mall.usermanager.service.IUserManagerService
 import com.qiyei.mall.usermanager.service.impl.UserManagerServiceImpl
 import javax.inject.Inject
 
@@ -15,6 +16,9 @@ import javax.inject.Inject
  */
 open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegisterView>() {
 
+    @Inject
+    lateinit var mUserManagerService:IUserManagerService
+
     /**
      * 用户注册
      * @param userKey 用户标志，可以是手机，邮箱，或者用户名
@@ -22,10 +26,7 @@ open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegis
      * @param verifyCode 验证码
      */
     fun register(userKey: String, password: String, verifyCode: String) {
-
-        //业务实现
-        var userManagerService = UserManagerServiceImpl()
-        userManagerService.register(userKey, password, verifyCode)
+        mUserManagerService.register(userKey, password, verifyCode)
                 .execute(object :BaseObserver<Boolean>(mView){
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult(t)

@@ -7,13 +7,16 @@ if (isLibrary.toBoolean()) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+kapt {
+    generateStubs = true
+}
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 27
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -45,10 +48,6 @@ android {
             }
         }
     }
-}
-
-kapt {
-    generateStubs = true
 }
 
 dependencies {

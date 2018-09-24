@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @description: MVP基类Activity，持有Presenter
  */
 open class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
-    @Inject
+
     lateinit var mPresenter:T
 
     override fun onCreate(savedInstanceState: Bundle?) {
