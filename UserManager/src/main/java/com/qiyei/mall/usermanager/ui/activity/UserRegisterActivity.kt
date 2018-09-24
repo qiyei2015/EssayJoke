@@ -16,8 +16,8 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
 
-        //初始化Presenter与View
-        mPresenter = UserRegisterPresenter()
+//        //初始化Presenter与View
+//        mPresenter = UserRegisterPresenter()
         mPresenter.mView = this
 
         //anko 框架

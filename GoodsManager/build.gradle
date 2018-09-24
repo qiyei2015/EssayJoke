@@ -3,6 +3,7 @@ if (isLibrary.toBoolean()) {
 } else {
     apply plugin: 'com.android.application'
 }
+
 android {
     compileSdkVersion 27
 
@@ -34,8 +35,12 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
+//    //Dagger2
+//    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_version"
+
     api project(':Framework')
 }
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'

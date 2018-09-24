@@ -5,6 +5,7 @@ import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.usermanager.mvp.view.IUserRegisterView
 import com.qiyei.mall.usermanager.service.impl.UserManagerServiceImpl
+import javax.inject.Inject
 
 /**
  * @author Created by qiyei2015 on 2018/9/22.
@@ -12,7 +13,7 @@ import com.qiyei.mall.usermanager.service.impl.UserManagerServiceImpl
  * @email: 1273482124@qq.com
  * @description: 用户注册界面的Presenter
  */
-open class UserRegisterPresenter : BasePresenter<IUserRegisterView>() {
+open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegisterView>() {
 
     /**
      * 用户注册
