@@ -1,6 +1,8 @@
 package com.qiyei.framework.mvp.presenter
 
 import com.qiyei.framework.mvp.view.IBaseView
+import com.trello.rxlifecycle2.LifecycleProvider
+import javax.inject.Inject
 
 /**
  * @author Created by qiyei2015 on 2018/9/22.
@@ -10,6 +12,14 @@ import com.qiyei.framework.mvp.view.IBaseView
  */
 open class BasePresenter<T:IBaseView> {
 
+    /**
+     * 公共基类View
+     */
     lateinit var mView:T
+    /**
+     * 用作RxLifeCycle
+     */
+    @Inject
+    lateinit var mLifecycleProvider: LifecycleProvider<*>
 
 }

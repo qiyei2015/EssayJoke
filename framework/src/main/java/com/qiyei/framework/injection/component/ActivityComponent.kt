@@ -1,8 +1,11 @@
 package com.qiyei.framework.injection.component
 
 import android.app.Activity
+import android.content.Context
 import com.qiyei.framework.injection.module.ActivityModule
+import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.injection.scope.ActivityScope
+import com.trello.rxlifecycle2.LifecycleProvider
 import dagger.Component
 
 
@@ -13,7 +16,22 @@ import dagger.Component
  * @description: Activity的Component，依赖AppComponent
  */
 @ActivityScope
-@Component(modules = arrayOf(ActivityModule::class),dependencies = arrayOf(AppComponent::class))
+@Component(modules = arrayOf(ActivityModule::class,LifecycleProviderModule::class),dependencies = arrayOf(AppComponent::class))
 interface ActivityComponent {
+
+    /**
+     * 提供Activity
+     */
     fun activity():Activity
+
+    /**
+     * 提供Context
+     */
+    fun context(): Context
+
+    /**
+     * 提供LifecycleProvider
+     */
+    fun lifecycleProvider():LifecycleProvider<*>
+
 }

@@ -31,6 +31,6 @@ open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegis
                     override fun onNext(t: Boolean) {
                         mView.onRegisterResult(t)
                     }
-                })
+                },mLifecycleProvider)
     }
 }

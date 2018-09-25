@@ -5,6 +5,7 @@ import com.qiyei.framework.FrameworkApplication
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.component.DaggerActivityComponent
 import com.qiyei.framework.injection.module.ActivityModule
+import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
 import org.jetbrains.anko.toast
@@ -52,7 +53,9 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
         mActivityComponet = DaggerActivityComponent.builder()
                 .appComponent((application as FrameworkApplication).mAppComponent)
                 .activityModule(ActivityModule(this))
+                .lifecycleProviderModule(LifecycleProviderModule(this))
                 .build()
+
     }
 
 }
