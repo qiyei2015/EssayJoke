@@ -6,18 +6,17 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
+import com.qiyei.sdk.log.LogManager;
+import com.trello.rxlifecycle2.components.support.RxFragment;
+
 /**
  * Email: 1273482124@qq.com
  * Created by qiyei2015 on 2017/6/23.
  * Version: 1.0
  * Description: 所有Fragment的基类
  */
-public class BaseFragment extends Fragment{
+public abstract class BaseFragment extends RxFragment{
 
-    /**
-     * 调试用的TAG
-     */
-    private static final String TAG = Fragment.class.getSimpleName();
     /**
      * Activity中的context
      */
@@ -31,25 +30,7 @@ public class BaseFragment extends Fragment{
      * 无参构造函数
      */
     public BaseFragment(){
-    }
 
-    /**
-     * 创建不带Bundle参数的Fragment实例
-     * @return
-     */
-    public static BaseFragment newInstance(){
-        return new BaseFragment();
-    }
-
-    /**
-     * 创建带参数Bundle的fragment
-     * @param args
-     * @return
-     */
-    public static BaseFragment newIntance(Bundle args){
-        BaseFragment fragment = new BaseFragment();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -63,9 +44,7 @@ public class BaseFragment extends Fragment{
      * 获取调试TAG
      * @return
      */
-    protected String getTAG(){
-        return TAG;
-    }
+    abstract protected String getTAG();
 
     /**
      * 启动Activity
@@ -73,8 +52,11 @@ public class BaseFragment extends Fragment{
      */
     protected void startActivity(Class<?> clazz){
         if (mContext != null){
+            LogManager.i(getTAG(),"startActivity,clazz:" + clazz);
             startActivity(new Intent(mContext,clazz));
+            return;
         }
+        LogManager.i(getTAG(),"startActivity failed,mContext is null,clazz:" + clazz);
     }
 
 }

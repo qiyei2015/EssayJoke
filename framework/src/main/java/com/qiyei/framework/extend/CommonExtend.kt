@@ -3,7 +3,6 @@ package com.qiyei.framework.extend
 
 import com.qiyei.framework.rx.BaseObserver
 import com.trello.rxlifecycle2.LifecycleProvider
-import com.trello.rxlifecycle2.kotlin.bindToLifecycle
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

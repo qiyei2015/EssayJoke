@@ -29,7 +29,12 @@ open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegis
         mUserManagerService.register(userKey, password, verifyCode)
                 .execute(object :BaseObserver<Boolean>(mView){
                     override fun onNext(t: Boolean) {
-                        mView.onRegisterResult(t)
+                        if (t){
+                            mView.onRegisterResult("注册成功")
+                        }else {
+                            mView.onRegisterResult("注册失败")
+                        }
+
                     }
                 },mLifecycleProvider)
     }

@@ -12,7 +12,7 @@ interface IUserRegisterView : IBaseView{
 
     /**
      * 注册结果回调
-     * @param success
+     * @param result
      */
-    fun onRegisterResult(success: Boolean)
+    fun onRegisterResult(result: String)
 }

@@ -30,12 +30,8 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
 
     }
 
-    override fun onRegisterResult(success: Boolean) {
-        if (success){
-            toast("注册成功")
-        }else{
-            toast("注册失败")
-        }
+    override fun onRegisterResult(result:String) {
+        toast(result)
     }
 
     override fun initComponentInject() {
