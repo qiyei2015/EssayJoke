@@ -19,23 +19,25 @@ public class LoadingManager {
      * @param tag
      */
     public static void showDialog(Object manager, String tag){
-        Log.i(TAG,"manager:"+manager + " tag:" + tag);
+        Log.i(TAG,"manager:"+manager.getClass() + " tag:" + tag);
         if (manager == null){
             return;
         }
-        LoadingDialog dialog = new LoadingDialog();
-        dialog.setCancelable(false);
-        if (manager instanceof FragmentManager){
 
+        if (manager instanceof FragmentManager){
+            LoadingDialogV4 dialog = new LoadingDialogV4();
+            dialog.setCancelable(false);
             FragmentManager fragmentManager = (FragmentManager) manager;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(dialog, tag);
             fragmentTransaction.commitNowAllowingStateLoss();//立即执行
         }else if (manager instanceof android.app.FragmentManager){
+            LoadingDialog dialog = new LoadingDialog();
+            dialog.setCancelable(false);
             android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
             android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(dialog, tag);
-//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+            fragmentTransaction.add(dialog, tag);
+            fragmentTransaction.commitAllowingStateLoss();//立即执行
         }
     }
 
@@ -51,15 +53,16 @@ public class LoadingManager {
         }
         if (manager instanceof FragmentManager){
             FragmentManager fragmentManager = (FragmentManager) manager;
-            LoadingDialog dialog = (LoadingDialog) fragmentManager.findFragmentByTag(tag);
+            LoadingDialogV4 dialog = (LoadingDialogV4) fragmentManager.findFragmentByTag(tag);
             if(dialog != null){
                 dialog.dismissAllowingStateLoss();
             }
         }else if (manager instanceof android.app.FragmentManager){
             android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
-            android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(dialog, tag);
-//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+            LoadingDialog dialog = (LoadingDialog) fragmentManager.findFragmentByTag(tag);
+            if(dialog != null){
+                dialog.dismissAllowingStateLoss();
+            }
         }
     }
 
@@ -73,20 +76,20 @@ public class LoadingManager {
             return;
         }
 
-        ProgressDialog dialog = new ProgressDialog();
-
-        dialog.setCancelable(false);
         if (manager instanceof FragmentManager){
-
+            ProgressDialogV4 dialog = new ProgressDialogV4();
+            dialog.setCancelable(false);
             FragmentManager fragmentManager = (FragmentManager) manager;
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(dialog, tag);
             fragmentTransaction.commitNowAllowingStateLoss();//立即执行
         }else if (manager instanceof android.app.FragmentManager){
+            ProgressDialog dialog = new ProgressDialog();
+            dialog.setCancelable(false);
             android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
             android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(dialog, tag);
-//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+            fragmentTransaction.add(dialog, tag);
+            fragmentTransaction.commitAllowingStateLoss();//立即执行
         }
     }
 
@@ -101,15 +104,16 @@ public class LoadingManager {
         }
         if (manager instanceof FragmentManager){
             FragmentManager fragmentManager = (FragmentManager) manager;
-            ProgressDialog dialog = (ProgressDialog) fragmentManager.findFragmentByTag(tag);
+            ProgressDialogV4 dialog = (ProgressDialogV4) fragmentManager.findFragmentByTag(tag);
             if(dialog != null){
                 dialog.dismissAllowingStateLoss();
             }
         }else if (manager instanceof android.app.FragmentManager){
             android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
-            android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(dialog, tag);
-//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+            ProgressDialog dialog = (ProgressDialog) fragmentManager.findFragmentByTag(tag);
+            if(dialog != null){
+                dialog.dismissAllowingStateLoss();
+            }
         }
     }
 
@@ -125,15 +129,16 @@ public class LoadingManager {
         }
         if (manager instanceof FragmentManager){
             FragmentManager fragmentManager = (FragmentManager) manager;
-            ProgressDialog dialog = (ProgressDialog) fragmentManager.findFragmentByTag(tag);
+            ProgressDialogV4 dialog = (ProgressDialogV4) fragmentManager.findFragmentByTag(tag);
             if(dialog != null){
                 dialog.setProgress(progress);
             }
         }else if (manager instanceof android.app.FragmentManager){
             android.app.FragmentManager fragmentManager = (android.app.FragmentManager) manager;
-            android.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//            fragmentTransaction.add(dialog, tag);
-//            fragmentTransaction.commitNowAllowingStateLoss();//立即执行
+            ProgressDialog dialog = (ProgressDialog) fragmentManager.findFragmentByTag(tag);
+            if(dialog != null){
+                dialog.setProgress(progress);
+            }
         }
     }
 

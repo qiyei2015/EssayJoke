@@ -179,7 +179,7 @@ dependencies {
 
     //dagger2
     api "com.google.dagger:dagger:$dagger_version"
-    annotationProcessor "com.google.dagger:dagger:$dagger_compiler_version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //ARouter
     annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"

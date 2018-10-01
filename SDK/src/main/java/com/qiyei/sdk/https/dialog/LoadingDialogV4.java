@@ -1,30 +1,29 @@
 package com.qiyei.sdk.https.dialog;
 
-
-import android.app.DialogFragment;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.qiyei.sdk.R;
 
+
 /**
- * @author Created by qiyei2015 on 2018/10/1.
+ * @author Created by qiyei2015 on 2017/10/21.
  * @version: 1.0
  * @email: 1273482124@qq.com
- * @description: 对话框
+ * @description: http请求时显示的对话框
  */
-public class LoadingDialog extends DialogFragment {
+public class LoadingDialogV4 extends DialogFragment {
 
-    public LoadingDialog(){
+    public LoadingDialogV4(){
 
     }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.dialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
     }
 
     @Override

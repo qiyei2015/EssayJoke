@@ -34,11 +34,11 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
 
     override fun showLoading() {
         mDialogTAG = this.javaClass.canonicalName
-        LoadingManager.showDialog(fragmentManager,mDialogTAG)
+        LoadingManager.showDialog(supportFragmentManager,mDialogTAG)
     }
 
     override fun hideLoading() {
-        LoadingManager.dismissDialog(fragmentManager,mDialogTAG)
+        LoadingManager.dismissDialog(supportFragmentManager,mDialogTAG)
     }
 
     override fun onError(text: String) {

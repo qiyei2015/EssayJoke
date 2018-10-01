@@ -1,28 +1,32 @@
 package com.qiyei.sdk.https.dialog;
 
-import android.app.DialogFragment;
+
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.qiyei.sdk.R;
 import com.qiyei.sdk.view.ProgressView;
 
 /**
- * @author Created by qiyei2015 on 2018/10/1.
+ * @author Created by qiyei2015 on 2017/10/30.
  * @version: 1.0
  * @email: 1273482124@qq.com
  * @description:
  */
-public class ProgressDialog extends DialogFragment {
+public class ProgressDialogV4 extends DialogFragment {
 
     /**
      * 自定义进度View
      */
     private ProgressView mProgressView;
 
-    public ProgressDialog(){
+    public ProgressDialogV4(){
 
     }
 
@@ -52,5 +56,6 @@ public class ProgressDialog extends DialogFragment {
     public void setProgress(int progress){
         mProgressView.setProgress(progress);
     }
+
 
 }
