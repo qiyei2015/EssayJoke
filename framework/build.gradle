@@ -56,6 +56,7 @@ dependencies {
 
     api project(':SDK')
     api project(':Resource')
+    api project(':MallResource')
 
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
