@@ -1,153 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!--<style name="WrapMatch">-->
-        <!--<item name="android:layout_width">wrap_content</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
+    <style name="WrapMatch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchWrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapWrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchMatch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchAuto">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="AutoMatch">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapAuto">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="AutoWrap">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapMatch.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="WrapMatch.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchWrap.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="WrapWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="WrapWrap.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchMatch.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchMatch.Common">
+        <item name="android:background">@color/common_bg</item>
+    </style>
+
+    <style name="MatchWrap.Common">
+        <item name="android:background">@color/common_bg</item>
+    </style>
+
+    <style name="MatchMatch.Vertical.Common">
+        <item name="android:background">@color/common_bg</item>
+    </style>
+
+    <style name="MatchMatch.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchAuto.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchAuto.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="AutoMatch.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AutoMatch.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="WrapAuto.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="WrapAuto.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="AutoWrap.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AutoWrap.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MatchOne">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="OneMatch">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WeightMatch">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+
+    <!--&lt;!&ndash; 主题样式 &ndash;&gt;-->
+    <!--<style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="android:windowContentOverlay">@null</item>-->
+        <!--<item name="android:textSize">@dimen/text_middle_size</item>-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+        <!--<item name="colorPrimary">@color/common_black</item>-->
+        <!--<item name="colorPrimaryDark">@color/common_black</item>-->
+        <!--<item name="colorAccent">@color/colorAccent</item>-->
     <!--</style>-->
-
-    <!--<style name="MatchWrap">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_height">wrap_content</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapWrap">-->
-        <!--<item name="android:layout_width">wrap_content</item>-->
-        <!--<item name="android:layout_height">wrap_content</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchMatch">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchAuto">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-        <!--<item name="android:layout_height">0dp</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoMatch">-->
-        <!--<item name="android:layout_width">0dp</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapAuto">-->
-        <!--<item name="android:layout_width">wrap_content</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-        <!--<item name="android:layout_height">0dp</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoWrap">-->
-        <!--<item name="android:layout_width">0dp</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-        <!--<item name="android:layout_height">wrap_content</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapMatch.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapMatch.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchWrap.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchWrap.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapWrap.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapWrap.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchMatch.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchMatch.Common">-->
-        <!--<item name="android:background">@color/common_bg</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchWrap.Common">-->
-        <!--<item name="android:background">@color/common_bg</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchMatch.Vertical.Common">-->
-        <!--<item name="android:background">@color/common_bg</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchMatch.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchAuto.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchAuto.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoMatch.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoMatch.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapAuto.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="WrapAuto.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoWrap.Vertical">-->
-        <!--<item name="android:orientation">vertical</item>-->
-    <!--</style>-->
-
-    <!--<style name="AutoWrap.Horizontal">-->
-        <!--<item name="android:orientation">horizontal</item>-->
-    <!--</style>-->
-
-    <!--<style name="MatchOne">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_height">1px</item>-->
-    <!--</style>-->
-
-    <!--<style name="OneMatch">-->
-        <!--<item name="android:layout_width">1px</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-    <!--</style>-->
-
-    <!--<style name="WeightMatch">-->
-        <!--<item name="android:layout_width">0dp</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-        <!--<item name="android:layout_weight">1</item>-->
-    <!--</style>-->
-
-
-    <!--&lt;!&ndash;&lt;!&ndash; 主题样式 &ndash;&gt;&ndash;&gt;-->
-    <!--&lt;!&ndash;<style name="AppTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:windowContentOverlay">@null</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="android:textSize">@dimen/text_middle_size</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="windowActionBar">false</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="windowNoTitle">true</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="colorPrimary">@color/common_black</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="colorPrimaryDark">@color/common_black</item>&ndash;&gt;-->
-        <!--&lt;!&ndash;<item name="colorAccent">@color/colorAccent</item>&ndash;&gt;-->
-    <!--&lt;!&ndash;</style>&ndash;&gt;-->
 
     <!--&lt;!&ndash; Window黑色背景主题 &ndash;&gt;-->
     <!--<style name="AppTheme.Black" parent="@style/AppTheme">-->
