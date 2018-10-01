@@ -4,21 +4,27 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="15dp"
-    android:background="@android:color/transparent"
-    >
+    android:background="@android:color/transparent">
 
-    <ProgressBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateDrawable="@anim/anim_loading"/>
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="@drawable/progress_shape_bg">
 
-    <TextView
-        android:id="@+id/load_msg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:text="@string/net_loading"
-        android:layout_marginTop="5dp"
-        android:textColor="@android:color/white"
-        />
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateDrawable="@anim/anim_loading"/>
+
+        <TextView
+            android:id="@+id/load_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="@string/net_loading"
+            android:layout_marginTop="5dp"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
 </LinearLayout>
