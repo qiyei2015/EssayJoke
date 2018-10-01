@@ -2,6 +2,7 @@ package com.qiyei.sdk.https.dialog;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 /**
  * @author Created by qiyei2015 on 2017/10/25.
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
  * @description:
  */
 public class LoadingManager {
+    private static final String TAG = "LoadingManager";
 
     /**
      * 显示对话框
@@ -17,6 +19,7 @@ public class LoadingManager {
      * @param tag
      */
     public static void showDialog(Object manager, String tag){
+        Log.i(TAG,"manager:"+manager + " tag:" + tag);
         if (manager == null){
             return;
         }
@@ -42,6 +45,7 @@ public class LoadingManager {
      * @param tag
      */
     public static void dismissDialog(Object manager,String tag){
+        Log.i(TAG,"manager:"+manager + " tag:" + tag);
         if (manager == null){
             return;
         }

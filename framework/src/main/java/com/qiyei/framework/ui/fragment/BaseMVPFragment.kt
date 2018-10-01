@@ -8,6 +8,7 @@ import com.qiyei.framework.injection.module.ActivityModule
 import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
+import com.qiyei.sdk.https.dialog.LoadingManager
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -24,6 +25,8 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
 
     lateinit var mActivityComponet: ActivityComponent
 
+    lateinit var mDialogTAG:String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initActivityInjection()
@@ -31,11 +34,12 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
     }
 
     override fun showLoading() {
-
+        mDialogTAG = this.javaClass.canonicalName
+        LoadingManager.showDialog(fragmentManager,mDialogTAG)
     }
 
     override fun hideLoading() {
-
+        LoadingManager.dismissDialog(fragmentManager,mDialogTAG)
     }
 
     override fun onError(text: String) {

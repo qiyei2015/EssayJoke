@@ -31,12 +31,15 @@
                       android:layout_weight="1.0"
                       android:inputType="phone"/>
             <View style="@style/DividerFixedWidth.MarginTopBottom"/>
-            <!--<com.kotlin.base.widgets.VerifyButton-->
-                <!--android:id="@+id/mVerifyCodeBtn"-->
-                <!--style="@style/WrapMatch"-->
-                <!--android:textColor="@color/common_blue"-->
-                <!--android:background="@null"-->
-                <!--android:text="获取验证码"/>-->
+            <com.qiyei.framework.view.VerifyButton
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:id="@+id/mVerifyCodeBtn"
+                android:textColor="@color/common_blue"
+                android:background="@null"
+                android:text="获取验证码"/>
         </LinearLayout>
         <View style="@style/DividerFixedHeight"/>
         <EditText android:id="@+id/mVerifyCodeEt"

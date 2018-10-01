@@ -28,6 +28,9 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
             mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
         }
 
+        mVerifyCodeBtn.setOnClickListener {
+            mVerifyCodeBtn.start()
+        }
     }
 
     override fun onRegisterResult(result:String) {

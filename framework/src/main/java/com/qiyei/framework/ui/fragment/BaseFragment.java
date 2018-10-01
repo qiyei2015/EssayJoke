@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import com.qiyei.sdk.log.LogManager;
 import com.trello.rxlifecycle2.components.support.RxFragment;
