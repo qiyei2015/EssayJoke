@@ -17,6 +17,8 @@ import com.qiyei.opensource.R;
 public class OpenSourceFragment extends BaseFragment {
 
 
+    private static final String TAG = "OpenSourceFragment";
+
     public OpenSourceFragment() {
         // Required empty public constructor
     }
@@ -29,4 +31,8 @@ public class OpenSourceFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_open_source, container, false);
     }
 
+    @Override
+    protected String getTAG() {
+        return TAG;
+    }
 }

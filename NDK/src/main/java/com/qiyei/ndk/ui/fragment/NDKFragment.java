@@ -16,6 +16,7 @@ import com.qiyei.ndk.R;
  */
 public class NDKFragment extends BaseFragment {
 
+    private static final String TAG = "NDKFragment";
 
     public NDKFragment() {
         // Required empty public constructor
@@ -29,4 +30,11 @@ public class NDKFragment extends BaseFragment {
         return inflater.inflate(R.layout.fragment_ndk, container, false);
     }
 
+    /**
+     * @return {@link #TAG}
+     */
+    @Override
+    public String getTAG() {
+        return TAG;
+    }
 }

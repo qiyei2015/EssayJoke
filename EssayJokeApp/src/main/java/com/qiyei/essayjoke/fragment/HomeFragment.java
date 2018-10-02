@@ -32,6 +32,8 @@ import java.util.List;
  */
 public class HomeFragment extends BaseFragment {
 
+    private static final String TAG = "HomeFragment";
+
     @ViewById(R.id.indicator_view)
     private IndicatorView mIndicatorView;
     @ViewById(R.id.view_pager)
@@ -54,6 +56,13 @@ public class HomeFragment extends BaseFragment {
         return view;
     }
 
+    /**
+     * @return {@link #TAG}
+     */
+    @Override
+    protected String getTAG() {
+        return TAG;
+    }
 
     /**
      * 初始化ViewPager

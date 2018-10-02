@@ -19,6 +19,8 @@ import com.qiyei.sdk.ioc.ViewUtils;
  */
 public class NewFragment extends BaseFragment {
 
+    private static final String TAG = "NewFragment";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -28,4 +30,8 @@ public class NewFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    protected String getTAG() {
+        return null;
+    }
 }
