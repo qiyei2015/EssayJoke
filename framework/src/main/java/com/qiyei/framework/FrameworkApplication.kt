@@ -5,6 +5,7 @@ import android.content.Context
 import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
 import com.qiyei.framework.injection.module.AppModule
+import com.qiyei.sdk.SDKManager
 
 /**
  * @author Created by qiyei2015 on 2018/9/24.
@@ -22,7 +23,11 @@ open class FrameworkApplication:Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        try {
+            SDKManager.initSDK(this)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
         mAppComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
 

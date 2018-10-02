@@ -8,6 +8,7 @@ import com.qiyei.framework.injection.module.ActivityModule
 import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
+import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.sdk.https.dialog.LoadingManager
 import org.jetbrains.anko.toast
 import javax.inject.Inject
@@ -25,6 +26,10 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
     lateinit var mActivityComponet:ActivityComponent
 
     lateinit var mDialogTAG:String
+    /**
+     * 标题栏
+     */
+    protected var mTitleBar: CommonTitleBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

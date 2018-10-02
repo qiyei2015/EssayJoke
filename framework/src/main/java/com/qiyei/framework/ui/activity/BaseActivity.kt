@@ -3,6 +3,7 @@ package com.qiyei.framework.ui.activity
 
 
 import android.os.Bundle
+import android.view.View
 import com.qiyei.framework.AppManager
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.jetbrains.anko.toast
@@ -13,7 +14,7 @@ import org.jetbrains.anko.toast
  * @email: 1273482124@qq.com
  * @description: 所有Activity基类
  */
-open class BaseActivity :RxAppCompatActivity(){
+abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
 
     private var preTime:Long = 0
 
@@ -25,6 +26,10 @@ open class BaseActivity :RxAppCompatActivity(){
     override fun onDestroy() {
         AppManager.instance.removeActivity(this)
         super.onDestroy()
+    }
+
+    override fun onClick(view: View) {
+
     }
 
     /**

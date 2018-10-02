@@ -81,6 +81,6 @@
             android:background="@drawable/btn_common_selector"
             android:padding="@dimen/common_padding_middle"
             android:layout_margin="@dimen/common_margin"
-            android:editable="false"
+            android:enabled="false"
             android:text="注册"/>
 </LinearLayout>

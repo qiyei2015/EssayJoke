@@ -2,6 +2,9 @@ package com.qiyei.mall.usermanager.ui.activity
 
 
 import android.os.Bundle
+import android.view.View
+import com.qiyei.framework.extend.enable
+import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.activity.BaseMVPActivity
 import com.qiyei.mall.usermanager.R
 import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
@@ -18,18 +21,17 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_register)
 
-        //anko 框架
-        var value = intent.getIntExtra("key",-1)
+        initView()
+    }
 
-        toast(""+value)
-
-        //可以直接使用id,kotlin-android-extensions
-        mRegisterBtn.setOnClickListener{
-            mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
-        }
-
-        mVerifyCodeBtn.setOnClickListener {
-            mVerifyCodeBtn.start()
+    override fun onClick(view: View) {
+        when(view.id){
+            R.id.mRegisterBtn -> {
+                mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
+            }
+            R.id.mVerifyCodeBtn -> {
+                mVerifyCodeBtn.start()
+            }
         }
     }
 
@@ -45,6 +47,29 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
                 .build()
                 .inject(this)
         mPresenter.mView = this
+    }
 
+    private fun initView(){
+        mTitleBar = CommonTitleBar.Builder(this)
+                .setTitle("注册")
+                .build()
+        //lambda表达式移到括号外面了
+        mRegisterBtn.enable(mMobileEt){isRegisterEnable()}
+        mRegisterBtn.enable(mVerifyCodeEt){isRegisterEnable()}
+        mRegisterBtn.enable(mPwdEt){isRegisterEnable()}
+        mRegisterBtn.enable(mPwdConfirmEt){isRegisterEnable()}
+        //可以直接使用id
+        mRegisterBtn.setOnClickListener(this)
+        mVerifyCodeBtn.setOnClickListener(this)
+    }
+
+    /**
+     * 注册按钮是否可用
+     */
+    private fun isRegisterEnable():Boolean{
+        return mMobileEt.text.isNotEmpty()
+                && mVerifyCodeEt.text.isNotEmpty()
+                && mPwdEt.text.isNotEmpty()
+                && mPwdConfirmEt.text.isNotEmpty()
     }
 }

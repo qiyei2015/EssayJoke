@@ -8,7 +8,7 @@ import com.qiyei.framework.R;
 
 
 /**
- * Email: 1273482124@qq.com
+ * @author: 1273482124@qq.com
  * Created by qiyei2015 on 2017/5/14.
  * Version: 1.0
  * Description:

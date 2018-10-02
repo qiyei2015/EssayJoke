@@ -1,6 +1,10 @@
 package com.qiyei.framework.extend
 
 
+import android.text.Editable
+import android.text.TextWatcher
+import android.widget.Button
+import android.widget.EditText
 import com.qiyei.framework.rx.BaseObserver
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
@@ -24,4 +28,19 @@ fun <T> Observable<T>.execute(observer:BaseObserver<T>,lifecycleProvider:Lifecyc
             .subscribe(observer)
 }
 
+/**
+ * Button使能
+ */
+fun Button.enable(editText: EditText,method:() -> Boolean){
+    editText.addTextChangedListener(object :TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
+        }
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            this@enable.isEnabled = method()
+        }
+        override fun afterTextChanged(s: Editable?) {
+
+        }
+    })
+}
