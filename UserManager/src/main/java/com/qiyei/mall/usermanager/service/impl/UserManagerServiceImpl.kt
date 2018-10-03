@@ -4,6 +4,7 @@ package com.qiyei.mall.usermanager.service.impl
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.net.ResultCode
 import com.qiyei.framework.rx.BaseException
+import com.qiyei.framework.rx.BaseFunction
 import com.qiyei.mall.usermanager.data.respository.UserManagerRepository
 import com.qiyei.mall.usermanager.service.IUserManagerService
 import io.reactivex.Observable
@@ -24,6 +25,7 @@ class UserManagerServiceImpl @Inject constructor():IUserManagerService {
     lateinit var mRepository:UserManagerRepository
 
     override fun register(userKey: String, password: String, verifyCode: String): Observable<Boolean> {
+        //将Observer<String>转换成Observer<Boolean>
         return mRepository.register(userKey,password,verifyCode)
                 .flatMap(object : Function<BaseResp<String>,ObservableSource<Boolean>>{
                     override fun apply(t: BaseResp<String>): ObservableSource<Boolean> {
@@ -33,6 +35,12 @@ class UserManagerServiceImpl @Inject constructor():IUserManagerService {
                         return Observable.just(true)
                     }
                 })
+//                .flatMap(object :BaseFunction<BaseResp<String>,Observable<Boolean>>{
+//                    override fun apply(t: BaseResp<BaseResp<String>>): Observable<Boolean> {
+//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//                    }
+//                })
+
     }
 
 }

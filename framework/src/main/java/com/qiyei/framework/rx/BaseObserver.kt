@@ -13,7 +13,7 @@ import org.jetbrains.anko.getStackTraceString
  * @email: 1273482124@qq.com
  * @description: Rx的基类订阅器，继承Observer实现
  */
-open class BaseObserver<T>(val baseView:IBaseView) : Observer<T>{
+open class BaseObserver<T>(private val baseView:IBaseView) : Observer<T>{
 
     companion object {
         const val TAG = "BaseObserver"
