@@ -2,10 +2,7 @@ package com.qiyei.mall.usermanager.data.api
 
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.mall.usermanager.data.bean.UserInfo
-import com.qiyei.mall.usermanager.data.protocol.ForgetPasswordReq
-import com.qiyei.mall.usermanager.data.protocol.LoginReq
-import com.qiyei.mall.usermanager.data.protocol.ModifyPasswordReq
-import com.qiyei.mall.usermanager.data.protocol.RegisterReq
+import com.qiyei.mall.usermanager.data.protocol.*
 import io.reactivex.Observable
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -42,4 +39,9 @@ interface IUserManagerApi {
     @POST("userCenter/resetPwd")
     fun modifyPassword(@Body req: ModifyPasswordReq):Observable<BaseResp<String>>
 
+    /**
+     * 编辑修改用户资料
+     */
+    @POST("userCenter/editUser")
+    fun modifyUserInfo(@Body req:EditUserInfoReq):Observable<BaseResp<UserInfo>>
 }

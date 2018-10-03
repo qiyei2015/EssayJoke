@@ -3,6 +3,7 @@ package com.qiyei.mall.usermanager.injection.component
 
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
+import com.qiyei.mall.usermanager.injection.module.UploadManagerModule
 import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.ui.activity.UserForgetPasswordActivity
 import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
@@ -17,7 +18,7 @@ import dagger.Component
  * @description:
  */
 @PreComponentScope
-@Component(modules = arrayOf(UserManagerModule::class),dependencies = arrayOf(ActivityComponent::class))
+@Component(modules = arrayOf(UserManagerModule::class,UploadManagerModule::class),dependencies = arrayOf(ActivityComponent::class))
 interface UserManagerComponent {
 
     /**

@@ -1,6 +1,8 @@
 package com.qiyei.mall.usermanager.injection.module
 
+import com.qiyei.mall.usermanager.service.IUploadManagerService
 import com.qiyei.mall.usermanager.service.IUserManagerService
+import com.qiyei.mall.usermanager.service.impl.UploadManagerServiceImpl
 import com.qiyei.mall.usermanager.service.impl.UserManagerServiceImpl
 import dagger.Module
 import dagger.Provides
@@ -15,7 +17,7 @@ import dagger.Provides
 class UserManagerModule {
 
     @Provides
-    fun providerUserManagerService(service:UserManagerServiceImpl):IUserManagerService{
+    fun providerUploadManagerService(service: UploadManagerServiceImpl): IUploadManagerService {
         return service
     }
 
