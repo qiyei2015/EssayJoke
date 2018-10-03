@@ -6,6 +6,4 @@ package com.qiyei.mall.usermanager.data.protocol
  * @email: 1273482124@qq.com
  * @description:
  */
-data class RegisterReq(val userKey: String, val password: String, val verifyCode: String) {
-
-}
+data class RegisterReq(val mobile: String, val pwd: String, val verifyCode: String)

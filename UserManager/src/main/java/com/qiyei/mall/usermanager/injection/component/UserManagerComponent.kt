@@ -4,6 +4,7 @@ package com.qiyei.mall.usermanager.injection.component
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.usermanager.injection.module.UserManagerModule
+import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
 import com.qiyei.mall.usermanager.ui.activity.UserRegisterActivity
 import dagger.Component
 
@@ -21,5 +22,7 @@ interface UserManagerComponent {
      * 需要注入的地方
      */
     fun inject(activity: UserRegisterActivity)
+
+    fun inject(activity: UserLoginActivity)
 
 }

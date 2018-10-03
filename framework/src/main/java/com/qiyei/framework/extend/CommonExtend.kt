@@ -5,6 +5,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import com.qiyei.framework.data.protocol.BaseResp
+import com.qiyei.framework.rx.BaseFunction
 import com.qiyei.framework.rx.BaseObserver
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
@@ -26,6 +28,13 @@ fun <T> Observable<T>.execute(observer:BaseObserver<T>,lifecycleProvider:Lifecyc
             .observeOn(AndroidSchedulers.mainThread())
             .compose(lifecycleProvider.bindToLifecycle())
             .subscribe(observer)
+}
+
+/**
+ * 将Observer<BaseResp<T>>转换成Observer<T>类型
+ */
+fun <T> Observable<BaseResp<T>>.baseRespConvert():Observable<T>{
+    return this.flatMap(BaseFunction())
 }
 
 /**

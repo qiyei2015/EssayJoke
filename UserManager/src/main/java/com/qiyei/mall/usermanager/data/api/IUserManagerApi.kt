@@ -1,6 +1,8 @@
 package com.qiyei.mall.usermanager.data.api
 
 import com.qiyei.framework.data.protocol.BaseResp
+import com.qiyei.mall.usermanager.data.bean.UserInfo
+import com.qiyei.mall.usermanager.data.protocol.LoginReq
 import com.qiyei.mall.usermanager.data.protocol.RegisterReq
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -19,5 +21,11 @@ interface IUserManagerApi {
      */
     @POST("userCenter/register")
     fun register(@Body req: RegisterReq):Observable<BaseResp<String>>
+
+    /**
+     * 用户登录
+     */
+    @POST("userCenter/login")
+    fun login(@Body req: LoginReq):Observable<BaseResp<UserInfo>>
 
 }

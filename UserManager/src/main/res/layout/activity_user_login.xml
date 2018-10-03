@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/MatchMatch.Vertical.Common"
+    tools:context=".ui.activity.UserLoginActivity">
+
+    <LinearLayout
+        style="@style/MatchWrap.Vertical"
+        android:layout_margin="@dimen/dimen_15"
+        android:background="@drawable/border_all">
+
+        <EditText
+            android:id="@+id/mMobileEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            android:background="@null"
+            android:paddingLeft="@dimen/dimen_5"
+            android:hint="@string/please_input_phoneNumber"
+            android:drawableLeft="@drawable/icon_user_name"
+            android:drawablePadding="@dimen/dimen_5"
+            android:inputType="phone"/>
+        <View style="@style/DividerFixedHeight"/>
+
+        <EditText
+            android:id="@+id/mPasswordEditText"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_50"
+            android:background="@null"
+            android:paddingLeft="@dimen/dimen_5"
+            android:hint="@string/please_input_password"
+            android:drawableLeft="@drawable/icon_pwd"
+            android:drawablePadding="@dimen/dimen_5"
+            android:inputType="textPassword"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/mLoginButton"
+        android:text="@string/login"
+        style="@style/FullButtonStyle"/>
+
+    <TextView
+        style="@style/WrapWrap"
+        android:id="@+id/mForgetPasswordEditText"
+        android:textColor="@color/colorPrimary"
+        android:layout_gravity="right"
+        android:layout_marginRight="@dimen/dimen_15"
+        android:text="@string/forget_password"/>
+
+</LinearLayout>

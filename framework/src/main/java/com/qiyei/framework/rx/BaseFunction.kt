@@ -1,6 +1,8 @@
 package com.qiyei.framework.rx
 
 import com.qiyei.framework.data.protocol.BaseResp
+import com.qiyei.framework.net.ResultCode
+import io.reactivex.Observable
 import io.reactivex.functions.Function
 
 /**
@@ -9,4 +11,13 @@ import io.reactivex.functions.Function
  * @email: 1273482124@qq.com
  * @description:
  */
-interface BaseFunction<T,R> :Function<BaseResp<T>,R>
+class BaseFunction<T> :Function<BaseResp<T>,Observable<T>>{
+    override fun apply(t: BaseResp<T>): Observable<T> {
+        if (t.status == ResultCode.SUCCESS){
+            return Observable.just(t.data)
+        }else {
+            return Observable.error(BaseException(t.status,"类型转换错误"))
+        }
+    }
+
+}

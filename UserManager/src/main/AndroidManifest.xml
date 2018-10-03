@@ -3,7 +3,9 @@
           package="com.qiyei.mall.usermanager">
 
     <application>
-        <activity android:name="com.qiyei.mall.usermanager.ui.activity.UserRegisterActivity">
+        <activity android:name=".ui.activity.UserRegisterActivity">
+        </activity>
+        <activity android:name=".ui.activity.UserLoginActivity">
         </activity>
     </application>
 

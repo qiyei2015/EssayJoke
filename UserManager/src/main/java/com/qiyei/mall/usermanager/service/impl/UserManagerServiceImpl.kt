@@ -5,10 +5,12 @@ import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.net.ResultCode
 import com.qiyei.framework.rx.BaseException
 import com.qiyei.framework.rx.BaseFunction
+import com.qiyei.mall.usermanager.data.bean.UserInfo
 import com.qiyei.mall.usermanager.data.respository.UserManagerRepository
 import com.qiyei.mall.usermanager.service.IUserManagerService
 import io.reactivex.Observable
 import io.reactivex.ObservableSource
+import io.reactivex.Observer
 import io.reactivex.functions.Function
 import javax.inject.Inject
 
@@ -35,12 +37,12 @@ class UserManagerServiceImpl @Inject constructor():IUserManagerService {
                         return Observable.just(true)
                     }
                 })
-//                .flatMap(object :BaseFunction<BaseResp<String>,Observable<Boolean>>{
-//                    override fun apply(t: BaseResp<BaseResp<String>>): Observable<Boolean> {
-//                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//                    }
-//                })
 
     }
 
+    override fun login(userKey: String, password: String, pushId: String): Observable<UserInfo> {
+        return mRepository.login(userKey,password,pushId)
+                .flatMap(BaseFunction())
+
+    }
 }

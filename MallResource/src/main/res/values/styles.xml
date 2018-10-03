@@ -271,15 +271,16 @@
     <!--<style name="LabelContentTextStyle" parent="@style/LabelTitleTextStyle">-->
         <!--<item name="android:textColor">@color/text_light_dark</item>-->
     <!--</style>-->
-    <!-- 横屏按钮样式，带不可用状态 -->
-    <!-- 按钮样式-->
-    <!--<style name="FullBtnStyle">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_height">wrap_content</item>-->
-        <!--<item name="android:textColor">@color/common_white</item>-->
-        <!--<item name="android:background">@drawable/btn_common_selector</item>-->
-        <!--<item name="android:padding">@dimen/common_padding_middle</item>-->
-        <!--<item name="android:layout_margin">@dimen/common_margin</item>-->
-        <!--<item name="android:enabled">false</item>-->
-    <!--</style>-->
+
+     <!--横屏按钮样式，带不可用状态 -->
+     <!--按钮样式-->
+    <style name="FullButtonStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/common_white</item>
+        <item name="android:background">@drawable/btn_common_selector</item>
+        <item name="android:padding">@dimen/common_padding_middle</item>
+        <item name="android:layout_margin">@dimen/common_margin</item>
+        <item name="android:enabled">false</item>
+    </style>
 </resources>

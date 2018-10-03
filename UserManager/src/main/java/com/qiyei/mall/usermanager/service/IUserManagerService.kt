@@ -1,5 +1,6 @@
 package com.qiyei.mall.usermanager.service
 
+import com.qiyei.mall.usermanager.data.bean.UserInfo
 import io.reactivex.Observable
 
 /**
@@ -17,5 +18,11 @@ interface IUserManagerService {
      */
     fun register(userKey:String,password:String,verifyCode:String):Observable<Boolean>
 
-
+    /**
+     * 用户登录
+     * @param userKey 用户标志，可以是手机，邮箱，或者用户名
+     * @param password 用户密码
+     * @param pushId pushId
+     */
+    fun login(userKey:String,password:String,pushId:String):Observable<UserInfo>
 }
