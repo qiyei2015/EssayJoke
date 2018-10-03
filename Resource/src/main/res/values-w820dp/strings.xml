@@ -5,5 +5,8 @@
     <string name="architecture_page">架构</string>
     <string name="media_page">音视频</string>
     <string name="ndk_page">NDK</string>
+    <string name="common_next">下一步</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_register">注册</string>
 
 </resources>

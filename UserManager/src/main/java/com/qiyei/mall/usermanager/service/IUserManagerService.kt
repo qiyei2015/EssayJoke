@@ -25,4 +25,19 @@ interface IUserManagerService {
      * @param pushId pushId
      */
     fun login(userKey:String,password:String,pushId:String):Observable<UserInfo>
+
+
+    /**
+     * 忘记密码
+     * @param userKey 用户标志，可以是手机，邮箱，或者用户名
+     * @param verifyCode 验证码
+     */
+    fun forgetPassword(userKey:String,verifyCode: String):Observable<Boolean>
+
+    /**
+     * 修改密码
+     * @param userKey 用户标志，可以是手机，邮箱，或者用户名
+     * @param password 用户密码
+     */
+    fun modifyPassword(userKey:String,password:String):Observable<Boolean>
 }

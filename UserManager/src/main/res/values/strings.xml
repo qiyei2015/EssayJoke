@@ -3,5 +3,11 @@
     <string name="please_input_phoneNumber">请输入手机号码</string>
     <string name="please_input_password">请输入密码</string>
     <string name="login">登录</string>
-    <string name="forget_password">忘记密码?</string>
+    <string name="modify_password">修改密码</string>
+    <string name="forget_password_">忘记密码?</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="getVerifyCode">获取验证码</string>
+    <string name="please_input_message_verifyCode">请输入短信验证码</string>
+    <string name="please_input_password_6_20">请输入密码（6-20位字母或数字）</string>
+    <string name="please_input_password_again">请再次输入密码</string>
 </resources>

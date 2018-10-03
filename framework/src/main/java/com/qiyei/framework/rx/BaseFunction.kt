@@ -16,7 +16,7 @@ class BaseFunction<T> :Function<BaseResp<T>,Observable<T>>{
         if (t.status == ResultCode.SUCCESS){
             return Observable.just(t.data)
         }else {
-            return Observable.error(BaseException(t.status,"类型转换错误"))
+            return Observable.error(BaseException(t.status,t.message))
         }
     }
 

@@ -2,7 +2,9 @@ package com.qiyei.mall.usermanager.data.api
 
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.mall.usermanager.data.bean.UserInfo
+import com.qiyei.mall.usermanager.data.protocol.ForgetPasswordReq
 import com.qiyei.mall.usermanager.data.protocol.LoginReq
+import com.qiyei.mall.usermanager.data.protocol.ModifyPasswordReq
 import com.qiyei.mall.usermanager.data.protocol.RegisterReq
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -27,5 +29,17 @@ interface IUserManagerApi {
      */
     @POST("userCenter/login")
     fun login(@Body req: LoginReq):Observable<BaseResp<UserInfo>>
+
+    /**
+     * 忘记密码
+     */
+    @POST("userCenter/forgetPwd")
+    fun forgetPassword(@Body req: ForgetPasswordReq):Observable<BaseResp<String>>
+
+    /**
+     * 用户登录
+     */
+    @POST("userCenter/resetPwd")
+    fun modifyPassword(@Body req: ModifyPasswordReq):Observable<BaseResp<String>>
 
 }

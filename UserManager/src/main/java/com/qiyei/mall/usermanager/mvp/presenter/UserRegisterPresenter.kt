@@ -34,7 +34,6 @@ open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegis
                         }else {
                             mView.onRegisterResult("注册失败")
                         }
-
                     }
                 },mLifecycleProvider)
     }

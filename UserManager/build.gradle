@@ -43,8 +43,8 @@ android {
             } else {
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
                 java.srcDirs = ['src/debug/java', 'src/main/java']
-                resources.srcDirs = ['src/debug/res']//指定source目录
-                res.srcDirs = ['src/debug/res']//指定资源目录
+                resources.srcDirs = ['src/debug/res','src/main/res']//指定source目录
+                res.srcDirs = ['src/debug/res','src/main/res']//指定资源目录
             }
         }
     }
@@ -55,6 +55,7 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"

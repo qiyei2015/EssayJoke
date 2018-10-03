@@ -4,7 +4,9 @@ package com.qiyei.mall.usermanager.injection.component
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.usermanager.injection.module.UserManagerModule
+import com.qiyei.mall.usermanager.ui.activity.UserForgetPasswordActivity
 import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
+import com.qiyei.mall.usermanager.ui.activity.UserModifyPasswordActivity
 import com.qiyei.mall.usermanager.ui.activity.UserRegisterActivity
 import dagger.Component
 
@@ -25,4 +27,7 @@ interface UserManagerComponent {
 
     fun inject(activity: UserLoginActivity)
 
+    fun inject(activity: UserForgetPasswordActivity)
+
+    fun inject(activity: UserModifyPasswordActivity)
 }

@@ -2,9 +2,12 @@ package com.qiyei.mall.usermanager.service.impl
 
 
 import com.qiyei.framework.data.protocol.BaseResp
+import com.qiyei.framework.extend.baseRespConvert
+import com.qiyei.framework.extend.baseRespConvertBoolean
 import com.qiyei.framework.net.ResultCode
 import com.qiyei.framework.rx.BaseException
 import com.qiyei.framework.rx.BaseFunction
+import com.qiyei.framework.rx.BaseFunctionBoolean
 import com.qiyei.mall.usermanager.data.bean.UserInfo
 import com.qiyei.mall.usermanager.data.respository.UserManagerRepository
 import com.qiyei.mall.usermanager.service.IUserManagerService
@@ -41,8 +44,17 @@ class UserManagerServiceImpl @Inject constructor():IUserManagerService {
     }
 
     override fun login(userKey: String, password: String, pushId: String): Observable<UserInfo> {
-        return mRepository.login(userKey,password,pushId)
-                .flatMap(BaseFunction())
+        return mRepository.login(userKey,password,pushId).baseRespConvert()
+
+    }
+
+    override fun forgetPassword(userKey: String, verifyCode: String): Observable<Boolean> {
+        return mRepository.forgetPassword(userKey,verifyCode).baseRespConvertBoolean()
+
+    }
+
+    override fun modifyPassword(userKey: String, password: String): Observable<Boolean> {
+        return mRepository.modifyPassword(userKey,password).baseRespConvertBoolean()
 
     }
 }

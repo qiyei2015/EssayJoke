@@ -102,6 +102,16 @@ public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
         }
 
         /**
+         * 设置右侧点击事件
+         * @param listener
+         * @return
+         */
+        public Builder setLeftClickListener(View.OnClickListener listener){
+            mBarParams.mLeftClickListener = listener;
+            return this;
+        }
+
+        /**
          * 创建CommonNavigationBar
          * @return
          */

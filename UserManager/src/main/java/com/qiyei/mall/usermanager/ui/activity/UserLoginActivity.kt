@@ -37,7 +37,7 @@ class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
                 mPresenter.login(mMobileEditText.text.toString(),mPasswordEditText.text.toString(),"")
             }
             R.id.mForgetPasswordEditText -> {
-                //startActivity<>()
+                startActivity<UserForgetPasswordActivity>()
             }
         }
     }

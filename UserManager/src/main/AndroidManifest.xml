@@ -7,6 +7,10 @@
         </activity>
         <activity android:name=".ui.activity.UserLoginActivity">
         </activity>
+        <activity android:name=".ui.activity.UserForgetPasswordActivity">
+        </activity>
+        <activity android:name=".ui.activity.UserModifyPasswordActivity">
+        </activity>
     </application>
 
 </manifest>

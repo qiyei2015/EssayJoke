@@ -6,7 +6,7 @@ package com.qiyei.mall.usermanager.data.bean
  * @email: 1273482124@qq.com
  * @description:
  */
-data class UserInfo(val id:Long,
+data class UserInfo(val id:String,
                     val userName:String,
                     val userMobile:String,
                     val pushId:String)

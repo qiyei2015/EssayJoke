@@ -47,4 +47,17 @@
         <item name="android:layout_centerInParent">true</item>
     </style>
 
+    <!--验证码样式-->
+    <style name="verifyCodeStyle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:minWidth">@dimen/dimen_50</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/dimen_5</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_5</item>
+        <item name="android:layout_marginRight">@dimen/dimen_10</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
 </resources>

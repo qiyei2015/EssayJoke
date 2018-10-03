@@ -26,11 +26,11 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
 
     override fun onClick(view: View) {
         when(view.id){
-            R.id.mRegisterBtn -> {
-                mPresenter.register(mMobileEt.text.toString(),mPwdEt.text.toString(),mVerifyCodeEt.text.toString())
+            R.id.mRegisterButton -> {
+                mPresenter.register(mMobileEditText.text.toString(),mPasswordEditText.text.toString(),mVerifyCodeButton.text.toString())
             }
-            R.id.mVerifyCodeBtn -> {
-                mVerifyCodeBtn.start()
+            R.id.mVerifyCodeButton -> {
+                mVerifyCodeButton.start()
             }
         }
     }
@@ -54,22 +54,22 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
                 .setTitle("注册")
                 .build()
         //lambda表达式移到括号外面了
-        mRegisterBtn.enable(mMobileEt){isRegisterEnable()}
-        mRegisterBtn.enable(mVerifyCodeEt){isRegisterEnable()}
-        mRegisterBtn.enable(mPwdEt){isRegisterEnable()}
-        mRegisterBtn.enable(mPwdConfirmEt){isRegisterEnable()}
+        mRegisterButton.enable(mMobileEditText){isRegisterEnable()}
+        mRegisterButton.enable(mVerifyCodeEditText){isRegisterEnable()}
+        mRegisterButton.enable(mPasswordEditText){isRegisterEnable()}
+        mRegisterButton.enable(mPasswordConfirmEditText){isRegisterEnable()}
         //可以直接使用id
-        mRegisterBtn.setOnClickListener(this)
-        mVerifyCodeBtn.setOnClickListener(this)
+        mRegisterButton.setOnClickListener(this)
+        mVerifyCodeButton.setOnClickListener(this)
     }
 
     /**
      * 注册按钮是否可用
      */
     private fun isRegisterEnable():Boolean{
-        return mMobileEt.text.isNotEmpty()
-                && mVerifyCodeEt.text.isNotEmpty()
-                && mPwdEt.text.isNotEmpty()
-                && mPwdConfirmEt.text.isNotEmpty()
+        return mMobileEditText.text.isNotEmpty()
+                && mVerifyCodeEditText.text.isNotEmpty()
+                && mPasswordEditText.text.isNotEmpty()
+                && mPasswordConfirmEditText.text.isNotEmpty()
     }
 }

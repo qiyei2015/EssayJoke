@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.rx.BaseFunction
+import com.qiyei.framework.rx.BaseFunctionBoolean
 import com.qiyei.framework.rx.BaseObserver
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
@@ -35,6 +36,13 @@ fun <T> Observable<T>.execute(observer:BaseObserver<T>,lifecycleProvider:Lifecyc
  */
 fun <T> Observable<BaseResp<T>>.baseRespConvert():Observable<T>{
     return this.flatMap(BaseFunction())
+}
+
+/**
+ * 将Observer<BaseResp<T>>转换成Observer<Boolean>类型
+ */
+fun <T> Observable<BaseResp<T>>.baseRespConvertBoolean():Observable<Boolean>{
+    return this.flatMap(BaseFunctionBoolean())
 }
 
 /**

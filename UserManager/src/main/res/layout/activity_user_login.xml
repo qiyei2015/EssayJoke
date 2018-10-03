@@ -49,6 +49,6 @@
         android:textColor="@color/colorPrimary"
         android:layout_gravity="right"
         android:layout_marginRight="@dimen/dimen_15"
-        android:text="@string/forget_password"/>
+        android:text="@string/forget_password_"/>
 
 </LinearLayout>
