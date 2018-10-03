@@ -3,8 +3,11 @@ package com.qiyei.framework.view
 import android.content.Context
 import android.os.Handler
 import android.util.AttributeSet
+import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import com.qiyei.framework.R
+import com.qiyei.sdk.util.DisplayUtil
 
 /**
  * @author Created by qiyei2015 on 2018/9/30.
@@ -40,6 +43,10 @@ class VerifyButton @JvmOverloads constructor(
             this@VerifyButton.text = mCount.toString() + "s"
             this@VerifyButton.setBackgroundColor(resources.getColor(R.color.common_disable))
             this@VerifyButton.setTextColor(resources.getColor(R.color.common_white))
+            var lp: ViewGroup.MarginLayoutParams = this@VerifyButton.layoutParams as ViewGroup.MarginLayoutParams
+            lp.topMargin = DisplayUtil.dip2px(getContext(),10f)
+            lp.bottomMargin = DisplayUtil.dip2px(getContext(),10f)
+            this@VerifyButton.layoutParams = lp
             //禁止使能
             this@VerifyButton.isEnabled = false
             if (mCount > 0){
