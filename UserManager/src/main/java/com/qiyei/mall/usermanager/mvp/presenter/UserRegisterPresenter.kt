@@ -19,6 +19,11 @@ open class UserRegisterPresenter @Inject constructor(): BasePresenter<IUserRegis
     @Inject
     lateinit var mUserManagerService:IUserManagerService
 
+
+    override fun getTAG(): String {
+        return UserRegisterPresenter::class.java.simpleName
+    }
+
     /**
      * 用户注册
      * @param userKey 用户标志，可以是手机，邮箱，或者用户名

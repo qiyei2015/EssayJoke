@@ -22,6 +22,10 @@ class UserForgetPasswordActivity : BaseMVPActivity<UserForgetPasswordPresenter>(
         initView()
     }
 
+    override fun getTAG(): String {
+        return UserForgetPasswordActivity::class.java.simpleName
+    }
+
     override fun onClick(view: View) {
         when(view.id){
             R.id.mVerifyCodeButton -> {

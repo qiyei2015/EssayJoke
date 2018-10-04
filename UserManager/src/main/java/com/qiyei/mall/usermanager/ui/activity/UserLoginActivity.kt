@@ -25,6 +25,10 @@ class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
         initView()
     }
 
+    override fun getTAG(): String {
+        return UserLoginActivity::class.java.simpleName
+    }
+
     /**
      * View层回调
      */

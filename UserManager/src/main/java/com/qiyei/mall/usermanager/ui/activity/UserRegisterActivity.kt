@@ -24,6 +24,10 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
         initView()
     }
 
+    override fun getTAG(): String {
+        return UserRegisterActivity::class.java.simpleName
+    }
+
     override fun onClick(view: View) {
         when(view.id){
             R.id.mRegisterButton -> {

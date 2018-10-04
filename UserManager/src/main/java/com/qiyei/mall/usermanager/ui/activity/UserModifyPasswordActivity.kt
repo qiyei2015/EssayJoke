@@ -28,6 +28,10 @@ class UserModifyPasswordActivity : BaseMVPActivity<UserModifyPasswordPresenter>(
         initView()
     }
 
+    override fun getTAG(): String {
+        return UserModifyPasswordActivity::class.java.simpleName
+    }
+
     override fun onClick(view: View) {
         when(view.id){
             R.id.mConfirmButton -> {

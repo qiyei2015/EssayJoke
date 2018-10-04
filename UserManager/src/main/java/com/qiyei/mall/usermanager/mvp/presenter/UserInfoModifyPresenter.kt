@@ -23,6 +23,11 @@ class UserInfoModifyPresenter @Inject constructor():BasePresenter<IUserInfoModif
     @Inject
     lateinit var mUploadManagerService: IUploadManagerService
 
+
+    override fun getTAG(): String {
+        return UserInfoModifyPresenter::class.java.simpleName
+    }
+
     /**
      * 获取token
      */

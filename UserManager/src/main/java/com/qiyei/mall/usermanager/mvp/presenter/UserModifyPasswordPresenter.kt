@@ -17,6 +17,11 @@ class UserModifyPasswordPresenter  @Inject constructor():BasePresenter<IUserModi
     @Inject
     lateinit var mUserManagerService: IUserManagerService
 
+
+    override fun getTAG(): String {
+        return UserModifyPasswordPresenter::class.java.simpleName
+    }
+
     fun modifyPassword(userKey:String,password:String){
         mUserManagerService.modifyPassword(userKey,password)
                 .execute(object :BaseObserver<Boolean>(mView){

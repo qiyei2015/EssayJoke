@@ -41,6 +41,10 @@ class UserInfoModifyActivity : BaseMVPActivity<UserInfoModifyPresenter>(),IUserI
         initView()
     }
 
+    override fun getTAG(): String {
+        return UserInfoModifyActivity::class.java.simpleName
+    }
+
     override fun initComponentInject() {
         //注入点
         DaggerUserManagerComponent.builder()

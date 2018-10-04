@@ -18,6 +18,11 @@ class UserForgetPasswordPresenter @Inject constructor():BasePresenter<IUserForge
     @Inject
     lateinit var mUserManagerService: IUserManagerService
 
+
+    override fun getTAG(): String {
+        return UserForgetPasswordPresenter::class.java.simpleName
+    }
+
     /**
      * 忘记密码
      */
