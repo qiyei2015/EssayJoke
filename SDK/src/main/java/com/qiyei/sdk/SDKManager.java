@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.SystemClock;
 
 import com.qiyei.sdk.common.RuntimeEnv;
@@ -84,7 +85,6 @@ public final class SDKManager {
         Intent receiver = new Intent(context,StartCoreServiceReceiver.class);
         PendingIntent pi = PendingIntent.getBroadcast(context,0,receiver,0);
         am.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
-
     }
 
     /**
@@ -100,13 +100,30 @@ public final class SDKManager {
         public void onReceive(Context context, Intent intent) {
             LogManager.i(TAG,"StartCoreServiceReceiver receive intent:" + intent);
 
-            //启动核心服务与远程服务
-            Intent in = new Intent(context,CoreService.class);
-            context.startService(in);
-            in = new Intent(context,RemoteCoreService.class);
-            context.startService(in);
-            in = new Intent(context,CoreWakeUpService.class);
-            context.startService(in);
+            if (!RuntimeEnv.serviceAlive(CoreService.class.getCanonicalName())){
+                //启动核心服务与远程服务
+                Intent in = new Intent(context,CoreService.class);
+                startService(context,in);
+            }
+            if (!RuntimeEnv.serviceAlive(RemoteCoreService.class.getCanonicalName())){
+                //启动核心服务与远程服务
+                Intent in = new Intent(context,CoreService.class);
+                startService(context,in);
+            }
+            if (!RuntimeEnv.serviceAlive(CoreWakeUpService.class.getCanonicalName())){
+                //启动核心服务与远程服务
+                Intent in = new Intent(context,CoreService.class);
+                startService(context,in);
+            }
+        }
+
+        private void startService(Context context,Intent intent){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                context.startForegroundService(intent);
+            }else {
+                context.startService(intent);
+            }
         }
     }
+
 }

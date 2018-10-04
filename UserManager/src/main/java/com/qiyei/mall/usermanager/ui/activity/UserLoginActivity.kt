@@ -13,6 +13,7 @@ import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.mvp.presenter.UserLoginPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserLoginView
 import kotlinx.android.synthetic.main.activity_user_login.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
@@ -29,6 +30,7 @@ class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
      */
     override fun onLoginResult(userInfo: UserInfo) {
         toast(userInfo.toString())
+        startActivity(intentFor<UserInfoModifyActivity>())
     }
 
     override fun onClick(view: View) {

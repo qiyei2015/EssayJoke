@@ -12,9 +12,11 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.server.core.CoreService;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -238,5 +240,32 @@ public final class RuntimeEnv {
 //            ActivityCompat.requestPermissions(context,new String[]{ Manifest.permission.READ_EXTERNAL_STORAGE,
 //                    Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.VIBRATE},MY_PERMISSIONS_REQUEST_WRITE_STORE);
         }
+    }
+
+    /**
+     * 判断某个服务是否正在运行的方法
+     * @param serviceName
+     *            是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
+     * @return true代表正在运行，false代表服务没有正在运行
+     */
+    public static boolean serviceAlive(String serviceName) {
+        boolean isWork = false;
+        ActivityManager activityManager = (ActivityManager)RuntimeEnv.appContext.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> myList = activityManager.getRunningServices(10000);
+        if (myList.size() <= 0) {
+            return false;
+        }
+        for (int i = 0; i < myList.size(); i++) {
+            String name = myList.get(i).service.getClassName().toString();
+            if (name.contains(CoreService.class.getCanonicalName())){
+                LogManager.i(TAG, "RunningServiceInfo name:" + name);
+                if (name.equals(serviceName)) {
+                    isWork = true;
+                    break;
+                }
+            }
+        }
+        LogManager.i(TAG,serviceName + " isAlive " + isWork);
+        return isWork;
     }
 }

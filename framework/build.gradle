@@ -65,4 +65,14 @@ dependencies {
     //依赖anko框架 kotlin扩展
     api "org.jetbrains.anko:anko:$anko_version"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //Circle ImageView
+    api "de.hdodenhof:circleimageview:${circle_imageView_version}"
+    //Take Photo
+    api "com.jph.takephoto:takephoto_library:${take_photo_version}"
+    //Alert View
+    api "com.bigkoo:alertview:${alert_view_version}"
+    //七牛
+    api 'com.qiniu:qiniu-android-sdk:7.3.+'
+
 }

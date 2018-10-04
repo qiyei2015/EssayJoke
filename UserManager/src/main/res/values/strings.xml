@@ -10,4 +10,13 @@
     <string name="please_input_message_verifyCode">请输入短信验证码</string>
     <string name="please_input_password_6_20">请输入密码（6-20位字母或数字）</string>
     <string name="please_input_password_again">请再次输入密码</string>
+    <string name="common_avatar">头像</string>
+    <string name="nickname">昵称</string>
+    <string name="please_info_me">请称呼我</string>
+    <string name="gender">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="mobile_phone">手机</string>
+    <string name="sign">签名</string>
+    <string name="please_sign">请您填写签名</string>
 </resources>

@@ -43,8 +43,8 @@ android {
             } else {
                 manifest.srcFile 'src/debug/AndroidManifest.xml'
                 java.srcDirs = ['src/debug/java', 'src/main/java']
-                resources.srcDirs = ['src/debug/res','src/main/res']//指定source目录
-                res.srcDirs = ['src/debug/res','src/main/res']//指定资源目录
+                resources.srcDirs = ['src/debug/res', 'src/main/res']//指定source目录
+                res.srcDirs = ['src/debug/res', 'src/main/res']//指定资源目录
             }
         }
     }

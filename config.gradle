@@ -152,6 +152,12 @@ ext{
     // ?
     roundedimageview_version = '2.2.1'
 
+    //圆形ImageView
+    circle_imageView_version = "2.1.0"
+    //takephoto
+    take_photo_version = "4.0.3"
+    //对话框
+    alert_view_version = "1.0.3"
 
     /**
      * 测试依赖

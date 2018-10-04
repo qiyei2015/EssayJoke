@@ -1,7 +1,8 @@
 package com.qiyei.sdk.server.core;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
+
+import android.app.Notification;
 import android.app.job.JobInfo;
 import android.app.job.JobParameters;
 import android.app.job.JobScheduler;
@@ -14,7 +15,9 @@ import android.os.Build;
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.log.LogManager;
 
-import java.util.List;
+
+
+import static com.qiyei.sdk.common.RuntimeEnv.serviceAlive;
 
 /**
  * Email: 1273482124@qq.com
@@ -28,6 +31,15 @@ public class CoreWakeUpService extends JobService {
     private static final String TAG = CoreWakeUpService.class.getSimpleName();
 
     private final int jobWakeUpId = 1;
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            LogManager.i(TAG,"startForeground");
+            startForeground(1,new Notification());
+        }
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -47,7 +59,7 @@ public class CoreWakeUpService extends JobService {
         // 如果杀死了启动  轮寻onStartJob
 
         // 判断服务有没有在运行
-        boolean alive = serviceAlive(CoreService.class.getName());
+        boolean alive = RuntimeEnv.serviceAlive(CoreService.class.getName());
         if(!alive){
             //startService Android 8.0以上不支持启动在后台的service
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.N_MR1){
@@ -66,30 +78,4 @@ public class CoreWakeUpService extends JobService {
         return false;
     }
 
-    /**
-     * 判断某个服务是否正在运行的方法
-     * @param serviceName
-     *            是包名+服务的类名（例如：net.loonggg.testbackstage.TestService）
-     * @return true代表正在运行，false代表服务没有正在运行
-     */
-    private boolean serviceAlive(String serviceName) {
-        boolean isWork = false;
-        ActivityManager activityManager = (ActivityManager)getSystemService(Context.ACTIVITY_SERVICE);
-        List<ActivityManager.RunningServiceInfo> myList = activityManager.getRunningServices(1000);
-        if (myList.size() <= 0) {
-            return false;
-        }
-        for (int i = 0; i < myList.size(); i++) {
-            String name = myList.get(i).service.getClassName().toString();
-            if (name.contains(CoreService.class.getCanonicalName())){
-                LogManager.i(TAG, "RunningServiceInfo name:" + name);
-                if (name.equals(serviceName)) {
-                    isWork = true;
-                    break;
-                }
-            }
-        }
-        LogManager.i(TAG,serviceName + " isAlive " + isWork);
-        return isWork;
-    }
 }
