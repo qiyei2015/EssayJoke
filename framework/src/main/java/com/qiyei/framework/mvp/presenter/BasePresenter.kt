@@ -10,7 +10,7 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description: MVP 中Presenter基类,持有View的引用
  */
-open class BasePresenter<T:IBaseView> {
+abstract class BasePresenter<T:IBaseView> {
 
     /**
      * 公共基类View
@@ -21,5 +21,10 @@ open class BasePresenter<T:IBaseView> {
      */
     @Inject
     lateinit var mLifecycleProvider: LifecycleProvider<*>
+
+    /**
+     * 定位的TAG
+     */
+    abstract fun getTAG():String
 
 }

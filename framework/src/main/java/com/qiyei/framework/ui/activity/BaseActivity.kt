@@ -33,6 +33,11 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
     }
 
     /**
+     * 用于日志调试TAG
+     */
+    abstract fun getTAG():String
+
+    /**
      * 监听返回键，双击退出APP
      */
     override fun onBackPressed() {
