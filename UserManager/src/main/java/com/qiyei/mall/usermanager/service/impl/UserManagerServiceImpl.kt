@@ -57,4 +57,8 @@ class UserManagerServiceImpl @Inject constructor():IUserManagerService {
         return mRepository.modifyPassword(userKey,password).baseRespConvertBoolean()
 
     }
+
+    override fun modifyUserInfo(userIcon: String, nickName: String, userGender: String, userSign: String): Observable<UserInfo> {
+        return mRepository.modifyUserInfo(userIcon,nickName,userGender,userSign).baseRespConvert()
+    }
 }

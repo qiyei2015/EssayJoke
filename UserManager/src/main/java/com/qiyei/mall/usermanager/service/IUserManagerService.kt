@@ -1,5 +1,6 @@
 package com.qiyei.mall.usermanager.service
 
+import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.mall.usermanager.data.bean.UserInfo
 import io.reactivex.Observable
 
@@ -40,4 +41,15 @@ interface IUserManagerService {
      * @param password 用户密码
      */
     fun modifyPassword(userKey:String,password:String):Observable<Boolean>
+
+
+    /**
+     * 修改密码
+     * @param userIcon 用户头像
+     * @param nickName 昵称
+     * @param userGender 性别
+     * @param userSign 签名
+     */
+    fun modifyUserInfo(userIcon:String,nickName:String,userGender:String,userSign:String): Observable<UserInfo>
+
 }

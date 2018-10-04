@@ -33,7 +33,7 @@
     <RelativeLayout style="@style/user_info_line_style">
         <TextView android:text="@string/nickname"
                   style="@style/user_info_label_style"/>
-        <EditText android:id="@+id/mUserNameEditText"
+        <EditText android:id="@+id/mNickNameEditText"
                   android:background="@null"
                   android:hint="@string/please_info_me"
                   android:maxLength="10"

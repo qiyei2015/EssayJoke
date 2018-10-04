@@ -4,10 +4,7 @@ import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.net.RetrofitFactory
 import com.qiyei.mall.usermanager.data.api.IUserManagerApi
 import com.qiyei.mall.usermanager.data.bean.UserInfo
-import com.qiyei.mall.usermanager.data.protocol.ForgetPasswordReq
-import com.qiyei.mall.usermanager.data.protocol.LoginReq
-import com.qiyei.mall.usermanager.data.protocol.ModifyPasswordReq
-import com.qiyei.mall.usermanager.data.protocol.RegisterReq
+import com.qiyei.mall.usermanager.data.protocol.*
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -50,4 +47,12 @@ class UserManagerRepository @Inject constructor() {
         return RetrofitFactory.INSTANCE.create(IUserManagerApi::class.java)
                 .modifyPassword(ModifyPasswordReq(userKey,password))
     }
+
+    /**
+     * 修改用户信息
+     */
+    fun modifyUserInfo(userIcon:String,nickName:String,userGender:String,userSign:String): Observable<BaseResp<UserInfo>> {
+        return RetrofitFactory.INSTANCE.create(IUserManagerApi::class.java).modifyUserInfo(EditUserInfoReq(userIcon,nickName,userGender,userSign))
+    }
+
 }

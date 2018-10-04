@@ -1,6 +1,7 @@
 package com.qiyei.mall.usermanager.mvp.view
 
 import com.qiyei.framework.mvp.view.IBaseView
+import com.qiyei.mall.usermanager.data.bean.UserInfo
 
 /**
  * @author Created by qiyei2015 on 2018/10/4.
@@ -10,5 +11,8 @@ import com.qiyei.framework.mvp.view.IBaseView
  */
 interface IUserInfoModifyView:IBaseView {
 
+    fun onUploadTokenResult(result:String)
+
+    fun onModifyUserInfoResult(userInfo:UserInfo)
 
 }
