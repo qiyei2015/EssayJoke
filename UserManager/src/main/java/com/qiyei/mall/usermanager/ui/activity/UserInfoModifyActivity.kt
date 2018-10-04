@@ -4,7 +4,6 @@ package com.qiyei.mall.usermanager.ui.activity
 
 import android.os.Bundle
 import android.view.View
-import com.qiyei.framework.ui.activity.BaseMVPActivity
 import com.qiyei.mall.usermanager.R
 import com.qiyei.mall.usermanager.data.bean.UserInfo
 import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
@@ -13,22 +12,36 @@ import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.mvp.presenter.UserInfoModifyPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserInfoModifyView
 import kotlinx.android.synthetic.main.activity_user_info_modify.*
-import com.bigkoo.alertview.AlertView
+import com.jph.takephoto.model.TResult
+import com.qiniu.android.http.ResponseInfo
+import com.qiniu.android.storage.UpCompletionHandler
 import com.qiniu.android.storage.UploadManager
+import com.qiyei.framework.constant.MallConstant
 import com.qiyei.framework.titlebar.CommonTitleBar
+import com.qiyei.framework.ui.activity.BaseTakePhotoActivity
+import com.qiyei.sdk.image.ImageManager
+import com.qiyei.sdk.log.LogManager
+import io.reactivex.Observable
+import io.reactivex.Observer
 import org.jetbrains.anko.toast
+import org.json.JSONObject
 
 
-class UserInfoModifyActivity : BaseMVPActivity<UserInfoModifyPresenter>(),IUserInfoModifyView {
+class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),IUserInfoModifyView {
 
     /**
      * 用户信息
      */
     private lateinit var mUserInfo: UserInfo
     /**
+     * 用户本地头像url
+     */
+    private lateinit var mLocalAvatarUrl:String
+    /**
      * 用户头像url
      */
     private lateinit var mUserIconUrl:String
+
     /**
      * 七牛上传
      */
@@ -59,17 +72,40 @@ class UserInfoModifyActivity : BaseMVPActivity<UserInfoModifyPresenter>(),IUserI
     override fun onClick(view: View) {
         when(view.id){
             R.id.mUserIconRelativeLayout ->{
-                showAvatarDialog()
+                showTakePhotoDialog()
             }
         }
     }
 
-    override fun onUploadTokenResult(result: String) {
+    /**
+     * 图片选择回调
+     */
+    override fun takeSuccess(result: TResult?) {
+        mLocalAvatarUrl = result?.image?.compressPath?:""
+        mPresenter.getUploadToken()
+        LogManager.i(getTAG(),"mLocalAvatarUrl:$mLocalAvatarUrl")
+    }
 
+    /**
+     * token获取回调
+     */
+    override fun onUploadTokenResult(result: String) {
+        LogManager.i(getTAG(),"onUploadTokenResult:$result")
+        //上传
+        mUploadManager.put(mLocalAvatarUrl, null,result,object : UpCompletionHandler{
+            override fun complete(key: String?, info: ResponseInfo?, response: JSONObject?) {
+                mUserIconUrl = MallConstant.IMAGE_SERVER_ADDRESS + response?.get("hash")
+                LogManager.i(getTAG(),"mUserIconUrl:$mUserIconUrl")
+
+                mUserIconCircleImageView.post{
+                    ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
+                }
+            }
+        },null)
     }
 
     override fun onModifyUserInfoResult(userInfo: UserInfo) {
-
+        toast("修改用户信息成功")
     }
 
     /**
@@ -85,31 +121,6 @@ class UserInfoModifyActivity : BaseMVPActivity<UserInfoModifyPresenter>(),IUserI
                 }
                 .build()
         mUserIconRelativeLayout.setOnClickListener(this)
-    }
-
-    /**
-     * 弹出头像对话框
-     */
-    private fun showAvatarDialog(){
-        AlertView.Builder().setContext(this)
-                .setStyle(AlertView.Style.ActionSheet)
-                .setTitle("选择操作")
-                .setMessage(null)
-                .setCancelText("取消")
-                .setDestructive("拍照", "相册")
-                .setOthers(null)
-                .setOnItemClickListener { o, position ->
-                    when(position){
-                        0 -> {
-                            toast("拍照")
-                        }
-                        1 -> {
-                            toast("从相册选择")
-                        }
-                    }
-                }
-                .build()
-                .show()
     }
 
 }

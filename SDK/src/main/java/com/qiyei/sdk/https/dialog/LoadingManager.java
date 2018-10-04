@@ -19,7 +19,7 @@ public class LoadingManager {
      * @param tag
      */
     public static void showDialog(Object manager, String tag){
-        Log.i(TAG,"manager:"+manager.getClass() + " tag:" + tag);
+
         if (manager == null){
             return;
         }
@@ -39,6 +39,7 @@ public class LoadingManager {
             fragmentTransaction.add(dialog, tag);
             fragmentTransaction.commitAllowingStateLoss();//立即执行
         }
+        Log.i(TAG,"showDialog tag:" + tag);
     }
 
     /**
@@ -47,7 +48,7 @@ public class LoadingManager {
      * @param tag
      */
     public static void dismissDialog(Object manager,String tag){
-        Log.i(TAG,"manager:"+manager + " tag:" + tag);
+
         if (manager == null){
             return;
         }
@@ -64,6 +65,7 @@ public class LoadingManager {
                 dialog.dismissAllowingStateLoss();
             }
         }
+        Log.i(TAG,"dismissDialog tag:" + tag);
     }
 
     /**

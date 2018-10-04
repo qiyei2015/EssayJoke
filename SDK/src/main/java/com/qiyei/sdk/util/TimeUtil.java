@@ -23,4 +23,20 @@ public class TimeUtil {
         return sf.format(time);
     }
 
+    /**
+     * 获取当前时间
+     * @return long返回
+     */
+    public static String getCurrentTime(){
+        return System.currentTimeMillis() + "";
+    }
+
+    /**
+     * 获取当前时间
+     * @param format
+     * @return long返回
+     */
+    public static String getCurrentTime(String format){
+        return formatTime(Long.parseLong(getCurrentTime()),format);
+    }
 }
