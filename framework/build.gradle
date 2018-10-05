@@ -53,6 +53,8 @@ dependencies {
     annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
 
     api "com.android.support:appcompat-v7:$appcompat_v7_version"
+    api "com.android.support:cardview-v7:${appcompat_v7_version}"
+
     testImplementation "junit:junit:$junit_version"
 
     api "com.android.support:multidex:$support_multidex_version"
@@ -82,5 +84,10 @@ dependencies {
     api "com.ashokvarma.android:bottom-navigation-bar:$bottom_navigation_bar_version"
     //banner
     api "com.youth.banner:banner:$banner_version"
+    //带三角形角标的View
+    api "com.github.shts:TriangleLabelView:$triangleLabelView_version"
+    //画廊
+    api "com.github.crosswall:Android-Coverflow:$android_coverflow_version"
+
 
 }

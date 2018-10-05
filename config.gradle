@@ -162,6 +162,10 @@ ext{
     bottom_navigation_bar_version = "2.0.5"
     //banner
     banner_version = "1.4.10"
+    //带三角形角标的View
+    triangleLabelView_version = "1.1.2"
+    //画廊
+    android_coverflow_version = "release-v1.0.5"
 
     /**
      * 测试依赖

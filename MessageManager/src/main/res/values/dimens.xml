@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="news_height">45dp</dimen>
+    <dimen name="msg_icon_height">45dip</dimen>
+    <dimen name="msg_icon_width">45dip</dimen>
+</resources>

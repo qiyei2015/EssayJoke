@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="@dimen/news_height"
+              android:orientation="horizontal"
+              android:gravity="center_vertical"
+              android:background="@drawable/corner_news_bg"
+              android:paddingLeft="@dimen/common_padding_middle"
+              android:paddingTop="@dimen/common_padding_small"
+              android:paddingBottom="@dimen/common_padding_small">
+    <ImageView style="@style/WrapMatch"
+               android:layout_marginRight="@dimen/common_margin_middle"
+               android:src="@drawable/icon_news"/>
+    <View android:layout_marginRight="@dimen/common_margin_middle"
+          style="@style/DividerFixedWidth"/>
+    <ViewFlipper android:id="@+id/mFlipperView"
+                 style="@style/MatchWrap"
+                 android:flipInterval="3000"/>
+</LinearLayout>

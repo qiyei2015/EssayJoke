@@ -5,10 +5,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.framework.rx.BaseFunction
 import com.qiyei.framework.rx.BaseFunctionBoolean
 import com.qiyei.framework.rx.BaseObserver
+import com.qiyei.sdk.image.ImageManager
 import com.trello.rxlifecycle2.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -60,4 +62,11 @@ fun Button.enable(editText: EditText,method:() -> Boolean){
 
         }
     })
+}
+
+/**
+ * ImageView加载图片
+ */
+fun ImageView.loadUrl(url: String) {
+    ImageManager.getInstance().loadImage(this, url)
 }

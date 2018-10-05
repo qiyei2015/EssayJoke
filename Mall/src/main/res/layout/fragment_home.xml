@@ -1,14 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:orientation="vertical"
              tools:context=".ui.fragment.HomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment"/>
+    <LinearLayout
+        style="@style/searchHeaderStyle"
+        android:paddingLeft="@dimen/common_padding">
+        <EditText
+            android:id="@+id/mSearchEditText"
+            android:hint="@string/search_googs_category"
+            android:cursorVisible="false"
+            android:editable="false"
+            style="@style/searchHeaderEditTextStyle"/>
+        <ImageView
+            android:id="@+id/mScanImageView"
+            style="@style/WrapWrap"
+            android:src="@drawable/icon_scan"/>
+    </LinearLayout>
 
-</FrameLayout>
+    <com.youth.banner.Banner
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/mHomeBanner">
+    </com.youth.banner.Banner>
+
+    <com.qiyei.mall.messagemanager.view.NewsViewFlipper
+        android:id="@+id/mNewsViewFlipper"
+        style="@style/MatchWrap"
+        android:layout_marginLeft="@dimen/common_margin_middle"
+        android:layout_marginTop="@dimen/common_margin_small"
+        android:layout_marginRight="@dimen/common_margin_middle"
+        android:layout_marginBottom="@dimen/common_margin_small"/>
+
+    <TextView
+        android:textSize="@dimen/text_small_size"
+        android:textStyle="bold"
+        android:textColor="@color/text_light_dark"
+        android:background="@color/common_white"
+        android:paddingLeft="@dimen/common_margin"
+        android:paddingTop="@dimen/common_padding_small"
+        android:paddingBottom="@dimen/common_margin_small"
+        style="@style/MatchWrap"
+        android:text="火爆进行中"
+        android:drawableLeft="@drawable/icon_special"
+        android:drawablePadding="@dimen/common_padding_small"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mHomeDiscountRecyclerView"
+        style="@style/commonRecyclerView"
+        android:background="@color/common_white"
+        android:paddingLeft="@dimen/common_padding"
+        android:paddingRight="@dimen/common_padding"
+        android:paddingBottom="@dimen/common_padding_small"
+        android:layout_height="wrap_content"/>
+
+    <!--画廊-->
+    <me.crosswall.lib.coverflow.core.PagerContainer
+        android:id="@+id/mPagerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="?attr/colorPrimary">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/mTopicViewPager"
+            android:layout_gravity="center"
+            android:layout_width="200dip"
+            android:layout_height="160dip"
+            android:overScrollMode="never"/>
+
+    </me.crosswall.lib.coverflow.core.PagerContainer>
+
+</LinearLayout>

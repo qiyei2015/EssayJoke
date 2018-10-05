@@ -1,10 +1,8 @@
-package com.qiyei.mall
+package com.qiyei.mall.ui.activity
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.qiyei.mall.ui.activity.HomeActivity
-import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
-import com.qiyei.mall.usermanager.ui.activity.UserRegisterActivity
+import com.qiyei.mall.R
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
