@@ -74,6 +74,25 @@ public class FragmentHelper {
     }
 
     /**
+     * 移除Fragment
+     * @param fragment
+     */
+    public void removeFragment(Fragment fragment){
+        // 开启事物
+        FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
+
+        // 1.找到所有的Fragment
+        List<Fragment> childFragments = mFragmentManager.getFragments();
+
+        // 2.如果容器里面没有我们就添加，否则显示
+        if(childFragments.contains(fragment)) {
+            fragmentTransaction.remove(fragment);
+        }
+        // 一定要commit
+        fragmentTransaction.commit();
+    }
+
+    /**
      *
      * @param clazz
      * @return

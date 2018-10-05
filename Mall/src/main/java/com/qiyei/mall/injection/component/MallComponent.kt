@@ -2,7 +2,7 @@ package com.qiyei.mall.injection.component
 
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
-import com.qiyei.mall.ui.fragment.HomeFragment
+import com.qiyei.mall.ui.fragment.*
 import dagger.Component
 
 /**
@@ -16,6 +16,9 @@ import dagger.Component
 interface MallComponent {
 
     fun inject(fragment:HomeFragment)
-
+    fun inject(fragment:CategoryFragment)
+    fun inject(fragment:CartFragment)
+    fun inject(fragment:MessageFragment)
+    fun inject(fragment:UserFragment)
 
 }

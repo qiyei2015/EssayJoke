@@ -60,7 +60,7 @@ class HomeBottomNavigationBar @JvmOverloads constructor(
         messageItem.setBadgeItem(mMessageBadge)
 
         //我的
-        val myItem = BottomNavigationItem(R.drawable.btn_nav_user_press,resources.getString(R.string.nav_bar_user))
+        val userItem = BottomNavigationItem(R.drawable.btn_nav_user_press,resources.getString(R.string.nav_bar_user))
                 .setInactiveIconResource(R.drawable.btn_nav_user_normal)
                 .setActiveColorResource(R.color.common_blue)
                 .setInActiveColorResource(R.color.text_normal)
@@ -74,7 +74,7 @@ class HomeBottomNavigationBar @JvmOverloads constructor(
                 .addItem(categoryItem)
                 .addItem(cartItem)
                 .addItem(messageItem)
-                .addItem(myItem)
+                .addItem(userItem)
                 .setFirstSelectedPosition(0)
                 .initialise()
 
