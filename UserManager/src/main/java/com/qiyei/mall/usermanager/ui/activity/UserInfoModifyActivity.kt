@@ -23,8 +23,10 @@ import com.qiyei.sdk.image.ImageManager
 import com.qiyei.sdk.log.LogManager
 import io.reactivex.Observable
 import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
 import org.jetbrains.anko.toast
 import org.json.JSONObject
+import java.util.concurrent.TimeUnit
 
 
 class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),IUserInfoModifyView {
@@ -97,9 +99,14 @@ class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),
                 mUserIconUrl = MallConstant.IMAGE_SERVER_ADDRESS + response?.get("hash")
                 LogManager.i(getTAG(),"mUserIconUrl:$mUserIconUrl")
 
-                mUserIconCircleImageView.post{
-                    ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
-                }
+                Observable.timer(0,TimeUnit.SECONDS)
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe {
+                            ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
+                        }
+//                mUserIconCircleImageView.post{
+//                    ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
+//                }
             }
         },null)
     }

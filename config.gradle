@@ -159,6 +159,9 @@ ext{
     //对话框
     alert_view_version = "1.0.3"
 
+    //底部导航栏
+    bottom_navigation_bar_version = "2.0.5"
+
     /**
      * 测试依赖
      */

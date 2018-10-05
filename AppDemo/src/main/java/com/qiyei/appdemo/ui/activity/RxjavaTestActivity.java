@@ -1,7 +1,7 @@
 package com.qiyei.appdemo.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.qiyei.appdemo.R;
@@ -32,7 +32,6 @@ import io.reactivex.schedulers.Schedulers;
 public class RxjavaTestActivity extends AppCompatActivity {
 
     private static final String TAG = "RxjavaTestActivity";
-
 
 
     @Override
@@ -124,7 +123,8 @@ public class RxjavaTestActivity extends AppCompatActivity {
                 emitter.onComplete();
             }
 
-        }).subscribe(new Observer<Integer>() {
+        }).observeOn(AndroidSchedulers.mainThread())
+          .subscribe(new Observer<Integer>() {
 
             Disposable disposable;
 
@@ -259,7 +259,7 @@ public class RxjavaTestActivity extends AppCompatActivity {
             }
         });
 
-
+        AndroidSchedulers.mainThread()
     }
 
 
