@@ -23,7 +23,7 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
     @Inject
     lateinit var mPresenter:T
 
-    lateinit var mActivityComponet: ActivityComponent
+    lateinit var mActivityComponent: ActivityComponent
 
     lateinit var mDialogTAG:String
 
@@ -55,7 +55,7 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
      * 初始化注入
      */
     private fun initActivityInjection(){
-        mActivityComponet = DaggerActivityComponent.builder()
+        mActivityComponent = DaggerActivityComponent.builder()
                 .appComponent((activity!!.application as FrameworkApplication).mAppComponent)
                 .activityModule(ActivityModule(activity!!))
                 .lifecycleProviderModule(LifecycleProviderModule(this))

@@ -88,7 +88,6 @@ ext{
     recyclerview_v7_version = '27.1.1'
     support_multidex_version = '1.0.3'
 
-
     /**
      * Android架构组件
      */
@@ -161,6 +160,8 @@ ext{
 
     //底部导航栏
     bottom_navigation_bar_version = "2.0.5"
+    //banner
+    banner_version = "1.4.10"
 
     /**
      * 测试依赖

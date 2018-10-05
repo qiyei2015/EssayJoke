@@ -80,5 +80,7 @@ dependencies {
     
     //底部导航栏
     api "com.ashokvarma.android:bottom-navigation-bar:$bottom_navigation_bar_version"
+    //banner
+    api "com.youth.banner:banner:$banner_version"
 
 }
