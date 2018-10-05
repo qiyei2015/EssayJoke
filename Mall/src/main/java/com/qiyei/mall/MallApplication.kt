@@ -1,8 +1,8 @@
 package com.qiyei.mall
 
-import android.app.Application
+
 import com.qiyei.framework.FrameworkApplication
-import com.qiyei.sdk.SDKManager
+
 
 /**
  * @author Created by qiyei2015 on 2018/9/23.

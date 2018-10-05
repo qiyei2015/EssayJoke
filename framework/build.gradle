@@ -21,7 +21,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        //分包
+        multiDexEnabled true
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -53,6 +54,8 @@ dependencies {
 
     api "com.android.support:appcompat-v7:$appcompat_v7_version"
     testImplementation "junit:junit:$junit_version"
+
+    api "com.android.support:multidex:$support_multidex_version"
 
     api project(':SDK')
     api project(':Resource')

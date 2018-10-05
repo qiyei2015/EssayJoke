@@ -1,7 +1,8 @@
 package com.qiyei.framework
 
-import android.app.Application
+
 import android.content.Context
+import android.support.multidex.MultiDexApplication
 import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
 import com.qiyei.framework.injection.module.AppModule
@@ -13,7 +14,7 @@ import com.qiyei.sdk.SDKManager
  * @email: 1273482124@qq.com
  * @description:
  */
-open class FrameworkApplication:Application() {
+open class FrameworkApplication: MultiDexApplication() {
 
     lateinit var mAppComponent:AppComponent
 
