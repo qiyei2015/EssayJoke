@@ -12,7 +12,7 @@ import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.mall.goodsmanager.R
 import com.qiyei.mall.goodsmanager.common.startLoading
-import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
+import com.qiyei.mall.goodsmanager.data.bean.Category
 import com.qiyei.mall.goodsmanager.injection.component.DaggerGoodsManagerComponent
 import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
 import com.qiyei.mall.goodsmanager.mvp.presenter.CategoryManagerPresenter
@@ -71,7 +71,7 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
     /**
      * presenter层回调
      */
-    override fun onCategoryResult(result: MutableList<CategoryItem>?) {
+    override fun onCategoryResult(result: MutableList<Category>?) {
         if (result == null || result.size == 0){
             toast("获取分类失败")
             //没有数据

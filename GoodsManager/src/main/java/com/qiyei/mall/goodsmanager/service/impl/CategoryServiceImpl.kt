@@ -1,7 +1,7 @@
 package com.qiyei.mall.goodsmanager.service.impl
 
 import com.qiyei.framework.extend.baseRespConvert
-import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
+import com.qiyei.mall.goodsmanager.data.bean.Category
 import com.qiyei.mall.goodsmanager.data.respository.CategoryRepository
 import com.qiyei.mall.goodsmanager.service.ICategoryService
 import io.reactivex.Observable
@@ -18,7 +18,7 @@ class CategoryServiceImpl @Inject constructor():ICategoryService {
     @Inject
     lateinit var mRepository: CategoryRepository
 
-    override fun getCategory(id:Int): Observable<MutableList<CategoryItem>?>{
+    override fun getCategory(id:Int): Observable<MutableList<Category>?>{
         return mRepository.getCategory(id).baseRespConvert()
     }
 }

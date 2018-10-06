@@ -3,10 +3,9 @@ package com.qiyei.mall.goodsmanager.mvp.presenter
 import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
-import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
+import com.qiyei.mall.goodsmanager.data.bean.Category
 import com.qiyei.mall.goodsmanager.mvp.view.ICategoryManagerView
 import com.qiyei.mall.goodsmanager.service.ICategoryService
-import com.qiyei.sdk.log.LogManager
 import javax.inject.Inject
 
 /**
@@ -25,8 +24,8 @@ class CategoryManagerPresenter @Inject constructor():BasePresenter<ICategoryMana
     }
 
     fun getCategory(id:Int){
-        mCategoryService.getCategory(id).execute(object :BaseObserver<MutableList<CategoryItem>?>(mView){
-            override fun onNext(t: MutableList<CategoryItem>?) {
+        mCategoryService.getCategory(id).execute(object :BaseObserver<MutableList<Category>?>(mView){
+            override fun onNext(t: MutableList<Category>?) {
                 mView.onCategoryResult(t)
             }
         },mLifecycleProvider)

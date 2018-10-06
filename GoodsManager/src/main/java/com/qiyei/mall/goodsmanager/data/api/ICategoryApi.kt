@@ -1,7 +1,7 @@
 package com.qiyei.mall.goodsmanager.data.api
 
 import com.qiyei.framework.data.protocol.BaseResp
-import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
+import com.qiyei.mall.goodsmanager.data.bean.Category
 import com.qiyei.mall.goodsmanager.data.protocol.CategoryReq
 import io.reactivex.Observable
 import retrofit2.http.Body
@@ -19,5 +19,5 @@ interface ICategoryApi {
      * 获取商品分类列表
      */
     @POST("category/getCategory")
-    fun getCategory(@Body req: CategoryReq): Observable<BaseResp<MutableList<CategoryItem>?>>
+    fun getCategory(@Body req: CategoryReq): Observable<BaseResp<MutableList<Category>?>>
 }

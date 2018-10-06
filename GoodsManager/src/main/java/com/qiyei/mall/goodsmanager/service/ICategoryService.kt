@@ -1,6 +1,6 @@
 package com.qiyei.mall.goodsmanager.service
 
-import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
+import com.qiyei.mall.goodsmanager.data.bean.Category
 import io.reactivex.Observable
 
 /**
@@ -11,5 +11,5 @@ import io.reactivex.Observable
  */
 interface ICategoryService {
 
-    fun getCategory(id:Int):Observable<MutableList<CategoryItem>?>
+    fun getCategory(id:Int):Observable<MutableList<Category>?>
 }
