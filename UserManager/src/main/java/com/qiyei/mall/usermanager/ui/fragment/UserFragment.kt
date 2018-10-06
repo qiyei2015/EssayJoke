@@ -1,4 +1,4 @@
-package com.qiyei.mall.ui.fragment
+package com.qiyei.mall.usermanager.ui.fragment
 
 
 import android.os.Bundle
@@ -7,11 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
-import com.qiyei.mall.R
-import com.qiyei.mall.injection.component.DaggerMallComponent
-import com.qiyei.mall.mvp.presenter.CategoryFragmentPresenter
-import com.qiyei.mall.mvp.view.ICategoryFragmentView
-
+import com.qiyei.mall.usermanager.R
+import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
+import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
+import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -19,14 +18,14 @@ import com.qiyei.mall.mvp.view.ICategoryFragmentView
  * @email: 1273482124@qq.com
  * @description:
  */
-class CategoryFragment : BaseMVPFragment<CategoryFragmentPresenter>(),ICategoryFragmentView {
+class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
     override fun onStart() {
@@ -38,7 +37,7 @@ class CategoryFragment : BaseMVPFragment<CategoryFragmentPresenter>(),ICategoryF
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerMallComponent.builder()
+        DaggerUserManagerComponent.builder()
                 .activityComponent(mActivityComponent)
                 .build()
                 .inject(this)
@@ -46,6 +45,6 @@ class CategoryFragment : BaseMVPFragment<CategoryFragmentPresenter>(),ICategoryF
     }
 
     override fun getTAG(): String {
-        return CategoryFragment::class.java.simpleName
+        return UserFragment::class.java.simpleName
     }
 }

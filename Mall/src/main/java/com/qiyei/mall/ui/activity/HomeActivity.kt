@@ -6,7 +6,11 @@ import android.support.v4.app.Fragment
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.qiyei.framework.ui.fragment.FragmentHelper
 import com.qiyei.mall.R
+import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
+import com.qiyei.mall.messagemanager.ui.fragment.MessageFragment
+import com.qiyei.mall.ordermanager.ui.fragment.CartFragment
 import com.qiyei.mall.ui.fragment.*
+import com.qiyei.mall.usermanager.ui.fragment.UserFragment
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_home.*
@@ -17,10 +21,10 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var fragmentHelper:FragmentHelper
 
     private val mHomeFragment:HomeFragment by lazy { HomeFragment() }
-    private val mCategoryFragment:CategoryFragment by lazy { CategoryFragment() }
-    private val mCartFragment:CartFragment by lazy { CartFragment() }
-    private val mMessageFragment:MessageFragment by lazy { MessageFragment() }
-    private val mUserFragment:UserFragment by lazy { UserFragment() }
+    private val mCategoryFragment: CategoryFragment by lazy { CategoryFragment() }
+    private val mCartFragment: CartFragment by lazy { CartFragment() }
+    private val mMessageFragment: MessageFragment by lazy { MessageFragment() }
+    private val mUserFragment: UserFragment by lazy { UserFragment() }
     /**
      * fragment列表
      */

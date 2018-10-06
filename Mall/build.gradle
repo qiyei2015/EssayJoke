@@ -40,20 +40,23 @@ dependencies {
 
     implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
     implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation 'com.android.support:support-v4:27.1.1'
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
-    implementation project(':Provider')
-    implementation project(':UserManager')
-    implementation project(':OrderManager')
-    implementation project(':GoodsManager')
-    implementation project(':MessageManager')
-
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    if(isMallLibrary.toBoolean()){
+        implementation project(':Provider')
+        implementation project(':UserManager')
+        implementation project(':OrderManager')
+        implementation project(':GoodsManager')
+        implementation project(':MessageManager')
+    }
 }

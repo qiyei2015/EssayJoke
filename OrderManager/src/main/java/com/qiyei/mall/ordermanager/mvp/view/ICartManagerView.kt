@@ -1,4 +1,4 @@
-package com.qiyei.mall.mvp.view
+package com.qiyei.mall.ordermanager.mvp.view
 
 import com.qiyei.framework.mvp.view.IBaseView
 
@@ -8,7 +8,7 @@ import com.qiyei.framework.mvp.view.IBaseView
  * @email: 1273482124@qq.com
  * @description:
  */
-interface IUserFragmentView:IBaseView {
+interface ICartManagerView:IBaseView {
 
 
 }

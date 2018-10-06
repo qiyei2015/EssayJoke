@@ -1,8 +1,7 @@
-package com.qiyei.mall.mvp.presenter
+package com.qiyei.mall.ordermanager.mvp.presenter
 
 import com.qiyei.framework.mvp.presenter.BasePresenter
-import com.qiyei.mall.mvp.view.ICartFragmentView
-import com.qiyei.mall.mvp.view.IHomeFragmentView
+import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
 import com.qiyei.sdk.log.LogManager
 import javax.inject.Inject
 
@@ -12,10 +11,10 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description:
  */
-class CartFragmentPresenter @Inject constructor():BasePresenter<ICartFragmentView>() {
+class CartManagerPresenter @Inject constructor():BasePresenter<ICartManagerView>() {
 
     override fun getTAG(): String {
-        return CartFragmentPresenter::class.java.simpleName
+        return CartManagerPresenter::class.java.simpleName
     }
 
     fun getString(){

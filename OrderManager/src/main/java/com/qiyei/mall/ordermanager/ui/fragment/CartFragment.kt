@@ -1,4 +1,4 @@
-package com.qiyei.mall.ui.fragment
+package com.qiyei.mall.ordermanager.ui.fragment
 
 
 import android.os.Bundle
@@ -7,10 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
-import com.qiyei.mall.R
-import com.qiyei.mall.injection.component.DaggerMallComponent
-import com.qiyei.mall.mvp.presenter.MessageFragmentPresenter
-import com.qiyei.mall.mvp.view.IMessageFragmentView
+
+import com.qiyei.mall.ordermanager.R
+import com.qiyei.mall.ordermanager.injection.component.DaggerCartManagerComponent
+import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
+import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
+
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -18,14 +20,14 @@ import com.qiyei.mall.mvp.view.IMessageFragmentView
  * @email: 1273482124@qq.com
  * @description:
  */
-class MessageFragment : BaseMVPFragment<MessageFragmentPresenter>(),IMessageFragmentView {
+class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
-        return inflater.inflate(R.layout.fragment_message, container, false)
+        return inflater.inflate(R.layout.fragment_cart, container, false)
     }
 
     override fun onStart() {
@@ -37,7 +39,7 @@ class MessageFragment : BaseMVPFragment<MessageFragmentPresenter>(),IMessageFrag
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerMallComponent.builder()
+        DaggerCartManagerComponent.builder()
                 .activityComponent(mActivityComponent)
                 .build()
                 .inject(this)
@@ -45,6 +47,6 @@ class MessageFragment : BaseMVPFragment<MessageFragmentPresenter>(),IMessageFrag
     }
 
     override fun getTAG(): String {
-        return MessageFragment::class.java.simpleName
+        return CartFragment::class.java.simpleName
     }
 }

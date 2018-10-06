@@ -1,4 +1,4 @@
-if (isLibrary.toBoolean()) {
+if (isMallLibrary.toBoolean()) {
     apply plugin: 'com.android.library'
 } else {
     apply plugin: 'com.android.application'
@@ -32,7 +32,7 @@ android {
     }
     sourceSets {
         main {
-            if (isLibrary.toBoolean()) {
+            if (isMallLibrary.toBoolean()) {
                 manifest.srcFile 'src/main/AndroidManifest.xml'
                 java {
                     //全部Module一起编译的时候剔除debug目录

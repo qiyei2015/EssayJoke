@@ -1,8 +1,7 @@
-package com.qiyei.mall.mvp.presenter
+package com.qiyei.mall.messagemanager.mvp.presenter
 
 import com.qiyei.framework.mvp.presenter.BasePresenter
-import com.qiyei.mall.mvp.view.IHomeFragmentView
-import com.qiyei.mall.mvp.view.IMessageFragmentView
+import com.qiyei.mall.messagemanager.mvp.view.IMessageManagerView
 import com.qiyei.sdk.log.LogManager
 import javax.inject.Inject
 
@@ -12,10 +11,10 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description:
  */
-class MessageFragmentPresenter @Inject constructor():BasePresenter<IMessageFragmentView>() {
+class MessageManagerPresenter @Inject constructor():BasePresenter<IMessageManagerView>() {
 
     override fun getTAG(): String {
-        return MessageFragmentPresenter::class.java.simpleName
+        return MessageManagerPresenter::class.java.simpleName
     }
 
     fun getString(){

@@ -1,8 +1,7 @@
-package com.qiyei.mall.mvp.presenter
+package com.qiyei.mall.usermanager.mvp.presenter
 
 import com.qiyei.framework.mvp.presenter.BasePresenter
-import com.qiyei.mall.mvp.view.IHomeFragmentView
-import com.qiyei.mall.mvp.view.IUserFragmentView
+import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
 import com.qiyei.sdk.log.LogManager
 import javax.inject.Inject
 
@@ -12,10 +11,10 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description:
  */
-class UserFragmentPresenter @Inject constructor():BasePresenter<IUserFragmentView>() {
+class UserManagerPresenter @Inject constructor():BasePresenter<IUserManagerView>() {
 
     override fun getTAG(): String {
-        return UserFragmentPresenter::class.java.simpleName
+        return UserManagerPresenter::class.java.simpleName
     }
 
     fun getString(){

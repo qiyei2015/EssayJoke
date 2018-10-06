@@ -7,12 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import com.qiyei.framework.extend.loadUrl
 import com.qiyei.mall.R
+import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.layout_topic_item.view.*
 
 /*
     话题数据
  */
 class TopicAdapter(private val context: Context, private val list: List<String>) : PagerAdapter() {
+
+    companion object {
+        const val TAG = "TopicAdapter"
+    }
 
     override fun destroyItem(parent: ViewGroup, paramInt: Int, paramObject: Any) {
         parent.removeView(paramObject as View)
@@ -24,6 +29,7 @@ class TopicAdapter(private val context: Context, private val list: List<String>)
 
     override fun instantiateItem(parent: ViewGroup, position: Int): Any {
         val rooView = LayoutInflater.from(this.context).inflate(R.layout.layout_topic_item, null)
+        LogManager.i(TAG,"loadUrl:" + list[position])
         rooView.mTopicIv.loadUrl(list[position])
         parent.addView(rooView)
         return rooView

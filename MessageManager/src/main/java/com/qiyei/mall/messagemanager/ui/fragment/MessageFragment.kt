@@ -1,4 +1,4 @@
-package com.qiyei.mall.ui.fragment
+package com.qiyei.mall.messagemanager.ui.fragment
 
 
 import android.os.Bundle
@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
+import com.qiyei.mall.messagemanager.R
+import com.qiyei.mall.messagemanager.injection.component.DaggerMessageManagerComponent
+import com.qiyei.mall.messagemanager.mvp.presenter.MessageManagerPresenter
+import com.qiyei.mall.messagemanager.mvp.view.IMessageManagerView
 
-import com.qiyei.mall.R
-import com.qiyei.mall.injection.component.DaggerMallComponent
-import com.qiyei.mall.mvp.presenter.UserFragmentPresenter
-import com.qiyei.mall.mvp.view.IUserFragmentView
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -18,14 +18,14 @@ import com.qiyei.mall.mvp.view.IUserFragmentView
  * @email: 1273482124@qq.com
  * @description:
  */
-class UserFragment : BaseMVPFragment<UserFragmentPresenter>(),IUserFragmentView {
+class MessageFragment : BaseMVPFragment<MessageManagerPresenter>(),IMessageManagerView {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
-        return inflater.inflate(R.layout.fragment_user, container, false)
+        return inflater.inflate(R.layout.fragment_message, container, false)
     }
 
     override fun onStart() {
@@ -37,7 +37,7 @@ class UserFragment : BaseMVPFragment<UserFragmentPresenter>(),IUserFragmentView 
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerMallComponent.builder()
+        DaggerMessageManagerComponent.builder()
                 .activityComponent(mActivityComponent)
                 .build()
                 .inject(this)
@@ -45,6 +45,6 @@ class UserFragment : BaseMVPFragment<UserFragmentPresenter>(),IUserFragmentView 
     }
 
     override fun getTAG(): String {
-        return UserFragment::class.java.simpleName
+        return MessageFragment::class.java.simpleName
     }
 }
