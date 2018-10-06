@@ -12,13 +12,17 @@ import android.view.ViewGroup;
 public class BaseTitleParams {
     public Context mContext;
     /**
+     * 依附的目标
+     */
+    public Object mTarget;
+    /**
      * 父布局
      */
-    public ViewGroup mActivityRoot;
+    public ViewGroup mRootViewGroup;
 
     public BaseTitleParams(Context context, ViewGroup root){
         mContext = context;
-        mActivityRoot = root;
+        mRootViewGroup = root;
     }
 
 }

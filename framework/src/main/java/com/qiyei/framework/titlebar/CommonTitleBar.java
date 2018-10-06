@@ -1,6 +1,8 @@
 package com.qiyei.framework.titlebar;
 
+import android.app.Activity;
 import android.content.Context;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -70,9 +72,16 @@ public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
          */
         CommonTitleParams mBarParams;
 
-        public Builder(Context context) {
-            super(context);
-            mBarParams = new CommonTitleParams(context,null);
+        public Builder(Activity activity) {
+            super(activity);
+            mBarParams = new CommonTitleParams(activity,null);
+            mBarParams.mTarget = activity;
+        }
+
+        public Builder(Fragment fragment) {
+            super(fragment.getContext());
+            mBarParams = new CommonTitleParams(fragment.getContext(),null);
+            mBarParams.mTarget = fragment;
         }
 
         /**

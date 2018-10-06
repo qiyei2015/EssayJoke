@@ -4,19 +4,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.qiyei.sdk.log.LogManager;
-
-import java.lang.reflect.Field;
 
 
 /**
@@ -40,7 +38,11 @@ public abstract class BaseTitleBar<T extends BaseTitleParams> implements ITitleB
 
     public BaseTitleBar(T params) {
         this.mParams = params;
-        bindViewToActivityRoot();
+        if (mParams.mTarget instanceof Activity){
+            bindViewToActivityRoot();
+        }else if (mParams.mTarget instanceof Fragment){
+            bindViewToFragmentRoot();
+        }
     }
 
     /**
@@ -97,50 +99,108 @@ public abstract class BaseTitleBar<T extends BaseTitleParams> implements ITitleB
     private void bindViewToActivityRoot() {
         ViewGroup activityRoot = null;
         //创建View
-        if (mParams.mActivityRoot == null || activityRoot == null){
+        if (mParams.mRootViewGroup == null || activityRoot == null){
             //获取Activity的根布局
             activityRoot = (ViewGroup) ((Activity)mParams.mContext).findViewById(android.R.id.content);
             //获取我们在Activity中设置ContentView的View
-            mParams.mActivityRoot = (ViewGroup)activityRoot.getChildAt(0);
-            LogManager.i(TAG,"activityRoot size : " +activityRoot.getChildCount() + " mParams.mActivityRoot:" + mParams.mActivityRoot);
+            mParams.mRootViewGroup = (ViewGroup)activityRoot.getChildAt(0);
+            LogManager.i(TAG,"activityRoot size : " +activityRoot.getChildCount() + " mParams.mRootViewGroup:" + mParams.mRootViewGroup);
         }
-        if (mParams.mActivityRoot == null){
+        if (mParams.mRootViewGroup == null){
             return;
         }
 
         mNavigationView = LayoutInflater.from(mParams.mContext)
                 .inflate(bindLayoutId(),activityRoot,false);
 
-        if (mParams.mActivityRoot instanceof RelativeLayout || mParams.mActivityRoot instanceof ConstraintLayout){
+        if (mParams.mRootViewGroup instanceof RelativeLayout || mParams.mRootViewGroup instanceof ConstraintLayout){
             //相对布局
             //先构造一个线性布局,指定垂直排列
-            LinearLayout newActivityRoot = new LinearLayout(mParams.mContext);
-            newActivityRoot.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout newRoot = new LinearLayout(mParams.mContext);
+            newRoot.setOrientation(LinearLayout.VERTICAL);
 
             //移除原有的activityRoot的parent，否则会报"The specified child already has a parent. " +
             //"You must call removeView() on the child's parent first. 异常
-            ViewGroup viewParent = (ViewGroup)mParams.mActivityRoot.getParent();
+            ViewGroup viewParent = (ViewGroup)mParams.mRootViewGroup.getParent();
             viewParent.removeAllViews();
 
             //将titleBar添加为第一个child,原来的activityRoot为第二个
-            newActivityRoot.addView(mNavigationView,0);
-            newActivityRoot.addView(mParams.mActivityRoot,1);
+            newRoot.addView(mNavigationView,0);
+            newRoot.addView(mParams.mRootViewGroup,1);
             //将新的activityRoot添加到android.R.id.content中
-            activityRoot.addView(newActivityRoot,0);
+            activityRoot.addView(newRoot,0);
 
-            LogManager.i(TAG,"mParams.mActivityRoot,child at 0 view:");
+            LogManager.i(TAG,"mParams.mRootViewGroup,child at 0 view:");
 
-        }else if (mParams.mActivityRoot instanceof CoordinatorLayout){
+        }else if (mParams.mRootViewGroup instanceof CoordinatorLayout){
 
 
         } else {
             //添加View到mParams.mParent中
-            mParams.mActivityRoot.addView(mNavigationView,0);
+            mParams.mRootViewGroup.addView(mNavigationView,0);
         }
-        LogManager.i(TAG,"mParams.mActivityRoot,child:" + mParams.mActivityRoot.getChildCount());
+        LogManager.i(TAG,"mParams.mRootViewGroup,child:" + mParams.mRootViewGroup.getChildCount());
         //绑定View
         bindView();
     }
+
+
+    /**
+     * 绑定View到ActivityRoot上
+     */
+    private void bindViewToFragmentRoot() {
+        ViewGroup fragmentRoot = null;
+        Fragment fragment = (Fragment) mParams.mTarget;
+
+        //创建View
+        if (mParams.mRootViewGroup == null || fragmentRoot == null){
+            //获取Fragment的根布局
+            fragmentRoot = (ViewGroup) fragment.getView();
+            //获取我们在Fragment中设置ContentView的View
+            mParams.mRootViewGroup = fragmentRoot;
+            LogManager.i(TAG,"fragmentRoot size : " +fragmentRoot.getChildCount() + " mParams.mRootViewGroup:" + mParams.mRootViewGroup);
+            if (mParams.mRootViewGroup == null){
+                LogManager.i(TAG,"fragment.getView() is null");
+                return;
+            }
+        }
+        if (mParams.mRootViewGroup == null){
+            return;
+        }
+
+        mNavigationView = LayoutInflater.from(mParams.mContext)
+                .inflate(bindLayoutId(),fragmentRoot,false);
+
+        if (mParams.mRootViewGroup instanceof RelativeLayout || mParams.mRootViewGroup instanceof ConstraintLayout){
+            //相对布局
+            //先构造一个线性布局,指定垂直排列
+            LinearLayout newRoot = new LinearLayout(mParams.mContext);
+            newRoot.setOrientation(LinearLayout.VERTICAL);
+
+            //移除原有的activityRoot的parent，否则会报"The specified child already has a parent. " +
+            //"You must call removeView() on the child's parent first. 异常
+            ViewGroup viewParent = (ViewGroup)mParams.mRootViewGroup.getParent();
+            viewParent.removeAllViews();
+
+            //将titleBar添加为第一个child,原来的activityRoot为第二个
+            newRoot.addView(mNavigationView,0);
+            newRoot.addView(mParams.mRootViewGroup,1);
+            //将新的activityRoot添加到android.R.id.content中
+            fragmentRoot.addView(newRoot,0);
+
+            LogManager.i(TAG,"mParams.mRootViewGroup,child at 0 view:");
+
+        }else if (mParams.mRootViewGroup instanceof CoordinatorLayout){
+
+        } else {
+            //添加View到mParams.mParent中
+            mParams.mRootViewGroup.addView(mNavigationView,0);
+        }
+        LogManager.i(TAG,"mParams.mRootViewGroup,child:" + mParams.mRootViewGroup.getChildCount());
+        //绑定View
+        bindView();
+    }
+
 
     /**
      * Builder设计模式,主要用于设置各种效果
