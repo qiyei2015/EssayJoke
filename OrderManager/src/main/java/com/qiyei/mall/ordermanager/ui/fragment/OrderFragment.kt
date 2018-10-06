@@ -9,9 +9,9 @@ import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
 
 import com.qiyei.mall.ordermanager.R
-import com.qiyei.mall.ordermanager.injection.component.DaggerCartManagerComponent
-import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
-import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
+import com.qiyei.mall.ordermanager.injection.component.DaggerOrderManagerComponent
+import com.qiyei.mall.ordermanager.mvp.presenter.OrderManagerPresenter
+import com.qiyei.mall.ordermanager.mvp.view.IOrderManagerView
 
 
 /**
@@ -20,14 +20,14 @@ import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
  * @email: 1273482124@qq.com
  * @description:
  */
-class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
+class OrderFragment : BaseMVPFragment<OrderManagerPresenter>(),IOrderManagerView {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
-        return inflater.inflate(R.layout.fragment_cart, container, false)
+        return inflater.inflate(R.layout.fragment_order, container, false)
     }
 
     override fun onStart() {
@@ -39,7 +39,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerCartManagerComponent.builder()
+        DaggerOrderManagerComponent.builder()
                 .activityComponent(mActivityComponent)
                 .build()
                 .inject(this)
@@ -47,6 +47,6 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
     }
 
     override fun getTAG(): String {
-        return CartFragment::class.java.simpleName
+        return OrderFragment::class.java.simpleName
     }
 }

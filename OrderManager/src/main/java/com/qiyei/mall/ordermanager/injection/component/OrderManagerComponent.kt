@@ -3,7 +3,7 @@ package com.qiyei.mall.ordermanager.injection.component
 
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
-import com.qiyei.mall.ordermanager.ui.fragment.CartFragment
+import com.qiyei.mall.ordermanager.ui.fragment.OrderFragment
 import dagger.Component
 
 /**
@@ -14,8 +14,8 @@ import dagger.Component
  */
 @PreComponentScope
 @Component(dependencies = arrayOf(ActivityComponent::class))
-interface CartManagerComponent {
+interface OrderManagerComponent {
 
 
-    fun inject(fragment: CartFragment)
+    fun inject(fragment: OrderFragment)
 }
