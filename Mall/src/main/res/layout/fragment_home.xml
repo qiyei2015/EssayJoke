@@ -66,8 +66,8 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/mTopicViewPager"
             android:layout_gravity="center"
-            android:layout_width="200dip"
-            android:layout_height="160dip"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
             android:overScrollMode="never"/>
 
     </me.crosswall.lib.coverflow.core.PagerContainer>
