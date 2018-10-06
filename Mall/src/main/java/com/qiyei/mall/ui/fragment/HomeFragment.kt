@@ -23,9 +23,6 @@ import me.crosswall.lib.coverflow.CoverFlow
 import me.crosswall.lib.coverflow.core.PageItemClickListener
 
 
-
-
-
 /**
  * @author Created by qiyei2015 on 2018/10/5.
  * @version: 1.0

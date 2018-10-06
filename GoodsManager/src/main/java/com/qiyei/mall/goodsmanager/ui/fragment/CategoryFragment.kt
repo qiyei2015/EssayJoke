@@ -94,7 +94,7 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
     }
 
     private fun initView(){
-        mTitleBar = CommonTitleBar.Builder(context)
+        mTitleBar = CommonTitleBar.Builder(this)
                 .setTitle(getString(R.string.goods_category))
                 .setLeftViewVisible(false)
                 .build()

@@ -70,6 +70,11 @@ public class FindFragment extends BaseFragment {
         mBannerView.stopLoop();
     }
 
+    @Override
+    protected String getTAG() {
+        return FindFragment.class.getSimpleName();
+    }
+
     private void initView() {
         mXRecyclerView.setLayoutManager(new LinearLayoutManager(mContext));
         //mXRecyclerView.addItemDecoration(new CategoryItemDecoration(mContext.getDrawable(R.drawable.recyclerview_decoration)));
