@@ -1,7 +1,7 @@
 package com.qiyei.mall.usermanager.service.impl
 
 import com.qiyei.framework.extend.baseRespConvert
-import com.qiyei.mall.usermanager.data.respository.UserUploadRespository
+import com.qiyei.mall.usermanager.data.respository.UserUploadRepository
 import com.qiyei.mall.usermanager.service.IUploadManagerService
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
  */
 class UploadManagerServiceImpl @Inject constructor():IUploadManagerService {
     @Inject
-    lateinit var mUploadRespository:UserUploadRespository
+    lateinit var mUploadRespository:UserUploadRepository
 
     override fun getUploadToken(): Observable<String> {
         return mUploadRespository.getUploadToken().baseRespConvert()

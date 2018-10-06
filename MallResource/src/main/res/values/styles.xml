@@ -154,16 +154,6 @@
         <!--<item name="android:windowBackground">@color/common_black</item>-->
     <!--</style>-->
 
-    <!--&lt;!&ndash; 多状态视图样式&ndash;&gt;-->
-    <!--<style name="MultiStateStyle">-->
-        <!--<item name="android:layout_width">match_parent</item>-->
-        <!--<item name="android:layout_height">match_parent</item>-->
-        <!--<item name="msv_loadingView">@layout/layout_state_loading</item>-->
-        <!--<item name="msv_emptyView">@layout/layout_state_empty</item>-->
-        <!--<item name="msv_errorView">@layout/layout_state_error</item>-->
-        <!--<item name="msv_viewState">loading</item>-->
-    <!--</style>-->
-
     <!--&lt;!&ndash; 加载弹框样式 &ndash;&gt;-->
     <!--<style name="LightDialog" parent="@android:style/Theme.Dialog">-->
         <!--<item name="android:windowFrame">@null</item>-->

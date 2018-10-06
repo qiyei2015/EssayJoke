@@ -14,7 +14,7 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description:
  */
-class UserUploadRespository @Inject constructor() {
+class UserUploadRepository @Inject constructor() {
 
     /**
      * 获取七牛云上传凭证

@@ -41,11 +41,11 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
 
     override fun showLoading() {
         mDialogTAG = this.javaClass.canonicalName
-        LoadingManager.showDialog(fragmentManager,mDialogTAG)
+        LoadingManager.showDialog(childFragmentManager,mDialogTAG)
     }
 
     override fun hideLoading() {
-        LoadingManager.dismissDialog(fragmentManager,mDialogTAG)
+        LoadingManager.dismissDialog(childFragmentManager,mDialogTAG)
     }
 
     override fun onError(text: String) {

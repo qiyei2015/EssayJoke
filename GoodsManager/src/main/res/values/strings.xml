@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GoodsManager</string>
+    <string name="goods_category">商品分类</string>
+    <string name="best_selling">热卖热荐</string>
 </resources>

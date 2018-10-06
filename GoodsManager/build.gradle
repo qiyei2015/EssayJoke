@@ -46,5 +46,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    //多状态视图MultiStateView
+    implementation "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
+
     api project(':Framework')
 }

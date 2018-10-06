@@ -1,6 +1,7 @@
 package com.qiyei.mall.goodsmanager.mvp.view
 
 import com.qiyei.framework.mvp.view.IBaseView
+import com.qiyei.mall.goodsmanager.data.bean.CategoryItem
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -10,5 +11,9 @@ import com.qiyei.framework.mvp.view.IBaseView
  */
 interface ICategoryManagerView:IBaseView {
 
+    /**
+     * 获取到分类的回调
+     */
+    fun onCategoryResult(result:MutableList<CategoryItem>?)
 
 }
