@@ -2,6 +2,7 @@ package com.qiyei.framework.titlebar;
 
 import android.content.Context;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.qiyei.sdk.titlebar.BaseTitleBar;
 import com.qiyei.framework.R;
@@ -36,6 +37,9 @@ public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
         setOnClickListener(R.id.right_text,mParams.mRightClickListener);
         // 左边 要写一个默认的  finishActivity
         setOnClickListener(R.id.back,mParams.mLeftClickListener);
+        if (!mParams.isBackViewVisible){
+            getView(R.id.back).setVisibility(View.GONE);
+        }
     }
 
     /**
@@ -108,6 +112,16 @@ public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
          */
         public Builder setLeftClickListener(View.OnClickListener listener){
             mBarParams.mLeftClickListener = listener;
+            return this;
+        }
+
+        /**
+         * 设置左侧View是否显示
+         * @param visible
+         * @return
+         */
+        public Builder setLeftViewVisible(boolean visible){
+            mBarParams.isBackViewVisible = visible;
             return this;
         }
 
