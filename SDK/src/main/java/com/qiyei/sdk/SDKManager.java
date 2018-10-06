@@ -107,12 +107,12 @@ public final class SDKManager {
             }
             if (!RuntimeEnv.serviceAlive(RemoteCoreService.class.getCanonicalName())){
                 //启动核心服务与远程服务
-                Intent in = new Intent(context,CoreService.class);
+                Intent in = new Intent(context,RemoteCoreService.class);
                 startService(context,in);
             }
             if (!RuntimeEnv.serviceAlive(CoreWakeUpService.class.getCanonicalName())){
                 //启动核心服务与远程服务
-                Intent in = new Intent(context,CoreService.class);
+                Intent in = new Intent(context,CoreWakeUpService.class);
                 startService(context,in);
             }
         }

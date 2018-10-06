@@ -140,6 +140,13 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
     }
 
     /**
+     * @return {@link #mDatas}
+     */
+    public List<T> getDatas() {
+        return mDatas;
+    }
+
+    /**
      * 数据绑定操作
      * @param holder
      * @param item
