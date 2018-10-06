@@ -1,2 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qiyei.mall.goodsmanager"/>
+          package="com.qiyei.mall.goodsmanager">
+
+    <application>
+        <activity android:name=".ui.activity.GoodsListActivity">
+        </activity>
+        <activity android:name=".ui.activity.GoodsDetailActivity">
+        </activity>
+        <activity android:name=".ui.activity.GoodsSearchActivity">
+        </activity>
+        <activity android:name=".ui.activity.CartActivity">
+        </activity>
+    </application>
+
+</manifest>

@@ -28,4 +28,8 @@ public class MessageFragment extends BaseFragment {
         return view;
     }
 
+    @Override
+    protected String getTAG() {
+        return MessageFragment.class.getSimpleName();
+    }
 }

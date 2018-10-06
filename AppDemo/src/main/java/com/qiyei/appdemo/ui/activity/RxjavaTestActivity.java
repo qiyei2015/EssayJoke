@@ -259,7 +259,6 @@ public class RxjavaTestActivity extends AppCompatActivity {
             }
         });
 
-        AndroidSchedulers.mainThread()
     }
 
 

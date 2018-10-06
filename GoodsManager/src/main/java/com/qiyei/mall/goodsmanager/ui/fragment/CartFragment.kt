@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.mall.goodsmanager.R
-import com.qiyei.mall.ordermanager.injection.component.DaggerCartManagerComponent
+import com.qiyei.mall.ordermanager.injection.component.DaggerCartComponent
 
 
 import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
@@ -39,7 +39,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerCartManagerComponent.builder()
+        DaggerCartComponent.builder()
                 .activityComponent(mActivityComponent)
                 .build()
                 .inject(this)

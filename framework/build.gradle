@@ -89,6 +89,6 @@ dependencies {
     api "com.github.shts:TriangleLabelView:$triangleLabelView_version"
     //画廊
     api "com.github.crosswall:Android-Coverflow:$android_coverflow_version"
-
-
+    //上下拉刷新
+    api "cn.bingoogolapple:bga-refreshlayout:$bga_refreshlayout_version"
 }

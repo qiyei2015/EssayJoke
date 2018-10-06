@@ -11,15 +11,18 @@ import com.kennyc.view.MultiStateView
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.mall.goodsmanager.R
+import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.common.startLoading
 import com.qiyei.mall.goodsmanager.data.bean.Category
-import com.qiyei.mall.goodsmanager.injection.component.DaggerGoodsManagerComponent
+import com.qiyei.mall.goodsmanager.injection.component.DaggerCategoryComponent
 import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
 import com.qiyei.mall.goodsmanager.mvp.presenter.CategoryManagerPresenter
 import com.qiyei.mall.goodsmanager.mvp.view.ICategoryManagerView
+import com.qiyei.mall.goodsmanager.ui.activity.GoodsListActivity
 import com.qiyei.mall.goodsmanager.ui.adapter.FirstCategoryAdapter
 import com.qiyei.mall.goodsmanager.ui.adapter.SecondCategoryAdapter
 import kotlinx.android.synthetic.main.fragment_category.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -56,7 +59,7 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerGoodsManagerComponent.builder()
+        DaggerCategoryComponent.builder()
                 .activityComponent(mActivityComponent)
                 .categoryModule(CategoryModule())
                 .build()
@@ -117,7 +120,7 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
         mSecondCategoryRecyclerView.layoutManager = girdLayout
         mSecondCategoryRecyclerView.adapter = mSecondCategoryAdapter
         mSecondCategoryAdapter.setOnItemClickListener { view, t, position ->
-            toast(t.categoryName)
+            startActivity<GoodsListActivity>(GoodsConstant.KEY_CATEGORY_ID to t.id)
         }
 
     }

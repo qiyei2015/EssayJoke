@@ -30,7 +30,7 @@ open class BaseObserver<T>(private val baseView:IBaseView) : Observer<T>{
         baseView.showLoading()
     }
 
-    override fun onNext(t: T) {
+    override fun onNext(item: T) {
 
     }
 
