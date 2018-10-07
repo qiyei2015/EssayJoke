@@ -20,6 +20,4 @@ import dagger.Component
 interface CategoryComponent {
 
     fun inject(fragment: CategoryFragment)
-    fun inject(fragment: TabGoodsFragment)
-    fun inject(fragment: TabDetailFragment)
 }

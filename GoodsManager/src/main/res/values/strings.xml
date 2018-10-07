@@ -3,4 +3,5 @@
     <string name="goods_category">商品分类</string>
     <string name="best_selling">热卖热荐</string>
     <string name="goods_list">商品列表</string>
+    <string name="add_to_cart">加入购物车</string>
 </resources>

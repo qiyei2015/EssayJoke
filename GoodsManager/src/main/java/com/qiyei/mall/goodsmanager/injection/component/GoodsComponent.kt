@@ -6,6 +6,8 @@ import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
 import com.qiyei.mall.goodsmanager.injection.module.GoodsModule
 import com.qiyei.mall.goodsmanager.ui.activity.GoodsListActivity
 import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
+import com.qiyei.mall.goodsmanager.ui.fragment.TabDetailFragment
+import com.qiyei.mall.goodsmanager.ui.fragment.TabGoodsFragment
 
 import dagger.Component
 
@@ -20,5 +22,9 @@ import dagger.Component
 interface GoodsComponent {
 
     fun inject(activity: GoodsListActivity)
+
+    fun inject(fragment: TabGoodsFragment)
+
+    fun inject(fragment: TabDetailFragment)
 
 }

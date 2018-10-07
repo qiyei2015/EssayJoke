@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.GoodsDetailActivity">
 
-
     <android.support.v4.view.ViewPager
         android:id="@+id/mGoodsViewPager"
         android:layout_width="match_parent"
@@ -22,7 +21,7 @@
         android:background="@drawable/border_top">
 
         <TextView
-            android:id="@+id/mShareTv"
+            android:id="@+id/mShareTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
@@ -31,12 +30,12 @@
             android:drawablePadding="2dp"
             android:drawableTop="@drawable/collect_selector"
             android:gravity="center"
-            android:text="分享"
+            android:text="@string/share"
             android:textColor="@drawable/bottom_nav_text_selector"
             android:textSize="@dimen/text_small_size"/>
 
         <TextView
-            android:id="@+id/mEnterCartTv"
+            android:id="@+id/mCartTextView"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginBottom="2dp"
@@ -45,17 +44,17 @@
             android:drawablePadding="2dp"
             android:drawableTop="@drawable/bottom_nav_cart_selector"
             android:gravity="center"
-            android:text="购物车"
+            android:text="@string/nav_bar_cart"
             android:textColor="@drawable/bottom_nav_text_selector"
             android:textSize="@dimen/text_small_size"/>
 
         <Button
-            android:id="@+id/mAddCartBtn"
+            android:id="@+id/mAddToCartButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:background="@color/common_red"
-            android:text="加入购物车"
+            android:text="@string/add_to_cart"
             android:textColor="@color/common_white"
             android:textSize="@dimen/text_big_size"/>
     </LinearLayout>

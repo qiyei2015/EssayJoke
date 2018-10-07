@@ -2,27 +2,22 @@ package com.qiyei.mall.goodsmanager.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.kennyc.view.MultiStateView
-import com.qiyei.framework.titlebar.CommonTitleBar
+import com.qiyei.framework.extend.GlideImageLoader
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
+import com.qiyei.framework.util.YuanFenConverter
 import com.qiyei.mall.goodsmanager.R
 import com.qiyei.mall.goodsmanager.common.GoodsConstant
-import com.qiyei.mall.goodsmanager.common.startLoading
-import com.qiyei.mall.goodsmanager.data.bean.Category
-import com.qiyei.mall.goodsmanager.injection.component.DaggerCategoryComponent
-import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
-import com.qiyei.mall.goodsmanager.mvp.presenter.CategoryManagerPresenter
-import com.qiyei.mall.goodsmanager.mvp.view.ICategoryManagerView
-import com.qiyei.mall.goodsmanager.ui.activity.GoodsListActivity
-import com.qiyei.mall.goodsmanager.ui.adapter.FirstCategoryAdapter
-import com.qiyei.mall.goodsmanager.ui.adapter.SecondCategoryAdapter
-import kotlinx.android.synthetic.main.fragment_category.*
-import org.jetbrains.anko.support.v4.startActivity
+import com.qiyei.mall.goodsmanager.data.bean.Goods
+import com.qiyei.mall.goodsmanager.injection.component.DaggerGoodsComponent
+import com.qiyei.mall.goodsmanager.injection.module.GoodsModule
+import com.qiyei.mall.goodsmanager.mvp.presenter.GoodsSkuPresenter
+import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
+import com.youth.banner.BannerConfig
+import com.youth.banner.Transformer
+import kotlinx.android.synthetic.main.fragment_goods_tab.*
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -32,21 +27,20 @@ import org.jetbrains.anko.support.v4.toast
  * @email: 1273482124@qq.com
  * @description:
  */
-class TabGoodsFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryManagerView {
+class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
 
     /**
-     * 一级分类Adapter
+     * 商品列表id
      */
-    private lateinit var mFirstCategoryAdapter:FirstCategoryAdapter
+    private var mGoodsId:Int = -1
     /**
-     * 二级Adapter
+     * 当前商品
      */
-    private lateinit var mSecondCategoryAdapter: SecondCategoryAdapter
-
+    private var mCurrentGoods:Goods? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_category, container, false)
+        return inflater.inflate(R.layout.fragment_goods_tab, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,13 +49,23 @@ class TabGoodsFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
         loadData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mGoodsDetailBanner.startAutoPlay()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mGoodsDetailBanner.startAutoPlay()
+    }
+
     /**
      * 依赖注入
      */
     override fun initComponentInject() {
-        DaggerCategoryComponent.builder()
+        DaggerGoodsComponent.builder()
                 .activityComponent(mActivityComponent)
-                .categoryModule(CategoryModule())
+                .goodsModule(GoodsModule())
                 .build()
                 .inject(this)
         mPresenter.mView = this
@@ -71,65 +75,37 @@ class TabGoodsFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
         return TabGoodsFragment::class.java.simpleName
     }
 
-    /**
-     * presenter层回调
-     */
-    override fun onCategoryResult(result: MutableList<Category>?) {
-        if (result == null || result.size == 0){
-            toast("获取分类失败")
-            //没有数据
-            mTopCategoryImageView.visibility = View.INVISIBLE
-            mCategoryTitleTextView.visibility = View.INVISIBLE
-            mMultiStateView.viewState = MultiStateView.VIEW_STATE_EMPTY
-            return
-        }
-        //一级目录
-        if (result[0].parentId == 0){
-            result[0].isSelected = true
-            mFirstCategoryAdapter.datas = result
-            mPresenter.getCategory(result[0].id)
-        }else {
-            mTopCategoryImageView.visibility = View.VISIBLE
-            mCategoryTitleTextView.visibility = View.VISIBLE
-            mSecondCategoryAdapter.datas = result
-            mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
-        }
+    override fun onGoodsSkuResult(goods: Goods) {
+        mCurrentGoods = goods
+        mGoodsDetailBanner.setImages(goods.goodsBanner.split(","))
+        mGoodsDetailBanner.start()
+        updateView(goods)
     }
 
     private fun initView(){
-        mTitleBar = CommonTitleBar.Builder(this)
-                .setTitle(getString(R.string.goods_category))
-                .setLeftViewVisible(false)
-                .build()
-
-        mFirstCategoryAdapter = FirstCategoryAdapter(context!!, arrayListOf())
-        val layoutLayout = LinearLayoutManager(context)
-        layoutLayout.orientation = LinearLayoutManager.VERTICAL
-        mFirstCategoryRecyclerView.layoutManager = layoutLayout
-        mFirstCategoryRecyclerView.adapter = mFirstCategoryAdapter
-        mFirstCategoryAdapter.setOnItemClickListener { view, t, position ->
-            for (category in mFirstCategoryAdapter.datas) {
-                category.isSelected = t.id == category.id
-            }
-            mFirstCategoryAdapter.notifyDataSetChanged()
-            loadData(t.id)
+        mGoodsDetailBanner.setImageLoader(GlideImageLoader())
+        //设置图片集合
+        mGoodsDetailBanner.setIndicatorGravity(BannerConfig.RIGHT)
+        mGoodsDetailBanner.setDelayTime(2000)
+        mGoodsDetailBanner.setBannerAnimation(Transformer.Accordion)
+        mGoodsDetailBanner.setOnBannerListener {
+            toast("$it")
         }
-
-        mSecondCategoryAdapter = SecondCategoryAdapter(context!!, arrayListOf())
-        val girdLayout = GridLayoutManager(context,3)
-        mSecondCategoryRecyclerView.layoutManager = girdLayout
-        mSecondCategoryRecyclerView.adapter = mSecondCategoryAdapter
-        mSecondCategoryAdapter.setOnItemClickListener { view, t, position ->
-            startActivity<GoodsListActivity>(GoodsConstant.KEY_CATEGORY_ID to t.id)
-        }
-
+        //mGoodsDetailBanner.start()
     }
 
-    private fun loadData(parentId:Int = 0){
-        if (parentId != 0){
-            mMultiStateView.startLoading()
-        }
-        mPresenter.getCategory(parentId)
+    private fun loadData(){
+        mGoodsId = activity?.intent?.getIntExtra(GoodsConstant.KEY_GOODS_ID,-1)?:-1
+        mPresenter.getGoodsSku(mGoodsId)
     }
 
+    /**
+     * 更新View
+     */
+    private fun updateView(goods: Goods){
+        mGoodsDescTextView.text = goods.goodsDesc
+        mGoodsPriceTextView.text = YuanFenConverter.changeF2YWithUnit(goods.goodsDefaultPrice)
+        mSkuSelectedTextView.text = goods.goodsDefaultSku
+
+    }
 }

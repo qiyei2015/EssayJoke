@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.qiyei.framework.extend.GlideImageLoader
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
 import com.qiyei.mall.R

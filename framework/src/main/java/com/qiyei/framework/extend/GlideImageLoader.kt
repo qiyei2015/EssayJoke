@@ -1,4 +1,4 @@
-package com.qiyei.mall.extend
+package com.qiyei.framework.extend
 
 import android.content.Context
 import android.widget.ImageView
