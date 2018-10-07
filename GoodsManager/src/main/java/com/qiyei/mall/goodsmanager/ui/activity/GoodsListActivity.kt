@@ -54,7 +54,7 @@ class GoodsListActivity : BaseMVPActivity<GoodsListPresenter>(),IGoodsListView, 
 
     override fun initComponentInject() {
         DaggerGoodsComponent.builder()
-                .activityComponent(mActivityComponet)
+                .activityComponent(mActivityComponent)
                 .goodsModule(GoodsModule())
                 .build()
                 .inject(this)

@@ -4,6 +4,8 @@ import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
 import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
+import com.qiyei.mall.goodsmanager.ui.fragment.TabDetailFragment
+import com.qiyei.mall.goodsmanager.ui.fragment.TabGoodsFragment
 
 import dagger.Component
 
@@ -18,5 +20,6 @@ import dagger.Component
 interface CategoryComponent {
 
     fun inject(fragment: CategoryFragment)
-
+    fun inject(fragment: TabGoodsFragment)
+    fun inject(fragment: TabDetailFragment)
 }
