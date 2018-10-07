@@ -2,6 +2,7 @@ package com.qiyei.essayjoke;
 
 import android.app.Application;
 
+import com.qiyei.framework.FrameworkApplication;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.log.LogManager;
@@ -12,16 +13,16 @@ import com.qiyei.sdk.log.LogManager;
  * Version: 1.0
  * Description:
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends FrameworkApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        try {
-            SDKManager.initSDK(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            SDKManager.initSDK(this);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
 

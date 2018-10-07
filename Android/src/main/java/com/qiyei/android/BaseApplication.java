@@ -1,15 +1,14 @@
 package com.qiyei.android;
 
-import android.app.Application;
+
 import android.content.Context;
 import android.os.StrictMode;
 
 import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.github.moduth.blockcanary.internal.BlockInfo;
+import com.qiyei.framework.FrameworkApplication;
 import com.qiyei.framework.skin.SkinManager;
-import com.qiyei.sdk.SDKManager;
-import com.qiyei.sdk.log.LogManager;
 import com.squareup.leakcanary.LeakCanary;
 
 import java.io.File;
@@ -22,7 +21,7 @@ import java.util.List;
  * Version: 1.0
  * Description:
  */
-public class BaseApplication extends Application {
+public class BaseApplication extends FrameworkApplication {
 
     @Override
     public void onCreate() {
@@ -35,11 +34,11 @@ public class BaseApplication extends Application {
         }
         LeakCanary.install(this);
 
-        try {
-            SDKManager.initSDK(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            SDKManager.initSDK(this);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
         //使用严格模式，检测内存泄漏

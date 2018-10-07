@@ -36,6 +36,10 @@ dependencies {
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
+    //Dagger2
+    annotationProcessor "com.google.dagger:dagger-compiler:$dagger_compiler_version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_compiler_version"
+
     api project(':Framework')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }

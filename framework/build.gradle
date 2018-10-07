@@ -59,6 +59,7 @@ dependencies {
 
     testImplementation "junit:junit:$junit_version"
 
+    //分包
     api "com.android.support:multidex:$support_multidex_version"
 
     api project(':SDK')

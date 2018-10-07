@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qiyei.opensource"/>
+          package="com.qiyei.opensource">
+
+    <application>
+        <activity android:name=".ui.activity.DaggerDemoActivity">
+        </activity>
+    </application>
+
+</manifest>

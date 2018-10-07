@@ -178,7 +178,6 @@ dependencies {
     api "com.android.support:multidex:$support_multidex_version"
 
     //dagger2
-    api "com.google.dagger:dagger:$dagger_version"
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_compiler_version"
 
     //ARouter
