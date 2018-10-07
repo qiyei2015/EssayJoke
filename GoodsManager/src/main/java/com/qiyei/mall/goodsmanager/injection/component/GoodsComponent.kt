@@ -2,6 +2,7 @@ package com.qiyei.mall.goodsmanager.injection.component
 
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
+import com.qiyei.mall.goodsmanager.injection.module.CartModule
 import com.qiyei.mall.goodsmanager.injection.module.CategoryModule
 import com.qiyei.mall.goodsmanager.injection.module.GoodsModule
 import com.qiyei.mall.goodsmanager.ui.activity.GoodsListActivity
@@ -18,7 +19,7 @@ import dagger.Component
  * @description:
  */
 @PreComponentScope
-@Component(dependencies = arrayOf(ActivityComponent::class),modules = arrayOf(GoodsModule::class))
+@Component(dependencies = arrayOf(ActivityComponent::class),modules = arrayOf(GoodsModule::class,CartModule::class))
 interface GoodsComponent {
 
     fun inject(activity: GoodsListActivity)

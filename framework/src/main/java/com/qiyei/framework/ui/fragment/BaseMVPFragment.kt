@@ -1,6 +1,7 @@
 package com.qiyei.framework.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import com.qiyei.framework.FrameworkApplication
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.component.DaggerActivityComponent
@@ -50,6 +51,15 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
 
     override fun onError(text: String) {
         toast(text)
+    }
+
+    override fun onClick(view: View) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+//        if (Bu)
     }
 
     /**

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 
 import com.qiyei.sdk.log.LogManager;
 import com.trello.rxlifecycle2.components.support.RxFragment;
@@ -14,7 +15,7 @@ import com.trello.rxlifecycle2.components.support.RxFragment;
  * Version: 1.0
  * Description: 所有Fragment的基类
  */
-public abstract class BaseFragment extends RxFragment{
+public abstract class BaseFragment extends RxFragment implements View.OnClickListener{
 
     /**
      * Activity中的context

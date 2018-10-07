@@ -4,9 +4,11 @@ package com.qiyei.framework.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import com.qiyei.framework.AppManager
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
 /**
@@ -56,4 +58,10 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
         }
     }
 
+    //获取Window中视图content
+    val contentView:View
+        get() {
+            val content = find<FrameLayout>(android.R.id.content)
+            return content.getChildAt(0)
+        }
 }

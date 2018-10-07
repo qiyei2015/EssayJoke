@@ -15,4 +15,9 @@ interface IGoodsSkuView:IBaseView {
      * 商品sku回调
      */
     fun onGoodsSkuResult(goods: Goods)
+
+    /**
+     * 加入购物车回调
+     */
+    fun onAddCartResult(num: Int)
 }

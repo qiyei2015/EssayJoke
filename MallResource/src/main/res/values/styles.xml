@@ -247,11 +247,11 @@
         <item name="android:layout_marginTop">@dimen/common_margin_middle</item>
         <item name="android:layout_marginBottom">@dimen/common_margin_middle</item>
     </style>
-    <!--&lt;!&ndash; 底部出入动画 &ndash;&gt;-->
-    <!--<style name="AnimBottom" parent="@android:style/Animation">-->
-        <!--<item name="android:windowEnterAnimation">@anim/push_bottom_in</item>-->
-        <!--<item name="android:windowExitAnimation">@anim/push_bottom_out</item>-->
-    <!--</style>-->
+    <!-- 底部出入动画 -->
+    <style name="AnimBottom" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/push_bottom_out</item>
+    </style>
     <!-- 自定义标签字体样式 -->
     <!--<style name="LabelTitleTextStyle">-->
         <!--<item name="android:textSize">@dimen/text_middle_size</item>-->

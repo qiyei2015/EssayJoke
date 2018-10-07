@@ -3,6 +3,7 @@ package com.qiyei.framework.extend
 
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -62,6 +63,22 @@ fun Button.enable(editText: EditText,method:() -> Boolean){
 
         }
     })
+}
+
+/**
+ * 扩展点击事件
+ */
+fun View.onClick(listener: View.OnClickListener): View {
+    setOnClickListener(listener)
+    return this
+}
+
+/**
+ * 扩展点击事件，参数为方法
+ */
+fun View.onClick(method:() -> Unit): View {
+    setOnClickListener { method() }
+    return this
 }
 
 /**

@@ -6,6 +6,7 @@ import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.goodsmanager.data.bean.Goods
 import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
+import com.qiyei.mall.goodsmanager.service.ICartService
 import com.qiyei.mall.goodsmanager.service.IGoodsService
 
 import javax.inject.Inject
@@ -20,6 +21,8 @@ class GoodsSkuPresenter @Inject constructor():BasePresenter<IGoodsSkuView>() {
 
     @Inject
     lateinit var mGoodsService:IGoodsService
+    @Inject
+    lateinit var mCartService:ICartService
 
     override fun getTAG(): String {
         return GoodsSkuPresenter::class.java.simpleName
@@ -36,4 +39,15 @@ class GoodsSkuPresenter @Inject constructor():BasePresenter<IGoodsSkuView>() {
         },mLifecycleProvider)
     }
 
+    /**
+     * 添加商品到购物车
+     */
+    fun addCart(goods: Goods,goodsCount: Int, goodsSku: String){
+        mCartService.addCart(goods.id,goods.goodsDesc,goods.goodsDefaultIcon,goods.goodsDefaultPrice
+                ,goodsCount,goodsSku).execute(object : BaseObserver<Int>(mView){
+            override fun onNext(item: Int) {
+                mView.onAddCartResult(item)
+            }
+        },mLifecycleProvider)
+    }
 }
