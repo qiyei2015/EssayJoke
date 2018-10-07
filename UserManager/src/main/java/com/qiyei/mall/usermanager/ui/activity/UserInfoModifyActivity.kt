@@ -22,7 +22,6 @@ import com.qiyei.framework.ui.activity.BaseTakePhotoActivity
 import com.qiyei.sdk.image.ImageManager
 import com.qiyei.sdk.log.LogManager
 import io.reactivex.Observable
-import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import org.jetbrains.anko.toast
 import org.json.JSONObject
@@ -63,7 +62,7 @@ class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),
     override fun initComponentInject() {
         //注入点
         DaggerUserManagerComponent.builder()
-                .activityComponent(mActivityComponet)
+                .activityComponent(mActivityComponent)
                 .userManagerModule(UserManagerModule())
                 .uploadManagerModule(UploadManagerModule())
                 .build()

@@ -46,7 +46,7 @@ class UserRegisterActivity : BaseMVPActivity<UserRegisterPresenter>(),IUserRegis
     override fun initComponentInject() {
         //注入点
         DaggerUserManagerComponent.builder()
-                .activityComponent(mActivityComponet)
+                .activityComponent(mActivityComponent)
                 .userManagerModule(UserManagerModule())
                 .build()
                 .inject(this)

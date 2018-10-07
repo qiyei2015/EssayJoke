@@ -42,7 +42,7 @@ class UserModifyPasswordActivity : BaseMVPActivity<UserModifyPasswordPresenter>(
 
     override fun initComponentInject() {
         DaggerUserManagerComponent.builder()
-                .activityComponent(mActivityComponet)
+                .activityComponent(mActivityComponent)
                 .userManagerModule(UserManagerModule())
                 .build()
                 .inject(this)
