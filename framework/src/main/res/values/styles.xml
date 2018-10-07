@@ -38,6 +38,22 @@
         <item name="android:drawableLeft">@null</item>
     </style>
 
+    <!-- TabLayout通用样式-->
+    <style name="common_tab_layout_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="tabIndicatorColor">@color/common_white</item>
+        <item name="tabBackground">@drawable/tab_selector</item>
+        <item name="tabTextAppearance">@style/tab_layout_TextStyle</item>
+        <item name="tabTextColor">@color/text_light_dark</item>
+        <item name="tabSelectedTextColor">@color/common_white</item>
+    </style>
+
+    <!-- TabLayout文字样式-->
+    <style name="tab_layout_TextStyle">
+        <item name="android:textSize">@dimen/text_big_size</item>
+    </style>
+
     <!--图片选择器的样式-->
     <style name="media_choose_btn">
         <item name="android:textSize">16sp</item>

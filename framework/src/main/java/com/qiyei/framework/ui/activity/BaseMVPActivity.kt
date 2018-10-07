@@ -8,7 +8,6 @@ import com.qiyei.framework.injection.module.ActivityModule
 import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
-import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.sdk.https.dialog.LoadingManager
 import org.jetbrains.anko.toast
 import javax.inject.Inject
@@ -23,13 +22,9 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
     @Inject
     lateinit var mPresenter:T
 
-    lateinit var mActivityComponet:ActivityComponent
+    lateinit var mActivityComponent:ActivityComponent
 
-    lateinit var mDialogTAG:String
-    /**
-     * 标题栏
-     */
-    protected var mTitleBar: CommonTitleBar? = null
+    private lateinit var mDialogTAG:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +54,7 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
      * 初始化注入
      */
     private fun initActivityInjection(){
-        mActivityComponet = DaggerActivityComponent.builder()
+        mActivityComponent = DaggerActivityComponent.builder()
                 .appComponent((application as FrameworkApplication).mAppComponent)
                 .activityModule(ActivityModule(this))
                 .lifecycleProviderModule(LifecycleProviderModule(this))

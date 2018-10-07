@@ -87,6 +87,7 @@ ext{
     support_design_version = '27.1.1'
     recyclerview_v7_version = '27.1.1'
     support_multidex_version = '1.0.3'
+    android_support_version = "27.1.1"
 
     /**
      * Android架构组件

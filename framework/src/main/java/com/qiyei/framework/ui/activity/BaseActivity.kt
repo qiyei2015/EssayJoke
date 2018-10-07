@@ -5,6 +5,7 @@ package com.qiyei.framework.ui.activity
 import android.os.Bundle
 import android.view.View
 import com.qiyei.framework.AppManager
+import com.qiyei.framework.titlebar.CommonTitleBar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
 import org.jetbrains.anko.toast
 
@@ -17,6 +18,11 @@ import org.jetbrains.anko.toast
 abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
 
     private var preTime:Long = 0
+
+    /**
+     * 通用标题栏
+     */
+    protected var mTitleBar: CommonTitleBar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

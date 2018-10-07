@@ -2,6 +2,8 @@ package com.qiyei.framework.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -13,11 +15,15 @@ import com.qiyei.sdk.titlebar.BaseTitleParams;
  * Version: 1.0
  * Description: 定义该NaviagtionBar支持的所有效果，包括主标题，右标题等
  */
-public class CommonTitleParams extends BaseTitleParams {
+public class TabLayoutTitleParams extends BaseTitleParams {
     /**
-     * 主标题
+     * 关联的ViewPager
      */
-   String mTitle;
+    ViewPager mViewPager;
+    /**
+     * tabMode
+     */
+    int tabMode = TabLayout.MODE_SCROLLABLE;
     /**
      * 标题右侧文字
      */
@@ -42,7 +48,7 @@ public class CommonTitleParams extends BaseTitleParams {
         }
     };
 
-    public CommonTitleParams(Context context, ViewGroup parent) {
+    public TabLayoutTitleParams(Context context, ViewGroup parent) {
         super(context, parent);
     }
 
