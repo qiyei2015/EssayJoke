@@ -7,20 +7,28 @@
     android:orientation="vertical"
     tools:context=".ui.activity.GoodsListActivity">
 
-    <cn.bingoogolapple.refreshlayout.BGARefreshLayout
-        android:id="@+id/mRefreshLayout"
+
+    <com.kennyc.view.MultiStateView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        style="@style/multi_state_style"
+        android:id="@+id/mMultiStateView">
 
-        <android.support.v7.widget.RecyclerView
+        <cn.bingoogolapple.refreshlayout.BGARefreshLayout
+            android:id="@+id/mRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            style="@style/commonRecyclerView"
-            android:id="@+id/mGoodsListRecyclerView">
-        </android.support.v7.widget.RecyclerView>
+            android:layout_height="match_parent">
 
-    </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                style="@style/commonRecyclerView"
+                android:id="@+id/mGoodsListRecyclerView">
+            </android.support.v7.widget.RecyclerView>
 
+        </cn.bingoogolapple.refreshlayout.BGARefreshLayout>
+
+    </com.kennyc.view.MultiStateView>
 
 </LinearLayout>
