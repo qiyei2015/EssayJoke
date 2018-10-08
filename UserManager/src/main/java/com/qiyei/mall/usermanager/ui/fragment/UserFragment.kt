@@ -11,6 +11,8 @@ import com.qiyei.mall.usermanager.R
 import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
 import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
+import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -31,6 +33,7 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
     override fun onStart() {
         super.onStart()
         mPresenter.getString()
+        startActivity<UserLoginActivity>()
     }
 
     /**

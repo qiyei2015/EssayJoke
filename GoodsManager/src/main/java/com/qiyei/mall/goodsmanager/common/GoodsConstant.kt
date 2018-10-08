@@ -1,12 +1,14 @@
 package com.qiyei.mall.goodsmanager.common
 
+import com.qiyei.sdk.dc.impl.DC
+
 /**
  * @author Created by qiyei2015 on 2018/10/6.
  * @version: 1.0
  * @email: 1273482124@qq.com
  * @description:
  */
-class GoodsConstant {
+class GoodsConstant: DC.UserData() {
 
     companion object {
         //搜索历史 本地存储

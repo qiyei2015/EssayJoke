@@ -32,7 +32,7 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
     }
 
     override fun onDestroy() {
-        AppManager.instance.removeActivity(this)
+        //AppManager.instance.removeActivity(this)
         super.onDestroy()
     }
 
@@ -45,18 +45,16 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
      */
     abstract fun getTAG():String
 
-    /**
-     * 监听返回键，双击退出APP
-     */
-    override fun onBackPressed() {
-        val time = System.currentTimeMillis()
-        if (time - preTime > 2000){
-            preTime = time
-            toast("再按一次退出")
-        }else {
-            AppManager.instance.exitApplication(this)
-        }
-    }
+
+//    override fun onBackPressed() {
+//        val time = System.currentTimeMillis()
+//        if (time - preTime > 2000){
+//            preTime = time
+//            toast("再按一次退出")
+//        }else {
+//            AppManager.instance.exitApplication(this)
+//        }
+//    }
 
     //获取Window中视图content
     val contentView:View

@@ -4,10 +4,12 @@ package com.qiyei.mall.goodsmanager.mvp.presenter
 import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
+import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.data.bean.Goods
 import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
 import com.qiyei.mall.goodsmanager.service.ICartService
 import com.qiyei.mall.goodsmanager.service.IGoodsService
+import com.qiyei.sdk.dc.DataManager
 
 import javax.inject.Inject
 
@@ -46,6 +48,9 @@ class GoodsSkuPresenter @Inject constructor():BasePresenter<IGoodsSkuView>() {
         mCartService.addCart(goods.id,goods.goodsDesc,goods.goodsDefaultIcon,goods.goodsDefaultPrice
                 ,goodsCount,goodsSku).execute(object : BaseObserver<Int>(mView){
             override fun onNext(item: Int) {
+                //保存数据
+                val cartUri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+                DataManager.getInstance().setInt(cartUri,item)
                 mView.onAddCartResult(item)
             }
         },mLifecycleProvider)
