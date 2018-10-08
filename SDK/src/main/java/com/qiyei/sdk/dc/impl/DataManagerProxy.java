@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 import static com.qiyei.sdk.dc.impl.DC.DEFAULT_DATA;
+import static com.qiyei.sdk.dc.impl.DC.TAG;
 
 /**
  * @author Created by qiyei2015 on 2018/5/11.
@@ -24,6 +25,11 @@ import static com.qiyei.sdk.dc.impl.DC.DEFAULT_DATA;
  * @description:
  */
 public class DataManagerProxy implements IDataOperator {
+
+    /**
+     * Kotlin中伴生对象标志
+     */
+    private static final String KOTLIN_COMPANION_FLAG = "$Companion";
 
     private DataCenterProxy mProxy;
     /**
@@ -94,6 +100,7 @@ public class DataManagerProxy implements IDataOperator {
      */
     @Override
     public String getUri(Class<?> type,String key){
+        type = adaptForKotlin(type);
         if (type == null || TextUtils.isEmpty(key)){
             LogManager.e(DC.TAG,"getUri(Class<?> type,String key) params has null");
             return null;
@@ -102,11 +109,10 @@ public class DataManagerProxy implements IDataOperator {
             LogManager.e(DC.TAG,"" + type + " is interface");
             return null;
         }
-
         String realType = getRealTypeByType(type);
         boolean isExist = checkField(type, key);
         if (!isExist){
-            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
+            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type + " ,realType:" + realType);
             return null;
         }
 
@@ -121,6 +127,7 @@ public class DataManagerProxy implements IDataOperator {
      */
     @Override
     public String getUriForSecret(Class<?> type,String key){
+        type = adaptForKotlin(type);
         if (type == null || TextUtils.isEmpty(key)){
             LogManager.e(DC.TAG,"getUriForSecret(Class<?> type,String key) params has null");
             return null;
@@ -129,11 +136,10 @@ public class DataManagerProxy implements IDataOperator {
             LogManager.e(DC.TAG,"" + type + " is interface");
             return null;
         }
-
         String realType = getRealTypeByType(type);
         boolean isExist = checkField(type, key);
         if (!isExist){
-            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type);
+            LogManager.e(DC.TAG,"checkField(type, key) fail:"  + " key:" + key + " not exist in " + type + " ,realType:" + realType);
             return null;
         }
         return DC.URI_SECRET + "/" + realType + "/" + key;
@@ -297,4 +303,16 @@ public class DataManagerProxy implements IDataOperator {
         return false;
     }
 
+    /**
+     * 为kotlin做适配，kotlin中伴生对象编译出来后传递过来的是xxx$Companion形式，需要去除$Companion
+     * @param type
+     * @return
+     */
+    private Class<?> adaptForKotlin(Class<?> type){
+        if (type.getName().contains(KOTLIN_COMPANION_FLAG)){
+            LogManager.i(TAG,"type:"+ type.getName());
+            return type.getDeclaringClass();
+        }
+        return type;
+    }
 }
