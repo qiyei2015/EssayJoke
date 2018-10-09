@@ -18,6 +18,7 @@ import com.qiyei.mall.goodsmanager.R
 import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.data.bean.Goods
 import com.qiyei.mall.goodsmanager.event.AddCartEvent
+import com.qiyei.mall.goodsmanager.event.GoodsDetailImageEvent
 import com.qiyei.mall.goodsmanager.event.SkuChangedEvent
 import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.injection.component.DaggerGoodsComponent
@@ -119,7 +120,7 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
         mGoodsDetailBanner.setImages(goods.goodsBanner.split(","))
         mGoodsDetailBanner.start()
         updateView(goods)
-//        Bus.send(GoodsDetailImageEvent(result.goodsDetailOne, result.goodsDetailTwo))
+        Bus.send(GoodsDetailImageEvent(goods.goodsDetailOne, goods.goodsDetailTwo))
         loadPopData(goods)
     }
 
