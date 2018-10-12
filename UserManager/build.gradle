@@ -7,9 +7,6 @@ if (isMallLibrary.toBoolean()) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-kapt {
-    generateStubs = true
-}
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -63,5 +60,14 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+    api project(':Router')
+
     api project(':Framework')
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }

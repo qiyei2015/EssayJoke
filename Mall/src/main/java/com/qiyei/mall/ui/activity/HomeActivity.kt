@@ -1,9 +1,10 @@
 package com.qiyei.mall.ui.activity
 
-import android.support.v7.app.AppCompatActivity
+
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
+import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.framework.ui.fragment.FragmentHelper
 import com.qiyei.mall.R
 import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
@@ -16,7 +17,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.concurrent.TimeUnit
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     private lateinit var fragmentHelper:FragmentHelper
 
@@ -36,6 +37,10 @@ class HomeActivity : AppCompatActivity() {
         fragmentHelper = FragmentHelper(supportFragmentManager,R.id.mHomeContent)
         initView()
         initFragment()
+    }
+
+    override fun getTAG(): String {
+        return this::class.java.simpleName
     }
 
     private fun initView(){

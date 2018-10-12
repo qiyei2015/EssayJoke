@@ -37,6 +37,7 @@ class AppManager private constructor(){
      */
     fun removeActivity(activity: Activity){
         activityStack.remove(activity)
+        activity.finish()
     }
 
     /**

@@ -32,8 +32,8 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
     }
 
     override fun onDestroy() {
-        //AppManager.instance.removeActivity(this)
         super.onDestroy()
+        AppManager.instance.removeActivity(this)
     }
 
     override fun onClick(view: View) {

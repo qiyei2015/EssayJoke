@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.HomeActivity">
+        <activity android:name=".ui.activity.HomeActivity"
+            android:exported="false"
+            android:launchMode="singleTask">
         </activity>
     </application>
 

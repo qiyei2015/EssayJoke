@@ -4,6 +4,7 @@ package com.qiyei.mall.usermanager.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Route
 import com.qiyei.framework.constant.MallConstant
 import com.qiyei.framework.extend.enable
 import com.qiyei.framework.titlebar.CommonTitleBar
@@ -14,12 +15,14 @@ import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
 import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.mvp.presenter.UserLoginPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserLoginView
+import com.qiyei.router.path.RouteMall
 import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.activity_user_login.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
+@Route(path = RouteMall.UserManager.path_login)
 class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,7 +1,6 @@
 package com.qiyei.mall.goodsmanager.ui.activity
 
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.Gravity
 import android.view.View
 import com.eightbitlab.rxbus.Bus
@@ -13,6 +12,7 @@ import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.event.AddCartEvent
 import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.ui.adapter.GoodsDetailViewPagerAdapter
+import com.qiyei.router.util.afterLogin
 import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import org.jetbrains.anko.toast
@@ -45,11 +45,14 @@ class GoodsDetailActivity : BaseActivity() {
                 toast("分享")
             }
             R.id.mCartTextView -> {
-                toast("购物车")
+                afterLogin {
+                    toast("购物车")
+                }
             }
             R.id.mAddToCartButton -> {
-                Bus.send(AddCartEvent())
-                toast("添加到购物车")
+                afterLogin {
+                    Bus.send(AddCartEvent())
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-//apply plugin: 'com.alibaba.arouter'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -14,7 +15,7 @@ android {
         //ARouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ moduleName : project.getName() ]
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
             }
         }
     }
@@ -30,7 +31,6 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"

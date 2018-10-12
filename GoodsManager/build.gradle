@@ -7,9 +7,7 @@ if (isMallLibrary.toBoolean()) {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-kapt {
-    generateStubs = true
-}
+
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -58,5 +56,14 @@ dependencies {
     //数组按钮？
     api 'ren.qinc.numberbutton:numberbutton:0.0.1'
 
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+    api project(':Router')
+
     api project(':Framework')
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }

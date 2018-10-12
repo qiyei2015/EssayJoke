@@ -19,4 +19,5 @@
     <string name="mobile_phone">手机</string>
     <string name="sign">签名</string>
     <string name="please_sign">请您填写签名</string>
+    <string name="un_login_text">登录/注册</string>
 </resources>
