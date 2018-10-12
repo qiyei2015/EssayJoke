@@ -13,16 +13,12 @@ import java.util.*
  */
 class AppManager private constructor(){
 
-    private val activityStack:Stack<Activity>;
+    private val activityStack:Stack<Activity> = Stack()
 
     companion object {
         val instance:AppManager by lazy{
             AppManager()
         }
-    }
-
-    init {
-        activityStack = Stack()
     }
 
     /**
