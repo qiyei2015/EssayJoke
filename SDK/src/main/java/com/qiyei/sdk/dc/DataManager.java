@@ -1,7 +1,10 @@
 package com.qiyei.sdk.dc;
 
+import com.qiyei.sdk.dc.impl.DC;
 import com.qiyei.sdk.dc.impl.DataManagerProxy;
+import com.qiyei.sdk.log.LogManager;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -41,10 +44,19 @@ public class DataManager{
 
     /**
      * 注册数据观察者
-     * @param uriSet 感兴趣的uri
+     * @param uriSet 感兴趣的key
      * @param observer
      */
     public void registerDataObserver(Set<String> uriSet,DataObserver observer){
+        mProxy.registerDataObserver(uriSet,observer);
+    }
+
+    /**
+     * 注册数据观察者
+     * @param uriSet 感兴趣的uri
+     * @param observer
+     */
+    public void registerSecretDataObserver(Set<String> uriSet,DataObserver observer){
         mProxy.registerDataObserver(uriSet,observer);
     }
 
@@ -53,6 +65,14 @@ public class DataManager{
      * @param observer
      */
     public void unregisterDataObserver(DataObserver observer){
+        mProxy.unregisterDataObserver(observer);
+    }
+
+    /**
+     * 取消注册
+     * @param observer
+     */
+    public void unregisterSecretDataObserver(DataObserver observer){
         mProxy.unregisterDataObserver(observer);
     }
 
@@ -221,5 +241,44 @@ public class DataManager{
         String value = mProxy.getString(uri);
         return value == null ? defValue : value;
     }
+
+    /**
+     * 存储String类型数据
+     * @param type
+     * @param key
+     * @param value
+     */
+    public void setString(Class<?> type,String key,String value){
+        String uri  = getUri(type,key);
+        LogManager.d(DC.TAG,"setString uri:" + uri);
+        mProxy.setString(uri,value);
+    }
+
+    /**
+     * 存储String类型数据
+     * @param type
+     * @param key
+     */
+    public String getString(Class<?> type,String key,String defValue){
+        String uri  = getUri(type,key);
+        String value = mProxy.getString(uri);
+        LogManager.d(DC.TAG,"getString uri:" + uri + " value:" + value);
+        return value == null ? defValue : value;
+    }
+
+    /**
+     * 将key转换为可识别的uri
+     * @param keys
+     * @param isSecret 是否使用加密
+     * @return
+     */
+//    private Set<String> convertKeysToUris(Set<String> keys,boolean isSecret){
+//        Set<String> uriSet = new HashSet<>();
+//        if (isSecret){
+//            for (String key : keys){
+//                uriSet.add(getUriForSecret())
+//            }
+//        }
+//    }
 
 }

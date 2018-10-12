@@ -36,6 +36,10 @@ public class DataManagerProxy implements IDataOperator {
      * 数据观察者，外部使用
      */
     private List<DataObserver> mObservers = new ArrayList<>();
+    /**
+     * 数据观察者，外部使用
+     */
+    private List<DataObserver> mSecretObservers = new ArrayList<>();
 
     public DataManagerProxy() {
         mProxy = new DataCenterProxy(RuntimeEnv.appContext,new IDataCenterObserver() {
@@ -57,11 +61,29 @@ public class DataManagerProxy implements IDataOperator {
                     //清除，便于下一次循环使用
                     updateUris.clear();
                 }
+
+                for (DataObserver observer : mSecretObservers){
+                    //只更新关心的
+                    for (String uri : urlSet){
+                        if (observer.getUri().contains(uri)){
+                            updateUris.add(uri);
+                        }
+                    }
+                    //updateUris有内容才更新
+                    if (updateUris.size() > 0){
+                        observer.onDataChanged(updateUris);
+                    }
+                    //清除，便于下一次循环使用
+                    updateUris.clear();
+                }
             }
 
             @Override
             public void onDataDeleted(Set<String> urlSet) {
                 for (DataObserver observer : mObservers){
+                    observer.onDataDeleted(urlSet);
+                }
+                for (DataObserver observer : mSecretObservers){
                     observer.onDataDeleted(urlSet);
                 }
             }
@@ -83,10 +105,34 @@ public class DataManagerProxy implements IDataOperator {
     }
 
     /**
+     * 注册数据观察者
+     * @param uriSet 感兴趣的uri
+     * @param observer
+     */
+    public void registerSecretDataObserver(Set<String> uriSet,DataObserver observer){
+        if (!mObservers.contains(observer)){
+            //添加感兴趣的uri
+            observer.addUri(uriSet);
+            //添加到mObservers中
+            mObservers.add(observer);
+        }
+    }
+
+    /**
      * 取消注册
      * @param observer
      */
     public void unregisterDataObserver(DataObserver observer){
+        if (mObservers.contains(observer)){
+            mObservers.remove(observer);
+        }
+    }
+
+    /**
+     * 取消注册
+     * @param observer
+     */
+    public void unregisterSecretDataObserver(DataObserver observer){
         if (mObservers.contains(observer)){
             mObservers.remove(observer);
         }

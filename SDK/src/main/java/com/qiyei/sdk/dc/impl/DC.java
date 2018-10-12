@@ -17,14 +17,14 @@ public class DC {
     /**
      * 加密标志
      */
-    static final String SECRET = "_sec";
+    static final String SECRET = "_secret";
 
     /**
-     * 不加密数据的主机
+     * 不加密数据的host
      */
     static String AUTHORITY = RuntimeEnv.packageName;
     /**
-     * 加密数据的主机
+     * 加密数据的host
      */
     static String AUTHORITY_SECRET = RuntimeEnv.packageName + SECRET;
     /**
