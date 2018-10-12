@@ -54,6 +54,9 @@ public final class DataCenter{
         mBufferMap.put(DC.MEM_DATA,memoryBuffer);
         mBufferMap.put(DC.STORE_DATA,spBuffer);
         mBufferMap.put(DC.SQL_DATA,sqlBuffer);
+        // TODO: 2018/10/12 后期需要保存到用户登录后的数据 ,现在默认用户名为admin
+        IDataBuffer userBuffer = new SPDataBuffer(context,"admin");
+        mBufferMap.put(DC.USER_DATA,userBuffer);
     }
 
     /**

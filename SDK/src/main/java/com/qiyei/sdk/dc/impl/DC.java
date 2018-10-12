@@ -61,12 +61,12 @@ public class DC {
      */
     static final String DEFAULT_DATA = "default_data";
 
-//    /**
-//     * 存储在数据库中数据
-//     */
-//    public static class SqlData{
-//
-//    }
+    /**
+     * 存储在数据库中数据
+     */
+    public static class SqlData{
+
+    }
 
     /**
      * 存储在SP中，多用户共享数据

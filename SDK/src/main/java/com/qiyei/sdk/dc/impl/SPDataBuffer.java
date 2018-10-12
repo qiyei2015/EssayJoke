@@ -46,6 +46,18 @@ public class SPDataBuffer implements IDataBuffer {
         mEditor = mSharedPreferences.edit();
     }
 
+
+    /**
+     * 同一个包下可以引用
+     * @param context
+     */
+    SPDataBuffer(Context context,String userName){
+        mContext = context;
+        //名称默认为包名
+        mSharedPreferences = mContext.getSharedPreferences(RuntimeEnv.packageName +"_" + userName + suffix,Context.MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
+    }
+
     @Override
     public void setValue(String uri, String value) {
         mEditor.putString(uri,value);
