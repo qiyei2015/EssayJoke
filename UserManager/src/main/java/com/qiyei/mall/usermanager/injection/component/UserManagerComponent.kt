@@ -1,7 +1,6 @@
 package com.qiyei.mall.usermanager.injection.component
 
 
-import android.app.Fragment
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.usermanager.injection.module.UploadManagerModule
@@ -31,7 +30,7 @@ interface UserManagerComponent {
 
     fun inject(activity: UserModifyPasswordActivity)
 
-    fun inject(activity: UserInfoModifyActivity)
+    fun inject(activity: UserInfoActivity)
 
     fun inject(fragment: UserFragment)
 }

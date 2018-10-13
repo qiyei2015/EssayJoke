@@ -11,7 +11,7 @@
         </activity>
         <activity android:name=".ui.activity.UserModifyPasswordActivity">
         </activity>
-        <activity android:name=".ui.activity.UserInfoModifyActivity">
+        <activity android:name=".ui.activity.UserInfoActivity">
         </activity>
     </application>
 

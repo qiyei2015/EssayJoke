@@ -44,7 +44,9 @@ public abstract class BaseFragment extends RxFragment implements View.OnClickLis
      * 获取调试TAG
      * @return
      */
-    abstract protected String getTAG();
+    protected String getTAG(){
+        return this.getClass().getSimpleName();
+    }
 
     /**
      * 启动Activity

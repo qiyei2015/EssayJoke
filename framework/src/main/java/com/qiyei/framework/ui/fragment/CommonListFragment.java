@@ -63,6 +63,10 @@ public abstract class CommonListFragment extends BaseFragment {
         return "CommonListFragment";
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 
     /**
      * View初始化

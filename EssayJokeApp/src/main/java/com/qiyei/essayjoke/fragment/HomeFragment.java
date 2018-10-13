@@ -64,6 +64,11 @@ public class HomeFragment extends BaseFragment {
         return TAG;
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     /**
      * 初始化ViewPager
      */

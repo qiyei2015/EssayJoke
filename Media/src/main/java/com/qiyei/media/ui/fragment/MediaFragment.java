@@ -48,4 +48,8 @@ public class MediaFragment extends CommonListFragment {
         setLiveData(mMenuList);
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

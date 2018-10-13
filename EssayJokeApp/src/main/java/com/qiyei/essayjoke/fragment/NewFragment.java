@@ -34,4 +34,9 @@ public class NewFragment extends BaseFragment {
     protected String getTAG() {
         return null;
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

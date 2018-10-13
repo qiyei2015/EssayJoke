@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     style="@style/MatchMatch.Vertical.Common"
-    tools:context=".ui.activity.UserInfoModifyActivity">
+    tools:context=".ui.activity.UserInfoActivity">
 
     <RelativeLayout android:id="@+id/mUserIconRelativeLayout"
                     android:layout_height="wrap_content"

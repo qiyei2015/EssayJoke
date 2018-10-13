@@ -12,10 +12,10 @@ import com.qiyei.mall.usermanager.R
 import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
 import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
-import com.qiyei.mall.usermanager.ui.activity.UserLoginActivity
+import com.qiyei.mall.usermanager.ui.activity.UserInfoActivity
+import com.qiyei.router.util.afterLogin
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -59,11 +59,11 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
  */
     override fun onClick(view: View) {
         when (view.id) {
-//            R.id.mUserIconIv, R.id.mUserNameTv -> {
-//                afterLogin {
-//                    startActivity<UserInfoActivity>()
-//                }
-//            }
+            R.id.mUserIconIv, R.id.mUserNameTv -> {
+                afterLogin {
+                    startActivity<UserInfoActivity>()
+                }
+            }
 //
 //            R.id.mWaitPayOrderTv -> {
 //                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)

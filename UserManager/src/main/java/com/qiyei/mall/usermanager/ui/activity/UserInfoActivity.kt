@@ -28,7 +28,7 @@ import org.json.JSONObject
 import java.util.concurrent.TimeUnit
 
 
-class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),IUserInfoModifyView {
+class UserInfoActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),IUserInfoModifyView {
 
     /**
      * 用户信息
@@ -56,7 +56,7 @@ class UserInfoModifyActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),
     }
 
     override fun getTAG(): String {
-        return UserInfoModifyActivity::class.java.simpleName
+        return UserInfoActivity::class.java.simpleName
     }
 
     override fun initComponentInject() {

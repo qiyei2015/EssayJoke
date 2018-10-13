@@ -52,6 +52,11 @@ public class OpenSourceFragment extends CommonListFragment {
     }
 
     @Override
+    public void onClick(View v) {
+        super.onClick(v);
+    }
+
+    @Override
     protected void initData() {
         setLiveData(mMenuList);
     }

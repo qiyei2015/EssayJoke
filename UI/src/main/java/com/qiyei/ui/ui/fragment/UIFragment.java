@@ -50,4 +50,8 @@ public class UIFragment extends CommonListFragment {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        super.onClick(v);
+    }
 }

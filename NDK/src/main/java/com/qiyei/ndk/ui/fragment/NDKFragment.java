@@ -19,7 +19,7 @@ public class NDKFragment extends BaseFragment {
     private static final String TAG = "NDKFragment";
 
     public NDKFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -36,5 +36,10 @@ public class NDKFragment extends BaseFragment {
     @Override
     public String getTAG() {
         return TAG;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
