@@ -1,7 +1,9 @@
 package com.qiyei.router.util
 
 import com.alibaba.android.arouter.launcher.ARouter
+import com.qiyei.framework.constant.MallConstant
 import com.qiyei.router.path.RouteMall
+import com.qiyei.sdk.dc.DataManager
 
 /**
  * @author Created by qiyei2015 on 2018/10/12.
@@ -14,7 +16,7 @@ import com.qiyei.router.path.RouteMall
  * 是否已经登录
  */
 fun isLogin():Boolean{
-    return false
+    return DataManager.getInstance().getString(MallConstant.javaClass, MallConstant.KEY_SP_TOKEN,null) != null
 }
 
 fun afterLogin(method: () -> Unit){

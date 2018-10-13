@@ -33,14 +33,11 @@ class RetrofitFactory private constructor(){
     init {
         //初始化拦截器
         interceptor = Interceptor { chain ->
-            val tokenUri = DataManager.getInstance().getUri(MallConstant.javaClass,MallConstant.KEY_SP_TOKEN)
-            val token = DataManager.getInstance().getString(MallConstant.KEY_SP_TOKEN,"")
-            //token暂时调试
             val request = chain.request()
                     .newBuilder()
                     .addHeader("Content_Type", "application/json")
                     .addHeader("charset", "UTF-8")
-                    .addHeader("token","11")
+                    .addHeader("token",DataManager.getInstance().getString(MallConstant.javaClass,MallConstant.KEY_SP_TOKEN,""))
                     .build()
             chain.proceed(request)
         }

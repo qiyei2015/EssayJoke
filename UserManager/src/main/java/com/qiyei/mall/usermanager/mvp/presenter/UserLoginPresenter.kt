@@ -1,11 +1,13 @@
 package com.qiyei.mall.usermanager.mvp.presenter
 
+import com.qiyei.framework.constant.MallConstant
 import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.usermanager.data.bean.UserInfo
 import com.qiyei.mall.usermanager.mvp.view.IUserLoginView
 import com.qiyei.mall.usermanager.service.IUserManagerService
+import com.qiyei.sdk.dc.DataManager
 import javax.inject.Inject
 
 /**
@@ -34,8 +36,12 @@ open class UserLoginPresenter @Inject constructor():BasePresenter<IUserLoginView
         mUserManagerService.login(userKey, password, pushId)
                 .execute(object : BaseObserver<UserInfo>(mView){
                     override fun onNext(t: UserInfo) {
+                        //保存Token
+                        DataManager.getInstance().setString(MallConstant.javaClass, MallConstant.KEY_SP_TOKEN,t.id)
                         mView.onLoginResult(t)
                     }
                 },mLifecycleProvider)
     }
+
+
 }

@@ -14,6 +14,7 @@ import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.ui.adapter.GoodsDetailViewPagerAdapter
 import com.qiyei.router.util.afterLogin
 import com.qiyei.sdk.dc.DataManager
+import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import org.jetbrains.anko.toast
 import q.rorbin.badgeview.QBadgeView
@@ -40,10 +41,13 @@ class GoodsDetailActivity : BaseActivity() {
 
     override fun onClick(view: View) {
         super.onClick(view)
+        LogManager.i(getTAG(),"id:" + view.id)
+        LogManager.i(getTAG(),"R.id.mCartTextView:" + R.id.mCartTextView)
         when(view.id){
             R.id.mShareTextView -> {
                 toast("分享")
             }
+            //使用QBadgeView有bug
             R.id.mCartTextView -> {
                 afterLogin {
                     toast("购物车")
@@ -69,7 +73,11 @@ class GoodsDetailActivity : BaseActivity() {
                 .build()
 
         mShareTextView.setOnClickListener(this)
-        mCartTextView.setOnClickListener(this)
+        mCartTextView.setOnClickListener {
+            afterLogin {
+                toast("购物车")
+            }
+        }
         mAddToCartButton.setOnClickListener(this)
         mCartBadge = QBadgeView(this)
 
@@ -95,7 +103,7 @@ class GoodsDetailActivity : BaseActivity() {
         mCartBadge.setBadgeTextSize(6f,true)
         val cartUri = DataManager.getInstance().getUri(GoodsConstant.javaClass,GoodsConstant.SP_CART_SIZE)
         mCartBadge.bindTarget(mCartTextView).badgeNumber = DataManager.getInstance().getInt(cartUri,0)
-        toast(mCartBadge.bindTarget(mCartTextView).badgeNumber.toString())
+        toast(mCartBadge.badgeNumber.toString())
     }
 
 }

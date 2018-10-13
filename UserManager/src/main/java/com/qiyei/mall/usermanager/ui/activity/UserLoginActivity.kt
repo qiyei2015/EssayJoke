@@ -40,10 +40,6 @@ class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
      */
     override fun onLoginResult(userInfo: UserInfo) {
         toast(userInfo.toString())
-        val tokenUri = DataManager.getInstance().getUri(MallConstant.javaClass, MallConstant.KEY_SP_TOKEN)
-        val token = DataManager.getInstance().setString(MallConstant.KEY_SP_TOKEN,userInfo.id)
-//        val intent = Intent()
-//        startActivity()
     }
 
     override fun onClick(view: View) {

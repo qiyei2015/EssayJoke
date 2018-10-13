@@ -39,6 +39,6 @@ dependencies {
     api "com.alibaba:arouter-api:$arouter_api_version"
     annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
-    api project(':SDK')
+    api project(':Framework')
 
 }
