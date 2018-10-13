@@ -14,4 +14,5 @@
     <string name="nav_bar_cart">购物车</string>
     <string name="nav_bar_msg">消息</string>
     <string name="nav_bar_user">我的</string>
+    <string name="common_cart">购物车</string>
 </resources>

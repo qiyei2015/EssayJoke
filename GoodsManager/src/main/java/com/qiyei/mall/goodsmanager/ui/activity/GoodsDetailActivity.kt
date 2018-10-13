@@ -16,6 +16,7 @@ import com.qiyei.router.util.afterLogin
 import com.qiyei.sdk.dc.DataManager
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_goods_detail.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import q.rorbin.badgeview.QBadgeView
 
@@ -50,7 +51,7 @@ class GoodsDetailActivity : BaseActivity() {
             //使用QBadgeView有bug
             R.id.mCartTextView -> {
                 afterLogin {
-                    toast("购物车")
+                    startActivity<CartActivity>()
                 }
             }
             R.id.mAddToCartButton -> {
@@ -75,7 +76,7 @@ class GoodsDetailActivity : BaseActivity() {
         mShareTextView.setOnClickListener(this)
         mCartTextView.setOnClickListener {
             afterLogin {
-                toast("购物车")
+                startActivity<CartActivity>()
             }
         }
         mAddToCartButton.setOnClickListener(this)

@@ -43,7 +43,9 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
     /**
      * 用于日志调试TAG
      */
-    abstract fun getTAG():String
+    open fun getTAG():String{
+       return this::class.java.simpleName
+    }
 
 
 //    override fun onBackPressed() {
