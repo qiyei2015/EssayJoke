@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
+    <com.kennyc.view.MultiStateView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mMultiStateView"
+        style="@style/multi_state_style">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mCartRecyclerView"
+                style="@style/commonRecyclerView">
+            </android.support.v7.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/mBottomRelativeLayout"
+                style="@style/MatchWrap"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/border_all">
 
+                <CheckBox
+                    android:id="@+id/mAllCheckBox"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/common_margin"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/common_check_selector"
+                    android:drawablePadding="@dimen/common_padding_middle"
+                    android:text="@string/all_checked"
+                    android:textSize="@dimen/text_big_size"/>
 
-</FrameLayout>
+                <TextView
+                    android:id="@+id/mTotalPriceTextView"
+                    style="@style/WrapWrap"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@id/mAllCheckBox"
+                    android:textColor="@color/common_red"/>
+
+                <Button
+                    android:id="@+id/mSettleAccountsButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/common_red"
+                    android:text="@string/go_account"
+                    android:textColor="@color/common_white"
+                    android:textSize="@dimen/text_big_size"/>
+
+                <Button
+                    android:id="@+id/mDeleteButton"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@color/common_red"
+                    android:text="@string/delete"
+                    android:textColor="@color/common_white"
+                    android:textSize="@dimen/text_big_size"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+        </RelativeLayout>
+    </com.kennyc.view.MultiStateView>
+
+</LinearLayout>

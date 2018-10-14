@@ -4,4 +4,6 @@
     <string name="best_selling">热卖热荐</string>
     <string name="goods_list">商品列表</string>
     <string name="add_to_cart">加入购物车</string>
+    <string name="all_checked">全选</string>
+    <string name="go_account">去结算</string>
 </resources>
