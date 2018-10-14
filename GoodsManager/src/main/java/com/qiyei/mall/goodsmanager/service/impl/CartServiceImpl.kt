@@ -1,6 +1,7 @@
 package com.qiyei.mall.goodsmanager.service.impl
 
 import com.qiyei.framework.extend.baseRespConvert
+import com.qiyei.framework.extend.baseRespConvertBoolean
 import com.qiyei.mall.goodsmanager.data.protocol.CartGoods
 import com.qiyei.mall.goodsmanager.data.respository.CartRepository
 import com.qiyei.mall.goodsmanager.service.ICartService
@@ -27,8 +28,8 @@ class CartServiceImpl @Inject constructor():ICartService {
         return mRepository.addCart(goodsId,goodsDesc,goodsIcon,goodsPrice,goodsCount,goodsSku).baseRespConvert()
     }
 
-    override fun deleteCartList(list: List<Int>): Observable<String> {
-        return mRepository.deleteCartList(list).baseRespConvert()
+    override fun deleteCartList(list: List<Int>): Observable<Boolean> {
+        return mRepository.deleteCartList(list).baseRespConvertBoolean()
     }
 
     override fun submitCart(list: MutableList<CartGoods>, totalPrice: Long): Observable<Int> {

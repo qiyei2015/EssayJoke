@@ -99,6 +99,12 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onSubmitCartList(count: Int) {
         LogManager.i(getTAG(), "count:$count")
+        val list:MutableList<CartGoods> = arrayListOf()
+        mCartGoodsListAdapter.datas
+                .filter {
+                    it.isSelected
+                }.mapTo(list) { it }
+        mPresenter.submitCart(list,mTotalPrice)
     }
 
     private fun initView(){

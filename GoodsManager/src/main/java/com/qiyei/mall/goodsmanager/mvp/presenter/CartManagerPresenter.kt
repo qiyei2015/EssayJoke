@@ -3,13 +3,9 @@ package com.qiyei.mall.ordermanager.mvp.presenter
 import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
-import com.qiyei.mall.goodsmanager.data.bean.Category
 import com.qiyei.mall.goodsmanager.data.protocol.CartGoods
 import com.qiyei.mall.goodsmanager.service.ICartService
-import com.qiyei.mall.goodsmanager.service.ICategoryService
 import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
-import com.qiyei.sdk.log.LogManager
-import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -39,24 +35,25 @@ class CartManagerPresenter @Inject constructor():BasePresenter<ICartManagerView>
     }
 
     /**
-     * 添加商品到购物车
-     */
-    fun addCart(goodsId: Int, goodsDesc: String, goodsIcon: String, goodsPrice: Long,
-                goodsCount: Int, goodsSku: String){
-
-    }
-    /**
      * 删除购物车商品
      */
     fun deleteCartList(list: List<Int>){
-
+        mCartService.deleteCartList(list).execute(object : BaseObserver<Boolean>(mView){
+            override fun onNext(item: Boolean) {
+                mView.onDeleteCartList(item)
+            }
+        },mLifecycleProvider)
     }
 
     /**
      * 购物车结算
      */
     fun submitCart(list: MutableList<CartGoods>, totalPrice: Long){
-
+        mCartService.submitCart(list,totalPrice).execute(object : BaseObserver<Int>(mView){
+            override fun onNext(item: Int) {
+                mView.onSubmitCartList(item)
+            }
+        },mLifecycleProvider)
     }
 
 }
