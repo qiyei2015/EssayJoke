@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.qiyei.sdk.titlebar.BaseTitleBar;
 import com.qiyei.framework.R;
@@ -61,6 +62,15 @@ public class CommonTitleBar extends BaseTitleBar<CommonTitleParams> {
     public void setRightText(String text){
         mParams.mRightText = text;
         setText(R.id.right_text,mParams.mRightText);
+    }
+
+    /**
+     * 获取右侧显示的文字
+     * @return
+     */
+    public String getRightText(){
+        TextView textView = getView(R.id.right_text);
+        return textView.getText().toString();
     }
 
     /**

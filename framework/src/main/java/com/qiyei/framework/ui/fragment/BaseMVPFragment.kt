@@ -38,10 +38,10 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
         super.onCreate(savedInstanceState)
         initActivityInjection()
         initComponentInject()
+        mDialogTAG = this.javaClass.canonicalName
     }
 
     override fun showLoading() {
-        mDialogTAG = this.javaClass.canonicalName
         LoadingManager.showDialog(childFragmentManager,mDialogTAG)
     }
 

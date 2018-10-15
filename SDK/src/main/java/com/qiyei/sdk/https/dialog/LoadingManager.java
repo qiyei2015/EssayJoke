@@ -19,11 +19,9 @@ public class LoadingManager {
      * @param tag
      */
     public static void showDialog(Object manager, String tag){
-
         if (manager == null){
             return;
         }
-
         if (manager instanceof FragmentManager){
             LoadingDialogV4 dialog = new LoadingDialogV4();
             dialog.setCancelable(false);

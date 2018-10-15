@@ -51,6 +51,11 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         LogManager.i(getTAG(),"onViewCreated")
         initView()
         initObserver()
+    }
+
+
+    override fun onStart() {
+        super.onStart()
         loadData()
     }
 
@@ -73,10 +78,21 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
                 updateView()
             }
             R.id.mSettleAccountsButton -> {
-
+                val list:MutableList<CartGoods> = arrayListOf()
+                mCartGoodsListAdapter.datas
+                        .filter {
+                            it.isSelected
+                        }.mapTo(list) { it }
+                mPresenter.submitCart(list,mTotalPrice)
             }
             R.id.mDeleteButton -> {
-
+                //删除所选
+                val list:MutableList<Int> = arrayListOf()
+                mCartGoodsListAdapter.datas
+                        .filter {
+                            it.isSelected
+                        }.mapTo(list) { it.id }
+                mPresenter.deleteCartList(list)
             }
         }
     }
@@ -95,16 +111,12 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onDeleteCartList(result: Boolean) {
         LogManager.i(getTAG(), "result:$result")
+        toast("删除成功")
+        loadData()
     }
 
     override fun onSubmitCartList(count: Int) {
         LogManager.i(getTAG(), "count:$count")
-        val list:MutableList<CartGoods> = arrayListOf()
-        mCartGoodsListAdapter.datas
-                .filter {
-                    it.isSelected
-                }.mapTo(list) { it }
-        mPresenter.submitCart(list,mTotalPrice)
     }
 
     private fun initView(){
@@ -112,7 +124,15 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
                 .setTitle(getString(R.string.common_cart))
                 .setRightText(getString(R.string.common_edit))
                 .setRightClickListener {
-                    toast("编辑")
+                    val text = if(mTitleBar?.rightText == getString(R.string.common_edit)){
+                        switchEditModeView()
+                        getString(R.string.common_complete)
+                    }
+                    else {
+                        switchAccountModeView()
+                        getString(R.string.common_edit)
+                    }
+                    mTitleBar?.rightText = text
                 }
                 .build()
 
@@ -126,7 +146,8 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         mCartRecyclerView.adapter = mCartGoodsListAdapter
 
         mTotalPriceTextView.text = "合计:${YuanFenConverter.changeF2YWithUnit(mTotalPrice)}"
-
+        //首次是切换为结账模式
+        switchAccountModeView()
     }
 
     private fun initObserver(){
@@ -170,5 +191,23 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
             item.isSelected = mAllCheckBox.isChecked
         }
         mCartGoodsListAdapter.notifyDataSetChanged()
+    }
+
+    /**
+     * 切换到编辑模式
+     */
+    private fun switchEditModeView() {
+        mDeleteButton.visibility = View.VISIBLE
+        mSettleAccountsButton.visibility = View.GONE
+        mTotalPriceTextView.visibility = View.GONE
+    }
+
+    /**
+     * 切换到结账模式
+     */
+    private fun switchAccountModeView() {
+        mDeleteButton.visibility = View.GONE
+        mSettleAccountsButton.visibility = View.VISIBLE
+        mTotalPriceTextView.visibility = View.VISIBLE
     }
 }
