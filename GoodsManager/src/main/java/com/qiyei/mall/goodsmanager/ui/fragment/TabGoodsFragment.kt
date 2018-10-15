@@ -27,6 +27,7 @@ import com.qiyei.mall.goodsmanager.mvp.presenter.GoodsSkuPresenter
 import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
 import com.qiyei.mall.goodsmanager.ui.activity.GoodsDetailActivity
 import com.qiyei.mall.goodsmanager.view.GoodsSkuPopView
+import com.qiyei.sdk.dc.DataManager
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_tab.*
@@ -128,6 +129,10 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
      * 加入购物车回调
      */
     override fun onAddCartResult(num: Int) {
+        //保存数量
+        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass,GoodsConstant.SP_CART_SIZE)
+        DataManager.getInstance().setInt(uri,num)
+
         Bus.send(UpdateCartCountEvent())
     }
 

@@ -13,6 +13,7 @@ import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.framework.util.YuanFenConverter
 import com.qiyei.mall.goodsmanager.R
+import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.data.protocol.CartGoods
 import com.qiyei.mall.goodsmanager.event.UpdateAllChecked
 import com.qiyei.mall.goodsmanager.event.UpdateTotalPriceEvent
@@ -22,6 +23,7 @@ import com.qiyei.mall.ordermanager.injection.component.DaggerCartComponent
 
 import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
 import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
+import com.qiyei.sdk.dc.DataManager
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
@@ -117,6 +119,9 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onSubmitCartList(count: Int) {
         LogManager.i(getTAG(), "count:$count")
+        //保存数量
+        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+        DataManager.getInstance().setInt(uri,count)
     }
 
     private fun initView(){

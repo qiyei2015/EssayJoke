@@ -1,13 +1,13 @@
 package com.qiyei.mall.view
 
 import android.content.Context
-import android.opengl.Visibility
 import android.util.AttributeSet
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.ashokvarma.bottomnavigation.BottomNavigationItem
 import com.ashokvarma.bottomnavigation.ShapeBadgeItem
 import com.ashokvarma.bottomnavigation.TextBadgeItem
 import com.qiyei.mall.R
+import com.qiyei.sdk.log.LogManager
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -18,6 +18,10 @@ import com.qiyei.mall.R
 class HomeBottomNavigationBar @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BottomNavigationBar(context, attrs, defStyleAttr) {
+
+    companion object {
+        const val TAG = "HomeBottomNavigationBar"
+    }
 
     /**
      * 购物车边角
@@ -77,9 +81,7 @@ class HomeBottomNavigationBar @JvmOverloads constructor(
                 .addItem(userItem)
                 .setFirstSelectedPosition(0)
                 .initialise()
-
-        setCartBadgeCount(0)
-        setMessageBadgeVisibility(false)
+        LogManager.i(TAG,"HomeBottomNavigationBar init")
     }
 
     /**

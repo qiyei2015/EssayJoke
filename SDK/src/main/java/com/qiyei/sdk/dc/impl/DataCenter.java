@@ -161,9 +161,10 @@ public final class DataCenter{
      * @param uri
      */
     private String getValue(String uri){
-        LogManager.i(DC.TAG,"getValue,uri --> " + uri);
         mDataBuffer = getDataBuffer(uri);
-        return mDataBuffer.getValue(uri);
+        String value = mDataBuffer.getValue(uri);
+        LogManager.i(DC.TAG,"getValue,uri --> " + uri + ",value:" + value);
+        return value;
     }
 
     /**
