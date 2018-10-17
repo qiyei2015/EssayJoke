@@ -25,6 +25,8 @@ abstract class BasePresenter<T:IBaseView> {
     /**
      * 定位的TAG
      */
-    abstract fun getTAG():String
+    open fun getTAG():String{
+        return this::class.java.simpleName
+    }
 
 }

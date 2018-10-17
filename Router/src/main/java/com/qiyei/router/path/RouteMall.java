@@ -16,4 +16,13 @@ public interface RouteMall {
 
     }
 
+    interface OrderManager{
+        /**
+         * 订单确认
+         */
+        String order_confirm = "/order_manager/order_confirm";
+
+    }
+
+    
 }
