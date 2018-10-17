@@ -1,6 +1,7 @@
 package com.qiyei.framework.ui.activity
 
 import android.os.Bundle
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.FrameworkApplication
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.component.DaggerActivityComponent
@@ -28,6 +29,8 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        ARouter.getInstance().inject(this)
         initActivityInjection()
         initComponentInject()
     }

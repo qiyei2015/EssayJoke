@@ -22,6 +22,6 @@ interface ICartManagerView:IBaseView {
     /**
      * 提交购物车
      */
-    fun onSubmitCartList(count: Int)
+    fun onSubmitCartList(id: Int)
 
 }

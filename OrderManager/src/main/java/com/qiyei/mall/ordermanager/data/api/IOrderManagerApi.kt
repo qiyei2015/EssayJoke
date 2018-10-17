@@ -1,7 +1,11 @@
 package com.qiyei.mall.ordermanager.data.api
 
+import com.qiyei.framework.data.protocol.BaseResp
 import com.qiyei.mall.ordermanager.data.bean.Order
+import com.qiyei.mall.ordermanager.data.protocol.*
 import io.reactivex.Observable
+import retrofit2.http.Body
+import retrofit2.http.POST
 
 
 /**
@@ -13,28 +17,32 @@ import io.reactivex.Observable
 interface IOrderManagerApi {
 
     /**
-     * 根据ID查询订单
+     *取消订单
      */
-    fun getOrderById(orderId: Int): Observable<Order>
-
-    /**
-     *提交订单
-     */
-    fun submitOrder(order: Order): Observable<Boolean>
-
-    /**
-     * 根据状态查询订单列表
-     */
-    fun getOrderList(orderStatus: Int): Observable<MutableList<Order>?>
-
-    /**
-     * 取消订单
-     */
-    fun cancelOrder(orderId: Int): Observable<Boolean>
+    @POST("order/cancel")
+    fun cancelOrder(@Body req: CancelOrderReq): Observable<BaseResp<String>>
 
     /**
      * 确认订单
      */
-    fun confirmOrder(orderId: Int): Observable<Boolean>
+    @POST("order/confirm")
+    fun confirmOrder(@Body req: ConfirmOrderReq): Observable<BaseResp<String>>
 
+    /**
+     *根据ID获取订单
+     */
+    @POST("order/getOrderById")
+    fun getOrderById(@Body req: GetOrderByIdReq): Observable<BaseResp<Order>>
+
+    /**
+     * 根据订单状态查询查询订单列表
+     */
+    @POST("order/getOrderList")
+    fun getOrderList(@Body req: GetOrderListReq): Observable<BaseResp<MutableList<Order>?>>
+
+    /**
+     * 提交订单
+     */
+    @POST("order/submitOrder")
+    fun submitOrder(@Body req: SubmitOrderReq): Observable<BaseResp<String>>
 }

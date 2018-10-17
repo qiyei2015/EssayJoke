@@ -1,6 +1,7 @@
 package com.qiyei.mall.ordermanager.data.bean
 
 import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
 
 /**
@@ -9,8 +10,8 @@ import android.os.Parcelable
  * @email: 1273482124@qq.com
  * @description:
  */
-
-abstract class ShipAddress(val id: Int,
+@Parcelize
+data class ShipAddress(val id: Int,
                        var shipUserName: String,
                        var shipUserMobile: String,
                        var shipAddress: String,

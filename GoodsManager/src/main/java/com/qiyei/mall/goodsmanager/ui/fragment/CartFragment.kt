@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.kennyc.view.MultiStateView
@@ -23,6 +24,8 @@ import com.qiyei.mall.ordermanager.injection.component.DaggerCartComponent
 
 import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
 import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
+import com.qiyei.router.path.RouteMall
+import com.qiyei.router.provider.ProviderConstant
 import com.qiyei.sdk.dc.DataManager
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.fragment_cart.*
@@ -117,11 +120,14 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         loadData()
     }
 
-    override fun onSubmitCartList(count: Int) {
-        LogManager.i(getTAG(), "count:$count")
+    override fun onSubmitCartList(id: Int) {
+        LogManager.i(getTAG(), "orderId:$id")
         //保存数量
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-        DataManager.getInstance().setInt(uri,count)
+        //val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+        //DataManager.getInstance().setInt(uri,id)
+        ARouter.getInstance().build(RouteMall.OrderManager.order_confirm)
+                .withInt(ProviderConstant.KEY_ORDER_ID,id)
+                .navigation()
     }
 
     private fun initView(){

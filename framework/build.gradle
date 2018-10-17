@@ -62,10 +62,6 @@ dependencies {
     //分包
     api "com.android.support:multidex:$support_multidex_version"
 
-    api project(':SDK')
-    api project(':Resource')
-    api project(':MallResource')
-
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
@@ -73,6 +69,10 @@ dependencies {
     //依赖anko框架 kotlin扩展
     api "org.jetbrains.anko:anko:$anko_version"
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //ARouter
+    api "com.alibaba:arouter-api:$arouter_api_version"
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
     //Circle ImageView
     api "de.hdodenhof:circleimageview:${circle_imageView_version}"
@@ -93,4 +93,8 @@ dependencies {
     api "com.github.crosswall:Android-Coverflow:$android_coverflow_version"
     //上下拉刷新
     api "cn.bingoogolapple:bga-refreshlayout:$bga_refreshlayout_version"
+
+    api project(':SDK')
+    api project(':Resource')
+    api project(':MallResource')
 }

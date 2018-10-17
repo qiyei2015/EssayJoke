@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">OrderManager</string>
+    <string name="order_confirm">订单确认</string>
+    <string name="choose_ship">选择收货人</string>
+    <string name="pay_and_ship">在线支付 快递运输</string>
+    <string name="submit_order">提交订单</string>
+    <string name="payment_distribution">支付配送</string>
 </resources>
