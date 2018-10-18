@@ -48,6 +48,11 @@ public abstract class BaseFragment extends RxFragment implements View.OnClickLis
         return this.getClass().getSimpleName();
     }
 
+    @Override
+    public void onClick(View v) {
+
+    }
+
     /**
      * 启动Activity
      * @param clazz

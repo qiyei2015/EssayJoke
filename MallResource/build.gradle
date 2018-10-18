@@ -29,4 +29,7 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
+
+    //多状态视图MultiStateView
+    api "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
 }

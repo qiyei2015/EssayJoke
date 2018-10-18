@@ -71,6 +71,11 @@ public class FindFragment extends BaseFragment {
     }
 
     @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
     protected String getTAG() {
         return FindFragment.class.getSimpleName();
     }
