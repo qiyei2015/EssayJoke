@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.ShipAddressActivity">
+
+    <com.kennyc.view.MultiStateView
+        android:id="@+id/mMultiStateView"
+        style="@style/multi_state_style"
+        android:layout_above="@+id/mAddAddressButton">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mAddressRecyclerView"
+            style="@style/commonRecyclerView"/>
+    </com.kennyc.view.MultiStateView>
+    <Button
+        android:id="@+id/mAddAddressButton"
+        style="@style/MatchWrap"
+        android:background="@drawable/btn_common_selector"
+        android:layout_margin="@dimen/common_margin"
+        android:padding="@dimen/common_padding_middle"
+        android:textSize="@dimen/text_big_size"
+        android:textColor="@color/common_white"
+        android:text="@string/new_address"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

@@ -5,4 +5,6 @@
     <string name="pay_and_ship">在线支付 快递运输</string>
     <string name="submit_order">提交订单</string>
     <string name="payment_distribution">支付配送</string>
+    <string name="new_address">新建地址</string>
+    <string name="address_manager">地址管理</string>
 </resources>

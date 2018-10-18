@@ -2,7 +2,6 @@ package com.qiyei.mall.ordermanager.ui.activity
 
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -18,6 +17,7 @@ import com.qiyei.mall.ordermanager.ui.adapter.OrderGoodsAdapter
 import com.qiyei.router.path.RouteMall
 import com.qiyei.router.provider.ProviderConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 @Route(path = RouteMall.OrderManager.order_confirm)
@@ -55,7 +55,7 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
         super.onClick(view)
         when(view.id){
             R.id.mSelectShipTextView -> {
-                toast("选择收货人")
+                startActivity<ShipAddressActivity>()
             }
             R.id.mSubmitOrderButton -> {
                 submitOrder()

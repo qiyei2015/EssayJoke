@@ -5,6 +5,8 @@
     <application>
         <activity android:name=".ui.activity.OrderConfirmActivity">
         </activity>
+        <activity android:name=".ui.activity.ShipAddressActivity">
+        </activity>
     </application>
 
 </manifest>

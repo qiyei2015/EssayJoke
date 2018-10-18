@@ -275,4 +275,14 @@
         <item name="android:layout_margin">@dimen/common_margin</item>
         <item name="android:enabled">false</item>
     </style>
+
+    <!-- 多状态视图样式-->
+    <style name="multi_state_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="msv_loadingView">@layout/layout_state_loading</item>
+        <item name="msv_emptyView">@layout/layout_state_empty</item>
+        <item name="msv_errorView">@layout/layout_state_error</item>
+        <item name="msv_viewState">loading</item>
+    </style>
 </resources>
