@@ -116,6 +116,10 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseVi
         return super.getItemViewType(position);
     }
 
+    protected String getTAG(){
+        return this.getClass().getSimpleName();
+    }
+
     /**
      * @param clickListener the {@link #mClickListener} to set
      */

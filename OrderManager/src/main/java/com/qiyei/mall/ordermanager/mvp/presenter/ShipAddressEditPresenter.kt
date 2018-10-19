@@ -4,8 +4,10 @@ import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.ordermanager.data.bean.ShipAddress
+import com.qiyei.mall.ordermanager.mvp.view.IShipAddressEditView
 import com.qiyei.mall.ordermanager.mvp.view.IShipAddressView
 import com.qiyei.mall.ordermanager.service.IAddressManagerService
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -14,18 +16,18 @@ import javax.inject.Inject
  * @email: 1273482124@qq.com
  * @description:
  */
-class ShipAddressPresenter @Inject constructor():BasePresenter<IShipAddressView>() {
+class ShipAddressEditPresenter @Inject constructor():BasePresenter<IShipAddressEditView>() {
 
     @Inject
     lateinit var mAddressManagerService:IAddressManagerService
 
     /**
-     * 获取收货地址列表
+     * 添加收货地址
      */
-    fun getShipAddressList(){
-        mAddressManagerService.getShipAddressList().execute(object : BaseObserver<MutableList<ShipAddress>?>(mView){
-            override fun onNext(item: MutableList<ShipAddress>?) {
-                mView.onShipAddressList(item)
+    fun addShipAddress(shipUserName: String, shipUserMobile: String, shipAddress: String){
+        mAddressManagerService.addShipAddress(shipUserName,shipUserMobile,shipAddress).execute(object :BaseObserver<String>(mView){
+            override fun onNext(item: String) {
+                mView.onAddShipAddress(item)
             }
         },mLifecycleProvider)
     }

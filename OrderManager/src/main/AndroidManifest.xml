@@ -7,6 +7,8 @@
         </activity>
         <activity android:name=".ui.activity.ShipAddressActivity">
         </activity>
+        <activity android:name=".ui.activity.ShipAddressEditActivity">
+        </activity>
     </application>
 
 </manifest>
