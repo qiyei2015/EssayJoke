@@ -13,6 +13,8 @@
         </activity>
         <activity android:name=".ui.activity.UserInfoActivity">
         </activity>
+        <activity android:name=".ui.activity.SettingActivity">
+        </activity>
     </application>
 
 </manifest>

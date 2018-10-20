@@ -23,7 +23,12 @@ import kotlinx.android.synthetic.main.activity_order_confirm.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
-
+/**
+ * @author Created by qiyei2015 on 2018/10/18.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
+ */
 @Route(path = RouteMall.OrderManager.order_confirm)
 class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConfirmView {
 

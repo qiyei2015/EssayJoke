@@ -33,4 +33,6 @@ interface UserManagerComponent {
     fun inject(activity: UserInfoActivity)
 
     fun inject(fragment: UserFragment)
+
+    fun inject(activity: SettingActivity)
 }

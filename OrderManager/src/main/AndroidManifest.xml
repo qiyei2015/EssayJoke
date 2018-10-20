@@ -9,6 +9,8 @@
         </activity>
         <activity android:name=".ui.activity.ShipAddressEditActivity">
         </activity>
+        <activity android:name=".ui.activity.OrderListActivity">
+        </activity>
     </application>
 
 </manifest>

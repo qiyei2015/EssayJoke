@@ -6,6 +6,7 @@ import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.ordermanager.injection.module.AddressManagerModule
 import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.ui.activity.OrderConfirmActivity
+import com.qiyei.mall.ordermanager.ui.activity.OrderListActivity
 import com.qiyei.mall.ordermanager.ui.activity.ShipAddressActivity
 import com.qiyei.mall.ordermanager.ui.activity.ShipAddressEditActivity
 import com.qiyei.mall.ordermanager.ui.fragment.OrderFragment
@@ -25,6 +26,8 @@ interface OrderManagerComponent {
     fun inject(fragment: OrderFragment)
 
     fun inject(activity:OrderConfirmActivity)
+
+    fun inject(activity:OrderListActivity)
 
     fun inject(activity:ShipAddressActivity)
 

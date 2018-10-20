@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.constant.MallConstant
+import com.qiyei.framework.constant.OrderConstant
+import com.qiyei.framework.constant.OrderStatus
 import com.qiyei.framework.extend.loadUrl
 import com.qiyei.framework.extend.onClick
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
@@ -14,12 +17,15 @@ import com.qiyei.mall.usermanager.R
 import com.qiyei.mall.usermanager.injection.component.DaggerUserManagerComponent
 import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
+import com.qiyei.mall.usermanager.ui.activity.SettingActivity
 import com.qiyei.mall.usermanager.ui.activity.UserInfoActivity
+import com.qiyei.router.path.RouteMall
 import com.qiyei.router.util.afterLogin
 import com.qiyei.router.util.isLogin
 import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.jetbrains.anko.support.v4.startActivity
+import org.jetbrains.anko.support.v4.toast
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -61,33 +67,43 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
                     startActivity<UserInfoActivity>()
                 }
             }
-//
-//            R.id.mWaitPayOrderTextView -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
-//            }
-//            R.id.mWaitConfirmOrderTextView -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
-//            }
-//            R.id.mCompleteOrderTextView -> {
-//                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
-//            }
-//            R.id.mAllOrderTextView-> {
-//                afterLogin {
-//                    startActivity<OrderActivity>()
-//                }
-//            }
-//
-//            R.id.mAddressTextView -> {
-//                afterLogin {
+
+            R.id.mWaitPayOrderTextView -> {
+                ARouter.getInstance()
+                        .build(RouteMall.OrderManager.order_list)
+                        .withInt(OrderConstant.User.KEY_ORDER_STATUS, OrderStatus.ORDER_WAIT_PAY)
+                        .navigation()
+            }
+            R.id.mWaitConfirmOrderTextView -> {
+                ARouter.getInstance()
+                        .build(RouteMall.OrderManager.order_list)
+                        .withInt(OrderConstant.User.KEY_ORDER_STATUS,OrderStatus.ORDER_WAIT_CONFIRM)
+                        .navigation()
+            }
+            R.id.mCompleteOrderTextView -> {
+                ARouter.getInstance()
+                        .build(RouteMall.OrderManager.order_list)
+                        .withInt(OrderConstant.User.KEY_ORDER_STATUS,OrderStatus.ORDER_COMPLETED)
+                        .navigation()
+            }
+            R.id.mAllOrderTextView-> {
+                afterLogin {
+                    ARouter.getInstance()
+                            .build(RouteMall.OrderManager.order_list)
+                            .navigation()
+                }
+            }
+            R.id.mAddressTextView -> {
+                afterLogin {
 //                    startActivity<ShipAddressActivity>()
-//                }
-//            }
-//            R.id.mShareTextView -> {
-//                toast(R.string.coming_soon_tip)
-//            }
-//            R.id.mSettingTextView -> {
-//                startActivity<SettingActivity>()
-//            }
+                }
+            }
+            R.id.mShareTextView -> {
+                toast(R.string.coming_soon_tip)
+            }
+            R.id.mSettingTextView -> {
+                startActivity<SettingActivity>()
+            }
         }
     }
 

@@ -22,6 +22,10 @@ public interface RouteMall {
          */
         String order_confirm = "/order_manager/order_confirm";
 
+        /**
+         * 订单列表
+         */
+        String order_list = "/order_manager/order_list";
     }
 
     
