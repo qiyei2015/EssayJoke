@@ -2,6 +2,7 @@ package com.qiyei.framework.ui.activity
 
 
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
@@ -25,9 +26,19 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
      * 通用标题栏
      */
     protected var mTitleBar: CommonTitleBar? = null
+    /**
+     * Context
+     */
+    protected lateinit var mContext:Context
+    /**
+     * AppContext
+     */
+    protected lateinit var mAppContext:Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mContext = this
+        mAppContext = applicationContext
         AppManager.instance.addActivity(this)
     }
 

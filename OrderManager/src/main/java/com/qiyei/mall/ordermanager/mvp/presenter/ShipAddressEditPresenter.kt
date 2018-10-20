@@ -32,4 +32,14 @@ class ShipAddressEditPresenter @Inject constructor():BasePresenter<IShipAddressE
         },mLifecycleProvider)
     }
 
+    /**
+     * 修改收货地址
+     */
+    fun editShipAddress(address: ShipAddress){
+        mAddressManagerService.editShipAddress(address).execute(object :BaseObserver<Boolean>(mView){
+            override fun onNext(item: Boolean) {
+                mView.onUpdateShipAddress(item)
+            }
+        },mLifecycleProvider)
+    }
 }

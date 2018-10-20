@@ -16,4 +16,7 @@ interface IShipAddressView : IBaseView {
      */
     fun onShipAddressList(list: MutableList<ShipAddress>?)
 
+    fun onUpdateShipAddress(result:Boolean)
+
+    fun onDeleteShipAddress(result:Boolean)
 }

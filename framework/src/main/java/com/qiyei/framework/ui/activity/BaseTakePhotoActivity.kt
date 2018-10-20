@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
-import android.text.format.DateUtils
 import com.bigkoo.alertview.AlertView
 import com.jph.takephoto.app.TakePhoto
 import com.jph.takephoto.app.TakePhotoImpl
@@ -13,7 +12,6 @@ import com.jph.takephoto.model.TResult
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.sdk.log.LogManager
 import com.qiyei.sdk.util.TimeUtil
-import org.jetbrains.anko.toast
 import java.io.File
 
 /**

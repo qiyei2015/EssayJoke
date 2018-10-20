@@ -32,7 +32,10 @@ class ShipAddressAdapter(context: Context,datas:MutableList<ShipAddress>)
 
         holder.getView<TextView>(R.id.mSetDefaultTv).mSetDefaultTv.setOnClickListener {
             mShipAddressListener?.let {
+                clearDeafultSelected()
+                item?.shipIsDefault = 0
                 it.onSetDefault(item!!)
+                notifyDataSetChanged()
             }
         }
 
@@ -59,5 +62,14 @@ class ShipAddressAdapter(context: Context,datas:MutableList<ShipAddress>)
         fun onEdit(address:ShipAddress)
 
         fun onDelete(address:ShipAddress)
+    }
+
+    /**
+     * 清除默认选中
+     */
+    private fun clearDeafultSelected(){
+        for (item in datas){
+            item.shipIsDefault = 1
+        }
     }
 }

@@ -12,4 +12,6 @@ interface IShipAddressEditView : IBaseView {
 
 
     fun onAddShipAddress(result:Boolean)
+
+    fun onUpdateShipAddress(result:Boolean)
 }

@@ -6,6 +6,7 @@ import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.mall.ordermanager.data.bean.ShipAddress
 import com.qiyei.mall.ordermanager.mvp.view.IShipAddressView
 import com.qiyei.mall.ordermanager.service.IAddressManagerService
+import io.reactivex.Observable
 import javax.inject.Inject
 
 /**
@@ -29,5 +30,28 @@ class ShipAddressPresenter @Inject constructor():BasePresenter<IShipAddressView>
             }
         },mLifecycleProvider)
     }
+
+    /**
+     * 修改收货地址
+     */
+    fun editShipAddress(address: ShipAddress){
+        mAddressManagerService.editShipAddress(address).execute(object :BaseObserver<Boolean>(mView){
+            override fun onNext(item: Boolean) {
+                mView.onUpdateShipAddress(item)
+            }
+        },mLifecycleProvider)
+    }
+
+    /**
+     * 删除收货地址
+     */
+    fun deleteShipAddress(id: Int){
+        mAddressManagerService.deleteShipAddress(id).execute(object : BaseObserver<Boolean>(mView){
+            override fun onNext(item: Boolean) {
+                mView.onDeleteShipAddress(item)
+            }
+        },mLifecycleProvider)
+    }
+
 
 }
