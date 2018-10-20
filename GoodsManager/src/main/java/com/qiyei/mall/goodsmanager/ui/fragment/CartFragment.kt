@@ -83,12 +83,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
                 updateView()
             }
             R.id.mSettleAccountsButton -> {
-                val list:MutableList<CartGoods> = arrayListOf()
-                mCartGoodsListAdapter.datas
-                        .filter {
-                            it.isSelected
-                        }.mapTo(list) { it }
-                mPresenter.submitCart(list,mTotalPrice)
+                submitToAccount()
             }
             R.id.mDeleteButton -> {
                 //删除所选
@@ -111,6 +106,9 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         mCartGoodsListAdapter.datas = goodsList
         mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         updateView()
+        //保存数量
+        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+        DataManager.getInstance().setInt(uri,goodsList?.size?:0)
         LogManager.i(getTAG(), "goodsList.size():${goodsList?.size}")
     }
 
@@ -122,9 +120,6 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onSubmitCartList(id: Int) {
         LogManager.i(getTAG(), "orderId:$id")
-        //保存数量
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-        DataManager.getInstance().setInt(uri,id)
         ARouter.getInstance().build(RouteMall.OrderManager.order_confirm)
                 .withInt(ProviderConstant.KEY_ORDER_ID,id)
                 .navigation()
@@ -220,5 +215,22 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         mDeleteButton.visibility = View.GONE
         mSettleAccountsButton.visibility = View.VISIBLE
         mTotalPriceTextView.visibility = View.VISIBLE
+    }
+
+    /**
+     * 去结算
+     */
+    private fun submitToAccount() {
+        val list: List<CartGoods> = mCartGoodsListAdapter.datas
+                .filter {
+                    it.isSelected
+                }
+        if (list.isEmpty()) {
+            toast("请选择商品")
+            return
+        }
+        val accountList: MutableList<CartGoods> = arrayListOf()
+        list.mapTo(accountList) { it }
+        mPresenter.submitCart(accountList, mTotalPrice)
     }
 }
