@@ -1,6 +1,7 @@
 package com.qiyei.mall.ordermanager.service.impl
 
 import com.qiyei.framework.extend.baseRespConvert
+import com.qiyei.framework.extend.baseRespConvertBoolean
 import com.qiyei.mall.ordermanager.data.bean.ShipAddress
 import com.qiyei.mall.ordermanager.data.repository.AddressManagerRepository
 import com.qiyei.mall.ordermanager.service.IAddressManagerService
@@ -18,16 +19,16 @@ class AddressManagerServiceImpl @Inject constructor(): IAddressManagerService {
     @Inject
     lateinit var mAddressRepository: AddressManagerRepository
 
-    override fun addShipAddress(shipUserName: String, shipUserMobile: String, shipAddress: String): Observable<String> {
-        return mAddressRepository.addShipAddress(shipUserName,shipUserMobile,shipAddress).baseRespConvert()
+    override fun addShipAddress(shipUserName: String, shipUserMobile: String, shipAddress: String): Observable<Boolean> {
+        return mAddressRepository.addShipAddress(shipUserName,shipUserMobile,shipAddress).baseRespConvertBoolean()
     }
 
-    override fun deleteShipAddress(id: Int): Observable<String> {
-        return mAddressRepository.deleteShipAddress(id).baseRespConvert()
+    override fun deleteShipAddress(id: Int): Observable<Boolean> {
+        return mAddressRepository.deleteShipAddress(id).baseRespConvertBoolean()
     }
 
-    override fun editShipAddress(address: ShipAddress): Observable<String> {
-        return mAddressRepository.editShipAddress(address).baseRespConvert()
+    override fun editShipAddress(address: ShipAddress): Observable<Boolean> {
+        return mAddressRepository.editShipAddress(address).baseRespConvertBoolean()
     }
 
     override fun getShipAddressList(): Observable<MutableList<ShipAddress>?> {

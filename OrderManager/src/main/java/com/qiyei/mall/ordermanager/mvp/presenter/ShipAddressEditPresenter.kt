@@ -25,8 +25,8 @@ class ShipAddressEditPresenter @Inject constructor():BasePresenter<IShipAddressE
      * 添加收货地址
      */
     fun addShipAddress(shipUserName: String, shipUserMobile: String, shipAddress: String){
-        mAddressManagerService.addShipAddress(shipUserName,shipUserMobile,shipAddress).execute(object :BaseObserver<String>(mView){
-            override fun onNext(item: String) {
+        mAddressManagerService.addShipAddress(shipUserName,shipUserMobile,shipAddress).execute(object :BaseObserver<Boolean>(mView){
+            override fun onNext(item: Boolean) {
                 mView.onAddShipAddress(item)
             }
         },mLifecycleProvider)

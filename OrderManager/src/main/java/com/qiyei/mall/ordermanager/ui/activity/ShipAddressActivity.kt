@@ -29,6 +29,10 @@ class ShipAddressActivity : BaseMVPActivity<ShipAddressPresenter>(),IShipAddress
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ship_address)
         initView()
+    }
+
+    override fun onStart() {
+        super.onStart()
         loadData()
     }
 

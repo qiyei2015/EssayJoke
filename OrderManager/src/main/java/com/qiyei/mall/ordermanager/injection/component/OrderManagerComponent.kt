@@ -7,6 +7,7 @@ import com.qiyei.mall.ordermanager.injection.module.AddressManagerModule
 import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.ui.activity.OrderConfirmActivity
 import com.qiyei.mall.ordermanager.ui.activity.ShipAddressActivity
+import com.qiyei.mall.ordermanager.ui.activity.ShipAddressEditActivity
 import com.qiyei.mall.ordermanager.ui.fragment.OrderFragment
 import dagger.Component
 
@@ -27,5 +28,5 @@ interface OrderManagerComponent {
 
     fun inject(activity:ShipAddressActivity)
 
-
+    fun inject(activity:ShipAddressEditActivity)
 }

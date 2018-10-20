@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +7,62 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.ShipAddressEditActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:id="@+id/mShipNameLayout"
+        style="@style/MatchWrap.Horizontal"
+        android:background="@drawable/border_bottom">
+        <TextView
+            style="@style/WrapMatch"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"
+            android:text="@string/ship_name_colon"/>
+        <EditText
+            android:id="@+id/mShipNameEditText"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/mShipMobileLayout"
+        style="@style/MatchWrap.Horizontal"
+        android:background="@drawable/border_bottom"
+        android:layout_below="@id/mShipNameLayout">
+        <TextView
+            style="@style/WrapMatch"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"
+            android:text="@string/contact_colon"/>
+        <EditText
+            android:id="@+id/mShipMobileEditText"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"
+            android:inputType="phone"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/mShipAddressLayout"
+        android:background="@drawable/border_bottom"
+        android:layout_below="@id/mShipMobileLayout"
+        style="@style/MatchWrap.Horizontal">
+        <TextView
+            style="@style/WrapMatch"
+            android:text="@string/address_detail_colon"
+            android:textColor="@color/text_light_dark"
+            android:padding="@dimen/common_padding"/>
+        <EditText
+            android:id="@+id/mShipAddressEditText"
+            style="@style/WeightMatch"
+            android:textColor="@color/text_light_dark"
+            android:background="@null"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/mSaveButton"
+        style="@style/MatchWrap"
+        android:text="@string/common_save"
+        android:textSize="@dimen/text_big_size"
+        android:textColor="@color/common_white"
+        android:background="@drawable/btn_common_selector"
+        android:padding="@dimen/common_padding_middle"
+        android:layout_margin="@dimen/common_margin"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

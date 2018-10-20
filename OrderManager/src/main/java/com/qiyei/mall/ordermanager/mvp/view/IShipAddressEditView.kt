@@ -11,5 +11,5 @@ import com.qiyei.framework.mvp.view.IBaseView
 interface IShipAddressEditView : IBaseView {
 
 
-    fun onAddShipAddress(address:String)
+    fun onAddShipAddress(result:Boolean)
 }
