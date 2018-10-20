@@ -123,8 +123,8 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
     override fun onSubmitCartList(id: Int) {
         LogManager.i(getTAG(), "orderId:$id")
         //保存数量
-        //val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-        //DataManager.getInstance().setInt(uri,id)
+        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+        DataManager.getInstance().setInt(uri,id)
         ARouter.getInstance().build(RouteMall.OrderManager.order_confirm)
                 .withInt(ProviderConstant.KEY_ORDER_ID,id)
                 .navigation()
