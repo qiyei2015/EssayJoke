@@ -81,6 +81,7 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
 
     override fun onSubmitOrder(result: Boolean) {
         toast("提交订单 $result")
+        //跳转到去支付界面
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

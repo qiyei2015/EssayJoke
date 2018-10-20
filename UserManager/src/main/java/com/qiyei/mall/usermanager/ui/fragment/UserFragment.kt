@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.qiyei.framework.constant.MallConstant
+import com.qiyei.framework.extend.loadUrl
 import com.qiyei.framework.extend.onClick
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
@@ -14,6 +16,8 @@ import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
 import com.qiyei.mall.usermanager.ui.activity.UserInfoActivity
 import com.qiyei.router.util.afterLogin
+import com.qiyei.router.util.isLogin
+import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -28,8 +32,6 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-
-
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
@@ -37,7 +39,6 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
         super.onViewCreated(view, savedInstanceState)
         initView()
     }
-
 
     /**
      * 依赖注入
@@ -50,62 +51,78 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
         mPresenter.mView = this
     }
 
-    override fun getTAG(): String {
-        return UserFragment::class.java.simpleName
-    }
-
-    /*
-    点击事件
- */
+    /**
+     * 点击事件
+     */
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.mUserIconIv, R.id.mUserNameTv -> {
+            R.id.mUserIconImageView, R.id.mUserNameTextView -> {
                 afterLogin {
                     startActivity<UserInfoActivity>()
                 }
             }
 //
-//            R.id.mWaitPayOrderTv -> {
+//            R.id.mWaitPayOrderTextView -> {
 //                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_PAY)
 //            }
-//            R.id.mWaitConfirmOrderTv -> {
+//            R.id.mWaitConfirmOrderTextView -> {
 //                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_WAIT_CONFIRM)
 //            }
-//            R.id.mCompleteOrderTv -> {
+//            R.id.mCompleteOrderTextView -> {
 //                startActivity<OrderActivity>(OrderConstant.KEY_ORDER_STATUS to OrderStatus.ORDER_COMPLETED)
 //            }
-//            R.id.mAllOrderTv -> {
+//            R.id.mAllOrderTextView-> {
 //                afterLogin {
 //                    startActivity<OrderActivity>()
 //                }
 //            }
 //
-//            R.id.mAddressTv -> {
+//            R.id.mAddressTextView -> {
 //                afterLogin {
 //                    startActivity<ShipAddressActivity>()
 //                }
 //            }
-//            R.id.mShareTv -> {
+//            R.id.mShareTextView -> {
 //                toast(R.string.coming_soon_tip)
 //            }
-//            R.id.mSettingTv -> {
+//            R.id.mSettingTextView -> {
 //                startActivity<SettingActivity>()
 //            }
         }
     }
 
-    private fun initView(){
-        mUserIconIv.onClick(this)
-        mUserNameTv.onClick(this)
-
-        mWaitPayOrderTv.onClick(this)
-        mWaitConfirmOrderTv.onClick(this)
-        mCompleteOrderTv.onClick(this)
-        mAllOrderTv.onClick(this)
-        mAddressTv.onClick(this)
-        mShareTv.onClick(this)
-        mSettingTv.onClick(this)
+    override fun onStart() {
+        super.onStart()
+        updateUserInfoView()
     }
 
+    private fun initView(){
+        mUserIconImageView.onClick(this)
+        mUserNameTextView.onClick(this)
+        mWaitPayOrderTextView.onClick(this)
+        mWaitConfirmOrderTextView.onClick(this)
+        mCompleteOrderTextView.onClick(this)
+        mAllOrderTextView.onClick(this)
+        mAddressTextView.onClick(this)
+        mShareTextView.onClick(this)
+        mSettingTextView.onClick(this)
+    }
 
+    /**
+     * 更新用户信息显示
+     */
+    private fun updateUserInfoView(){
+        //如果已登录
+        if (isLogin()){
+            val name = DataManager.getInstance().getString(MallConstant::class.java, MallConstant.KEY_USER_NAME,"")
+            mUserNameTextView.text = name
+            val url = DataManager.getInstance().getString(MallConstant::class.java, MallConstant.KEY_USER_ICON,null)
+            if (url != null){
+                mUserIconImageView.loadUrl(url)
+            }
+        }else {
+            mUserNameTextView.text = getString(R.string.un_login_text)
+            mUserIconImageView.setImageResource(R.drawable.icon_default_user)
+        }
+    }
 }

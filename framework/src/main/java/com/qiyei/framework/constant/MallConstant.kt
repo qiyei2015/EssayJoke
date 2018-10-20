@@ -8,7 +8,7 @@ import com.qiyei.sdk.dc.impl.DC
  * @email: 1273482124@qq.com
  * @description:
  */
-class MallConstant : DC.UserData(){
+class MallConstant : DC.MemoryData(){
 
     /**
      * 伴生对象
@@ -20,6 +20,10 @@ class MallConstant : DC.UserData(){
         const val SERVER_ADDRESS = "http://192.168.1.108:8080"
         //Token Key
         const val KEY_SP_TOKEN = "token"
+        //用户名
+        const val KEY_USER_NAME = "user_name"
+        //user_icon
+        const val KEY_USER_ICON = "user_icon"
     }
 
 }

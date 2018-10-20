@@ -42,7 +42,6 @@ interface IUserManagerService {
      */
     fun modifyPassword(userKey:String,password:String):Observable<Boolean>
 
-
     /**
      * 修改密码
      * @param userIcon 用户头像

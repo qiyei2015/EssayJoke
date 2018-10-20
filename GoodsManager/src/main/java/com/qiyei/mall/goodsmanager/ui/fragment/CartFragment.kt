@@ -231,6 +231,9 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         }
         val accountList: MutableList<CartGoods> = arrayListOf()
         list.mapTo(accountList) { it }
+        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
+        val count = DataManager.getInstance().getInt(uri,0) - accountList.size
+        DataManager.getInstance().setInt(uri,count)
         mPresenter.submitCart(accountList, mTotalPrice)
     }
 }

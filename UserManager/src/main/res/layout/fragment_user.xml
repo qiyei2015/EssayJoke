@@ -7,14 +7,14 @@
         android:orientation="horizontal"
         android:background="@drawable/bg_me_header">
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/mUserIconIv"
+            android:id="@+id/mUserIconImageView"
             android:layout_width="@dimen/common_icon_width"
             android:layout_height="@dimen/common_icon_height"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/common_margin"
             android:src="@drawable/icon_default_user"/>
         <TextView
-            android:id="@+id/mUserNameTv"
+            android:id="@+id/mUserNameTextView"
             style="@style/WrapWrap"
             android:textSize="@dimen/text_big_size"
             android:textColor="@color/common_white"
@@ -27,39 +27,39 @@
         android:paddingTop="@dimen/common_padding_middle"
         android:paddingBottom="@dimen/common_padding_middle"
         style="@style/MatchWrap.Horizontal">
-        <TextView android:id="@+id/mWaitPayOrderTv"
-                  android:text="待付款"
+        <TextView android:id="@+id/mWaitPayOrderTextView"
+                  android:text="@string/pending_pay"
                   android:drawableTop="@drawable/icon_order_wait_pay"
                   style="@style/MeOrderLabelStyle"/>
-        <TextView android:id="@+id/mWaitConfirmOrderTv"
-                  android:text="待收货"
+        <TextView android:id="@+id/mWaitConfirmOrderTextView"
+                  android:text="@string/pending_receive"
                   android:drawableTop="@drawable/icon_order_wait_confirm"
                   style="@style/MeOrderLabelStyle"/>
-        <TextView android:id="@+id/mCompleteOrderTv"
-                  android:text="已完成"
+        <TextView android:id="@+id/mCompleteOrderTextView"
+                  android:text="@string/completed"
                   android:drawableTop="@drawable/icon_order_completed"
                   style="@style/MeOrderLabelStyle"/>
         <View style="@style/DividerFixedWidth"/>
-        <TextView android:id="@+id/mAllOrderTv"
-                  android:text="我的订单"
+        <TextView android:id="@+id/mAllOrderTextView"
+                  android:text="@string/my_order"
                   android:drawableTop="@drawable/icon_order"
                   style="@style/MeOrderLabelStyle"/>
     </LinearLayout>
     <TextView
-        android:id="@+id/mAddressTv"
+        android:id="@+id/mAddressTextView"
         android:background="@drawable/border_all"
         android:layout_marginTop="@dimen/common_margin"
-        android:text="收货管理"
+        android:text="@string/receiving_management"
         android:drawableLeft="@drawable/icon_address"
         style="@style/MeItemStyle"/>
     <TextView
-        android:id="@+id/mShareTv"
-        android:text="分享"
+        android:id="@+id/mShareTextView"
+        android:text="@string/share"
         android:drawableLeft="@drawable/icon_share"
         style="@style/MeItemStyle"/>
     <TextView
-        android:id="@+id/mSettingTv"
-        android:text="设置"
+        android:id="@+id/mSettingTextView"
+        android:text="@string/setting"
         android:drawableLeft="@drawable/icon_setting"
         style="@style/MeItemStyle"/>
 </LinearLayout>

@@ -19,6 +19,7 @@ import com.qiniu.android.storage.UploadManager
 import com.qiyei.framework.constant.MallConstant
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.activity.BaseTakePhotoActivity
+import com.qiyei.sdk.dc.DataManager
 import com.qiyei.sdk.image.ImageManager
 import com.qiyei.sdk.log.LogManager
 import io.reactivex.Observable
@@ -103,9 +104,8 @@ class UserInfoActivity : BaseTakePhotoActivity<UserInfoModifyPresenter>(),IUserI
                         .subscribe {
                             ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
                         }
-//                mUserIconCircleImageView.post{
-//                    ImageManager.getInstance().loadImage(mUserIconCircleImageView,mLocalAvatarUrl)
-//                }
+                //保存user_icon地址
+                DataManager.getInstance().setString(MallConstant::class.java,MallConstant.KEY_USER_ICON,mLocalAvatarUrl)
             }
         },null)
     }

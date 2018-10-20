@@ -20,4 +20,9 @@
     <string name="sign">签名</string>
     <string name="please_sign">请您填写签名</string>
     <string name="un_login_text">登录/注册</string>
+    <string name="receiving_management">收货管理</string>
+    <string name="my_order">我的订单</string>
+    <string name="completed">已完成</string>
+    <string name="pending_receive">待收货</string>
+    <string name="pending_pay">待付款</string>
 </resources>
