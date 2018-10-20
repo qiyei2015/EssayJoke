@@ -9,7 +9,7 @@ import com.qiyei.mall.ordermanager.ui.activity.OrderConfirmActivity
 import com.qiyei.mall.ordermanager.ui.activity.OrderListActivity
 import com.qiyei.mall.ordermanager.ui.activity.ShipAddressActivity
 import com.qiyei.mall.ordermanager.ui.activity.ShipAddressEditActivity
-import com.qiyei.mall.ordermanager.ui.fragment.OrderFragment
+import com.qiyei.mall.ordermanager.ui.fragment.OrderListFragment
 import dagger.Component
 
 /**
@@ -23,7 +23,7 @@ import dagger.Component
 interface OrderManagerComponent {
 
 
-    fun inject(fragment: OrderFragment)
+    fun inject(fragment: OrderListFragment)
 
     fun inject(activity:OrderConfirmActivity)
 

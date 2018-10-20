@@ -10,4 +10,5 @@
     <string name="ship_name_colon">收货人:</string>
     <string name="contact_colon">联系方式:</string>
     <string name="address_detail_colon">详细地址:</string>
+    <string name="my_orders">我的订单</string>
 </resources>
