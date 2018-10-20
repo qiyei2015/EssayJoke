@@ -1,6 +1,7 @@
 package com.qiyei.mall.ordermanager.ui.activity
 
 
+import android.app.Activity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -69,6 +70,9 @@ class ShipAddressActivity : BaseMVPActivity<ShipAddressPresenter>(),IShipAddress
         }
         mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         mShipAddressAdapter.datas = list
+        mDefaultAddress = mShipAddressAdapter.datas.filter {
+            it.shipIsDefault == 0
+        }.last()
         LogManager.i(getTAG(),"onShipAddressList,mShipAddressAdapter.datas:${mShipAddressAdapter.datas}")
     }
 
@@ -76,6 +80,8 @@ class ShipAddressActivity : BaseMVPActivity<ShipAddressPresenter>(),IShipAddress
         if (result){
             toast("保存成功")
             loadData()
+            setResult(Activity.RESULT_OK,intent.putExtra(OrderConstant.ADDRESS_ID,mDefaultAddress))
+            finish()
         }else {
             toast("保存失败")
         }

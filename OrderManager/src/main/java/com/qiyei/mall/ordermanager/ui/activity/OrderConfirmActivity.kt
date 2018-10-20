@@ -1,5 +1,7 @@
 package com.qiyei.mall.ordermanager.ui.activity
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -8,6 +10,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.activity.BaseMVPActivity
 import com.qiyei.mall.ordermanager.R
+import com.qiyei.mall.ordermanager.common.OrderConstant
 import com.qiyei.mall.ordermanager.data.bean.Order
 import com.qiyei.mall.ordermanager.injection.component.DaggerOrderManagerComponent
 import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
@@ -18,6 +21,7 @@ import com.qiyei.router.path.RouteMall
 import com.qiyei.router.provider.ProviderConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 
 @Route(path = RouteMall.OrderManager.order_confirm)
@@ -34,6 +38,10 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
      * 当前订单
      */
     private lateinit var mOrder:Order
+
+    companion object {
+        const val REQUEST_CODE = 0x10
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +63,13 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
         super.onClick(view)
         when(view.id){
             R.id.mSelectShipTextView -> {
-                startActivity<ShipAddressActivity>()
+                startActivityForResult<ShipAddressActivity>(REQUEST_CODE)
             }
             R.id.mSubmitOrderButton -> {
                 submitOrder()
+            }
+            R.id.mShipLayout -> {
+                startActivityForResult<ShipAddressActivity>(REQUEST_CODE)
             }
         }
     }
@@ -72,6 +83,18 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
         toast("提交订单 $result")
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode != Activity.RESULT_OK ){
+            return
+        }
+        if (requestCode == REQUEST_CODE) {
+            mOrder.shipAddress = data?.getParcelableExtra(OrderConstant.ADDRESS_ID)
+            updateShipAddressView()
+        }
+    }
+
+
     private fun initView(){
         mTitleBar = CommonTitleBar.Builder(this)
                 .setTitle(getString(R.string.order_confirm))
@@ -79,6 +102,8 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
 
         mSelectShipTextView.setOnClickListener(this)
         mSubmitOrderButton.setOnClickListener(this)
+        mShipLayout.setOnClickListener(this)
+
         mShipLayout.visibility = View.GONE
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
@@ -98,4 +123,17 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
         mPresenter.submitOrder(mOrder)
     }
 
+    private fun updateShipAddressView(){
+        mOrder.let {
+            if (it.shipAddress == null){
+                mShipLayout.visibility = View.GONE
+                mSelectShipTextView.visibility = View.VISIBLE
+            } else {
+                mShipLayout.visibility = View.VISIBLE
+                mSelectShipTextView.visibility = View.GONE
+                mShipNameTextView.text = it.shipAddress?.shipUserName + " " + it.shipAddress?.shipUserMobile
+                mShipAddressTv.text = it.shipAddress?.shipAddress
+            }
+        }
+    }
 }
