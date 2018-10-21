@@ -18,6 +18,7 @@
       <module fileurl="file://$PROJECT_DIR$/NDK/NDK.iml" filepath="$PROJECT_DIR$/NDK/NDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/OpenSource/OpenSource.iml" />
       <module fileurl="file://$PROJECT_DIR$/OrderManager/OrderManager.iml" filepath="$PROJECT_DIR$/OrderManager/OrderManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/PayManager/PayManager.iml" filepath="$PROJECT_DIR$/PayManager/PayManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
       <module fileurl="file://$PROJECT_DIR$/Resource/Resource.iml" filepath="$PROJECT_DIR$/Resource/Resource.iml" />
