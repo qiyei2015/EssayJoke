@@ -10,6 +10,15 @@ import com.qiyei.sdk.dc.impl.DC
  */
 class OrderConstant{
 
+    companion object {
+        //支付订单操作
+        const val OPT_ORDER_PAY = 1
+        //确认订单操作
+        const val OPT_ORDER_CONFIRM = 2
+        //取消订单操作
+        const val OPT_ORDER_CANCEL = 3
+    }
+
     class User:DC.UserData(){
         companion object {
             //订单状态
@@ -22,12 +31,7 @@ class OrderConstant{
             const val KEY_IS_SELECT_ADDRESS = "is_select_address"
             //是否编辑地址
             const val KEY_ADDRESS_IS_EDIT = "address_is_edit"
-            //支付订单操作
-            const val OPT_ORDER_PAY = 1
-            //确认订单操作
-            const val OPT_ORDER_CONFIRM = 2
-            //取消订单操作
-            const val OPT_ORDER_CANCEL = 3
+
         }
     }
 
