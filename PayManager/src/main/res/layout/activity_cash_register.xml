@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,4 +7,72 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.CashRegisterActivity">
 
-</android.support.constraint.ConstraintLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mOrderLayout">
+        <TextView
+            android:id="@+id/mOrderIdTextView"
+            style="@style/WrapWrap"
+            android:layout_alignParentLeft="true"
+            android:gravity="left"
+            android:padding="@dimen/common_padding"/>
+
+        <TextView
+            android:id="@+id/mTotalPriceTextView"
+            style="@style/WrapWrap"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:padding="@dimen/common_padding"/>
+    </RelativeLayout>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mOrderLayout"
+        android:layout_marginTop="@dimen/dimen_20"
+        android:id="@+id/mPayRadioGroup">
+
+        <RadioButton
+            android:id="@+id/mAlipayRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/alipay_pay"
+            android:button="@null"
+            android:drawableLeft="@drawable/pay_type_alipay"
+            android:layout_below="@id/mTotalPriceTextView"
+            style="@style/order_pay_style"
+            android:checked="true"/>
+
+        <RadioButton
+            android:id="@+id/mWeixinPayRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/weixin_pay"
+            android:button="@null"
+            android:drawableLeft="@drawable/pay_type_weixin"
+            style="@style/order_pay_style"/>
+
+        <RadioButton
+            android:id="@+id/mBankCardRadioButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bank_card_pay"
+            android:button="@null"
+            android:drawableLeft="@drawable/pay_type_bank"
+            style="@style/order_pay_style"/>
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/mPayButton"
+        style="@style/MatchWrap"
+        android:text="@string/pay_immediately"
+        android:textSize="@dimen/text_big_size"
+        android:textColor="@color/common_white"
+        android:gravity="center"
+        android:background="@color/common_red"
+        android:padding="@dimen/common_padding"
+        android:layout_weight="1.0"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

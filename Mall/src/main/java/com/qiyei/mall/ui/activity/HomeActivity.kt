@@ -3,6 +3,7 @@ package com.qiyei.mall.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import com.alibaba.android.arouter.launcher.ARouter
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
@@ -18,6 +19,7 @@ import com.qiyei.mall.ordermanager.ui.fragment.CartFragment
 import com.qiyei.mall.ui.fragment.HomeFragment
 import com.qiyei.mall.usermanager.ui.fragment.UserFragment
 import com.qiyei.mall.view.HomeBottomNavigationBar
+import com.qiyei.router.path.RouteMall
 import com.qiyei.sdk.dc.DataManager
 import com.qiyei.sdk.log.LogManager
 import io.reactivex.Observable
@@ -47,6 +49,7 @@ class HomeActivity : BaseActivity() {
         initObserver()
         initFragment()
         loadData()
+        ARouter.getInstance().build(RouteMall.PayManager.cash_pay).navigation()
         LogManager.i(getTAG(),"onCreate")
     }
 

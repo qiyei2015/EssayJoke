@@ -28,5 +28,11 @@ public interface RouteMall {
         String order_list = "/order_manager/order_list";
     }
 
-    
+    interface PayManager{
+        /**
+         * 订单支付
+         */
+        String cash_pay = "/pay_manager/cash_pay";
+
+    }
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PayManager</string>
+    <string name="pay_immediately">立即支付</string>
+    <string name="alipay_pay">支付宝支付</string>
+    <string name="weixin_pay">微信支付</string>
+    <string name="bank_card_pay">银行卡支付</string>
+    <string name="cash_pay">收银台</string>
 </resources>

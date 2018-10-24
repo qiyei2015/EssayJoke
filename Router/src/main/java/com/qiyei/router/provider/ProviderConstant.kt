@@ -24,5 +24,7 @@ class ProviderConstant {
         const val KEY_ORDER_ID = "order_id"
         //订单价格
         const val KEY_ORDER_PRICE = "order_price"
+
+
     }
 }

@@ -27,11 +27,6 @@ android {
     }
 }
 
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
-}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -50,4 +45,9 @@ dependencies {
 
     api project(':Router')
     api project(':Framework')
+}
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
 }
