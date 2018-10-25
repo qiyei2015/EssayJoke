@@ -33,18 +33,6 @@ class OrderListPresenter @Inject constructor():BasePresenter<IOrderListView>() {
     }
 
     /**
-     *提交订单
-     */
-    fun submitOrder(order: Order){
-        mOrderService.submitOrder(order).execute(object :BaseObserver<Boolean>(mView){
-            override fun onNext(item: Boolean) {
-                super.onNext(item)
-                mView.onSubmitOrder(item)
-            }
-        },mLifecycleProvider)
-    }
-
-    /**
      * 确认订单
      */
     fun confirmOrder(orderId: Int){

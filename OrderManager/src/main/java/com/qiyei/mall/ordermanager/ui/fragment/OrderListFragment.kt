@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.launcher.ARouter
 import com.kennyc.view.MultiStateView
 import com.qiyei.framework.constant.OrderConstant
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
@@ -18,6 +19,8 @@ import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.mvp.presenter.OrderListPresenter
 import com.qiyei.mall.ordermanager.mvp.view.IOrderListView
 import com.qiyei.mall.ordermanager.ui.adapter.OrderListAdapter
+import com.qiyei.router.path.RouteMall
+import com.qiyei.router.provider.ProviderConstant
 import kotlinx.android.synthetic.main.fragment_order_list.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -135,7 +138,11 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
             }
             //支付订单
             OrderConstant.OPT_ORDER_PAY -> {
-                mPresenter.submitOrder(order)
+                //跳转到去支付界面
+                ARouter.getInstance().build(RouteMall.PayManager.cash_pay)
+                        .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
+                        .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                        .navigation()
             }
             //取消订单
             OrderConstant.OPT_ORDER_CANCEL -> {

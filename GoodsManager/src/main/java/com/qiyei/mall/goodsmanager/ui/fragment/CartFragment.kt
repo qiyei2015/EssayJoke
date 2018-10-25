@@ -122,6 +122,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         LogManager.i(getTAG(), "orderId:$id")
         ARouter.getInstance().build(RouteMall.OrderManager.order_confirm)
                 .withInt(ProviderConstant.KEY_ORDER_ID,id)
+                .withLong(ProviderConstant.KEY_ORDER_PRICE,mTotalPrice)
                 .navigation()
     }
 

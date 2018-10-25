@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.activity.BaseMVPActivity
 import com.qiyei.mall.ordermanager.R
@@ -87,6 +88,11 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
     override fun onSubmitOrder(result: Boolean) {
         toast("提交订单 $result")
         //跳转到去支付界面
+        ARouter.getInstance().build(RouteMall.PayManager.cash_pay)
+                .withInt(ProviderConstant.KEY_ORDER_ID,mOrderId)
+                .withLong(ProviderConstant.KEY_ORDER_PRICE,mOrder.totalPrice)
+                .navigation()
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

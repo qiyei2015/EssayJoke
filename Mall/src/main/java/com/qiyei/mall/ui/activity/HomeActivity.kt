@@ -49,7 +49,6 @@ class HomeActivity : BaseActivity() {
         initObserver()
         initFragment()
         loadData()
-        ARouter.getInstance().build(RouteMall.PayManager.cash_pay).navigation()
         LogManager.i(getTAG(),"onCreate")
     }
 
