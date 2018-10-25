@@ -20,14 +20,14 @@ class PayManagerRepository @Inject constructor() {
     /**
      *获取支付宝支付签名
      */
-    fun getPaySign(req: PaySignReq): Observable<BaseResp<String>> {
-        return RetrofitFactory.INSTANCE.create(IPayApi::class.java).getPaySign(req)
+    fun getPaySign(orderId: Int, totalPrice: Long): Observable<BaseResp<String>> {
+        return RetrofitFactory.INSTANCE.create(IPayApi::class.java).getPaySign(PaySignReq(orderId,totalPrice))
     }
 
     /**
      *刷新订单状态，已支付
      */
-    fun payOrder(req: PayOrderReq): Observable<BaseResp<String>>{
-        return RetrofitFactory.INSTANCE.create(IPayApi::class.java).payOrder(req)
+    fun payOrder(orderId: Int): Observable<BaseResp<String>>{
+        return RetrofitFactory.INSTANCE.create(IPayApi::class.java).payOrder(PayOrderReq(orderId))
     }
 }

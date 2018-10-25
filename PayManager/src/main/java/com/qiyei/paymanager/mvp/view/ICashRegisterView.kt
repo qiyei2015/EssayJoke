@@ -10,5 +10,7 @@ import com.qiyei.framework.mvp.view.IBaseView
  */
 interface ICashRegisterView :IBaseView{
 
+    fun onPaySignCallback(sign:String)
 
+    fun onPayOrderCallback(result: Boolean)
 }
