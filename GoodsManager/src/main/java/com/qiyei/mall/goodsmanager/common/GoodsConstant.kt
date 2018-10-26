@@ -28,6 +28,6 @@ class GoodsConstant: DC.UserData() {
         //sku分隔标识
         const val SKU_SEPARATOR = ","
         //购物车数量
-        const val SP_CART_SIZE = "cart_size"
+        const val CART_GOODS_COUNT = "cart_goods_count"
     }
 }

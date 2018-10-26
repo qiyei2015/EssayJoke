@@ -1,4 +1,4 @@
-package com.qiyei.router.provider
+package com.qiyei.provider.router
 
 /**
  * @author Created by qiyei2015 on 2018/10/17.
@@ -6,7 +6,7 @@ package com.qiyei.router.provider
  * @email: 1273482124@qq.com
  * @description:
  */
-class ProviderConstant {
+class RouterMallConstant {
 
     companion object {
         //用户名称
@@ -24,7 +24,5 @@ class ProviderConstant {
         const val KEY_ORDER_ID = "order_id"
         //订单价格
         const val KEY_ORDER_PRICE = "order_price"
-
-
     }
 }

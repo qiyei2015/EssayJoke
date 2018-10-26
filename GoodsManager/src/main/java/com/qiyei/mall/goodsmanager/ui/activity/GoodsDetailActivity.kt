@@ -3,17 +3,18 @@ package com.qiyei.mall.goodsmanager.ui.activity
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.qiyei.framework.titlebar.TabLayoutTitleBar
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.mall.goodsmanager.R
-import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.event.AddCartEvent
 import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.ui.adapter.GoodsDetailViewPagerAdapter
-import com.qiyei.router.util.afterLogin
-import com.qiyei.sdk.dc.DataManager
+import com.qiyei.provider.common.afterLogin
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_goods_detail.*
 import org.jetbrains.anko.startActivity
@@ -27,6 +28,9 @@ class GoodsDetailActivity : BaseActivity() {
      * 购物车角标
      */
     private lateinit var mCartBadge:QBadgeView
+
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,8 +106,7 @@ class GoodsDetailActivity : BaseActivity() {
         mCartBadge.badgeGravity = Gravity.END or Gravity.TOP
         mCartBadge.setGravityOffset(22f,-2f,true)
         mCartBadge.setBadgeTextSize(6f,true)
-        val cartUri = DataManager.getInstance().getUri(GoodsConstant.javaClass,GoodsConstant.SP_CART_SIZE)
-        mCartBadge.bindTarget(mCartTextView).badgeNumber = DataManager.getInstance().getInt(cartUri,0)
+        mCartBadge.bindTarget(mCartTextView).badgeNumber = mGoodsManagerService.getCartGoodsCount()
         toast(mCartBadge.badgeNumber.toString())
     }
 

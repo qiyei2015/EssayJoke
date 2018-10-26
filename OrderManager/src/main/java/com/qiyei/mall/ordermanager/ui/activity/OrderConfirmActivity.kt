@@ -18,10 +18,11 @@ import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.mvp.presenter.OrderConfirmPresenter
 import com.qiyei.mall.ordermanager.mvp.view.IOrderConfirmView
 import com.qiyei.mall.ordermanager.ui.adapter.OrderGoodsAdapter
-import com.qiyei.router.path.RouteMall
-import com.qiyei.router.provider.ProviderConstant
+import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.router.RouterMallConstant
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import kotlinx.android.synthetic.main.activity_order_confirm.*
-import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 /**
@@ -30,10 +31,10 @@ import org.jetbrains.anko.toast
  * @email: 1273482124@qq.com
  * @description:
  */
-@Route(path = RouteMall.OrderManager.order_confirm)
+@Route(path = RouteMall.OrderManager.ORDER_CONFIRM)
 class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConfirmView {
 
-    @Autowired(name = ProviderConstant.KEY_ORDER_ID)
+    @Autowired(name = RouterMallConstant.KEY_ORDER_ID)
     @JvmField
     var mOrderId:Int = 0
     /**
@@ -44,6 +45,13 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
      * 当前订单
      */
     private lateinit var mOrder:Order
+
+    /**
+     * 商品管理服务
+     */
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
+
 
     companion object {
         const val REQUEST_CODE = 0x10
@@ -86,13 +94,20 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
     }
 
     override fun onSubmitOrder(result: Boolean) {
-        toast("提交订单 $result")
-        //跳转到去支付界面
-        ARouter.getInstance().build(RouteMall.PayManager.cash_pay)
-                .withInt(ProviderConstant.KEY_ORDER_ID,mOrderId)
-                .withLong(ProviderConstant.KEY_ORDER_PRICE,mOrder.totalPrice)
-                .navigation()
+        if (result){
+            toast("提交订单 $result")
+            //更新购物车数量
+            val submitCount = mOrder.orderGoodsList.size
+            mGoodsManagerService.updateCartGoodsCount(mGoodsManagerService.getCartGoodsCount() - submitCount)
 
+            //跳转到去支付界面
+            ARouter.getInstance().build(RouteMall.PayManager.CASH_PAY)
+                    .withInt(RouterMallConstant.KEY_ORDER_ID,mOrderId)
+                    .withLong(RouterMallConstant.KEY_ORDER_PRICE,mOrder.totalPrice)
+                    .navigation()
+            return
+        }
+        toast("提交订单失败")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

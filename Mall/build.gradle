@@ -17,6 +17,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+            }
+        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //分包
         multiDexEnabled true
@@ -48,6 +54,9 @@ dependencies {
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //ARouter
+    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"

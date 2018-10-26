@@ -6,6 +6,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.AppManager
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
@@ -39,6 +40,7 @@ abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         mContext = this
         mAppContext = applicationContext
+        ARouter.getInstance().inject(this)
         AppManager.instance.addActivity(this)
     }
 

@@ -1,5 +1,6 @@
 package com.qiyei.framework.mvp.presenter
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.mvp.view.IBaseView
 import com.trello.rxlifecycle2.LifecycleProvider
 import javax.inject.Inject
@@ -21,6 +22,10 @@ abstract class BasePresenter<T:IBaseView> {
      */
     @Inject
     lateinit var mLifecycleProvider: LifecycleProvider<*>
+
+    init {
+        ARouter.getInstance().inject(this)
+    }
 
     /**
      * 定位的TAG

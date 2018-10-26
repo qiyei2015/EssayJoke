@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.qiyei.framework.extend.GlideImageLoader
@@ -27,7 +28,8 @@ import com.qiyei.mall.goodsmanager.mvp.presenter.GoodsSkuPresenter
 import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
 import com.qiyei.mall.goodsmanager.ui.activity.GoodsDetailActivity
 import com.qiyei.mall.goodsmanager.view.GoodsSkuPopView
-import com.qiyei.sdk.dc.DataManager
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_tab.*
@@ -57,6 +59,9 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
      * 当前商品
      */
     private var mCurrentGoods:Goods? = null
+
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -130,9 +135,7 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
      */
     override fun onAddCartResult(num: Int) {
         //保存数量
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass,GoodsConstant.SP_CART_SIZE)
-        DataManager.getInstance().setInt(uri,num)
-
+        mGoodsManagerService.updateCartGoodsCount(num)
         Bus.send(UpdateCartCountEvent())
     }
 

@@ -3,14 +3,13 @@ package com.qiyei.mall.ui.activity
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.alibaba.android.arouter.launcher.ARouter
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.framework.ui.fragment.FragmentHelper
 import com.qiyei.mall.R
-import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
 import com.qiyei.mall.messagemanager.event.UpdateMessageEvent
@@ -18,14 +17,10 @@ import com.qiyei.mall.messagemanager.ui.fragment.MessageFragment
 import com.qiyei.mall.ordermanager.ui.fragment.CartFragment
 import com.qiyei.mall.ui.fragment.HomeFragment
 import com.qiyei.mall.usermanager.ui.fragment.UserFragment
-import com.qiyei.mall.view.HomeBottomNavigationBar
-import com.qiyei.router.path.RouteMall
-import com.qiyei.sdk.dc.DataManager
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.log.LogManager
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_home.*
-import java.util.concurrent.TimeUnit
 
 class HomeActivity : BaseActivity() {
 
@@ -40,6 +35,9 @@ class HomeActivity : BaseActivity() {
      * fragment列表
      */
     private lateinit var mFragmentList:List<Fragment>
+
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,8 +94,7 @@ class HomeActivity : BaseActivity() {
     }
 
     private fun updateCartCountView(){
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass,GoodsConstant.SP_CART_SIZE)
-        val value = DataManager.getInstance().getInt(uri,0)
+        val value = mGoodsManagerService.getCartGoodsCount()
         LogManager.i(getTAG(),"updateCartCountView:$value")
         mHomeBottomNavigationBar.setCartBadgeCount(value)
     }

@@ -29,8 +29,6 @@ abstract class BaseMVPActivity<T:BasePresenter<*>> :BaseActivity(),IBaseView{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ARouter.getInstance().inject(this)
         initActivityInjection()
         initComponentInject()
     }

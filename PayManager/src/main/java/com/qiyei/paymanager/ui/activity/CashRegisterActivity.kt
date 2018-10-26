@@ -14,15 +14,15 @@ import com.qiyei.paymanager.injection.component.DaggerPayManagerComponent
 import com.qiyei.paymanager.injection.module.PayManagerModule
 import com.qiyei.paymanager.mvp.presenter.CashRegisterPresenter
 import com.qiyei.paymanager.mvp.view.ICashRegisterView
-import com.qiyei.router.path.RouteMall
-import com.qiyei.router.provider.ProviderConstant
+import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.router.RouterMallConstant
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_cash_register.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
-@Route(path = RouteMall.PayManager.cash_pay)
+@Route(path = RouteMall.PayManager.CASH_PAY)
 class CashRegisterActivity : BaseMVPActivity<CashRegisterPresenter>(),ICashRegisterView {
 
     companion object {
@@ -92,8 +92,8 @@ class CashRegisterActivity : BaseMVPActivity<CashRegisterPresenter>(),ICashRegis
     }
 
     private fun initData(){
-        mOrderId = intent.getIntExtra(ProviderConstant.KEY_ORDER_ID,0)
-        mTotalPrice = intent.getLongExtra(ProviderConstant.KEY_ORDER_PRICE,0)
+        mOrderId = intent.getIntExtra(RouterMallConstant.KEY_ORDER_ID,0)
+        mTotalPrice = intent.getLongExtra(RouterMallConstant.KEY_ORDER_PRICE,0)
     }
 
     private fun initView(){

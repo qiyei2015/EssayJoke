@@ -19,9 +19,9 @@ import com.qiyei.mall.usermanager.mvp.presenter.UserManagerPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserManagerView
 import com.qiyei.mall.usermanager.ui.activity.SettingActivity
 import com.qiyei.mall.usermanager.ui.activity.UserInfoActivity
-import com.qiyei.router.path.RouteMall
-import com.qiyei.router.util.afterLogin
-import com.qiyei.router.util.isLogin
+import com.qiyei.provider.common.afterLogin
+import com.qiyei.provider.common.isLogin
+import com.qiyei.provider.router.RouteMall
 import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -70,26 +70,26 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
 
             R.id.mWaitPayOrderTextView -> {
                 ARouter.getInstance()
-                        .build(RouteMall.OrderManager.order_list)
+                        .build(RouteMall.OrderManager.ORDER_LIST)
                         .withInt(OrderConstant.User.KEY_ORDER_STATUS, OrderStatus.ORDER_WAIT_PAY)
                         .navigation()
             }
             R.id.mWaitConfirmOrderTextView -> {
                 ARouter.getInstance()
-                        .build(RouteMall.OrderManager.order_list)
+                        .build(RouteMall.OrderManager.ORDER_LIST)
                         .withInt(OrderConstant.User.KEY_ORDER_STATUS,OrderStatus.ORDER_WAIT_CONFIRM)
                         .navigation()
             }
             R.id.mCompleteOrderTextView -> {
                 ARouter.getInstance()
-                        .build(RouteMall.OrderManager.order_list)
+                        .build(RouteMall.OrderManager.ORDER_LIST)
                         .withInt(OrderConstant.User.KEY_ORDER_STATUS,OrderStatus.ORDER_COMPLETED)
                         .navigation()
             }
             R.id.mAllOrderTextView-> {
                 afterLogin {
                     ARouter.getInstance()
-                            .build(RouteMall.OrderManager.order_list)
+                            .build(RouteMall.OrderManager.ORDER_LIST)
                             .navigation()
                 }
             }

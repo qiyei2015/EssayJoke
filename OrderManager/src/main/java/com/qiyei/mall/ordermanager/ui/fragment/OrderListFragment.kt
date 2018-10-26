@@ -19,8 +19,8 @@ import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.mvp.presenter.OrderListPresenter
 import com.qiyei.mall.ordermanager.mvp.view.IOrderListView
 import com.qiyei.mall.ordermanager.ui.adapter.OrderListAdapter
-import com.qiyei.router.path.RouteMall
-import com.qiyei.router.provider.ProviderConstant
+import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.router.RouterMallConstant
 import kotlinx.android.synthetic.main.fragment_order_list.*
 import org.jetbrains.anko.support.v4.toast
 
@@ -139,9 +139,9 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
             //支付订单
             OrderConstant.OPT_ORDER_PAY -> {
                 //跳转到去支付界面
-                ARouter.getInstance().build(RouteMall.PayManager.cash_pay)
-                        .withInt(ProviderConstant.KEY_ORDER_ID,order.id)
-                        .withLong(ProviderConstant.KEY_ORDER_PRICE,order.totalPrice)
+                ARouter.getInstance().build(RouteMall.PayManager.CASH_PAY)
+                        .withInt(RouterMallConstant.KEY_ORDER_ID,order.id)
+                        .withLong(RouterMallConstant.KEY_ORDER_PRICE,order.totalPrice)
                         .navigation()
             }
             //取消订单

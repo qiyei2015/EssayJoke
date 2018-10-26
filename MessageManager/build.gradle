@@ -18,6 +18,12 @@ android {
         versionCode 1
         versionName "1.0"
 
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+            }
+        }
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -46,8 +52,8 @@ dependencies {
 
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
-    api project(':Router')
 
+    api project(':Provider')
     api project(':Framework')
 }
 kapt {

@@ -1,8 +1,8 @@
-package com.qiyei.router.util
+package com.qiyei.provider.common
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.constant.MallConstant
-import com.qiyei.router.path.RouteMall
+import com.qiyei.provider.router.RouteMall
 import com.qiyei.sdk.dc.DataManager
 
 /**
@@ -24,6 +24,6 @@ fun afterLogin(method: () -> Unit){
         method()
     }else {
         //先登录
-        ARouter.getInstance().build(RouteMall.UserManager.path_login).navigation()
+        ARouter.getInstance().build(RouteMall.UserManager.LOGIN).navigation()
     }
 }

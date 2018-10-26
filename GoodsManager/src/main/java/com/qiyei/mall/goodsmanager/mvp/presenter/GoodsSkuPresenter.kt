@@ -1,6 +1,7 @@
 package com.qiyei.mall.goodsmanager.mvp.presenter
 
 
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.qiyei.framework.extend.execute
 import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.rx.BaseObserver
@@ -9,6 +10,8 @@ import com.qiyei.mall.goodsmanager.data.bean.Goods
 import com.qiyei.mall.goodsmanager.mvp.view.IGoodsSkuView
 import com.qiyei.mall.goodsmanager.service.ICartService
 import com.qiyei.mall.goodsmanager.service.IGoodsService
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.dc.DataManager
 
 import javax.inject.Inject
@@ -25,6 +28,9 @@ class GoodsSkuPresenter @Inject constructor():BasePresenter<IGoodsSkuView>() {
     lateinit var mGoodsService:IGoodsService
     @Inject
     lateinit var mCartService:ICartService
+
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun getTAG(): String {
         return GoodsSkuPresenter::class.java.simpleName
@@ -49,8 +55,7 @@ class GoodsSkuPresenter @Inject constructor():BasePresenter<IGoodsSkuView>() {
                 ,goodsCount,goodsSku).execute(object : BaseObserver<Int>(mView){
             override fun onNext(item: Int) {
                 //保存数据
-                val cartUri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-                DataManager.getInstance().setInt(cartUri,item)
+                mGoodsManagerService.updateCartGoodsCount(item)
                 mView.onAddCartResult(item)
             }
         },mLifecycleProvider)

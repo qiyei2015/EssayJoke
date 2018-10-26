@@ -1,4 +1,4 @@
-package com.qiyei.router.path;
+package com.qiyei.provider.router;
 
 /**
  * @author Created by qiyei2015 on 2018/10/12.
@@ -12,7 +12,7 @@ public interface RouteMall {
         /**
          * 登录
          */
-        String path_login = "/user_manager/login";
+        String LOGIN = "/user_manager/login";
 
     }
 
@@ -20,19 +20,21 @@ public interface RouteMall {
         /**
          * 订单确认
          */
-        String order_confirm = "/order_manager/order_confirm";
+        String ORDER_CONFIRM = "/order_manager/order_confirm";
 
         /**
          * 订单列表
          */
-        String order_list = "/order_manager/order_list";
+        String ORDER_LIST = "/order_manager/order_list";
     }
 
     interface PayManager{
         /**
          * 订单支付
          */
-        String cash_pay = "/pay_manager/cash_pay";
+        String CASH_PAY = "/pay_manager/cash_pay";
 
     }
+
+
 }

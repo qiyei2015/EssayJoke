@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.launcher.ARouter
 import com.eightbitlab.rxbus.Bus
 import com.eightbitlab.rxbus.registerInBus
@@ -14,7 +15,6 @@ import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.framework.util.YuanFenConverter
 import com.qiyei.mall.goodsmanager.R
-import com.qiyei.mall.goodsmanager.common.GoodsConstant
 import com.qiyei.mall.goodsmanager.data.protocol.CartGoods
 import com.qiyei.mall.goodsmanager.event.UpdateAllChecked
 import com.qiyei.mall.goodsmanager.event.UpdateTotalPriceEvent
@@ -24,9 +24,10 @@ import com.qiyei.mall.ordermanager.injection.component.DaggerCartComponent
 
 import com.qiyei.mall.ordermanager.mvp.presenter.CartManagerPresenter
 import com.qiyei.mall.ordermanager.mvp.view.ICartManagerView
-import com.qiyei.router.path.RouteMall
-import com.qiyei.router.provider.ProviderConstant
-import com.qiyei.sdk.dc.DataManager
+import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.router.RouterMallConstant
+import com.qiyei.provider.service.mall.IGoodsManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.fragment_cart.*
 import org.jetbrains.anko.support.v4.toast
@@ -45,6 +46,9 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
      * 总价格
      */
     private var mTotalPrice: Long = 0
+
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -106,9 +110,8 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         mCartGoodsListAdapter.datas = goodsList
         mMultiStateView.viewState = MultiStateView.VIEW_STATE_CONTENT
         updateView()
-        //保存数量
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-        DataManager.getInstance().setInt(uri,goodsList?.size?:0)
+        //更新数量
+        mGoodsManagerService.updateCartGoodsCount(goodsList?.size?:0)
         LogManager.i(getTAG(), "goodsList.size():${goodsList?.size}")
     }
 
@@ -120,9 +123,9 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onSubmitCartList(id: Int) {
         LogManager.i(getTAG(), "orderId:$id")
-        ARouter.getInstance().build(RouteMall.OrderManager.order_confirm)
-                .withInt(ProviderConstant.KEY_ORDER_ID,id)
-                .withLong(ProviderConstant.KEY_ORDER_PRICE,mTotalPrice)
+        ARouter.getInstance().build(RouteMall.OrderManager.ORDER_CONFIRM)
+                .withInt(RouterMallConstant.KEY_ORDER_ID,id)
+                .withLong(RouterMallConstant.KEY_ORDER_PRICE,mTotalPrice)
                 .navigation()
     }
 
@@ -232,9 +235,6 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
         }
         val accountList: MutableList<CartGoods> = arrayListOf()
         list.mapTo(accountList) { it }
-        val uri = DataManager.getInstance().getUri(GoodsConstant.javaClass, GoodsConstant.SP_CART_SIZE)
-        val count = DataManager.getInstance().getInt(uri,0) - accountList.size
-        DataManager.getInstance().setInt(uri,count)
         mPresenter.submitCart(accountList, mTotalPrice)
     }
 }

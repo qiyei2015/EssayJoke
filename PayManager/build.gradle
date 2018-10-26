@@ -47,7 +47,7 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
     kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
-    api project(':Router')
+    api project(':Provider')
     api project(':Framework')
 }
 kapt {
