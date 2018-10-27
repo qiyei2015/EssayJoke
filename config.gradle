@@ -43,6 +43,9 @@ ext{
             versionName  :"1.0",
     ]
 
+    //JPush
+    JPushAppkey = "66d86822c15c70caa48748bf"
+
 //    buildTypes = {
 //        release =  {
 //            minifyEnabled  = true // 开启混淆

@@ -23,6 +23,14 @@ android {
                 arguments = [ AROUTER_MODULE_NAME : project.getName() ]
             }
         }
+
+        /**
+         * JPush
+         */
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : applicationId,
+        ]
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //分包
         multiDexEnabled true

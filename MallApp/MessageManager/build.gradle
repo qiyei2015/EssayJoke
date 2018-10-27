@@ -24,6 +24,29 @@ android {
                 arguments = [ AROUTER_MODULE_NAME : project.getName() ]
             }
         }
+
+        /***
+         * JPush
+         */
+        ndk {
+            //选择要添加的对应 cpu 类型的 .so 库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        /***
+         * JPush
+         */
+        manifestPlaceholders = [
+                JPUSH_PKGNAME : "com.qiyei.mall",
+                JPUSH_APPKEY : rootProject.ext.JPushAppkey, //JPush 上注册的包名对应的 Appkey.
+                JPUSH_CHANNEL : "developer-default", //暂时填写默认值即可.
+        ]
+        packagingOptions {
+            doNotStrip '*/mips/*.so'
+            doNotStrip '*/mips64/*.so'
+        }
+
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -52,6 +75,11 @@ dependencies {
 
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+
+    // 此处以JPush 3.1.6 版本为例。
+    api 'cn.jiguang.sdk:jpush:3.1.6'
+    // 此处以JCore 1.2.5 版本为例。
+    api 'cn.jiguang.sdk:jcore:1.2.5'
 
     api project(':Provider')
     api project(':Framework')

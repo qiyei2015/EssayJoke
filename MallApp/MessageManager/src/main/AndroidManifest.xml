@@ -1,2 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qiyei.mall.messagemanager"/>
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.qiyei.mall.messagemanager">
+    <application>
+        <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"
+                   tools:replace="android:value"/>
+        <meta-data android:name="JPUSH_CHANNEL" android:value="${JPUSH_CHANNEL}"
+                   tools:replace="android:value"/>
+    </application>
+</manifest>
