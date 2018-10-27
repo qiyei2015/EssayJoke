@@ -1,26 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.qiyei.mall.messagemanager">
+
     <application>
-        <meta-data android:name="JPUSH_APPKEY" android:value="${JPUSH_APPKEY}"
-                   tools:replace="android:value"/>
-        <meta-data android:name="JPUSH_CHANNEL" android:value="${JPUSH_CHANNEL}"
-                   tools:replace="android:value"/>
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="${JPUSH_APPKEY}"
+            tools:replace="android:value"/>
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="${JPUSH_CHANNEL}"
+            tools:replace="android:value"/>
 
         <receiver
             android:name=".ui.receiver.JPushReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
-                <action android:name="cn.jpush.android.intent.REGISTRATION" />
-                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
-                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION" />
-                <action android:name="cn.jpush.android.intent.CONNECTION" />
-                <category android:name="com.qiyei.mall" />
+                <action android:name="cn.jpush.android.intent.REGISTRATION"/>
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED"/>
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_CLICK_ACTION"/>
+                <action android:name="cn.jpush.android.intent.CONNECTION"/>
+
+                <category android:name="com.qiyei.mall"/>
             </intent-filter>
         </receiver>
 
+        <activity android:name=".ui.activity.MessageDetailActivity">
+        </activity>
     </application>
+
 </manifest>

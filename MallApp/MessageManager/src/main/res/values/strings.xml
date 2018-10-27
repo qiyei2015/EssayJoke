@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MessageManager</string>
+    <string name="message_center">消息中心</string>
 </resources>

@@ -2,6 +2,8 @@ package com.qiyei.mall.messagemanager.injection.component
 
 import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
+import com.qiyei.mall.messagemanager.injection.module.MessageManagerModule
+import com.qiyei.mall.messagemanager.ui.activity.MessageDetailActivity
 import com.qiyei.mall.messagemanager.ui.fragment.MessageFragment
 import dagger.Component
 
@@ -12,8 +14,10 @@ import dagger.Component
  * @description:
  */
 @PreComponentScope
-@Component(dependencies = arrayOf(ActivityComponent::class))
+@Component(dependencies = arrayOf(ActivityComponent::class),modules = arrayOf(MessageManagerModule::class))
 interface MessageManagerComponent {
 
     fun inject(fragment:MessageFragment)
+
+    fun inject(activity:MessageDetailActivity)
 }

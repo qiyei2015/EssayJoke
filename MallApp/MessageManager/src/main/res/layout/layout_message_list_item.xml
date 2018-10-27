@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                style="@style/MatchWrap"
+                android:background="@drawable/border_bottom"
+                android:paddingLeft="@dimen/common_padding"
+                android:paddingTop="@dimen/common_padding_middle"
+                android:paddingRight="@dimen/common_padding"
+                android:paddingBottom="@dimen/common_padding_middle">
+    <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/mMsgIconIv"
+            android:layout_width="@dimen/msg_icon_width"
+            android:layout_height="@dimen/msg_icon_height"
+            android:src="@drawable/default_loading"/>
+    <TextView
+            android:id="@+id/mMsgTitleTv"
+            style="@style/WrapWrap"
+            android:textSize="@dimen/text_big_size"
+            android:textColor="@color/text_light_dark"
+            android:layout_marginLeft="@dimen/common_margin_middle"
+            android:layout_toRightOf="@id/mMsgIconIv"/>
+    <TextView
+            android:id="@+id/mMsgContentTv"
+            style="@style/WrapWrap"
+            android:textColor="@color/text_normal"
+            android:ellipsize="end"
+            android:layout_marginTop="@dimen/common_margin_small"
+            android:maxLines="1"
+            android:layout_below="@id/mMsgTitleTv"
+            android:layout_alignLeft="@id/mMsgTitleTv"/>
+    <TextView
+            android:id="@+id/mMsgTimeTv"
+            style="@style/WrapWrap"
+            android:textSize="@dimen/text_small_size"
+            android:textColor="@color/text_dark"
+            android:layout_alignParentRight="true"/>
+</RelativeLayout>
