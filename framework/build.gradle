@@ -96,5 +96,5 @@ dependencies {
 
     api project(':SDK')
     api project(':Resource')
-    api project(':MallResource')
+    api project(':MallApp:MallResource')
 }

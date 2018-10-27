@@ -63,10 +63,10 @@ dependencies {
 
     if(isMallLibrary.toBoolean()){
         implementation project(':Provider')
-        implementation project(':UserManager')
-        implementation project(':OrderManager')
-        implementation project(':GoodsManager')
-        implementation project(':MessageManager')
+        implementation project(':MallApp:UserManager')
+        implementation project(':MallApp:OrderManager')
+        implementation project(':MallApp:GoodsManager')
+        implementation project(':MallApp:MessageManager')
         implementation project(':PayManager')
     }
 }
