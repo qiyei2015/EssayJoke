@@ -9,9 +9,11 @@ package com.qiyei.provider.service.mall
 class MallServiceConstant {
 
     companion object {
-        const val GOODS_MANAGER_PATH = "/mall/goodsmanager/IGoodsManagerService"
-        const val GOODS_MANAGER_NAME = "GoodsManagerServiceImpl"
+        const val GOODS_MANAGER_SERVICE_PATH = "/mall_goods_manager/IGoodsManagerService"
+        const val GOODS_MANAGER_SERVICE_NAME = "GoodsManagerServiceImpl"
 
+        const val PUSH_MANAGER_SERVICE_PATH = "/mall_push_manager/IPushManagerService"
+        const val PUSH_MANAGER_SERVICE_NAME = "PushManagerServiceImpl"
     }
 
 }

@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.eightbitlab.rxbus.Bus
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 import com.qiyei.mall.messagemanager.R
 import com.qiyei.mall.messagemanager.injection.component.DaggerMessageManagerComponent
 import com.qiyei.mall.messagemanager.mvp.presenter.MessageManagerPresenter
 import com.qiyei.mall.messagemanager.mvp.view.IMessageManagerView
+import com.qiyei.provider.event.UpdateMessageEvent
 
 
 /**
@@ -46,5 +48,13 @@ class MessageFragment : BaseMVPFragment<MessageManagerPresenter>(),IMessageManag
 
     override fun getTAG(): String {
         return MessageFragment::class.java.simpleName
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        //点进去说明已经阅读了
+        if (!hidden){
+            Bus.send(UpdateMessageEvent(false))
+        }
     }
 }

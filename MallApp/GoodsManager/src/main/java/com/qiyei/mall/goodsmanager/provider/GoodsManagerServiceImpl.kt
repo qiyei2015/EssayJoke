@@ -13,7 +13,7 @@ import com.qiyei.sdk.dc.DataManager
  * @email: 1273482124@qq.com
  * @description:
  */
-@Route(path = MallServiceConstant.GOODS_MANAGER_PATH, name = MallServiceConstant.GOODS_MANAGER_NAME)
+@Route(path = MallServiceConstant.GOODS_MANAGER_SERVICE_PATH, name = MallServiceConstant.GOODS_MANAGER_SERVICE_NAME)
 class GoodsManagerServiceImpl : IGoodsManagerService{
 
     override fun init(context: Context?) {

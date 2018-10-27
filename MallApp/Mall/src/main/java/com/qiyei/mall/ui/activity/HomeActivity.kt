@@ -12,7 +12,7 @@ import com.qiyei.framework.ui.fragment.FragmentHelper
 import com.qiyei.mall.R
 import com.qiyei.mall.goodsmanager.event.UpdateCartCountEvent
 import com.qiyei.mall.goodsmanager.ui.fragment.CategoryFragment
-import com.qiyei.mall.messagemanager.event.UpdateMessageEvent
+import com.qiyei.provider.event.UpdateMessageEvent
 import com.qiyei.mall.messagemanager.ui.fragment.MessageFragment
 import com.qiyei.mall.ordermanager.ui.fragment.CartFragment
 import com.qiyei.mall.ui.fragment.HomeFragment
@@ -36,7 +36,7 @@ class HomeActivity : BaseActivity() {
      */
     private lateinit var mFragmentList:List<Fragment>
 
-    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_SERVICE_PATH)
     lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +84,7 @@ class HomeActivity : BaseActivity() {
                 }.registerInBus(this)
         Bus.observe<UpdateMessageEvent>()
                 .subscribe {
-                    updateMessageCountView()
+                    updateMessageCountView(it.visible)
                 }.registerInBus(this)
     }
 
@@ -99,8 +99,8 @@ class HomeActivity : BaseActivity() {
         mHomeBottomNavigationBar.setCartBadgeCount(value)
     }
 
-    private fun updateMessageCountView(){
-        mHomeBottomNavigationBar.setMessageBadgeVisibility(true)
+    private fun updateMessageCountView(visible:Boolean){
+        mHomeBottomNavigationBar.setMessageBadgeVisibility(visible)
     }
 
     /**

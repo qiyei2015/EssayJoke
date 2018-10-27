@@ -3,6 +3,7 @@ package com.qiyei.mall.usermanager.ui.activity
 
 import android.os.Bundle
 import android.view.View
+import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.qiyei.framework.constant.MallConstant
 import com.qiyei.framework.extend.enable
@@ -15,6 +16,8 @@ import com.qiyei.mall.usermanager.injection.module.UserManagerModule
 import com.qiyei.mall.usermanager.mvp.presenter.UserLoginPresenter
 import com.qiyei.mall.usermanager.mvp.view.IUserLoginView
 import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.service.mall.IPushManagerService
+import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.dc.DataManager
 import kotlinx.android.synthetic.main.activity_user_login.*
 import org.jetbrains.anko.startActivity
@@ -22,6 +25,9 @@ import org.jetbrains.anko.toast
 
 @Route(path = RouteMall.UserManager.LOGIN)
 class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
+
+    @Autowired(name = MallServiceConstant.PUSH_MANAGER_SERVICE_PATH)
+    lateinit var mPushManagerService:IPushManagerService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +42,7 @@ class UserLoginActivity : BaseMVPActivity<UserLoginPresenter>(),IUserLoginView {
     override fun onClick(view: View) {
         when(view.id){
             R.id.mLoginButton -> {
-                mPresenter.login(mMobileEditText.text.toString(),mPasswordEditText.text.toString(),"")
+                mPresenter.login(mMobileEditText.text.toString(),mPasswordEditText.text.toString(),mPushManagerService.getPushId())
             }
             R.id.mForgetPasswordEditText -> {
                 startActivity<UserForgetPasswordActivity>()

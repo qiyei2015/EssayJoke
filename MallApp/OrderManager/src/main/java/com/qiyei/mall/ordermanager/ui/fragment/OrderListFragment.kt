@@ -18,10 +18,12 @@ import com.qiyei.mall.ordermanager.injection.component.DaggerOrderManagerCompone
 import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
 import com.qiyei.mall.ordermanager.mvp.presenter.OrderListPresenter
 import com.qiyei.mall.ordermanager.mvp.view.IOrderListView
+import com.qiyei.mall.ordermanager.ui.activity.OrderDetailActivity
 import com.qiyei.mall.ordermanager.ui.adapter.OrderListAdapter
 import com.qiyei.provider.router.RouteMall
 import com.qiyei.provider.router.RouterMallConstant
 import kotlinx.android.synthetic.main.fragment_order_list.*
+import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -111,8 +113,11 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
         //监听器
         mOrderListAdapter.mListener = object:OrderListAdapter.OnClickListener{
             override fun onClick(type: Int, order: Order) {
-                handleItemClick(type,order)
+                handleOrderStatusClick(type,order)
             }
+        }
+        mOrderListAdapter.setOnItemClickListener { view, item, position ->
+            handleItemClick(item)
         }
         mOrderListRecyclerView.adapter = mOrderListAdapter
     }
@@ -130,7 +135,7 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
     /**
      * 处理点击事件
      */
-    private fun handleItemClick(type:Int,order: Order){
+    private fun handleOrderStatusClick(type:Int, order: Order){
         when(type){
             //确认订单
             OrderConstant.OPT_ORDER_CONFIRM -> {
@@ -151,4 +156,7 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
         }
     }
 
+    private fun handleItemClick(item:Order){
+        startActivity<OrderDetailActivity>(RouterMallConstant.KEY_ORDER_ID to item.id)
+    }
 }

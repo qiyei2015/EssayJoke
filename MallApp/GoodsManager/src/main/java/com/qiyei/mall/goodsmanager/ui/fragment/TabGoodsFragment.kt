@@ -60,7 +60,7 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
      */
     private var mCurrentGoods:Goods? = null
 
-    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_SERVICE_PATH)
     lateinit var mGoodsManagerService: IGoodsManagerService
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

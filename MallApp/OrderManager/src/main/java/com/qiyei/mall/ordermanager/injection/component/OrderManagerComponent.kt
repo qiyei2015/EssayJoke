@@ -5,10 +5,7 @@ import com.qiyei.framework.injection.component.ActivityComponent
 import com.qiyei.framework.injection.scope.PreComponentScope
 import com.qiyei.mall.ordermanager.injection.module.AddressManagerModule
 import com.qiyei.mall.ordermanager.injection.module.OrderManagerModule
-import com.qiyei.mall.ordermanager.ui.activity.OrderConfirmActivity
-import com.qiyei.mall.ordermanager.ui.activity.OrderListActivity
-import com.qiyei.mall.ordermanager.ui.activity.ShipAddressActivity
-import com.qiyei.mall.ordermanager.ui.activity.ShipAddressEditActivity
+import com.qiyei.mall.ordermanager.ui.activity.*
 import com.qiyei.mall.ordermanager.ui.fragment.OrderListFragment
 import dagger.Component
 
@@ -29,7 +26,10 @@ interface OrderManagerComponent {
 
     fun inject(activity:OrderListActivity)
 
+    fun inject(activity:OrderDetailActivity)
+
     fun inject(activity:ShipAddressActivity)
 
     fun inject(activity:ShipAddressEditActivity)
+
 }

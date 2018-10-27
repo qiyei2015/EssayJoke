@@ -49,7 +49,7 @@ class OrderConfirmActivity : BaseMVPActivity<OrderConfirmPresenter>(),IOrderConf
     /**
      * 商品管理服务
      */
-    @Autowired(name = MallServiceConstant.GOODS_MANAGER_PATH)
+    @Autowired(name = MallServiceConstant.GOODS_MANAGER_SERVICE_PATH)
     lateinit var mGoodsManagerService: IGoodsManagerService
 
 

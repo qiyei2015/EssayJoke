@@ -11,6 +11,8 @@
         </activity>
         <activity android:name=".ui.activity.OrderListActivity">
         </activity>
+        <activity android:name=".ui.activity.OrderDetailActivity">
+        </activity>
     </application>
 
 </manifest>

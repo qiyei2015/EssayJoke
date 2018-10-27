@@ -1,4 +1,4 @@
-package com.qiyei.mall.messagemanager.event
+package com.qiyei.provider.event
 
 /**
  * @author Created by qiyei2015 on 2018/10/15.
@@ -6,5 +6,5 @@ package com.qiyei.mall.messagemanager.event
  * @email: 1273482124@qq.com
  * @description:
  */
-class UpdateMessageEvent {
+class UpdateMessageEvent(val visible:Boolean) {
 }

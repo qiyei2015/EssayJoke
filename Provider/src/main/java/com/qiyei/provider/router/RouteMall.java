@@ -26,6 +26,11 @@ public interface RouteMall {
          * 订单列表
          */
         String ORDER_LIST = "/order_manager/order_list";
+
+        /**
+         * 订单确认
+         */
+        String ORDER_DETAIL = "/order_manager/order_detail";
     }
 
     interface PayManager{
