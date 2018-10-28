@@ -10,20 +10,15 @@
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" filepath="$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/GoodsManager/GoodsManager.iml" filepath="$PROJECT_DIR$/GoodsManager/GoodsManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/Mall/Mall.iml" filepath="$PROJECT_DIR$/MallApp/Mall/Mall.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Mall/Mall.iml" filepath="$PROJECT_DIR$/Mall/Mall.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MallApp.iml" filepath="$PROJECT_DIR$/MallApp/MallApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" filepath="$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MallResource/MallResource.iml" filepath="$PROJECT_DIR$/MallResource/MallResource.iml" />
       <module fileurl="file://$PROJECT_DIR$/Media/Media.iml" filepath="$PROJECT_DIR$/Media/Media.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" filepath="$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/MessageManager/MessageManager.iml" filepath="$PROJECT_DIR$/MessageManager/MessageManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/ModuleA/ModuleA.iml" filepath="$PROJECT_DIR$/ModuleA/ModuleA.iml" />
       <module fileurl="file://$PROJECT_DIR$/NDK/NDK.iml" filepath="$PROJECT_DIR$/NDK/NDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/OpenSource/OpenSource.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" filepath="$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OrderManager/OrderManager.iml" filepath="$PROJECT_DIR$/OrderManager/OrderManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/PayManager/PayManager.iml" filepath="$PROJECT_DIR$/PayManager/PayManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
@@ -33,7 +28,6 @@
       <module fileurl="file://$PROJECT_DIR$/Scan/Scan.iml" filepath="$PROJECT_DIR$/Scan/Scan.iml" />
       <module fileurl="file://$PROJECT_DIR$/UI/UI.iml" filepath="$PROJECT_DIR$/UI/UI.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/UserManager/UserManager.iml" filepath="$PROJECT_DIR$/MallApp/UserManager/UserManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UserManager/UserManager.iml" filepath="$PROJECT_DIR$/UserManager/UserManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/Video/Video.iml" filepath="$PROJECT_DIR$/Video/Video.iml" />
       <module fileurl="file://$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" filepath="$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" />
       <module fileurl="file://$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" filepath="$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" />

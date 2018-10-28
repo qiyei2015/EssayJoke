@@ -8,8 +8,8 @@ if not exist %ROOT_PATH%\Archive (
 
 pushd %ROOT_PATH%\Scan
 ::echo %cd%
-::call gradle --refresh-dependencies clean assembleRelease
-call gradle assembleRelease
+call gradle --refresh-dependencies clean assembleRelease
+::call gradle assembleRelease
 popd
 copy /y %ROOT_PATH%\Scan\build\outputs\aar\Scan-release.aar %ROOT_PATH%\Archive
 
