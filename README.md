@@ -18,7 +18,7 @@ app appdemo:业务相关，appdemo为sdk的测试demo
 已经想好后期的发展路线了，该项目主要用作实际项目开发的原型验证，也为学习新技术提供一个平台。
 
 后期将会按照如下的方式来打造这个项目
-![架构图](https://github.com/qiyei2015/EssayJoke/blob/master/Architecture_image.PNG)
+![架构图](https://github.com/qiyei2015/EssayJoke/blob/master/image/Architecture_image.PNG)
 
 主要分了四层，并准备使用Arouter实现组件化，使用Replugin实现插件化。
 
@@ -56,5 +56,48 @@ APP层打包各个APP，并依赖一个或者多个业务组件
 
 以上就是对整个项目的初步规划，后期将逐步的实现
 
+
+## 2018/10/29 更新
+进度：
+1 Mall商城APP已基本完成(参考Kotlin打造完整电商APP模块化+MVP+主流框架)，基本实现组件化，当然还有一堆bug没有解
+
+2 对Mall APP 全部引入MVP架构及采用kotlin语言开发，MVP架构如下
+
+![MVP](https://github.com/qiyei2015/EssayJoke/blob/master/image/MVP_image.PNG)
+
+后期的几大目标
+
+1 将AppDemo中所有测试用例全部按照 UI 开源 架构 音视频 NDK等划分到Android这个APP中，并且实现组件化
+
+2 在以上的项目中优化分层，使之架构更加合理可同时出多个产品线的多个APP
+
+3 完成及优化基础组件库的开发(待定)
+
+4 项目进行多仓的拆分，并且公共组件上maven
+
+目前最新的架构图如下：
+![架构图2](https://github.com/qiyei2015/EssayJoke/blob/master/image/Architecture2_image.PNG)
+
+业务层新增以下几部分
+
+**UserManager：** Mall APP 用户管理部分，包括登录，设置等
+
+**GoodsManager：** 商品管理模块，包括商品的列表，数量，详情，购物车添加等
+
+**OrderManager：** 订单管理模块，包括订单展示，详情展示。收获地址管理等
+
+**MessageManager：** 消息相关，下单，登录消息等
+
+**PayManager：** 支付管理，主要集成支付宝(有bug)，微信(未做)，银行卡(未做)等
+
+**Scan：** 二维码扫描模块，主要用作扫码(目前还未完善)
+
+业务公共层新增以下部分
+
+**Provider：** 路由模块及模块服务提供者，主要用作路由及个模块间通信说需要提供的服务
+
+**MallResource：** Mall APP 所需要的公共资源文件，但是其他模块暂时不需要的部分
+
+基础组件部分未做变动
 
 
