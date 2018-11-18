@@ -15,6 +15,18 @@
         </activity>
         <activity android:name=".ui.activity.XGrirdViewActivity">
         </activity>
+        <activity android:name=".ui.activity.CommonDialogActivity">
+        </activity>
+        <activity android:name=".ui.activity.ViewPagerTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.RecyclerViewTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.EssayJokeMainActivity">
+        </activity>
+        <activity android:name=".ui.activity.SkinTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.BannerTestActivity">
+        </activity>
     </application>
 
 </manifest>

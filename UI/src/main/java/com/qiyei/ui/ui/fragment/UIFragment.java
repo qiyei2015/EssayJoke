@@ -6,7 +6,11 @@ import android.view.View;
 import com.qiyei.framework.common.model.MainMenu;
 
 import com.qiyei.framework.ui.fragment.CommonListFragment;
+import com.qiyei.ui.ui.activity.CommonDialogActivity;
+import com.qiyei.ui.ui.activity.EssayJokeMainActivity;
+import com.qiyei.ui.ui.activity.RecyclerViewTestActivity;
 import com.qiyei.ui.ui.activity.ScanCodeActivity;
+import com.qiyei.ui.ui.activity.ViewPagerTestActivity;
 import com.qiyei.ui.ui.activity.XGrirdViewActivity;
 
 import java.util.ArrayList;
@@ -21,15 +25,15 @@ import java.util.List;
  */
 public class UIFragment extends CommonListFragment {
 
-
     /**
      * 菜单item
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 XGridView","测试2 二维码扫描"};
-    private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,ScanCodeActivity.class};
-
+    private String[] names = new String[]{"测试1 XGridView","测试2 自定义对话框测试","测试3 ViewPager测试"
+            ,"测试4 RecyclerViewTest","测试5 EssayJokeMain","测试 二维码扫描"};
+    private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,CommonDialogActivity.class,ViewPagerTestActivity.class
+            ,RecyclerViewTestActivity.class,EssayJokeMainActivity.class,ScanCodeActivity.class};
 
     public UIFragment() {
         super();
