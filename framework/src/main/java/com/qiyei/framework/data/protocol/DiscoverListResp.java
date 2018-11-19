@@ -1,4 +1,4 @@
-package com.qiyei.ui.data.protocol;
+package com.qiyei.framework.data.protocol;
 
 import java.util.List;
 

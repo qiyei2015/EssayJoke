@@ -1,4 +1,4 @@
-package com.qiyei.ui.data.bean;
+package com.qiyei.framework.data.bean;
 
 /**
  * @author Created by qiyei2015 on 2017/10/28.

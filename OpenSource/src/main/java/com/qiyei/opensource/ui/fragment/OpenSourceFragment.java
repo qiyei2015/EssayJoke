@@ -8,6 +8,7 @@ import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.opensource.R;
 import com.qiyei.opensource.ui.activity.DaggerDemoActivity;
+import com.qiyei.opensource.ui.activity.HotfixTestActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ public class OpenSourceFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 Dagger2"};
-    private Class<?>[] clazzs = new Class[]{DaggerDemoActivity.class,};
+    private String[] names = new String[]{"测试1 Dagger2","测试2 热修复"};
+    private Class<?>[] clazzs = new Class[]{DaggerDemoActivity.class,HotfixTestActivity.class};
 
 
     public OpenSourceFragment() {

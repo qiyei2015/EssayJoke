@@ -14,6 +14,10 @@ buildscript {
             url 'https://maven.google.com/'
             name 'Google'
         }
+        //阿里云仓库
+        maven {
+            url "http://maven.aliyun.com/nexus/content/repositories/releases"
+        }
         google()
     }
     dependencies {
@@ -42,6 +46,10 @@ allprojects {
         maven {
             // All of React Native (JS, Android binaries) is installed from npm
             url "$rootDir/node_modules/react-native/android"
+        }
+        //阿里云仓库
+        maven {
+            url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
     }
     //

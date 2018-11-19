@@ -1,10 +1,11 @@
-package com.qiyei.ui.data.api;
+package com.qiyei.framework.data.api;
 
 
+import com.qiyei.framework.data.bean.UserInfo;
+import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.framework.net.RequestObject;
 import com.qiyei.framework.net.ResponseObject;
-import com.qiyei.ui.data.bean.UserInfo;
-import com.qiyei.ui.data.protocol.DiscoverListResp;
+
 
 import java.util.Map;
 

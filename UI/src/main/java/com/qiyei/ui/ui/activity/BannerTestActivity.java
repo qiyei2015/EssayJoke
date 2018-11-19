@@ -10,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 
+import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;
@@ -20,7 +21,7 @@ import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.sdk.view.banner.BannerAdapter;
 import com.qiyei.sdk.view.banner.BannerViewPager;
 import com.qiyei.ui.R;
-import com.qiyei.ui.data.protocol.DiscoverListResp;
+
 
 import java.util.HashMap;
 import java.util.List;

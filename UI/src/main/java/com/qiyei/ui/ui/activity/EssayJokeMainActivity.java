@@ -8,6 +8,9 @@ import android.view.View;
 
 
 import com.qiyei.framework.activity.BaseSkinActivity;
+import com.qiyei.framework.data.api.IEassyJokeApiService;
+import com.qiyei.framework.data.protocol.DiscoverListReq;
+import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.framework.titlebar.CommonTitleBar;
 import com.qiyei.sdk.https.api.HttpManager;
 import com.qiyei.sdk.https.api.HttpRequest;
@@ -15,9 +18,8 @@ import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 import com.qiyei.ui.R;
-import com.qiyei.ui.data.api.IEassyJokeApiService;
-import com.qiyei.ui.data.protocol.DiscoverListReq;
-import com.qiyei.ui.data.protocol.DiscoverListResp;
+
+
 
 /**
  * @author Created by qiyei2015 on 2017/9/28.
