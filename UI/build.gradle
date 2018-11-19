@@ -38,6 +38,9 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
+    
+    api project(':ioc-annotation')
+    annotationProcessor project(':ioc-compiler')
 
     api project(':Framework')
     api project(':Scan')

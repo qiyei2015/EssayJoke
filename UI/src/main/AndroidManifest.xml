@@ -11,8 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.ScanCodeActivity">
-        </activity>
+
         <activity android:name=".ui.activity.XGrirdViewActivity">
         </activity>
         <activity android:name=".ui.activity.CommonDialogActivity">
@@ -23,9 +22,16 @@
         </activity>
         <activity android:name=".ui.activity.EssayJokeMainActivity">
         </activity>
-        <activity android:name=".ui.activity.SkinTestActivity">
+        <activity android:name=".ui.activity.SkinSwitchTestActivity">
         </activity>
         <activity android:name=".ui.activity.BannerTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.ImageChooseTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.MultiDisplaySupportActivity">
+        </activity>
+
+        <activity android:name=".ui.activity.ScanCodeActivity">
         </activity>
     </application>
 
