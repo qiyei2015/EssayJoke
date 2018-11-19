@@ -3,6 +3,10 @@
           package="com.qiyei.opensource">
 
     <application>
+        <activity android:name=".ui.activity.RxjavaTestActivity">
+        </activity>
+        <activity android:name=".ui.activity.OkioTestActivity">
+        </activity>
         <activity android:name=".ui.activity.DaggerDemoActivity">
         </activity>
         <activity android:name=".ui.activity.HotfixTestActivity">
