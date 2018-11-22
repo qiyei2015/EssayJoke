@@ -1,6 +1,0 @@
-<resources>
-    <string name="app_name">内涵段子测试Demo</string>
-    <string name="title_activity_network_test">NetworkTestActivity</string>
-    <string name="title_activity_database_test">DatabaseTestActivity</string>
-    <string name="title_activity_component_demo">ComponentDemoActivity</string>
-</resources>

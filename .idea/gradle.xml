@@ -10,7 +10,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/Android" />
-            <option value="$PROJECT_DIR$/AppDemo" />
             <option value="$PROJECT_DIR$/Architecture" />
             <option value="$PROJECT_DIR$/Cordova" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
@@ -23,7 +22,6 @@
             <option value="$PROJECT_DIR$/MallApp/OrderManager" />
             <option value="$PROJECT_DIR$/MallApp/UserManager" />
             <option value="$PROJECT_DIR$/Media" />
-            <option value="$PROJECT_DIR$/ModuleA" />
             <option value="$PROJECT_DIR$/NDK" />
             <option value="$PROJECT_DIR$/OpenSource" />
             <option value="$PROJECT_DIR$/PayManager" />

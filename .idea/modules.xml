@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android/Android.iml" filepath="$PROJECT_DIR$/Android/Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/AppDemo/AppDemo.iml" filepath="$PROJECT_DIR$/AppDemo/AppDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/Architecture/Architecture.iml" filepath="$PROJECT_DIR$/Architecture/Architecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/Cordova/Cordova.iml" filepath="$PROJECT_DIR$/Cordova/Cordova.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
@@ -15,7 +14,6 @@
       <module fileurl="file://$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" filepath="$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" />
       <module fileurl="file://$PROJECT_DIR$/Media/Media.iml" filepath="$PROJECT_DIR$/Media/Media.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" filepath="$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ModuleA/ModuleA.iml" filepath="$PROJECT_DIR$/ModuleA/ModuleA.iml" />
       <module fileurl="file://$PROJECT_DIR$/NDK/NDK.iml" filepath="$PROJECT_DIR$/NDK/NDK.iml" />
       <module fileurl="file://$PROJECT_DIR$/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/OpenSource/OpenSource.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" filepath="$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" />
