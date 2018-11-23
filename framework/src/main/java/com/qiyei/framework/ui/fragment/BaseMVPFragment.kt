@@ -11,6 +11,8 @@ import com.qiyei.framework.mvp.presenter.BasePresenter
 import com.qiyei.framework.mvp.view.IBaseView
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.sdk.https.dialog.LoadingManager
+import com.qiyei.sdk.log.LogManager
+import com.qiyei.sdk.util.UUIDUtil
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
@@ -27,7 +29,9 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
 
     lateinit var mActivityComponent: ActivityComponent
 
-    lateinit var mDialogTAG:String
+    private var mDialogTAG:String? = null
+
+    private var mDialogPre = ""
 
     /**
      * 标题栏
@@ -38,15 +42,27 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
         super.onCreate(savedInstanceState)
         initActivityInjection()
         initComponentInject()
-        mDialogTAG = this.javaClass.canonicalName
+        mDialogPre = this.javaClass.simpleName + "_"
     }
 
     override fun showLoading() {
-        LoadingManager.showDialog(childFragmentManager,mDialogTAG)
+        if (mDialogTAG == null){
+            mDialogTAG = mDialogPre + UUIDUtil.get16UUID()
+            LogManager.i(getTAG(), "${LoadingManager.TAG} showLoading tag:$mDialogTAG")
+            LoadingManager.showDialog(childFragmentManager,mDialogTAG)
+        }else {
+            LogManager.i(getTAG(),"${LoadingManager.TAG} showLoading error:already has a dialog")
+        }
     }
 
     override fun hideLoading() {
-        LoadingManager.dismissDialog(childFragmentManager,mDialogTAG)
+        if (mDialogTAG != null){
+            LogManager.i(getTAG(), "${LoadingManager.TAG} hideLoading tag:$mDialogTAG")
+            LoadingManager.dismissDialog(childFragmentManager,mDialogTAG)
+            mDialogTAG = null
+        }else {
+            LogManager.i(getTAG(),"${LoadingManager.TAG} hideLoading error,tag is null")
+        }
     }
 
     override fun onError(text: String) {

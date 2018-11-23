@@ -11,7 +11,7 @@ import android.util.Log;
  * @description:
  */
 public class LoadingManager {
-    private static final String TAG = "LoadingManager";
+    public static final String TAG = "LoadingManager";
 
     /**
      * 显示对话框

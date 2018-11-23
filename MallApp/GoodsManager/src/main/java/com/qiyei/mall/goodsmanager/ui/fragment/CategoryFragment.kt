@@ -52,6 +52,11 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
+        //loadData()
+    }
+
+    override fun onStart(){
+        super.onStart()
         loadData()
     }
 
