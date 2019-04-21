@@ -2,6 +2,7 @@ package com.qiyei.framework
 
 
 import android.content.Context
+import android.os.Debug
 import android.support.multidex.MultiDexApplication
 import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
@@ -24,6 +25,7 @@ open class FrameworkApplication: MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
+        Debug.startMethodTracing("mall_start")
         try {
             SDKManager.initSDK(this)
         } catch (e: Exception) {

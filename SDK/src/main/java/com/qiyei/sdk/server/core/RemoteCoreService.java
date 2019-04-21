@@ -1,7 +1,7 @@
 package com.qiyei.sdk.server.core;
 
 
-import android.app.Notification;
+
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.notification.NotificationManagerEx;
 import com.qiyei.sdk.server.base.BaseService;
 
 /**
@@ -59,7 +60,7 @@ public class RemoteCoreService extends BaseService {
         super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             LogManager.i(TAG,"startForeground");
-            startForeground(1,new Notification());
+            startForeground(1, NotificationManagerEx.makeNotifciation(this));
         }
         mContext = this;
     }

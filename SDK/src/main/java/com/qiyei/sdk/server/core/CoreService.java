@@ -13,6 +13,7 @@ import android.support.annotation.Nullable;
 
 import com.qiyei.sdk.R;
 import com.qiyei.sdk.log.LogManager;
+import com.qiyei.sdk.notification.NotificationManagerEx;
 import com.qiyei.sdk.server.base.BaseService;
 
 import java.util.HashMap;
@@ -88,7 +89,7 @@ public class CoreService extends BaseService {
         super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             LogManager.i(TAG,"startForeground");
-            startForeground(1,new Notification());
+            startForeground(1, NotificationManagerEx.makeNotifciation(this));
         }
         mContext = this;
     }
@@ -109,7 +110,7 @@ public class CoreService extends BaseService {
                 .setSmallIcon(R.drawable.wakeup)
                 .setWhen(System.currentTimeMillis()).build();
 
-        startForeground(0,notification);
+        startForeground(0,NotificationManagerEx.makeNotifciation(this));
         return START_STICKY;
     }
 

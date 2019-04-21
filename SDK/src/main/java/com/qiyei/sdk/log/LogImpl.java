@@ -44,7 +44,7 @@ public class LogImpl {
     /**
      * 日志开关是否打开
      */
-    private boolean isOpen;
+    private boolean isOpen = true;
     /**
      * 是否写入文件
      */

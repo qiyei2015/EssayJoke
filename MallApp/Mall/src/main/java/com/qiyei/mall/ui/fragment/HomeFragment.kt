@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import com.qiyei.framework.extend.GlideImageLoader
 import com.qiyei.framework.ui.fragment.BaseMVPFragment
 
@@ -16,12 +17,13 @@ import com.qiyei.mall.mvp.presenter.HomeFragmentPresenter
 import com.qiyei.mall.mvp.view.IHomeFragmentView
 import com.qiyei.mall.ui.adapter.HomeDiscountAdapter
 import com.qiyei.mall.ui.adapter.TopicAdapter
+import com.qiyei.sdk.launchstarter.LauncherManager
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.support.v4.toast
 import me.crosswall.lib.coverflow.CoverFlow
-import me.crosswall.lib.coverflow.core.PageItemClickListener
+
 
 
 /**
@@ -91,7 +93,13 @@ class HomeFragment : BaseMVPFragment<HomeFragmentPresenter>(),IHomeFragmentView 
         mHomeDiscountRecyclerView.adapter = HomeDiscountAdapter(context!!, mutableListOf(HOME_DISCOUNT_ONE,
                 HOME_DISCOUNT_TWO, HOME_DISCOUNT_THREE, HOME_DISCOUNT_FOUR, HOME_DISCOUNT_FIVE,HOME_DISCOUNT_ONE,
                 HOME_DISCOUNT_TWO, HOME_DISCOUNT_THREE, HOME_DISCOUNT_FOUR, HOME_DISCOUNT_FIVE))
-
+        mScanImageView.viewTreeObserver.addOnPreDrawListener(object :ViewTreeObserver.OnPreDrawListener{
+            override fun onPreDraw(): Boolean {
+                LauncherManager.getDefault().end("mScanImageView onPreDraw")
+                mScanImageView.viewTreeObserver.removeOnPreDrawListener(this)
+                return true
+            }
+        })
     }
 
     private fun initTopic(){

@@ -2,6 +2,7 @@ package com.qiyei.mall.ui.activity
 
 
 import android.os.Bundle
+import android.os.Debug
 import android.support.v4.app.Fragment
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.ashokvarma.bottomnavigation.BottomNavigationBar
@@ -19,6 +20,7 @@ import com.qiyei.mall.ui.fragment.HomeFragment
 import com.qiyei.mall.usermanager.ui.fragment.UserFragment
 import com.qiyei.provider.service.mall.IGoodsManagerService
 import com.qiyei.provider.service.mall.MallServiceConstant
+import com.qiyei.sdk.launchstarter.LauncherManager
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -53,6 +55,15 @@ class HomeActivity : BaseActivity() {
     override fun getTAG(): String {
         return this::class.java.simpleName
     }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        Debug.stopMethodTracing()
+        if (hasFocus){
+            LauncherManager.getDefault().end("onWindowFocusChanged")
+        }
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()

@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.SystemClock;
 
@@ -21,6 +22,8 @@ import com.qiyei.sdk.server.core.CoreService;
 import com.qiyei.sdk.server.core.CoreWakeUpService;
 import com.qiyei.sdk.server.core.RemoteCoreService;
 import com.qiyei.sdk.util.ToastUtil;
+
+import java.util.concurrent.Executor;
 
 /**
  * Email: 1273482124@qq.com

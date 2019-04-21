@@ -14,7 +14,7 @@ import android.os.Build;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.log.LogManager;
-
+import com.qiyei.sdk.notification.NotificationManagerEx;
 
 
 import static com.qiyei.sdk.common.RuntimeEnv.serviceAlive;
@@ -37,7 +37,7 @@ public class CoreWakeUpService extends JobService {
         super.onCreate();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             LogManager.i(TAG,"startForeground");
-            startForeground(1,new Notification());
+            startForeground(1, NotificationManagerEx.makeNotifciation(this));
         }
     }
 

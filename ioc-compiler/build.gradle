@@ -8,9 +8,9 @@ tasks.withType(JavaCompile) {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile "com.google.auto.service:auto-service:$auto_service_version"
-    compile "com.squareup:javapoet:$javapoet_version"
-    compile project(':ioc-annotation')
+    implementation "com.google.auto.service:auto-service:$auto_service_version"
+    implementation "com.squareup:javapoet:$javapoet_version"
+    implementation project(':ioc-annotation')
 }
 
 sourceCompatibility = "1.8"
