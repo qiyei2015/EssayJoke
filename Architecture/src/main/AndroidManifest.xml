@@ -3,6 +3,8 @@
           package="com.qiyei.architecture">
 
     <application>
+        <activity android:name=".ui.activity.MemoryOptimizationActivity">
+        </activity>
         <activity android:name=".ui.activity.ANRActivity">
         </activity>
 
@@ -58,7 +60,6 @@
             android:label="@string/title_activity_database_test"
             android:theme="@style/AppTheme">
         </activity>
-
         <activity android:name=".ui.activity.ArchitectureActivity">
         </activity>
         <activity
@@ -66,7 +67,6 @@
             android:label="@string/title_activity_component_demo"
             android:theme="@style/AppTheme">
         </activity>
-
     </application>
 
 </manifest>

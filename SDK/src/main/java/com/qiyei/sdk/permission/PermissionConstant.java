@@ -57,5 +57,5 @@ public class PermissionConstant {
      */
     public static final String group_SMS = Manifest.permission_group.SMS;
 
-
+    public static final String[] STORAGES = {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE};
 }

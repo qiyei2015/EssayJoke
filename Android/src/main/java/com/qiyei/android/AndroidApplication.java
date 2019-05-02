@@ -22,7 +22,7 @@ import java.util.List;
  * Version: 1.0
  * Description:
  */
-public class BaseApplication extends FrameworkApplication {
+public class AndroidApplication extends FrameworkApplication {
 
     @Override
     public void onCreate() {
@@ -38,26 +38,16 @@ public class BaseApplication extends FrameworkApplication {
         ARouter.init(this);
 
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-        LeakCanary.install(this);
 
-//        try {
-//            SDKManager.initSDK(this);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
-        //使用严格模式，检测内存泄漏
-        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectAll()//监测所以内容
-                .penaltyLog()//违规对log日志
-                .penaltyDeath()
-                .build());
+//        //使用严格模式，检测内存泄漏
+//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                .detectAll()//监测所以内容
+//                .penaltyLog()//违规对log日志
+//                .penaltyDeath()
+//                .build());
 
 
     }

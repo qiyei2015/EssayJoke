@@ -99,6 +99,17 @@ dependencies {
     //Kotlin RxBus
     api "com.eightbitlab:rxbus:1.0.2"
 
+    //leakCanary
+    debugApi 'com.squareup.leakcanary:leakcanary-android:1.6.3'
+    releaseApi 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.3'
+    // Optional, if you use support library fragments:
+    debugApi 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
+
+    //blockCanary
+    api 'com.github.markzhai:blockcanary-android:1.5.0'
+    debugApi 'com.github.markzhai:blockcanary-android:1.5.0'
+    releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
+
     api project(':SDK')
     api project(':Resource')
     api project(':MallApp:MallResource')

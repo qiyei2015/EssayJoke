@@ -1,6 +1,7 @@
 package com.qiyei.mall;
 
 import android.content.Context;
+import android.os.Debug;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.qiyei.framework.FrameworkApplication;
@@ -27,6 +28,7 @@ public class MallApplication extends FrameworkApplication {
 
     @Override
     public void onCreate() {
+        //Debug.startMethodTracing("mall_start");
         super.onCreate();
 
         // 这两行必须写在init之前，否则这些配置在init过程中将无效
@@ -41,6 +43,7 @@ public class MallApplication extends FrameworkApplication {
         LogManager.d("TAG","MallApplication onCreate");
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
+        //Debug.stopMethodTracing()
     }
 
 }

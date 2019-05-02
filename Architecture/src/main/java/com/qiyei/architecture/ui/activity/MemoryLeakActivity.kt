@@ -24,7 +24,7 @@ class MemoryLeakActivity : AppCompatActivity() {
         context = this
         btn1.setOnClickListener({it ->
             SingleInstance.getInstance(context)
-            finish()
+            //finish()
         })
 
         btn2.setOnClickListener{

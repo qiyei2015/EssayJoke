@@ -1,17 +1,30 @@
 package com.qiyei.mall.ui.activity
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.mall.R
+import com.qiyei.sdk.permission.PermissionConstant
+import com.qiyei.sdk.permission.PermissionManager
+import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(PermissionConstant.STORAGES,2)
+        }
+
         startActivity<HomeActivity>("key" to 20)
         finish()
     }
@@ -19,4 +32,6 @@ class MainActivity : BaseActivity() {
     override fun getTAG(): String {
         return this::class.java.simpleName
     }
+
+
 }

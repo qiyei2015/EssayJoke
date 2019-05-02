@@ -58,10 +58,9 @@ class HomeActivity : BaseActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        Debug.stopMethodTracing()
-        if (hasFocus){
-            LauncherManager.getDefault().end("onWindowFocusChanged")
-        }
+
+        LogManager.d("HomeActivity","onWindowFocusChanged")
+        LauncherManager.getDefault().end("onWindowFocusChanged")
     }
 
 

@@ -8,6 +8,7 @@ import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
 import com.qiyei.framework.injection.module.AppModule
 import com.qiyei.sdk.SDKManager
+import com.squareup.leakcanary.LeakCanary
 
 /**
  * @author Created by qiyei2015 on 2018/9/24.
@@ -25,13 +26,22 @@ open class FrameworkApplication: MultiDexApplication() {
 
     override fun onCreate() {
         super.onCreate()
-        Debug.startMethodTracing("mall_start")
+
         try {
             SDKManager.initSDK(this)
+            //initLeakCanary()
         } catch (e: Exception) {
             e.printStackTrace()
         }
         mAppComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
 
+    private fun initLeakCanary(){
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        LeakCanary.install(this)
+    }
 }
