@@ -1,6 +1,8 @@
 package com.qiyei.architecture.ui.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -19,8 +21,8 @@ public class MemoryOptimizationActivity extends AppCompatActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case MSG_MEMORY_JITTER:
-                    for (int i = 0;i < 5000;i++){
-                        String[] message1 = new String[10000];
+                    for (int i = 0;i < 500;i++){
+                        Bitmap bitmap = Bitmap.createBitmap(1920,1080, Bitmap.Config.ARGB_8888);
                     }
                     mHandler.sendEmptyMessageDelayed(MSG_MEMORY_JITTER,20);
                     break;
@@ -41,5 +43,6 @@ public class MemoryOptimizationActivity extends AppCompatActivity {
                 mHandler.sendEmptyMessage(MSG_MEMORY_JITTER);
             }
         });
+
     }
 }
