@@ -16,6 +16,7 @@ import com.qiyei.architecture.ui.activity.NetworkTestActivity;
 import com.qiyei.architecture.ui.activity.ProcessKeepAliveActivity;
 import com.qiyei.architecture.ui.activity.ProxyTestActivity;
 import com.qiyei.architecture.ui.activity.UIDrawActivity;
+import com.qiyei.architecture.ui.activity.WorkManagerDemoActivity;
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 
@@ -38,10 +39,10 @@ public class ArchitectureFragment extends CommonListFragment {
 
     private String[] names = new String[]{"测试1 动态代理","测试2 数据中心","测试3 进程保活","测试4 Binder测试"
             ,"测试5 网络框架测试","测试6 数据库框架测试","测试7 Android架构组件","测试8 组件化测试"
-            ,"测试9 UI绘制优化","测试10 ANR","测试11 内存优化","测试12 内存泄漏"};
+            ,"测试9 UI绘制优化","测试10 ANR","测试11 内存优化","测试12 内存泄漏","测试13 WorkManager"};
     private Class<?>[] clazzs = new Class[]{ProxyTestActivity.class,DataCenterTestActivity.class,ProcessKeepAliveActivity.class,BinderTestActivity.class
             ,NetworkTestActivity.class,DatabaseTestActivity.class,ArchitectureActivity.class,ComponentDemoActivity.class
-            ,UIDrawActivity.class,ANRActivity.class, MemoryOptimizationActivity.class,MemoryLeakActivity.class};
+            ,UIDrawActivity.class,ANRActivity.class, MemoryOptimizationActivity.class,MemoryLeakActivity.class, WorkManagerDemoActivity.class};
 
 
     public ArchitectureFragment() {

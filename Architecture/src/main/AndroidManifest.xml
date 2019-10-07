@@ -3,6 +3,8 @@
           package="com.qiyei.architecture">
 
     <application>
+        <activity android:name=".ui.activity.WorkManagerDemoActivity">
+        </activity>
         <activity android:name=".ui.activity.MemoryOptimizationActivity">
         </activity>
         <activity android:name=".ui.activity.ANRActivity">
