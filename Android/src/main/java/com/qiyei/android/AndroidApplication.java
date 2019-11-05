@@ -27,6 +27,27 @@ public class AndroidApplication extends FrameworkApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        initARouter();
+        initBlockCanary();
+        initSkinManager();
+    }
+
+    private void initBlockCanary() {
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+    }
+
+    private void initSkinManager() {
+        //初始化皮肤管理器
+        SkinManager.getInstance().init(this);
+//        //使用严格模式，检测内存泄漏
+//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+//                .detectAll()//监测所以内容
+//                .penaltyLog()//违规对log日志
+//                .penaltyDeath()
+//                .build());
+    }
+
+    private void initARouter() {
         // 这两行必须写在init之前，否则这些配置在init过程中将无效
         if (BuildConfig.DEBUG) {
             // 打印日志
@@ -36,23 +57,9 @@ public class AndroidApplication extends FrameworkApplication {
         }
         // 尽可能早，推荐在Application中初始化
         ARouter.init(this);
-
-        BlockCanary.install(this, new AppBlockCanaryContext()).start();
-
-
-        //初始化皮肤管理器
-        SkinManager.getInstance().init(this);
-//        //使用严格模式，检测内存泄漏
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectAll()//监测所以内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()
-//                .build());
-
-
     }
 
-     class AppBlockCanaryContext extends BlockCanaryContext {
+    class AppBlockCanaryContext extends BlockCanaryContext {
 
         /**
          * Implement in your project.

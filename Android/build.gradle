@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx' // apply plugin
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -49,6 +50,11 @@ android {
         abortOnError false
     }
 
+}
+
+aspectjx {
+    //开启AspectJX功能
+    enabled true
 }
 
 dependencies {
