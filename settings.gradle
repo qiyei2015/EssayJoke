@@ -1,5 +1,4 @@
 include ':EssayJokeApp', ':Video', ':Android', ':Android', ':Resource', ':Media', ':NDK', ':UI', ':OpenSource', ':Architecture'
 include ':MallApp:Mall', ':Provider', ':MallApp:UserManager', ':MallApp:GoodsManager', ':MallApp:MessageManager', ':MallApp:OrderManager', ':MallApp:MallResource', ':PayManager'
 include ':MallApp'
-include  ':Cordova', ':ReactNative'
-include  ':SDK', ':Framework', ':ioc-annotation', ':ioc-compiler', ':Router', ':Cordova', ':ReactNative', ':Scan'
+include  ':SDK', ':Framework', ':ioc-annotation', ':ioc-compiler', ':Router', ':Scan'

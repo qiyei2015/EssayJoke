@@ -40,7 +40,5 @@ dependencies {
     //hotfix
     api "com.aliyun.ams:alicloud-android-hotfix:$hotfix_version"
 
-    api project(':Cordova')
-    api project(':ReactNative')
     api project(':Framework')
 }

@@ -4,7 +4,7 @@ package com.qiyei.opensource.ui.fragment;
 import android.view.View;
 
 
-import com.qiyei.cordova.EmbeddedWebViewActivity;
+
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.opensource.R;
@@ -12,7 +12,7 @@ import com.qiyei.opensource.ui.activity.DaggerDemoActivity;
 import com.qiyei.opensource.ui.activity.HotfixTestActivity;
 import com.qiyei.opensource.ui.activity.OkioTestActivity;
 import com.qiyei.opensource.ui.activity.RxjavaTestActivity;
-import com.qiyei.reactnative.ReactNativeDemoActivity;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +33,8 @@ public class OpenSourceFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 Rxjava测试","测试2 Okio测试","测试3 Dagger2","测试4 热修复"
-            ,"测试 Cordova测试","测试 React Native测试",};
-    private Class<?>[] clazzs = new Class[]{RxjavaTestActivity.class,OkioTestActivity.class,DaggerDemoActivity.class,HotfixTestActivity.class
-            ,EmbeddedWebViewActivity.class,ReactNativeDemoActivity.class};
+    private String[] names = new String[]{"测试1 Rxjava测试","测试2 Okio测试","测试3 Dagger2","测试4 热修复"};
+    private Class<?>[] clazzs = new Class[]{RxjavaTestActivity.class,OkioTestActivity.class,DaggerDemoActivity.class,HotfixTestActivity.class};
 
 
     public OpenSourceFragment() {

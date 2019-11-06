@@ -1,8 +1,8 @@
 package com.qiyei.sdk.database.test.bean;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.Generated;
 
 /**
  * @author Created by qiyei2015 on 2017/11/11.
