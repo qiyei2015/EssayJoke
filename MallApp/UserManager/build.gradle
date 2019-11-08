@@ -62,9 +62,9 @@ dependencies {
 
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
-    api project(':Provider')
+    api project(':Framework:Provider')
 
-    api project(':Framework')
+    api project(':Framework:Framework')
 }
 kapt {
     arguments {

@@ -5,39 +5,39 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleHome" value="D:/Program Files/gradle-4.8" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/Android" />
-            <option value="$PROJECT_DIR$/Architecture" />
-            <option value="$PROJECT_DIR$/Cordova" />
+            <option value="$PROJECT_DIR$/AndroidApp" />
+            <option value="$PROJECT_DIR$/AndroidApp/Android" />
+            <option value="$PROJECT_DIR$/AndroidApp/Architecture" />
+            <option value="$PROJECT_DIR$/AndroidApp/Media" />
+            <option value="$PROJECT_DIR$/AndroidApp/NDK" />
+            <option value="$PROJECT_DIR$/AndroidApp/OpenSource" />
+            <option value="$PROJECT_DIR$/AndroidApp/Scan" />
+            <option value="$PROJECT_DIR$/AndroidApp/UI" />
+            <option value="$PROJECT_DIR$/AndroidApp/Video" />
             <option value="$PROJECT_DIR$/EssayJokeApp" />
             <option value="$PROJECT_DIR$/Framework" />
+            <option value="$PROJECT_DIR$/Framework/Framework" />
+            <option value="$PROJECT_DIR$/Framework/IOC-Annotation" />
+            <option value="$PROJECT_DIR$/Framework/IOC-Compiler" />
+            <option value="$PROJECT_DIR$/Framework/Provider" />
+            <option value="$PROJECT_DIR$/Framework/Resource" />
+            <option value="$PROJECT_DIR$/Framework/Router" />
             <option value="$PROJECT_DIR$/MallApp" />
             <option value="$PROJECT_DIR$/MallApp/GoodsManager" />
             <option value="$PROJECT_DIR$/MallApp/Mall" />
             <option value="$PROJECT_DIR$/MallApp/MallResource" />
             <option value="$PROJECT_DIR$/MallApp/MessageManager" />
             <option value="$PROJECT_DIR$/MallApp/OrderManager" />
+            <option value="$PROJECT_DIR$/MallApp/PayManager" />
             <option value="$PROJECT_DIR$/MallApp/UserManager" />
-            <option value="$PROJECT_DIR$/Media" />
-            <option value="$PROJECT_DIR$/NDK" />
-            <option value="$PROJECT_DIR$/OpenSource" />
-            <option value="$PROJECT_DIR$/PayManager" />
-            <option value="$PROJECT_DIR$/Provider" />
-            <option value="$PROJECT_DIR$/ReactNative" />
-            <option value="$PROJECT_DIR$/Resource" />
-            <option value="$PROJECT_DIR$/Router" />
             <option value="$PROJECT_DIR$/SDK" />
-            <option value="$PROJECT_DIR$/Scan" />
-            <option value="$PROJECT_DIR$/UI" />
-            <option value="$PROJECT_DIR$/Video" />
-            <option value="$PROJECT_DIR$/ioc-annotation" />
-            <option value="$PROJECT_DIR$/ioc-compiler" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

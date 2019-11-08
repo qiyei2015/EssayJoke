@@ -19,10 +19,10 @@ ext{
      * 公共部分
      */
     common = [
-            compileSdkVersion: 27,
+            compileSdkVersion: 29,
             buildToolsVersion: '28.0.3',
             minSdkVersion    : 21,
-            targetSdkVersion : 27,
+            targetSdkVersion : 28,
     ]
 
     /**

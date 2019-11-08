@@ -1,0 +1,17 @@
+apply plugin: 'java'
+
+//解决编译中文乱码问题
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation "com.google.auto.service:auto-service:$auto_service_version"
+    implementation "com.squareup:javapoet:$javapoet_version"
+    implementation project(':Framework:IOC-Annotation')
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"

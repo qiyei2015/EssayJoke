@@ -1,27 +1,28 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-aspectjx' // apply plugin
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
     buildToolsVersion rootProject.ext.common.buildToolsVersion
+
     defaultConfig {
-        applicationId "com.qiyei.essayjoke"
+        applicationId "com.qiyei.android"
         minSdkVersion rootProject.ext.common.minSdkVersion
         targetSdkVersion rootProject.ext.common.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        externalNativeBuild {
-            cmake {
-                cppFlags ""
-            }
-        }
         //分包
         multiDexEnabled true
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+        encoding "UTF-8"
     }
+
     buildTypes {
 
         debug {
@@ -35,34 +36,42 @@ android {
         }
 
     }
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
+
     sourceSets {
         main {
             jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
             jniLibs.srcDirs = ['libs']  //配置生成jniLibs
         }
     }
+
     //解决国际化资源文件不全
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
+
+}
+
+aspectjx {
+    //开启AspectJX功能
+    enabled true
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestImplementation("com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version", {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
+    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
 
-    api "com.android.support:appcompat-v7:$appcompat_v7_version"
-    api "com.makeramen:roundedimageview:$roundedimageview_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
+
     testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
-    api project(':Framework:Framework')
+    api project(':AndroidApp:UI')
+    api project(':AndroidApp:OpenSource')
+    api project(':AndroidApp:Architecture')
+    api project(':AndroidApp:Media')
+    api project(':AndroidApp:NDK')
 }

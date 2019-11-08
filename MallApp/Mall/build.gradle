@@ -71,11 +71,11 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     if(isMallLibrary.toBoolean()){
-        implementation project(':Provider')
+        implementation project(':Framework:Provider')
         implementation project(':MallApp:UserManager')
         implementation project(':MallApp:OrderManager')
         implementation project(':MallApp:GoodsManager')
         implementation project(':MallApp:MessageManager')
-        implementation project(':PayManager')
+        implementation project(':MallApp:PayManager')
     }
 }

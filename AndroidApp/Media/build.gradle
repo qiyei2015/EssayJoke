@@ -1,12 +1,4 @@
-if (isMallLibrary.toBoolean()) {
-    apply plugin: 'com.android.library'
-} else {
-    apply plugin: 'com.android.application'
-}
-
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -27,33 +19,26 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    androidExtensions {
-        experimental = true
-    }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+
+    implementation "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
+    implementation "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
+
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
+    implementation "android.arch.persistence.room:runtime:$room_runtime_version"
+
+
     implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
 
-    //Dagger2
-    kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
-
-    //ARouter
-    kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
-    api project(':Framework:Provider')
 
     api project(':Framework:Framework')
-}
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
+
 }

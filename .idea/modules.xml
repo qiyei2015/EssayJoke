@@ -2,33 +2,34 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Android/Android.iml" filepath="$PROJECT_DIR$/Android/Android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Architecture/Architecture.iml" filepath="$PROJECT_DIR$/Architecture/Architecture.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Cordova/Cordova.iml" filepath="$PROJECT_DIR$/Cordova/Cordova.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/Android/Android.iml" filepath="$PROJECT_DIR$/AndroidApp/Android/Android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/AndroidApp.iml" filepath="$PROJECT_DIR$/AndroidApp/AndroidApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/Architecture/Architecture.iml" filepath="$PROJECT_DIR$/AndroidApp/Architecture/Architecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/EssayJoke-Framework.iml" filepath="$PROJECT_DIR$/Framework/EssayJoke-Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Framework/Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/Framework/Framework-Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework/Framework-Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" filepath="$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/IOC-Annotation/IOC-Annotation.iml" filepath="$PROJECT_DIR$/Framework/IOC-Annotation/IOC-Annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/IOC-Compiler/IOC-Compiler.iml" filepath="$PROJECT_DIR$/Framework/IOC-Compiler/IOC-Compiler.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/Mall/Mall.iml" filepath="$PROJECT_DIR$/MallApp/Mall/Mall.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MallApp.iml" filepath="$PROJECT_DIR$/MallApp/MallApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" filepath="$PROJECT_DIR$/MallApp/MallResource/MallResource.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Media/Media.iml" filepath="$PROJECT_DIR$/Media/Media.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/Media/Media.iml" filepath="$PROJECT_DIR$/AndroidApp/Media/Media.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" filepath="$PROJECT_DIR$/MallApp/MessageManager/MessageManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/NDK/NDK.iml" filepath="$PROJECT_DIR$/NDK/NDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/OpenSource/OpenSource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/NDK/NDK.iml" filepath="$PROJECT_DIR$/AndroidApp/NDK/NDK.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/OpenSource/OpenSource.iml" filepath="$PROJECT_DIR$/AndroidApp/OpenSource/OpenSource.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" filepath="$PROJECT_DIR$/MallApp/OrderManager/OrderManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/PayManager/PayManager.iml" filepath="$PROJECT_DIR$/PayManager/PayManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Provider/Provider.iml" filepath="$PROJECT_DIR$/Provider/Provider.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ReactNative/ReactNative.iml" filepath="$PROJECT_DIR$/ReactNative/ReactNative.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Resource/Resource.iml" filepath="$PROJECT_DIR$/Resource/Resource.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Router/Router.iml" filepath="$PROJECT_DIR$/Router/Router.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MallApp/PayManager/PayManager.iml" filepath="$PROJECT_DIR$/MallApp/PayManager/PayManager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/Provider/Provider.iml" filepath="$PROJECT_DIR$/Framework/Provider/Provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/Resource/Resource.iml" filepath="$PROJECT_DIR$/Framework/Resource/Resource.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/Router/Router.iml" filepath="$PROJECT_DIR$/Framework/Router/Router.iml" />
       <module fileurl="file://$PROJECT_DIR$/SDK/SDK.iml" filepath="$PROJECT_DIR$/SDK/SDK.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Scan/Scan.iml" filepath="$PROJECT_DIR$/Scan/Scan.iml" />
-      <module fileurl="file://$PROJECT_DIR$/UI/UI.iml" filepath="$PROJECT_DIR$/UI/UI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/Scan/Scan.iml" filepath="$PROJECT_DIR$/AndroidApp/Scan/Scan.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/UI/UI.iml" filepath="$PROJECT_DIR$/AndroidApp/UI/UI.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/UserManager/UserManager.iml" filepath="$PROJECT_DIR$/MallApp/UserManager/UserManager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Video/Video.iml" filepath="$PROJECT_DIR$/Video/Video.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" filepath="$PROJECT_DIR$/ioc-annotation/ioc-annotation.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" filepath="$PROJECT_DIR$/ioc-compiler/ioc-compiler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/AndroidApp/Video/Video.iml" filepath="$PROJECT_DIR$/AndroidApp/Video/Video.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Framework/android_project-EssayJoke-Framework.iml" filepath="$PROJECT_DIR$/Framework/android_project-EssayJoke-Framework.iml" />
     </modules>
   </component>
 </project>

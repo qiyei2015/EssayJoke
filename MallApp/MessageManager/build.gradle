@@ -82,8 +82,8 @@ dependencies {
     // 此处以JCore 1.2.5 版本为例。
     api 'cn.jiguang.sdk:jcore:1.2.5'
 
-    api project(':Provider')
-    api project(':Framework')
+    api project(':Framework:Provider')
+    api project(':Framework:Framework')
 }
 kapt {
     arguments {
