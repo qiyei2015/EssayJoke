@@ -45,7 +45,7 @@ dependencies {
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+//    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     api project(':Framework:Provider')
     api project(':Framework:Framework')

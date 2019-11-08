@@ -1,8 +1,6 @@
 package com.qiyei.architecture.data.bean;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Keep;
+
 
 
 /**
@@ -11,21 +9,19 @@ import org.greenrobot.greendao.annotation.Keep;
  * @email: 1273482124@qq.com
  * @description:
  */
-@Entity
+
 public class DataBean {
-    @Id
+
     private long id;
     private String name;
     private String value;
 
-    @Keep()
     public DataBean(long id, String name, String value) {
         this.id = id;
         this.name = name;
         this.value = value;
     }
 
-    @Keep()
     public DataBean() {
     }
 

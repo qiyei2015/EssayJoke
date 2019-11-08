@@ -3,7 +3,7 @@
 apply from: "config.gradle"
 
 buildscript {
-    ext.kotlin_version = '1.3.10'
+    ext.kotlin_version = '1.3.50'
     ext.anko_version='0.10.6'
 
     repositories {
@@ -22,13 +22,9 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
-        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.2' // add plugin
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
-//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'  // add for annotation
-
 //        //ARouter
 //        classpath "com.alibaba:arouter-register:1.0.2"
+        //kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         //for AspectJ
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
@@ -59,11 +55,4 @@ allprojects {
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
-}
-
-dependencies {
-    //解决 Program type already present: android.support.design.widget.CoordinatorLayout$1
-//    configurations {
-//        all*.exclude group: 'com.android.support', module: 'support-v13'
-//    }
 }

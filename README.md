@@ -28,7 +28,7 @@ APP层打包各个APP，并依赖一个或者多个业务组件
 
 **UI：** 主要是各种UI方面的Demo，例如自定义View，Material Design View使用Demo,插件式换肤等
 
-**OpenSource：** 主要是各种开源软件库的使用，包括Okhttp，Retrofit,greenDao,Replugin等
+**OpenSource：** 主要是各种开源软件库的使用，包括Okhttp，Retrofit,Replugin,Glide等
 
 **Architecture：** 架构和性能优化方面的Demo,MVP，内存泄漏，ANR等
 

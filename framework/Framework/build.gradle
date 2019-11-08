@@ -66,7 +66,7 @@ dependencies {
 
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
-    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+//    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
 
     //依赖anko框架 kotlin扩展
     api "org.jetbrains.anko:anko:$anko_version"
@@ -106,7 +106,7 @@ dependencies {
     debugApi 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.3'
 
     //blockCanary
-    api 'com.github.markzhai:blockcanary-android:1.5.0'
+    //api 'com.github.markzhai:blockcanary-android:1.5.0'
     debugApi 'com.github.markzhai:blockcanary-android:1.5.0'
     releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
 

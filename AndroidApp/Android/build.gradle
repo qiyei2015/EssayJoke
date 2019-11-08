@@ -49,7 +49,9 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
-
+    aaptOptions { 
+        cruncherEnabled = false
+    }
 }
 
 aspectjx {
