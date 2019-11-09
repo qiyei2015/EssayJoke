@@ -27,7 +27,4 @@
 -dontwarn retrofit2.**
 -keep class retrofit2.** {*;}
 
--dontwarn org.greenrobot.greendao.**
--keep class org.greenrobot.greendao.** { *;}
-
 -ignorewarnings
