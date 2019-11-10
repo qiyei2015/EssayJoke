@@ -1,0 +1,47 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //ARouter
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    //ARouter
+    api ("com.alibaba:arouter-api:$arouter_api_version", {
+        exclude group: 'com.android.support'
+    })
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
+
+    implementation project(':Framework:Framework')
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+}

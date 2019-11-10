@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--定义自定义View公共属性-->
+    <attr name="textColor" format="color"/>
+    <attr name="textSize" format="dimension"/>
+
+
+    <!--自定义View ColorTrackTextView的属性-->
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originalColor" format="color"/>
+        <attr name="changeColor" format="color"/>
+    </declare-styleable>
+
+    <!--自定义View TrackIndicatorView的属性-->
+    <declare-styleable name="IndicatorView">
+        <attr name="visiableNum" format="integer"/>
+    </declare-styleable>
+
+
+    <!--TextSwitchView属性-->
+    <declare-styleable name="TextSwitchView">
+        <attr name="textSize" />
+        <attr name="textColor" />
+    </declare-styleable>
+
+
+    <declare-styleable name="CustomTitleView">
+        <attr name="titleText" format="string"/>
+        <attr name="titleColor" format="color"/>
+        <attr name="titleTextSize" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomCircleView">
+        <attr name="firstColor" format="color"/>
+        <attr name="secondColor" format="color"/>
+        <attr name="circleWidth" format="dimension"/>
+        <attr name="speed" format="integer"/>
+    </declare-styleable>
+
+
+    <!--ProgressView属性-->
+    <declare-styleable name="ProgressView">
+        <attr name="bottomColor" format="color"/>
+        <attr name="topColor" format="color"/>
+        <attr name="ringWidth" format="dimension"/>
+        <attr name="textColor"/>
+        <attr name="textSize" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"
+    android:toDegrees="3600"
+    android:pivotX="50%"
+    android:pivotY="50%">
+
+    <!--定义一个圆环-->
+    <shape
+        android:shape="ring"
+        android:innerRadiusRatio="3"
+        android:thicknessRatio="8"
+        android:useLevel="false">
+
+        <!--渐变色填充-->
+        <gradient
+            android:centerColor="#FFFFFF"
+            android:startColor="#00000000"
+            android:endColor="#ff1E90FF"
+            android:type="sweep"
+            android:centerX="0.5"
+            android:centerY="0.5"
+            android:useLevel="false"/>
+
+    </shape>
+
+</rotate>

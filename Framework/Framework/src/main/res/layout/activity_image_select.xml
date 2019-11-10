@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".imageselector.ImageSelectActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recycler_view"
+        android:background="#ff261f1f">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/select_layout"
+        android:clickable="true"
+        android:layout_gravity="bottom"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp"
+        android:background="#800a0909">
+
+        <TextView
+            android:id="@+id/select_preview_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:clickable="true"
+            android:text="@string/media_choose_preview" />
+
+        <TextView
+            android:id="@+id/select_num_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:id="@+id/select_ok_tv"
+            style="@style/media_choose_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp"
+            android:text="@string/media_choose_ok" />
+    </RelativeLayout>
+
+</FrameLayout>

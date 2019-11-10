@@ -1,0 +1,50 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.qiyei.sdk">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+
+    <application android:allowBackup="true"
+                 android:label="@string/app_name"
+                 android:supportsRtl="true">
+
+        <!--核心服务-->
+        <service
+            android:name=".server.core.CoreService"
+            android:enabled="true"
+            android:exported="false">
+        </service>
+
+        <!--核心服务的远程服务,单独一个进程-->
+        <service
+            android:name=".server.core.RemoteCoreService"
+            android:enabled="true"
+            android:exported="false"
+            android:process=":remote.core">
+        </service>
+
+        <!--5.0以后的JobService，用于进程保活-->
+        <service
+            android:name=".server.core.CoreWakeUpService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE">
+        </service>
+
+        <!--广播接收器-->
+        <receiver android:name=".SDKManager$StartCoreServiceReceiver">
+        </receiver>
+
+    </application>
+
+</manifest>

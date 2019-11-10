@@ -1,0 +1,143 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'android-aspectjx' // apply plugin
+
+kapt {
+    generateStubs = true
+}
+
+repositories {
+    mavenCentral()
+}
+
+android {
+    compileSdkVersion rootProject.ext.common.compileSdkVersion
+    buildToolsVersion rootProject.ext.common.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.common.minSdkVersion
+        targetSdkVersion rootProject.ext.common.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //分包
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = ['src/main/jni', 'src/main/cpp/']
+            jniLibs.srcDirs = ['libs']  //配置生成jniLibs
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation "androidx.room:room-runtime:2.2.1"
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.legacy:legacy-support-v4:1.0.0"
+    implementation "com.google.android.material:material:1.0.0"
+
+    //分包
+    implementation "androidx.multidex:multidex:2.0.1"
+
+    //Dagger2
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+//    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+    //依赖anko框架 kotlin扩展
+    api ("org.jetbrains.anko:anko-commons:$anko_version", {
+        exclude group: 'com.android.support'
+    })
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    //ARouter
+    api ("com.alibaba:arouter-api:$arouter_api_version", {
+        exclude group: 'com.android.support'
+    })
+    annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
+
+    //Circle ImageView
+    api "de.hdodenhof:circleimageview:${circle_imageView_version}"
+
+//    //Take Photo
+//    api ("com.jph.takephoto:takephoto_library:${take_photo_version}", {
+//        exclude group: 'com.android.support', module: 'support-v4'
+//    })
+
+    //Take Photo
+    api ("com.jph.takephoto:takephoto_library:${take_photo_version}", {
+        exclude group: 'com.android.support'
+    })
+
+    //Alert View
+    api "com.bigkoo:alertview:${alert_view_version}"
+    //七牛
+    api 'com.qiniu:qiniu-android-sdk:7.3.+'
+    
+    //底部导航栏
+    api "com.ashokvarma.android:bottom-navigation-bar:$bottom_navigation_bar_version"
+    //banner
+    api "com.youth.banner:banner:$banner_version"
+    //带三角形角标的View
+    api ("com.github.shts:TriangleLabelView:$triangleLabelView_version", {
+        exclude group: 'com.android.support'
+    })
+
+    //画廊
+    api ("com.github.crosswall:Android-Coverflow:$android_coverflow_version", {
+        exclude group: 'com.android.support'
+    })
+
+    //上下拉刷新
+    api "cn.bingoogolapple:bga-refreshlayout:$bga_refreshlayout_version"
+    
+    //Kotlin RxBus
+    api "com.eightbitlab:rxbus:1.0.2"
+
+    //leakCanary
+    debugApi ('com.squareup.leakcanary:leakcanary-android:1.6.3', {
+        exclude group: 'com.android.support'
+    })
+    releaseApi ('com.squareup.leakcanary:leakcanary-android-no-op:1.6.3', {
+        exclude group: 'com.android.support'
+    })
+
+    //blockCanary
+    api 'com.github.markzhai:blockcanary-android:1.5.0'
+    debugApi 'com.github.markzhai:blockcanary-android:1.5.0'
+    //releaseApi 'com.github.markzhai:blockcanary-no-op:1.5.0'
+
+    api project(':SDK')
+    implementation project(':Framework:Resource')
+    implementation project(':MallApp:MallResource')
+
+    androidTestImplementation"androidx.test.espresso:espresso-core:3.2.0"
+    testImplementation "junit:junit:$junit_version"
+}

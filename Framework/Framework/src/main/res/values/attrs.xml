@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!--自定义View ColorTrackTextView的属性-->
+    <declare-styleable name="ColorTrackTextView">
+        <attr name="originalColor" format="color"/>
+        <attr name="changeColor" format="color"/>
+    </declare-styleable>
+
+    <!--自定义View TrackIndicatorView的属性-->
+    <declare-styleable name="IndicatorView">
+        <attr name="visiableNum" format="integer"/>
+    </declare-styleable>
+
+</resources>
