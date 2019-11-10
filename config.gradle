@@ -175,7 +175,4 @@ ext{
      * 测试依赖
      */
     junit_version = '4.12'
-    support_test_runner_version = '1.0.2'
-    support_test_espresso_espresso_core_version = '3.0.2'
-
 }

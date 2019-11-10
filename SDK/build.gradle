@@ -96,5 +96,5 @@ dependencies {
     api files('libs/dom4j-2.1.0.jar')
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.12"
 }

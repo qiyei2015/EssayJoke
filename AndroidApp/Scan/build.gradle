@@ -29,7 +29,7 @@ dependencies {
 //    //不依赖最新的core包 使用源码
 //    api 'com.google.zxing:core:3.3.3'
 
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }

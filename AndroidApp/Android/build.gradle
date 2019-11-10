@@ -76,7 +76,7 @@ dependencies {
     api project(':AndroidApp:Media')
     api project(':AndroidApp:NDK')
 
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.12"
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 

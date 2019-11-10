@@ -62,7 +62,7 @@ dependencies {
 
     api 'androidx.appcompat:appcompat:1.1.0'
     api "com.makeramen:roundedimageview:$roundedimageview_version"
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.12"
 
     api project(':Framework:Framework')
 }

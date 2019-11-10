@@ -139,5 +139,5 @@ dependencies {
     implementation project(':MallApp:MallResource')
 
     androidTestImplementation"androidx.test.espresso:espresso-core:3.2.0"
-    testImplementation "junit:junit:$junit_version"
+    testImplementation "junit:junit:4.12"
 }
