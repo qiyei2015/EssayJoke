@@ -2,10 +2,11 @@ package com.qiyei.framework.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.qiyei.sdk.titlebar.BaseTitleBar;
 import com.qiyei.framework.R;

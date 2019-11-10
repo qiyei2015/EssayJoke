@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -29,21 +32,24 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation "android.arch.work:work-runtime:1.0.0"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
+    implementation "androidx.work:work-runtime:2.2.0"
+    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+
+    implementation "com.google.android.material:material:1.0.0"
 
     //Dagger2
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_compiler_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_compiler_version"
 
     api project(':Framework:Framework')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
 
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+}

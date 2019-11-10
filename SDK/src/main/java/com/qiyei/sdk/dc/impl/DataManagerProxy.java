@@ -1,7 +1,9 @@
 package com.qiyei.sdk.dc.impl;
 
-import android.support.annotation.NonNull;
+
 import android.text.TextUtils;
+
+import androidx.annotation.NonNull;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.dc.DataObserver;

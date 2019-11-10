@@ -1,7 +1,9 @@
 package com.qiyei.sdk.launchstarter;
 
 import android.os.Looper;
-import android.support.annotation.UiThread;
+
+
+import androidx.annotation.UiThread;
 
 import com.qiyei.sdk.launchstarter.task.ITask;
 import com.qiyei.sdk.launchstarter.task.Task;

@@ -1,6 +1,6 @@
 package com.qiyei.sdk.server.base;
 
-import android.app.Notification;
+
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
@@ -11,7 +11,9 @@ import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.support.annotation.Nullable;
+
+
+import androidx.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.server.base.IMessageListener;

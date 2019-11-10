@@ -1,7 +1,8 @@
 package com.qiyei.framework.viewmodel;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
+
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.qiyei.framework.common.model.MainMenu;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * @email: 1273482124@qq.com
  * @description: 公共列表的ViewModel
  */
-public class CommonListViewModel extends ViewModel{
+public class CommonListViewModel extends ViewModel {
     /**
      * LiveData
      */

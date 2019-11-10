@@ -16,7 +16,7 @@ import com.qiyei.sdk.dc.DataManager
  * 是否已经登录
  */
 fun isLogin():Boolean{
-    return DataManager.getInstance().getString(MallConstant.javaClass, MallConstant.KEY_SP_TOKEN,null) != null
+    return DataManager.getInstance().getString(MallConstant::class.java, MallConstant.KEY_SP_TOKEN,null) != null
 }
 
 fun afterLogin(method: () -> Unit){

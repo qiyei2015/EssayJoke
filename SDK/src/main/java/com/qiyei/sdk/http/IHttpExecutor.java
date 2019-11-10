@@ -1,6 +1,8 @@
 package com.qiyei.sdk.http;
 
-import android.support.v4.app.FragmentManager;
+
+
+import androidx.fragment.app.FragmentManager;
 
 import com.qiyei.sdk.http.base.HttpRequest;
 import com.qiyei.sdk.http.base.INetCallback;

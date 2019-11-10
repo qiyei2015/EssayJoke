@@ -2,7 +2,7 @@ package com.qiyei.mall.ordermanager.ui.activity
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Autowired
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.qiyei.framework.titlebar.CommonTitleBar

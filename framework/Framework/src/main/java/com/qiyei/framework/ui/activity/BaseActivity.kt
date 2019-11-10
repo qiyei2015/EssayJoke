@@ -9,7 +9,8 @@ import android.widget.FrameLayout
 import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.AppManager
 import com.qiyei.framework.titlebar.CommonTitleBar
-import com.trello.rxlifecycle2.components.support.RxAppCompatActivity
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity
+
 import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
@@ -19,7 +20,7 @@ import org.jetbrains.anko.toast
  * @email: 1273482124@qq.com
  * @description: 所有Activity基类
  */
-abstract class BaseActivity :RxAppCompatActivity(), View.OnClickListener{
+abstract class BaseActivity : RxAppCompatActivity(), View.OnClickListener{
 
     private var preTime:Long = 0
 

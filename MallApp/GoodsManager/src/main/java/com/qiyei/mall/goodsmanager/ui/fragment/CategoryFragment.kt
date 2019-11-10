@@ -1,9 +1,10 @@
 package com.qiyei.mall.goodsmanager.ui.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,10 +22,8 @@ import com.qiyei.mall.goodsmanager.mvp.view.ICategoryManagerView
 import com.qiyei.mall.goodsmanager.ui.activity.GoodsListActivity
 import com.qiyei.mall.goodsmanager.ui.adapter.FirstCategoryAdapter
 import com.qiyei.mall.goodsmanager.ui.adapter.SecondCategoryAdapter
+import com.qiyei.sdk.util.ToastUtil
 import kotlinx.android.synthetic.main.fragment_category.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
-
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -81,7 +80,7 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
      */
     override fun onCategoryResult(result: MutableList<Category>?) {
         if (result == null || result.size == 0){
-            toast("获取分类失败")
+            ToastUtil.showLongToast("获取分类失败")
             //没有数据
             mTopCategoryImageView.visibility = View.INVISIBLE
             mCategoryTitleTextView.visibility = View.INVISIBLE
@@ -125,7 +124,9 @@ class CategoryFragment : BaseMVPFragment<CategoryManagerPresenter>(),ICategoryMa
         mSecondCategoryRecyclerView.layoutManager = girdLayout
         mSecondCategoryRecyclerView.adapter = mSecondCategoryAdapter
         mSecondCategoryAdapter.setOnItemClickListener { view, t, position ->
-            startActivity<GoodsListActivity>(GoodsConstant.KEY_CATEGORY_ID to t.id)
+            val intent:Intent = Intent(context,GoodsListActivity::class.java)
+            intent.putExtra(GoodsConstant.KEY_CATEGORY_ID,t.id)
+            startActivity(intent)
         }
 
     }

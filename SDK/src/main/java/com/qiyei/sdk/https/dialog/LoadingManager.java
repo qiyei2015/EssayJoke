@@ -1,8 +1,10 @@
 package com.qiyei.sdk.https.dialog;
 
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.util.Log;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
  * @author Created by qiyei2015 on 2017/10/25.

@@ -69,7 +69,7 @@
                 android:text="自营"
                 android:drawableLeft="@drawable/icon_shop"
                 android:drawablePadding="@dimen/common_padding_small"/>
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/mOrderGoodsRv"
                 android:layout_height="wrap_content"
                 style="@style/commonRecyclerView"/>

@@ -1,7 +1,9 @@
 package com.qiyei.sdk.launchstarter.task;
 
 import android.os.Process;
-import android.support.v4.os.TraceCompat;
+
+
+import androidx.core.os.TraceCompat;
 
 import com.qiyei.sdk.launchstarter.LauncherManager;
 

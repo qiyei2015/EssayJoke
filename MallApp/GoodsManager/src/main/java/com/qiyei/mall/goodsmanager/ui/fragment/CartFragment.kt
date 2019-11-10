@@ -2,7 +2,7 @@ package com.qiyei.mall.ordermanager.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,8 +29,9 @@ import com.qiyei.provider.router.RouterMallConstant
 import com.qiyei.provider.service.mall.IGoodsManagerService
 import com.qiyei.provider.service.mall.MallServiceConstant
 import com.qiyei.sdk.log.LogManager
+import com.qiyei.sdk.util.ToastUtil
 import kotlinx.android.synthetic.main.fragment_cart.*
-import org.jetbrains.anko.support.v4.toast
+
 
 
 /**
@@ -117,7 +118,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
 
     override fun onDeleteCartList(result: Boolean) {
         LogManager.i(getTAG(), "result:$result")
-        toast("删除成功")
+        ToastUtil.showLongToast("删除成功")
         loadData()
     }
 
@@ -230,7 +231,7 @@ class CartFragment : BaseMVPFragment<CartManagerPresenter>(),ICartManagerView {
                     it.isSelected
                 }
         if (list.isEmpty()) {
-            toast("请选择商品")
+            ToastUtil.showLongToast("请选择商品")
             return
         }
         val accountList: MutableList<CartGoods> = arrayListOf()

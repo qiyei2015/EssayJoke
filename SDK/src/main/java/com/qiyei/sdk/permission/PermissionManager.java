@@ -4,10 +4,12 @@ package com.qiyei.sdk.permission;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
+
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.qiyei.sdk.log.LogManager;
 
@@ -69,7 +71,7 @@ public class PermissionManager {
      * @param requestCode
      * @param permissions
      */
-    public static void requestPermission(Fragment fragment , int requestCode,String[] permissions){
+    public static void requestPermission(Fragment fragment , int requestCode, String[] permissions){
         PermissionManager manager = new PermissionManager(fragment,requestCode,permissions);
         manager.request();
     }
@@ -108,7 +110,7 @@ public class PermissionManager {
      * @param permissions
      * @param grantResults
      */
-    public static void onRequestPermissionsResult(Object object,int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
+    public static void onRequestPermissionsResult(Object object, int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         String[] noApplyPermissions = getNoApplyPermissions(object,permissions);
         if (noApplyPermissions == null){
             LogManager.e(PermissionConstant.TAG,"onRequestPermissionsResult(),noApplyPermissions is null");

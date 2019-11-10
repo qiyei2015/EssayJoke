@@ -2,11 +2,12 @@ package com.qiyei.sdk.http;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.LruCache;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.qiyei.sdk.http.base.IHttpCallback;
 import com.qiyei.sdk.http.base.IHttpEngine;

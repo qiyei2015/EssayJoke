@@ -2,7 +2,7 @@ package com.qiyei.framework.mvp.presenter
 
 import com.alibaba.android.arouter.launcher.ARouter
 import com.qiyei.framework.mvp.view.IBaseView
-import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle3.LifecycleProvider
 import javax.inject.Inject
 
 /**

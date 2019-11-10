@@ -1,7 +1,9 @@
 package com.qiyei.sdk.https;
 
-import android.support.v4.app.FragmentManager;
 
+
+
+import androidx.fragment.app.FragmentManager;
 
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.HttpRequest;
@@ -34,7 +36,7 @@ public interface IHttpExecutor {
      * @param <R> 响应泛型参数
      * @return 该任务的taskId
      */
-    <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener);
+    <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener);
 
     /**
      * 执行https请求

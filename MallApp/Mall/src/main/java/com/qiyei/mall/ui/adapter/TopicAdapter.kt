@@ -1,10 +1,11 @@
 package com.qiyei.mall.ui.adapter
 
 import android.content.Context
-import android.support.v4.view.PagerAdapter
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager.widget.PagerAdapter
 import com.qiyei.framework.extend.loadUrl
 import com.qiyei.mall.R
 import com.qiyei.sdk.log.LogManager

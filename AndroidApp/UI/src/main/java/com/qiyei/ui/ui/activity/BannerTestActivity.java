@@ -2,13 +2,15 @@ package com.qiyei.ui.ui.activity;
 
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.sdk.http.HttpManager;

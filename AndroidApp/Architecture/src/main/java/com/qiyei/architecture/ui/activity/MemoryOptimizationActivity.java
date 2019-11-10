@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.qiyei.architecture.R;
 

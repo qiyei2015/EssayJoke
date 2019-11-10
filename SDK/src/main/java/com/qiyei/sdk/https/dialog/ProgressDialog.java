@@ -29,7 +29,7 @@ public class ProgressDialog extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.dialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
     }
 
     @Override

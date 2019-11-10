@@ -11,7 +11,7 @@
         android:id="@+id/mMultiStateView"
         style="@style/multi_state_style"
         android:layout_above="@+id/mAddAddressButton">
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/mAddressRecyclerView"
             style="@style/commonRecyclerView"/>
     </com.kennyc.view.MultiStateView>

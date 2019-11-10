@@ -1,17 +1,17 @@
 package com.qiyei.architecture.ui.activity;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 
 import com.qiyei.architecture.R;
 import com.qiyei.sdk.log.LogManager;
 
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.work.Constraints;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkManager;

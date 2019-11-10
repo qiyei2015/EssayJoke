@@ -2,7 +2,7 @@ package com.qiyei.mall.ui.fragment
 
 
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,10 +18,10 @@ import com.qiyei.mall.mvp.view.IHomeFragmentView
 import com.qiyei.mall.ui.adapter.HomeDiscountAdapter
 import com.qiyei.mall.ui.adapter.TopicAdapter
 import com.qiyei.sdk.launchstarter.LauncherManager
+import com.qiyei.sdk.util.ToastUtil
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_home.*
-import org.jetbrains.anko.support.v4.toast
 import me.crosswall.lib.coverflow.CoverFlow
 
 
@@ -79,7 +79,7 @@ class HomeFragment : BaseMVPFragment<HomeFragmentPresenter>(),IHomeFragmentView 
         mHomeBanner.setDelayTime(2000)
         mHomeBanner.setBannerAnimation(Transformer.Accordion)
         mHomeBanner.setOnBannerListener {
-            toast("$it")
+            ToastUtil.showLongToast("$it")
         }
         mHomeBanner.start()
 
@@ -117,7 +117,7 @@ class HomeFragment : BaseMVPFragment<HomeFragmentPresenter>(),IHomeFragmentView 
                 .rotationY(0f)
                 .build()
         mPagerContainer.setPageItemClickListener{ view, position ->
-            toast("$position")
+            ToastUtil.showLongToast("$position")
         }
     }
 }

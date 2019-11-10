@@ -32,14 +32,16 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
-
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     //ARouter
-    api "com.alibaba:arouter-api:$arouter_api_version"
+    api ("com.alibaba:arouter-api:$arouter_api_version", {
+        exclude group: 'com.android.support'
+    })
     annotationProcessor "com.alibaba:arouter-compiler:$arouter_compiler_version"
 
-    api project(':Framework:Framework')
+    implementation project(':Framework:Framework')
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }

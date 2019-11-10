@@ -3,10 +3,12 @@ package com.qiyei.media.ui.activity;
 import android.Manifest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
 
 import com.qiyei.media.R;
 import com.qiyei.media.ui.view.CameraPreview;

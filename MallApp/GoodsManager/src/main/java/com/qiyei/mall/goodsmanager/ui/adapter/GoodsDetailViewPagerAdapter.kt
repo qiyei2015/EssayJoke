@@ -1,9 +1,10 @@
 package com.qiyei.mall.goodsmanager.ui.adapter
 
 import android.content.Context
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+
 import com.qiyei.mall.goodsmanager.ui.fragment.TabDetailFragment
 import com.qiyei.mall.goodsmanager.ui.fragment.TabGoodsFragment
 
@@ -13,7 +14,7 @@ import com.qiyei.mall.goodsmanager.ui.fragment.TabGoodsFragment
  * @email: 1273482124@qq.com
  * @description:
  */
-class GoodsDetailViewPagerAdapter(fragmentManager: FragmentManager,context: Context):FragmentPagerAdapter(fragmentManager) {
+class GoodsDetailViewPagerAdapter(fragmentManager: FragmentManager, context: Context): FragmentPagerAdapter(fragmentManager) {
 
     private val titles = arrayOf("商品","详情")
 

@@ -1,7 +1,7 @@
 package com.qiyei.architecture.ui.viewmodel;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 
 import com.qiyei.architecture.data.bean.Product;

@@ -12,8 +12,8 @@ import com.qiyei.framework.mvp.view.IBaseView
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.sdk.https.dialog.LoadingManager
 import com.qiyei.sdk.log.LogManager
+import com.qiyei.sdk.util.ToastUtil
 import com.qiyei.sdk.util.UUIDUtil
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 /**
@@ -66,7 +66,7 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
     }
 
     override fun onError(text: String) {
-        toast(text)
+        ToastUtil.showLongToast(text)
     }
 
     override fun onClick(view: View) {
@@ -75,7 +75,6 @@ abstract class BaseMVPFragment<T:BasePresenter<*>>:BaseFragment(),IBaseView {
 
     override fun onDestroy() {
         super.onDestroy()
-//        if (Bu)
     }
 
     /**

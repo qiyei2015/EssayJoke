@@ -8,6 +8,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
+kapt {
+    arguments {
+        arg("AROUTER_MODULE_NAME", project.getName())
+    }
+}
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -19,7 +24,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 
     buildTypes {
@@ -34,12 +43,9 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
-    implementation "com.android.support.constraint:constraint-layout:$constraint_layout_version"
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation "androidx.recyclerview:recyclerview:1.0.0"
 
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
@@ -49,20 +55,25 @@ dependencies {
     implementation "com.github.Kennyc1012:MultiStateView:$multi_state_view_version"
 
     //FlowLayout 流式布局，自动计算宽度
-    api "com.zhy:flowlayout-lib:1.0.3"
+    api ("com.zhy:flowlayout-lib:1.0.3", {
+        exclude group: 'com.android.support'
+    })
+
     //BadgeView
     api 'q.rorbin:badgeview:1.1.2'
     //数组按钮？
-    api 'ren.qinc.numberbutton:numberbutton:0.0.1'
+    api ('ren.qinc.numberbutton:numberbutton:0.0.1', {
+        exclude group: 'com.android.support'
+    })
 
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
     api project(':Framework:Provider')
 
     api project(':Framework:Framework')
-}
-kapt {
-    arguments {
-        arg("AROUTER_MODULE_NAME", project.getName())
-    }
+
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
+
 }

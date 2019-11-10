@@ -9,7 +9,9 @@ import android.content.ServiceConnection;
 import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
+
+
+import androidx.annotation.Nullable;
 
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.notification.NotificationManagerEx;

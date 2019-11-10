@@ -2,7 +2,8 @@ package com.qiyei.sdk.https.server;
 
 import android.content.Context;
 
-import android.support.v4.app.FragmentManager;
+
+import androidx.fragment.app.FragmentManager;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.https.IHttpExecutor;

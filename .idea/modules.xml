@@ -7,7 +7,6 @@
       <module fileurl="file://$PROJECT_DIR$/AndroidApp/Architecture/Architecture.iml" filepath="$PROJECT_DIR$/AndroidApp/Architecture/Architecture.iml" />
       <module fileurl="file://$PROJECT_DIR$/EssayJoke.iml" filepath="$PROJECT_DIR$/EssayJoke.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/EssayJoke-Framework.iml" filepath="$PROJECT_DIR$/Framework/EssayJoke-Framework.iml" />
-      <module fileurl="file://$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" filepath="$PROJECT_DIR$/EssayJokeApp/EssayJokeApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/Framework/Framework-Framework.iml" filepath="$PROJECT_DIR$/Framework/Framework/Framework-Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" filepath="$PROJECT_DIR$/MallApp/GoodsManager/GoodsManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/Framework/IOC-Annotation/IOC-Annotation.iml" filepath="$PROJECT_DIR$/Framework/IOC-Annotation/IOC-Annotation.iml" />

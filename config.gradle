@@ -20,8 +20,8 @@ ext{
      */
     common = [
             compileSdkVersion: 29,
-            buildToolsVersion: '28.0.3',
-            minSdkVersion    : 21,
+            buildToolsVersion: '29.0.2',
+            minSdkVersion    : 23,
             targetSdkVersion : 28,
     ]
 
@@ -108,8 +108,8 @@ ext{
      */
     auto_service_version = '1.0-rc4'
     gson_version = '2.8.0'
-    dagger_version =  '2.16'
-    dagger_compiler_version =  '2.16'
+    dagger_version =  '2.25.2'
+    dagger_compiler_version =  '2.25.2'
 
     /**
      * Facebook 指定版本
@@ -132,11 +132,12 @@ ext{
     rxjava_version = '2.2.2'
     rxandroid_version = '2.1.0'
     rxkotlin_version = '2.3.0'
-    rxlifecycle_version = '2.2.2'
+
+    rxlifecycle_version = '3.1.0'
     /**
      * Glide
      */
-    glide_version = '3.7.0'
+    glide_version = '4.10.0'
 
     /**
      * alibaba
@@ -144,8 +145,8 @@ ext{
     //热修复
     hotfix_version = '3.1.3'
     //ARouter
-    arouter_compiler_version = '1.2.1'
-    arouter_api_version = '1.4.0'
+    arouter_compiler_version = '1.2.2'
+    arouter_api_version = '1.5.0'
 
     // ?
     roundedimageview_version = '2.2.1'

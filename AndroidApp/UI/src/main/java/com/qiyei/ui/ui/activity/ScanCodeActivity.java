@@ -3,8 +3,9 @@ package com.qiyei.ui.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.zxing.client.android.CaptureActivity;
 
@@ -36,7 +37,7 @@ public class ScanCodeActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
             case REQUEST_CODE:
                 if (resultCode == Activity.RESULT_OK){

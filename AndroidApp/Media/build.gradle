@@ -25,20 +25,17 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation "androidx.room:room-runtime:2.2.1"
+//    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
 
-    implementation "android.arch.lifecycle:runtime:$lifecycle_runtime_version"
-    implementation "android.arch.lifecycle:extensions:$lifecycle_extensions_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    
+    implementation project(':Framework:Framework')
 
-    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_compiler_version"
-    implementation "android.arch.persistence.room:runtime:$room_runtime_version"
-
-
-    implementation "com.android.support:appcompat-v7:$appcompat_v7_version"
     testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "com.android.support.test:runner:$support_test_runner_version"
-    androidTestImplementation "com.android.support.test.espresso:espresso-core:$support_test_espresso_espresso_core_version"
-
-
-    api project(':Framework:Framework')
-
+    androidTestImplementation "androidx.test:runner:1.2.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }

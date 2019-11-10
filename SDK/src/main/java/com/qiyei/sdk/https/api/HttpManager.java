@@ -1,8 +1,7 @@
 package com.qiyei.sdk.https.api;
 
 
-import android.support.v4.app.FragmentManager;
-
+import androidx.fragment.app.FragmentManager;
 
 import com.qiyei.sdk.https.IHttpExecutor;
 import com.qiyei.sdk.https.server.HttpServerProxy;
@@ -49,7 +48,7 @@ public class HttpManager implements IHttpExecutor {
      * @return 该任务的taskId
      */
     @Override
-    public <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request,IHttpListener<R> listener){
+    public <T,R> String execute(FragmentManager fragmentManager, HttpRequest<T> request, IHttpListener<R> listener){
         return mProxy.execute(fragmentManager,request,listener);
     }
 

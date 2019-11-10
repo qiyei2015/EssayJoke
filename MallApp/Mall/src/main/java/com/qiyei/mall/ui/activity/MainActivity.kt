@@ -4,12 +4,12 @@ package com.qiyei.mall.ui.activity
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
+import androidx.core.content.ContextCompat
+
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.mall.R
 import com.qiyei.sdk.permission.PermissionConstant
 import com.qiyei.sdk.permission.PermissionManager
-import org.jetbrains.anko.appcompat.v7.Appcompat
 import org.jetbrains.anko.startActivity
 
 class MainActivity : BaseActivity() {

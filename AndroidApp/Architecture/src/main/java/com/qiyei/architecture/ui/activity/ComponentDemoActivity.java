@@ -1,14 +1,15 @@
 package com.qiyei.architecture.ui.activity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
+
 import android.view.View;
 
-import com.alibaba.android.arouter.facade.annotation.Autowired;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.qiyei.architecture.R;
 
 

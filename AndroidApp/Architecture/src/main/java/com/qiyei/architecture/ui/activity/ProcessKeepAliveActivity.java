@@ -1,9 +1,11 @@
 package com.qiyei.architecture.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.qiyei.architecture.R;
 import com.qiyei.architecture.ui.service.RemoteService;

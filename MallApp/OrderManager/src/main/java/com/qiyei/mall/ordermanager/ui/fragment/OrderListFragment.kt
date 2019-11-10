@@ -1,8 +1,9 @@
 package com.qiyei.mall.ordermanager.ui.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,9 +23,9 @@ import com.qiyei.mall.ordermanager.ui.activity.OrderDetailActivity
 import com.qiyei.mall.ordermanager.ui.adapter.OrderListAdapter
 import com.qiyei.provider.router.RouteMall
 import com.qiyei.provider.router.RouterMallConstant
+import com.qiyei.sdk.util.ToastUtil
 import kotlinx.android.synthetic.main.fragment_order_list.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
+
 
 
 /**
@@ -83,25 +84,25 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
 
     override fun onSubmitOrder(result: Boolean) {
         if (result){
-            toast("提交成功")
+            ToastUtil.showLongToast("提交成功")
         } else {
-            toast("提交失败")
+            ToastUtil.showLongToast("提交失败")
         }
     }
 
     override fun onConfirmOrder(result: Boolean) {
         if (result){
-            toast("确认成功")
+            ToastUtil.showLongToast("确认成功")
         } else {
-            toast("确认失败")
+            ToastUtil.showLongToast("确认失败")
         }
     }
 
     override fun onCancelOrder(result: Boolean) {
         if (result){
-            toast("取消成功")
+            ToastUtil.showLongToast("取消成功")
         } else {
-            toast("取消失败")
+            ToastUtil.showLongToast("取消失败")
         }
     }
 
@@ -157,6 +158,8 @@ class OrderListFragment : BaseMVPFragment<OrderListPresenter>(),IOrderListView {
     }
 
     private fun handleItemClick(item:Order){
-        startActivity<OrderDetailActivity>(RouterMallConstant.KEY_ORDER_ID to item.id)
+        val intent = Intent(mContext,OrderDetailActivity::class.java)
+        intent.putExtra(RouterMallConstant.KEY_ORDER_ID,item.id)
+        startActivity(intent)
     }
 }

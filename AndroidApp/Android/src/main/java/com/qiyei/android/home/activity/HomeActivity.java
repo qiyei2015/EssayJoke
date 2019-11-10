@@ -1,9 +1,11 @@
 package com.qiyei.android.home.activity;
 
-import android.support.annotation.Nullable;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
+
+import androidx.annotation.Nullable;
 
 import com.qiyei.android.R;
 import com.qiyei.architecture.ui.fragment.ArchitectureFragment;

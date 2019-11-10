@@ -41,7 +41,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"/>
     </RelativeLayout>
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/mOrderGoodsRecyclerView"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_margin"

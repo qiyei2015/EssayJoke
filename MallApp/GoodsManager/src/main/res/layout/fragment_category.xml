@@ -12,13 +12,13 @@
         android:layout_height="match_parent"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             style="@style/commonRecyclerView"
             android:id="@+id/mFirstCategoryRecyclerView"
             android:layout_weight="2">
-        </android.support.v7.widget.RecyclerView>
+        </androidx.recyclerview.widget.RecyclerView>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,7 +47,7 @@
             <com.kennyc.view.MultiStateView
                 android:id="@+id/mMultiStateView"
                 style="@style/multi_state_style">
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/mSecondCategoryRecyclerView"
                     android:paddingLeft="@dimen/common_padding_small"
                     android:paddingTop="@dimen/common_padding_small"

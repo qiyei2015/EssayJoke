@@ -3,15 +3,16 @@ package com.qiyei.framework.activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.LayoutInflaterCompat;
-import android.support.v4.view.LayoutInflaterFactory;
-import android.support.v4.view.ViewCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewParent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.view.LayoutInflaterCompat;
+import androidx.core.view.LayoutInflaterFactory;
+import androidx.core.view.ViewCompat;
 
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.framework.skin.SkinResources;

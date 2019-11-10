@@ -3,7 +3,8 @@ package com.qiyei.sdk.database.engine.sqlite;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v4.util.ArrayMap;
+import android.util.ArrayMap;
+
 
 import com.qiyei.sdk.database.DB;
 import com.qiyei.sdk.database.IDatabaseSession;

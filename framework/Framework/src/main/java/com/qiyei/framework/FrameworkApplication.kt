@@ -3,7 +3,7 @@ package com.qiyei.framework
 
 import android.content.Context
 import android.os.Debug
-import android.support.multidex.MultiDexApplication
+import androidx.multidex.MultiDexApplication
 import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
 import com.qiyei.framework.injection.module.AppModule

@@ -5,7 +5,7 @@ import android.content.Context
 import com.qiyei.framework.injection.module.ActivityModule
 import com.qiyei.framework.injection.module.LifecycleProviderModule
 import com.qiyei.framework.injection.scope.ActivityScope
-import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle3.LifecycleProvider
 import dagger.Component
 
 

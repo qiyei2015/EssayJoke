@@ -30,10 +30,11 @@ import com.qiyei.mall.goodsmanager.ui.activity.GoodsDetailActivity
 import com.qiyei.mall.goodsmanager.view.GoodsSkuPopView
 import com.qiyei.provider.service.mall.IGoodsManagerService
 import com.qiyei.provider.service.mall.MallServiceConstant
+import com.qiyei.sdk.util.ToastUtil
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
 import kotlinx.android.synthetic.main.fragment_goods_tab.*
-import org.jetbrains.anko.support.v4.toast
+
 
 
 /**
@@ -146,7 +147,7 @@ class TabGoodsFragment : BaseMVPFragment<GoodsSkuPresenter>(),IGoodsSkuView {
         mGoodsDetailBanner.setDelayTime(2000)
         mGoodsDetailBanner.setBannerAnimation(Transformer.Accordion)
         mGoodsDetailBanner.setOnBannerListener {
-            toast("$it")
+            ToastUtil.showLongToast("$it")
         }
         mSkuViewLayout.setOnClickListener(this)
     }

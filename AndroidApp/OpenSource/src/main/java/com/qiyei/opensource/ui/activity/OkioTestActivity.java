@@ -1,8 +1,9 @@
 package com.qiyei.opensource.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.qiyei.opensource.R;
 import com.qiyei.sdk.log.LogManager;

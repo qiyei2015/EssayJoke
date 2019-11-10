@@ -2,11 +2,10 @@ package com.qiyei.framework.titlebar;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import com.google.android.material.tabs.TabLayout;
 import android.view.View;
 import android.view.ViewGroup;
-
+import androidx.viewpager.widget.ViewPager;
 import com.qiyei.sdk.titlebar.BaseTitleParams;
 
 /**

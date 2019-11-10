@@ -1,10 +1,12 @@
 package com.qiyei.ui.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.qiyei.sdk.dialog.BaseDialog;
 import com.qiyei.sdk.dialog.DialogListener;

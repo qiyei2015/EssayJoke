@@ -1,8 +1,9 @@
 package com.qiyei.mall.ordermanager.ui.activity
 
 import android.os.Bundle
-import android.support.design.widget.TabLayout
+
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.google.android.material.tabs.TabLayout
 import com.qiyei.framework.titlebar.CommonTitleBar
 import com.qiyei.framework.ui.activity.BaseActivity
 import com.qiyei.mall.ordermanager.R

@@ -2,13 +2,15 @@ package com.qiyei.sdk.https.dialog;
 
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.DialogFragment;
 
 import com.qiyei.sdk.R;
 import com.qiyei.sdk.view.ProgressView;
@@ -33,7 +35,7 @@ public class ProgressDialogV4 extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setStyle(android.support.v4.app.DialogFragment.STYLE_NORMAL, R.style.dialog);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.dialog);
     }
 
     @Override

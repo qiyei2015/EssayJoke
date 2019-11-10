@@ -1,6 +1,7 @@
 package com.qiyei.mall.usermanager.ui.fragment
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,10 +23,11 @@ import com.qiyei.mall.usermanager.ui.activity.UserInfoActivity
 import com.qiyei.provider.common.afterLogin
 import com.qiyei.provider.common.isLogin
 import com.qiyei.provider.router.RouteMall
+import com.qiyei.provider.router.RouterMallConstant
 import com.qiyei.sdk.dc.DataManager
+import com.qiyei.sdk.util.ToastUtil
 import kotlinx.android.synthetic.main.fragment_user.*
-import org.jetbrains.anko.support.v4.startActivity
-import org.jetbrains.anko.support.v4.toast
+
 
 /**
  * @author Created by qiyei2015 on 2018/10/5.
@@ -64,7 +66,8 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
         when (view.id) {
             R.id.mUserIconImageView, R.id.mUserNameTextView -> {
                 afterLogin {
-                    startActivity<UserInfoActivity>()
+                    val intent = Intent(mContext,UserInfoActivity::class.java)
+                    startActivity(intent)
                 }
             }
 
@@ -99,10 +102,11 @@ class UserFragment : BaseMVPFragment<UserManagerPresenter>(),IUserManagerView {
                 }
             }
             R.id.mShareTextView -> {
-                toast(R.string.coming_soon_tip)
+                ToastUtil.showLongToast(getString(R.string.coming_soon_tip))
             }
             R.id.mSettingTextView -> {
-                startActivity<SettingActivity>()
+                val intent = Intent(mContext,SettingActivity::class.java)
+                startActivity(intent)
             }
         }
     }

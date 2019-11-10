@@ -1,7 +1,8 @@
 package com.qiyei.architecture.data.repository;
 
-import android.arch.lifecycle.MutableLiveData;
 
+
+import androidx.lifecycle.MutableLiveData;
 
 import com.qiyei.architecture.data.bean.Product;
 import com.qiyei.sdk.util.ToastUtil;

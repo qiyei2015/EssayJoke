@@ -12,7 +12,7 @@ import com.qiyei.framework.rx.BaseFunction
 import com.qiyei.framework.rx.BaseFunctionBoolean
 import com.qiyei.framework.rx.BaseObserver
 import com.qiyei.sdk.image.ImageManager
-import com.trello.rxlifecycle2.LifecycleProvider
+import com.trello.rxlifecycle3.LifecycleProvider
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,7 +27,7 @@ import io.reactivex.schedulers.Schedulers
 /**
  * 扩展Observable执行,部分公共逻辑进行封装
  */
-fun <T> Observable<T>.execute(observer:BaseObserver<T>,lifecycleProvider:LifecycleProvider<*>){
+fun <T> Observable<T>.execute(observer:BaseObserver<T>,lifecycleProvider: LifecycleProvider<*>){
     this.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .compose(lifecycleProvider.bindToLifecycle())
