@@ -14,6 +14,7 @@ import com.qiyei.framework.ui.fragment.FragmentHelper;
 import com.qiyei.media.ui.fragment.MediaFragment;
 import com.qiyei.ndk.ui.fragment.NDKFragment;
 import com.qiyei.opensource.ui.fragment.OpenSourceFragment;
+import com.qiyei.performance.ui.fragment.PerformanceFragment;
 import com.qiyei.sdk.ioc.ViewById;
 import com.qiyei.ui.ui.fragment.UIFragment;
 
@@ -31,6 +32,8 @@ public class HomeActivity extends BaseSkinActivity {
     private RadioButton mOpenSourceButton;
     @ViewById(R.id.architecture_rb)
     private RadioButton mArchitectureButton;
+    @ViewById(R.id.performance_rb)
+    private RadioButton mPerformanceButton;
     @ViewById(R.id.media_rb)
     private RadioButton mMediaButton;
     @ViewById(R.id.ndk_rb)
@@ -42,6 +45,7 @@ public class HomeActivity extends BaseSkinActivity {
     private OpenSourceFragment mOpenSourceFragment;
     private NDKFragment mNDKFragment;
     private ArchitectureFragment mArchitectureFragment;
+    private PerformanceFragment mPerformanceFragment;
     private MediaFragment mMediaFragment;
 
     @Override
@@ -66,6 +70,7 @@ public class HomeActivity extends BaseSkinActivity {
         mUIButton.setOnClickListener(this);
         mOpenSourceButton.setOnClickListener(this);
         mArchitectureButton.setOnClickListener(this);
+        mPerformanceButton.setOnClickListener(this);
         mMediaButton.setOnClickListener(this);
         mNDKButton.setOnClickListener(this);
 
@@ -95,6 +100,12 @@ public class HomeActivity extends BaseSkinActivity {
                     mArchitectureFragment = new ArchitectureFragment();
                 }
                 mFragmentHelper.switchFragment(mArchitectureFragment);
+                break;
+            case R.id.performance_rb:
+                if (mPerformanceFragment == null){
+                    mPerformanceFragment = new PerformanceFragment();
+                }
+                mFragmentHelper.switchFragment(mPerformanceFragment);
                 break;
             case R.id.media_rb:
                 if (mMediaFragment == null){

@@ -41,6 +41,13 @@
             android:drawableTop="@drawable/ic_tab_discovery"
             android:text="@string/architecture_page" />
 
+
+        <RadioButton
+            android:id="@+id/performance_rb"
+            style="@style/home_bottom_tab_style"
+            android:drawableTop="@drawable/ic_tab_discovery"
+            android:text="@string/performance_page" />
+
         <RadioButton
             android:id="@+id/media_rb"
             style="@style/home_bottom_tab_style"
