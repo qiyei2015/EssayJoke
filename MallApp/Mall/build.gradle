@@ -37,12 +37,46 @@ android {
         multiDexEnabled true
     }
 
-    buildTypes {
+
+    /**
+     * 签名配置
+     */
+    signingConfigs {
+        //正式版签名
         release {
+            keyAlias proj_keyAlias
+            keyPassword proj_keyPassword
+            storeFile file(proj_storeFile)
+            storePassword proj_storePassword
+        }
+
+        //调试版签名
+        debug {
+
+        }
+    }
+
+    buildTypes {
+        debug {
+            // 对齐zip
+            zipAlignEnabled  = true
+            // 删除无用资源
+            shrinkResources  = false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        release {
+            // 对齐zip
+            zipAlignEnabled  = true
+            // 删除无用资源
+            shrinkResources  = false
+            minifyEnabled false
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
     }
+
     //指定jdk版本
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -86,4 +120,27 @@ dependencies {
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 
+}
+
+def releaseTime() {
+    // return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC")) //年月日
+    return new Date().format("yyyy-MM-dd-HH-mm-ss", TimeZone.getTimeZone("GMT+8:00")) //年月日时分秒
+}
+
+android.applicationVariants.all { variant ->
+    //如果是release版本
+    if (variant.buildType.name == 'release') {
+        variant.outputs.all{ output ->
+            //查找所有的apk
+            if (outputFileName.endsWith('.apk')) {
+                def index = outputFileName.indexOf(".")
+                def prefix = outputFileName.substring(0,index)
+                def suffix = outputFileName.substring(index)
+                //重新定义apk的名称: 工程名 + 版本号 + 生成时间
+                def fileName = prefix + "_V${android.defaultConfig.versionName}_${releaseTime()}" + suffix
+                //outputFile.parent参数可以改成你你想要的发布路径
+                outputFileName = fileName
+            }
+        }
+    }
 }
