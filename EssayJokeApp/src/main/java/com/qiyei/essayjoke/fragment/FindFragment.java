@@ -1,7 +1,8 @@
 package com.qiyei.essayjoke.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -12,11 +13,13 @@ import android.widget.ImageView;
 
 
 import com.qiyei.essayjoke.R;
+
 import com.qiyei.essayjoke.adapter.FindAdapter;
 import com.qiyei.essayjoke.model.DiscoverListResult;
 import com.qiyei.framework.ui.fragment.BaseFragment;
 import com.qiyei.sdk.http.HttpManager;
 import com.qiyei.sdk.http.base.HttpRequest;
+
 import com.qiyei.sdk.http.base.INetCallback;
 import com.qiyei.sdk.http.base.RequestMethod;
 import com.qiyei.sdk.image.ImageManager;
@@ -46,7 +49,7 @@ public class FindFragment extends BaseFragment {
     @ViewById(R.id.recycler_view)
     private XRecyclerView mXRecyclerView;
 
-    private List<DiscoverListResult.DataBean.CategoriesBean.CategoryListBean> mDatas;
+    private List<DiscoverListResult.CategoriesBean.CategoryListBean> mDatas;
 
     private FindAdapter mAdapter;
 
@@ -88,9 +91,9 @@ public class FindFragment extends BaseFragment {
         new HttpManager().execute(getChildFragmentManager(),buildRequest(), new INetCallback<DiscoverListResult>() {
             @Override
             public void onSuccess(DiscoverListResult result) {
-                LogManager.d(getTAG(),"name --> "+result.getData().getCategories().getName());
-                mAdapter.setDatas(result.getData().getCategories().getCategory_list());
-                initBanner(result.getData().getRotate_banner().getBanners());
+                LogManager.d(getTAG(),"name --> "+result.getCategories().getName());
+                mAdapter.setDatas(result.getCategories().getCategory_list());
+                initBanner(result.getRotate_banner().getBanners());
             }
 
             @Override
@@ -146,7 +149,7 @@ public class FindFragment extends BaseFragment {
         return request;
     }
 
-    private void initBanner(final List<DiscoverListResult.DataBean.RotateBannerBean.BannersBean> list){
+    private void initBanner(final List<DiscoverListResult.RotateBannerBean.BannersBean> list){
         mBannerView.setAdapter(new BannerAdapter() {
             @Override
             public int getCount() {

@@ -19,14 +19,14 @@ import java.util.List;
  * Version: 1.0
  * Description:
  */
-public class FindAdapter extends XRecyclerAdapter<DiscoverListResult.DataBean.CategoriesBean.CategoryListBean>{
+public class FindAdapter extends XRecyclerAdapter<DiscoverListResult.CategoriesBean.CategoryListBean>{
 
 
-    public FindAdapter(Context context, List<DiscoverListResult.DataBean.CategoriesBean.CategoryListBean> datas, int layoutId) {
+    public FindAdapter(Context context, List<DiscoverListResult.CategoriesBean.CategoryListBean> datas, int layoutId) {
         super(context, datas, layoutId);
     }
 
-    public FindAdapter(Context context, List<DiscoverListResult.DataBean.CategoriesBean.CategoryListBean> datas, IMultiTypeLayout typeLayout) {
+    public FindAdapter(Context context, List<DiscoverListResult.CategoriesBean.CategoryListBean> datas, IMultiTypeLayout typeLayout) {
         super(context, datas, typeLayout);
     }
 
@@ -35,7 +35,7 @@ public class FindAdapter extends XRecyclerAdapter<DiscoverListResult.DataBean.Ca
     }
 
     @Override
-    public void convert(BaseViewHolder holder, DiscoverListResult.DataBean.CategoriesBean.CategoryListBean item, int position) {
+    public void convert(BaseViewHolder holder, DiscoverListResult.CategoriesBean.CategoryListBean item, int position) {
         holder.setText(R.id.channel_text,item.getName());
         holder.setText(R.id.channel_topic,item.getIntro());
         String numberDescStr = item.getSubscribe_count()+" 订阅 | "+"总帖数 <font color='#FF678D'>"

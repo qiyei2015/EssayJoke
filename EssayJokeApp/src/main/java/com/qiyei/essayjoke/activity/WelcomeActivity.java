@@ -5,21 +5,25 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.qiyei.essayjoke.R;
 import com.qiyei.essayjoke.model.User;
 import com.qiyei.framework.activity.BaseSkinActivity;
 import com.qiyei.sdk.db.DaoSupportFactory;
+
 import com.qiyei.sdk.db.IDaoSupport;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 /**
  * Email: 1273482124@qq.com
