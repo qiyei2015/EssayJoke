@@ -2,7 +2,6 @@ package com.qiyei.android;
 
 
 import android.content.Context;
-import android.os.StrictMode;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.moduth.blockcanary.BlockCanary;
@@ -10,26 +9,58 @@ import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.github.moduth.blockcanary.internal.BlockInfo;
 import com.qiyei.framework.FrameworkApplication;
 import com.qiyei.framework.skin.SkinManager;
-import com.squareup.leakcanary.LeakCanary;
+import com.qiyei.performance.bootstarter.TaskDispatcher;
+import com.qiyei.performance.bootstarter.task.MainTask;
+import com.qiyei.performance.bootstarter.task.Task;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/8.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/5/8.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description:
  */
 public class AndroidApplication extends FrameworkApplication {
 
     @Override
     public void onCreate() {
         super.onCreate();
-        initARouter();
-        initBlockCanary();
-        initSkinManager();
+
+        TaskDispatcher.init(this);
+        TaskDispatcher.getInstance().addTask(new MainTask() {
+            @Override
+            public String getName() {
+                return "initARouter";
+            }
+
+            @Override
+            public void run() {
+                initARouter();
+            }
+        }).addTask(new Task() {
+            @Override
+            public String getName() {
+                return "initBlockCanary";
+            }
+
+            @Override
+            public void run() {
+                initBlockCanary();
+            }
+        }).addTask(new Task() {
+            @Override
+            public String getName() {
+                return "initSkinManager";
+            }
+
+            @Override
+            public void run() {
+                initSkinManager();
+            }
+        }).start();
     }
 
     private void initBlockCanary() {
