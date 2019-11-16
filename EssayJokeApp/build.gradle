@@ -33,7 +33,7 @@ android {
         release {
             keyAlias proj_keyAlias
             keyPassword proj_keyPassword
-            storeFile file(proj_storeFile)
+            storeFile file(project.getRootDir().getAbsolutePath() + proj_storeFile)
             storePassword proj_storePassword
         }
 
@@ -41,7 +41,7 @@ android {
         debug {
             keyAlias proj_keyAlias
             keyPassword proj_keyPassword
-            storeFile file(proj_storeFile)
+            storeFile file(project.getRootDir().getAbsolutePath() + proj_storeFile)
             storePassword proj_storePassword
         }
     }
