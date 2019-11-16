@@ -116,6 +116,13 @@ dependencies {
     //Kotlin RxBus
     api "com.eightbitlab:rxbus:1.0.2"
 
+    // https://github.com/mikepenz/Android-Iconics
+    api "com.mikepenz:iconics-core:4.0.2"
+    api "com.mikepenz:iconics-views:4.0.2"
+    api 'com.mikepenz:google-material-typeface:3.0.1.4.original-kotlin@aar'
+    api 'com.mikepenz:material-design-iconic-typeface:2.2.0.6-kotlin@aar'
+    api 'com.mikepenz:fontawesome-typeface:5.9.0.0-kotlin@aar'
+
     //leakCanary
     debugApi ('com.squareup.leakcanary:leakcanary-android:1.6.3', {
         exclude group: 'com.android.support'
