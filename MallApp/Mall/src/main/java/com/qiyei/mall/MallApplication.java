@@ -5,7 +5,6 @@ import android.os.Debug;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.qiyei.framework.FrameworkApplication;
-import com.qiyei.sdk.launchstarter.LauncherManager;
 import com.qiyei.sdk.log.LogManager;
 
 import org.jetbrains.annotations.Nullable;
@@ -23,7 +22,6 @@ public class MallApplication extends FrameworkApplication {
     @Override
     protected void attachBaseContext(@Nullable Context base) {
         super.attachBaseContext(base);
-        LauncherManager.getDefault().start();
     }
 
     @Override
