@@ -21,7 +21,6 @@ import com.qiyei.mall.ui.fragment.HomeFragment
 import com.qiyei.mall.usermanager.ui.fragment.UserFragment
 import com.qiyei.provider.service.mall.IGoodsManagerService
 import com.qiyei.provider.service.mall.MallServiceConstant
-import com.qiyei.sdk.launchstarter.LauncherManager
 import com.qiyei.sdk.log.LogManager
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -61,7 +60,6 @@ class HomeActivity : BaseActivity() {
         super.onWindowFocusChanged(hasFocus)
 
         LogManager.d("HomeActivity","onWindowFocusChanged")
-        LauncherManager.getDefault().end("onWindowFocusChanged")
     }
 
 

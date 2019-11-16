@@ -59,6 +59,10 @@ android {
         pickFirst 'lib/x86/*.so'
         pickFirst 'lib/x86_64/*.so'
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {

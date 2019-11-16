@@ -52,7 +52,10 @@ android {
 
         //调试版签名
         debug {
-
+            keyAlias proj_keyAlias
+            keyPassword proj_keyPassword
+            storeFile file(proj_storeFile)
+            storePassword proj_storePassword
         }
     }
 
@@ -63,6 +66,7 @@ android {
             // 删除无用资源
             shrinkResources  = false
             minifyEnabled false
+            signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -81,6 +85,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 

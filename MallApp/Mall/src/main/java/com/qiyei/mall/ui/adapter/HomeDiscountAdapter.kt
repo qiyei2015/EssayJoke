@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.ViewTreeObserver
 import com.qiyei.mall.R
 import com.qiyei.sdk.image.ImageManager
-import com.qiyei.sdk.launchstarter.LauncherManager
 import com.qiyei.sdk.view.xrecycler.base.BaseRecyclerAdapter
 import com.qiyei.sdk.view.xrecycler.base.BaseViewHolder
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -30,7 +29,6 @@ class HomeDiscountAdapter(context: Context,datas:List<String>):BaseRecyclerAdapt
             hasStart = true
             holder.itemView.mDiscountAfterTextView.viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
                 override fun onPreDraw(): Boolean {
-                    LauncherManager.getDefault().end("holder.itemView onPreDraw")
                     holder.itemView.mDiscountAfterTextView.viewTreeObserver.removeOnPreDrawListener (this)
                     return true
                 }

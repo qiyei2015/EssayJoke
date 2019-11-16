@@ -17,7 +17,6 @@ import com.qiyei.mall.mvp.presenter.HomeFragmentPresenter
 import com.qiyei.mall.mvp.view.IHomeFragmentView
 import com.qiyei.mall.ui.adapter.HomeDiscountAdapter
 import com.qiyei.mall.ui.adapter.TopicAdapter
-import com.qiyei.sdk.launchstarter.LauncherManager
 import com.qiyei.sdk.util.ToastUtil
 import com.youth.banner.BannerConfig
 import com.youth.banner.Transformer
@@ -95,7 +94,6 @@ class HomeFragment : BaseMVPFragment<HomeFragmentPresenter>(),IHomeFragmentView 
                 HOME_DISCOUNT_TWO, HOME_DISCOUNT_THREE, HOME_DISCOUNT_FOUR, HOME_DISCOUNT_FIVE))
         mScanImageView.viewTreeObserver.addOnPreDrawListener(object :ViewTreeObserver.OnPreDrawListener{
             override fun onPreDraw(): Boolean {
-                LauncherManager.getDefault().end("mScanImageView onPreDraw")
                 mScanImageView.viewTreeObserver.removeOnPreDrawListener(this)
                 return true
             }
