@@ -22,17 +22,18 @@ import com.qiyei.framework.skin.listener.ISkinChangeListener;
 import com.qiyei.framework.skin.support.SkinAppCompatViewInflater;
 import com.qiyei.framework.skin.support.SkinAttrsSupport;
 import com.qiyei.sdk.base.BaseActivity;
+import com.qiyei.sdk.log.LogManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Email: 1273482124@qq.com
- * Created by qiyei2015 on 2017/5/7.
- * Version: 1.0
- * Description:
+ * @author Created by qiyei2015 on 2017/5/7.
+ * @version: 1.0
+ * @email: 1273482124@qq.com
+ * @description: BaseSkinActivity
  */
-public abstract class BaseSkinActivity extends BaseActivity implements LayoutInflaterFactory,ISkinChangeListener{
+public abstract class BaseSkinActivity extends BaseActivity implements LayoutInflater.Factory2,ISkinChangeListener{
     /**
      * 插件换肤的布局加载器
      */
@@ -41,13 +42,13 @@ public abstract class BaseSkinActivity extends BaseActivity implements LayoutInf
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         LayoutInflater layoutInflater = LayoutInflater.from(this);
-        LayoutInflaterCompat.setFactory(layoutInflater,this);
-
+        LayoutInflaterCompat.setFactory2(layoutInflater,this);
         super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(View parent, String name, Context context, AttributeSet attrs){
+        long time = System.nanoTime();
         //拦截到View的创建，获取View之后去解析
         //1. 创建View
         View view = createAppCompatView(parent,name,context,attrs);
@@ -62,8 +63,13 @@ public abstract class BaseSkinActivity extends BaseActivity implements LayoutInf
             // 4.判断一下要不要换肤
             SkinManager.getInstance().checkChangeSkin(skinView);
         }
-
+        LogManager.i(TAG,"create " + name + " cost " + (System.nanoTime() - time)/1000 + " us");
         return view;
+    }
+
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs){
+        return getDelegate().createView(null,name,context,attrs);
     }
 
     /**

@@ -37,6 +37,8 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:$dagger_compiler_version"
     annotationProcessor "com.google.dagger:dagger-android-processor:$dagger_compiler_version"
 
+    implementation "me.weishu:epic:0.8.1-c"
+
     implementation project(':Framework:Framework')
 
     testImplementation 'junit:junit:4.12'

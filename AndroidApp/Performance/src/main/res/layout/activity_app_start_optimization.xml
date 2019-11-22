@@ -19,4 +19,13 @@
         app:layout_constraintRight_toRightOf="parent">
     </TextView>
 
+    <ImageView
+        android:id="@+id/imv"
+        android:layout_width="256dp"
+        android:layout_height="143dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv1" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

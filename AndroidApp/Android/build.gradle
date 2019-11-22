@@ -13,8 +13,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
         //分包
         multiDexEnabled true
+        multiDexKeepProguard file("multiDexKeep.pro")
+
+        //ndk配置
+        ndk {
+            abiFilters 'armeabi-v7a'
+        }
     }
 
     compileOptions {
@@ -136,3 +143,20 @@ android.applicationVariants.all { variant ->
         }
     }
 }
+
+//afterEvaluate {
+//    tasks.matching {
+//        it.name.startsWith('dex')
+//    }.each { dx ->
+//        def listFile = project.rootDir.absolutePath+'/AndroidApp/Android/maindexlist.txt'
+//        if (dx.additionalParameters == null) {
+//            dx.additionalParameters = []
+//        }
+//        //表示当方法数越界时则生成多个dex文件（我的没有越界，貌似也生成了两个）
+//        dx.additionalParameters += '--multi-dex'
+//        //这个指定了listFile中的类（即maindexlist.txt中的类）会打包到主dex中，不过注意下一条。
+//        dx.additionalParameters += '--main-dex-list=' +listFile
+//        //表明只有-main-dex-list所指定的类（在我的配置中，就是app目录下的maindexlist.txt中包含的类）才能打包到主dex中，如果没有这个选项，上个选项就会失效
+//        dx.additionalParameters += '--minimal-main-dex'
+//    }
+//}

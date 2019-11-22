@@ -2,6 +2,8 @@ package com.qiyei.android;
 
 
 import android.content.Context;
+import android.os.StrictMode;
+import android.view.Choreographer;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.moduth.blockcanary.BlockCanary;
@@ -12,6 +14,8 @@ import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.performance.bootstarter.TaskDispatcher;
 import com.qiyei.performance.bootstarter.task.MainTask;
 import com.qiyei.performance.bootstarter.task.Task;
+import com.qiyei.performance.hook.BitmapHook;
+import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -24,6 +28,13 @@ import java.util.List;
  * @description:
  */
 public class AndroidApplication extends FrameworkApplication {
+
+    private static final String TAG = "AndroidApplication";
+
+    private static final long FRAME_INTERVAL = 160L;
+    private static final long FRAME_INTERVAL_NANO = FRAME_INTERVAL * 1000 * 1000;
+    private long mPrevTime;
+    private int mFrameCount;
 
     @Override
     public void onCreate() {
@@ -60,8 +71,84 @@ public class AndroidApplication extends FrameworkApplication {
             public void run() {
                 initSkinManager();
             }
+        }).addTask(new Task() {
+            @Override
+            public String getName() {
+                return "initBitmapHook";
+            }
+
+            @Override
+            public void run() {
+                BitmapHook.start();
+            }
+        }).addTask(new MainTask() {
+            @Override
+            public String getName() {
+                return "initFrameCallback";
+            }
+
+            @Override
+            public void run() {
+                initFrameCallback();
+            }
+        }).addTask(new Task() {
+            @Override
+            public String getName() {
+                return "initStrictMode";
+            }
+
+            @Override
+            public void run() {
+                initStrictMode();
+            }
         }).start();
     }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+    }
+
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+    }
+
+    private void initFrameCallback(){
+//        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
+//            @Override
+//            public void doFrame(long frameTimeNanos) {
+//                if (mPrevTime == 0){
+//                    mPrevTime = frameTimeNanos;
+//                }
+//                long interval = frameTimeNanos - mPrevTime;
+//                //大于一帧
+//                if (interval > FRAME_INTERVAL_NANO){
+//                    double fps = ((double) mFrameCount * 1000 * 1000) / interval * 1000;
+//                    LogManager.d(TAG,"FPS=" + fps);
+//                    mFrameCount = 0;
+//                    mPrevTime = 0;
+//                } else {
+//                    mFrameCount++;
+//                }
+//                Choreographer.getInstance().postFrameCallback(this);
+//            }
+//        });
+    }
+
+    private void initStrictMode(){
+        //使用严格模式，检测内存泄漏
+        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
+                .detectAll()//监测所以内容
+                .penaltyLog()//违规对log日志
+                .build());
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build());
+    }
+
 
     private void initBlockCanary() {
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
@@ -70,12 +157,6 @@ public class AndroidApplication extends FrameworkApplication {
     private void initSkinManager() {
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
-//        //使用严格模式，检测内存泄漏
-//        StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-//                .detectAll()//监测所以内容
-//                .penaltyLog()//违规对log日志
-//                .penaltyDeath()
-//                .build());
     }
 
     private void initARouter() {
