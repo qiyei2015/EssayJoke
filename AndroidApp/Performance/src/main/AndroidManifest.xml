@@ -3,7 +3,10 @@
     package="com.qiyei.performance">
 
     <application>
-        <activity android:name=".ui.activity.AppStartOptimizationActivity"></activity>
+        <activity android:name=".ui.activity.AsyncLayoutInflaterActivity"></activity>
+        <activity android:name=".ui.activity.X2CDemoActivity" />
+        <activity android:name=".ui.activity.ImageViewHookActivity" />
+        <activity android:name=".ui.activity.AppStartOptimizationActivity" />
     </application>
 
 </manifest>

@@ -6,6 +6,9 @@ import android.view.View;
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.performance.ui.activity.AppStartOptimizationActivity;
+import com.qiyei.performance.ui.activity.AsyncLayoutInflaterActivity;
+import com.qiyei.performance.ui.activity.ImageViewHookActivity;
+import com.qiyei.performance.ui.activity.X2CDemoActivity;
 
 
 import java.util.ArrayList;
@@ -27,8 +30,8 @@ public class PerformanceFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 启动优化"};
-    private Class<?>[] clazzs = new Class[]{AppStartOptimizationActivity.class};
+    private String[] names = new String[]{"测试1 启动优化","测试2 ImageView Hook","测试3 AsyncLayoutInflater","测试4 X2CDemo"};
+    private Class<?>[] clazzs = new Class[]{AppStartOptimizationActivity.class, ImageViewHookActivity.class, AsyncLayoutInflaterActivity.class, X2CDemoActivity.class};
 
 
     public PerformanceFragment() {
