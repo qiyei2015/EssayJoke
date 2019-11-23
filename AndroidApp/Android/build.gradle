@@ -18,10 +18,6 @@ android {
         multiDexEnabled true
         multiDexKeepProguard file("multiDexKeep.pro")
 
-        //ndk配置
-        ndk {
-            abiFilters 'armeabi-v7a'
-        }
     }
 
     compileOptions {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Performance</string>
+    <string name="network_stats">统计流量</string>
 </resources>
