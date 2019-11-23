@@ -12,6 +12,7 @@ import com.qiyei.performance.bootstarter.task.State;
 import com.qiyei.performance.bootstarter.task.Task;
 import com.qiyei.performance.bootstarter.utils.Logger;
 import com.qiyei.performance.bootstarter.sort.TaskSort;
+import com.qiyei.performance.bootstarter.utils.ProcessUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,8 +83,7 @@ public class TaskDispatcher {
         if (context != null){
             sContext = context.getApplicationContext();
             sHasInit = true;
-            // TODO: 2019/11/13 暂时设置true
-            sIsMainProcess = true;
+            sIsMainProcess = ProcessUtils.isMainProcss(context);
         }
     }
 

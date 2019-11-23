@@ -3,7 +3,6 @@ package com.qiyei.android;
 
 import android.content.Context;
 import android.os.StrictMode;
-import android.view.Choreographer;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.moduth.blockcanary.BlockCanary;
@@ -14,8 +13,8 @@ import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.performance.bootstarter.TaskDispatcher;
 import com.qiyei.performance.bootstarter.task.MainTask;
 import com.qiyei.performance.bootstarter.task.Task;
+import com.qiyei.performance.frame.FrameManager;
 import com.qiyei.performance.hook.BitmapHook;
-import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -30,11 +29,6 @@ import java.util.List;
 public class AndroidApplication extends FrameworkApplication {
 
     private static final String TAG = "AndroidApplication";
-
-    private static final long FRAME_INTERVAL = 160L;
-    private static final long FRAME_INTERVAL_NANO = FRAME_INTERVAL * 1000 * 1000;
-    private long mPrevTime;
-    private int mFrameCount;
 
     @Override
     public void onCreate() {
@@ -71,7 +65,7 @@ public class AndroidApplication extends FrameworkApplication {
             public void run() {
                 initSkinManager();
             }
-        }).addTask(new Task() {
+        }).addTask(new MainTask() {
             @Override
             public String getName() {
                 return "initBitmapHook";
@@ -116,25 +110,7 @@ public class AndroidApplication extends FrameworkApplication {
     }
 
     private void initFrameCallback(){
-//        Choreographer.getInstance().postFrameCallback(new Choreographer.FrameCallback() {
-//            @Override
-//            public void doFrame(long frameTimeNanos) {
-//                if (mPrevTime == 0){
-//                    mPrevTime = frameTimeNanos;
-//                }
-//                long interval = frameTimeNanos - mPrevTime;
-//                //大于一帧
-//                if (interval > FRAME_INTERVAL_NANO){
-//                    double fps = ((double) mFrameCount * 1000 * 1000) / interval * 1000;
-//                    LogManager.d(TAG,"FPS=" + fps);
-//                    mFrameCount = 0;
-//                    mPrevTime = 0;
-//                } else {
-//                    mFrameCount++;
-//                }
-//                Choreographer.getInstance().postFrameCallback(this);
-//            }
-//        });
+        FrameManager.start();
     }
 
     private void initStrictMode(){

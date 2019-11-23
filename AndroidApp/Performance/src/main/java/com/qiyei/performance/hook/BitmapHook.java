@@ -27,7 +27,6 @@ public class BitmapHook {
             ImageView imageView = (ImageView) param.thisObject;
             //得到Bitmap对象
             Bitmap bitmap = (Bitmap) param.args[0];
-
             LogManager.d(TAG,param.method.getName() + " imageView,width=" + imageView.getWidth() + " height=" + imageView.getHeight()
                     + " bitmap,width=" + bitmap.getWidth() + " height=" + bitmap.getHeight());
         }
@@ -39,6 +38,12 @@ public class BitmapHook {
     }
 
     public static void start(){
-        DexposedBridge.findAndHookMethod(ImageView.class,"setImageBitmap",new ImageViewMethodHook());
+        DexposedBridge.hookAllConstructors(ImageView.class, new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                super.afterHookedMethod(param);
+                DexposedBridge.findAndHookMethod(ImageView.class,"setImageBitmap",Bitmap.class,new ImageViewMethodHook());
+            }
+        });
     }
 }

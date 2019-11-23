@@ -6,6 +6,7 @@ import androidx.asynclayoutinflater.view.AsyncLayoutInflater;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Process;
 import android.widget.ImageView;
 
 import com.qiyei.performance.R;
