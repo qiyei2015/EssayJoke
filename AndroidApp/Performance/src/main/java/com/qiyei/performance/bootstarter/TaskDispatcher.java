@@ -44,6 +44,7 @@ public class TaskDispatcher {
     private static boolean sIsMainProcess;
 
     private List<Future> mFutures = new ArrayList<>();
+    private List<Task> mOriginalAllTasks = new ArrayList<>();
     private List<Task> mAllTasks = new ArrayList<>();
     private List<Class<? extends Task>> mClsAllTasks = new ArrayList<>();
 
@@ -98,6 +99,7 @@ public class TaskDispatcher {
         if (task != null){
             collectDepends(task);
             mAllTasks.add(task);
+            mOriginalAllTasks.add(task);
             mClsAllTasks.add(task.getClass());
             //非主线程且需要wait的，主线程不需要CountDownLatch也是同步的
             if (ifNeedWait(task)){
@@ -120,7 +122,8 @@ public class TaskDispatcher {
 
             printDependedMsg();
 
-            mAllTasks = TaskSort.sort(mAllTasks,mClsAllTasks);
+            //mAllTasks = TaskSort.sort(mAllTasks,mClsAllTasks);
+            mAllTasks = TaskSort.sortAs(mAllTasks,mOriginalAllTasks);
             //需要被等待的数量
             mCountDownLatch = new CountDownLatch(mNeedWaitCount.get());
             //分发异步任务

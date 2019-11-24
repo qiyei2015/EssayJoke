@@ -15,10 +15,12 @@ import com.qiyei.performance.bootstarter.task.MainTask;
 import com.qiyei.performance.bootstarter.task.Task;
 import com.qiyei.performance.frame.FrameManager;
 import com.qiyei.performance.hook.BitmapHook;
+import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
+
 
 /**
  * @author Created by qiyei2015 on 2017/5/8.
@@ -35,6 +37,79 @@ public class AndroidApplication extends FrameworkApplication {
         super.onCreate();
 
         TaskDispatcher.init(this);
+
+        Task task1 = new Task.Builder()
+                .setName("initARouter")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        initARouter();
+                    }
+                })
+                .build();
+
+        Task task2 = new Task.Builder()
+                .setName("initBlockCanary")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        initBlockCanary();
+                    }
+                })
+                .build();
+
+        Task task3 = new Task.Builder()
+                .setName("initSkinManager")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        initSkinManager();
+                    }
+                })
+                .build();
+
+        Task task4 = new Task.Builder()
+                .setName("initBitmapHook")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        BitmapHook.start();
+                    }
+                })
+                .build();
+
+        Task task5 = new Task.Builder()
+                .setName("initFrameCallback")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        initFrameCallback();
+                    }
+                })
+                .build();
+
+        Task task6 = new Task.Builder()
+                .setName("initStrictMode")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        initStrictMode();
+                    }
+                })
+                .build();
+
+        TaskDispatcher.getInstance()
+                .addTask(task1)
+                .addTask(task2)
+                .addTask(task3)
+                .addTask(task4)
+                .addTask(task5)
+                .addTask(task6)
+                .start();
+    }
+
+
+    private void fff(){
         TaskDispatcher.getInstance().addTask(new MainTask() {
             @Override
             public String getName() {
@@ -98,6 +173,7 @@ public class AndroidApplication extends FrameworkApplication {
         }).start();
     }
 
+
     @Override
     public void onLowMemory() {
         super.onLowMemory();
@@ -131,6 +207,7 @@ public class AndroidApplication extends FrameworkApplication {
     }
 
     private void initSkinManager() {
+        LogManager.i("DispatchRunnable","initSkinManager running");
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
     }

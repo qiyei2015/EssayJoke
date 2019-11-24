@@ -56,7 +56,7 @@ public class DispatchRunnable implements Runnable {
         startTime = System.currentTimeMillis();
         mTask.setState(State.RUNNING);
         mTask.run();
-
+        mTask.getRunnable().run();
         //4 执行尾部的任务
         Runnable tailTask = mTask.getTailRunnable();
         if (tailTask != null){
@@ -88,9 +88,9 @@ public class DispatchRunnable implements Runnable {
      */
     private void printTaskLog(long startTime, long waitTime) {
         long runTime = System.currentTimeMillis() - startTime;
-//        Logger.d(mTask.getName() + "  wait " + waitTime + "    run "
+//        Logger.d(task.getName() + "  wait " + waitTime + "    run "
 //                + runTime + "   isMain " + (Looper.getMainLooper() == Looper.myLooper())
-//                + "  needWait " + (mTask.needWait() || (Looper.getMainLooper() == Looper.myLooper()))
+//                + "  needWait " + (task.needWait() || (Looper.getMainLooper() == Looper.myLooper()))
 //                + "  ThreadId " + Thread.currentThread().getId()
 //                + "  ThreadName " + Thread.currentThread().getName()
 //                + "  Situation  " + TaskStat.getCurrentSituation()

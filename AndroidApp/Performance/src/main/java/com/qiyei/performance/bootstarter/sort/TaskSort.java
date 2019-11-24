@@ -63,14 +63,51 @@ public class TaskSort {
         return newTasksAll;
     }
 
+    /**
+     * 任务的有向无环图的拓扑排序
+     * @param taskList
+     * @param depends
+     * @return
+     */
+    public static synchronized List<Task> sortAs(List<Task> taskList,List<Task> depends){
+        long makeTime = System.currentTimeMillis();
+
+        Set<Integer> dependSet = new HashSet<>();
+        Graph graph = new Graph(taskList.size());
+
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            if (task.getState() == State.DISPATCH || task.dependsOn() == null || task.dependsOn().size() == 0) {
+                continue;
+            }
+            for (Task dependTask : task.dependsOnTask()) {
+                int indexOfDepend = getIndexOfTask(taskList,depends,dependTask);
+                if (indexOfDepend < 0) {
+                    throw new IllegalStateException(task.getName() +
+                            " depends on " + dependTask.getName() + " can not be found in task list ");
+                }
+                dependSet.add(indexOfDepend);
+                graph.addEdge(indexOfDepend, i);
+            }
+        }
+        List<Integer> indexList = graph.topologicalSort();
+        List<Task> newTasksAll = getResultTasks(taskList, dependSet, indexList);
+
+        Logger.d(TAG,"task analyse cost makeTime " + (System.currentTimeMillis() - makeTime));
+        printAllTaskName(newTasksAll);
+        return newTasksAll;
+    }
 
     @NonNull
     private static List<Task> getResultTasks(List<Task> originTasks,
                                              Set<Integer> dependSet, List<Integer> indexList) {
         List<Task> newTasksAll = new ArrayList<>(originTasks.size());
-        List<Task> newTasksDepended = new ArrayList<>();// 被别人依赖的
-        List<Task> newTasksWithOutDepend = new ArrayList<>();// 没有依赖的
-        List<Task> newTasksRunAsSoon = new ArrayList<>();// 需要提升自己优先级的，先执行（这个先是相对于没有依赖的先）
+        // 被别人依赖的
+        List<Task> newTasksDepended = new ArrayList<>();
+        // 没有依赖的
+        List<Task> newTasksWithOutDepend = new ArrayList<>();
+        // 需要提升自己优先级的，先执行（这个先是相对于没有依赖的先）
+        List<Task> newTasksRunAsSoon = new ArrayList<>();
         for (int index : indexList) {
             if (dependSet.contains(index)) {
                 newTasksDepended.add(originTasks.get(index));
@@ -92,9 +129,9 @@ public class TaskSort {
     }
 
     private static void printAllTaskName(List<Task> newTasksAll) {
-        if (true) {
-            return;
-        }
+//        if (true) {
+//            return;
+//        }
         for (Task task : newTasksAll) {
             Logger.d(TAG,task.getName());
         }
@@ -108,11 +145,10 @@ public class TaskSort {
      * 获取任务在任务列表中的index
      *
      * @param originTasks
-     * @param taskName
+     * @param clsLaunchTasks
      * @return
      */
-    private static int getIndexOfTask(List<Task> originTasks,
-                                      List<Class<? extends Task>> clsLaunchTasks, Class cls) {
+    private static int getIndexOfTask(List<Task> originTasks, List<Class<? extends Task>> clsLaunchTasks, Class cls) {
         int index = clsLaunchTasks.indexOf(cls);
         if (index >= 0) {
             return index;
@@ -128,4 +164,26 @@ public class TaskSort {
         return index;
     }
 
+    /**
+     * 获取任务在任务列表中的index
+     *
+     * @param originTasks
+     * @param depends
+     * @return
+     */
+    private static int getIndexOfTask(List<Task> originTasks, List<Task> depends, Task task) {
+        int index = depends.indexOf(task);
+        if (index >= 0) {
+            return index;
+        }
+
+        // 仅仅是保护性代码
+        final int size = originTasks.size();
+        for (int i = 0; i < size; i++) {
+            if (task.getTaskId().equals(originTasks.get(i).getTaskId())) {
+                return i;
+            }
+        }
+        return index;
+    }
 }

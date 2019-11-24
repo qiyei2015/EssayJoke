@@ -3,8 +3,11 @@ package com.qiyei.performance.bootstarter.task;
 import android.os.Process;
 
 import com.qiyei.performance.bootstarter.utils.ThreadPoolExecutorUtils;
+import com.qiyei.sdk.log.LogManager;
 
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 
@@ -16,7 +19,8 @@ import java.util.concurrent.ExecutorService;
  */
 public abstract class Task implements ITask {
 
-    // TODO: 2019/11/15
+    private static final String TAG = "TASK";
+
     /**
      * 是否在主进程，用于多进程场景
      */
@@ -25,15 +29,53 @@ public abstract class Task implements ITask {
      * 依赖的task
      */
     private CountDownLatch mDepends = new CountDownLatch(dependsOn() == null ? 0 : dependsOn().size());
+
+    /**
+     * 任务名
+     */
+    private String mName;
+    /**
+     * 任务id
+     */
+    private String mTaskId;
+
     /**
      * 任务状态
      */
     private State mState;
 
+    private Callable mCallable;
+
+    private Runnable mRunnable;
+
+    private int mPriority = Process.THREAD_PRIORITY_BACKGROUND;
+
+    /**
+     * @return {@link #mName}
+     */
+    @Override
+    public String getName() {
+        return mName;
+    }
+
+    @Override
+    public void run() {
+        LogManager.i(TAG,getInfo() + " start running");
+        if (mRunnable != null){
+            mRunnable.run();
+            LogManager.i(TAG,getInfo() + " end running");
+        } else if (mCallable != null){
+            try {
+                Object o = mCallable.call();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     @Override
     public int priority() {
-        return Process.THREAD_PRIORITY_BACKGROUND;
+        return mPriority;
     }
 
     /**
@@ -52,6 +94,15 @@ public abstract class Task implements ITask {
      */
     @Override
     public List<Class<? extends Task>> dependsOn() {
+        return null;
+    }
+
+    /**
+     * 默认无依赖
+     * @return
+     */
+
+    public List<Task> dependsOnTask() {
         return null;
     }
 
@@ -131,4 +182,79 @@ public abstract class Task implements ITask {
     public void setState(State state) {
         mState = state;
     }
+
+    /**
+     * @return {@link #mTaskId}
+     */
+    public String getTaskId() {
+        return mTaskId;
+    }
+
+    /**
+     * @return {@link #mCallable}
+     */
+    public Callable getTask() {
+        return mCallable;
+    }
+
+    /**
+     * @return {@link #mRunnable}
+     */
+    public Runnable getRunnable() {
+        return mRunnable;
+    }
+
+    public String getInfo(){
+        return TAG + " --> name=" + mName + ",id=" + mTaskId;
+    }
+
+    public static class Builder{
+        Task task;
+
+        public Builder() {
+            task = new Task() {
+                @Override
+                public void run() {
+
+                }
+            };
+            task.mTaskId = TAG + "_" + UUID.randomUUID().toString();
+
+        }
+
+        /**
+         * @param name the {@link #mName} to set
+         */
+        public Builder setName(String name) {
+            task.mName = name;
+            return this;
+        }
+
+        public Builder setTaskCallBack(ITaskCallBack callBack) {
+            task.setTaskCallBack(callBack);
+            return this;
+        }
+
+        /**
+         * @param callable the {@link #mCallable} to set
+         */
+        public Builder setTask(Callable callable) {
+            task.mCallable = callable;
+            return this;
+        }
+
+        /**
+         * @param runnable the {@link #mCallable} to set
+         */
+        public Builder setTask(Runnable runnable) {
+            task.mRunnable = runnable;
+            return this;
+        }
+
+        public Task build(){
+            LogManager.i(TAG,task.getInfo());
+            return task;
+        }
+    }
+
 }
