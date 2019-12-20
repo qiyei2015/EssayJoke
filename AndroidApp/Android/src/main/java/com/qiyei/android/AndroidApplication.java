@@ -38,15 +38,16 @@ public class AndroidApplication extends FrameworkApplication {
 
         TaskDispatcher.init(this);
 
-        Task task1 = new Task.Builder()
-                .setName("initARouter")
-                .setTask(new Runnable() {
-                    @Override
-                    public void run() {
-                        initARouter();
-                    }
-                })
-                .build();
+        initARouter();
+//        Task task1 = new Task.Builder()
+//                .setName("initARouter")
+//                .setTask(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        initARouter();
+//                    }
+//                })
+//                .build();
 
         Task task2 = new Task.Builder()
                 .setName("initBlockCanary")
@@ -99,7 +100,6 @@ public class AndroidApplication extends FrameworkApplication {
                 .build();
 
         TaskDispatcher.getInstance()
-                .addTask(task1)
                 .addTask(task2)
                 .addTask(task3)
                 .addTask(task4)

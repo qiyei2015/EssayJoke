@@ -15,6 +15,7 @@ import com.qiyei.architecture.data.bean.DataBean;
 import com.qiyei.sdk.database.DB;
 import com.qiyei.sdk.database.DatabaseManager;
 import com.qiyei.sdk.database.IDatabaseSession;
+import com.qiyei.sdk.dc.DataManager;
 import com.qiyei.sdk.log.LogManager;
 
 import java.util.ArrayList;
@@ -63,6 +64,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
         userIDatabaseSession.insert(list);
         LogManager.i(DB.TAG,"data:" + userIDatabaseSession.queryBuilder().queryAll().toString());
 
+        DatabaseManager.getInstance().testRoom(this);
     }
 
 }

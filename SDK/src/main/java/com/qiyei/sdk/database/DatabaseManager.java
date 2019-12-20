@@ -1,6 +1,16 @@
 package com.qiyei.sdk.database;
 
+import android.content.Context;
+
+import androidx.room.Room;
+import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
+
 import com.qiyei.sdk.common.RuntimeEnv;
+import com.qiyei.sdk.database.engine.room.AppDatabase;
+import com.qiyei.sdk.database.engine.room.User;
+import com.qiyei.sdk.database.engine.room.UserDao;
 import com.qiyei.sdk.database.engine.sqlite.SQLiteDatabaseEngine;
 
 /**
@@ -84,4 +94,32 @@ public class DatabaseManager implements IDatabaseManager {
         return mEngine.getDBSession(dbName,clazz);
     }
 
+    public void testRoom(Context context){
+        AppDatabase database = Room.databaseBuilder(context.getApplicationContext()
+                ,AppDatabase.class,"qiyei.db")
+                .addMigrations(MIGRATION_1_2)
+                .build();
+
+        UserDao userDao = database.userDao();
+        User user = new User();
+        user.setFirstName("大爷");
+        user.setLastName("嘿嘿");
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                userDao.insertAll(user);
+            }
+        }).start();
+
+    }
+
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(SupportSQLiteDatabase database) {
+//            database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, "
+//                    + "`name` TEXT, PRIMARY KEY(`id`))");
+
+        }
+    };
 }
