@@ -117,8 +117,10 @@ public class DatabaseManager implements IDatabaseManager {
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
         public void migrate(SupportSQLiteDatabase database) {
-//            database.execSQL("CREATE TABLE `Fruit` (`id` INTEGER, "
-//                    + "`name` TEXT, PRIMARY KEY(`id`))");
+            //此处执行数据库升级的逻辑:例如表新增字段或者新建表等其他升级操作
+
+            //User表新增字段
+            database.execSQL("ALTER TABLE User " + " ADD COLUMN sex TEXT");
 
         }
     };

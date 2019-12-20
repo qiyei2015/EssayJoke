@@ -22,6 +22,9 @@ public class User {
     @ColumnInfo(name = "last_name")
     private String lastName;
 
+    @ColumnInfo(name = "sex")
+    private String sex;
+
     /**
      * @return {@link #uid}
      */
@@ -62,5 +65,19 @@ public class User {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return {@link #sex}
+     */
+    public String getSex() {
+        return sex;
+    }
+
+    /**
+     * @param sex the {@link #sex} to set
+     */
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 }

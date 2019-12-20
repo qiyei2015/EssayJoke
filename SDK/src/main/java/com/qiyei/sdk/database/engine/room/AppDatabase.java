@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
  * @email: 1273482124@qq.com
  * @description:
  */
-@Database(entities = {User.class},version = 1)
+@Database(entities = {User.class},version = 2)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
