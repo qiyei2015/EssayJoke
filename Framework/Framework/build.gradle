@@ -71,6 +71,13 @@ dependencies {
     //分包
     implementation "androidx.multidex:multidex:2.0.1"
 
+    //Room
+    api "androidx.room:room-runtime:2.2.3"
+    // use kapt for Kotlin
+    annotationProcessor "androidx.room:room-compiler:2.2.3"
+    // use kapt for Kotlin
+    kapt "androidx.room:room-compiler:2.2.3"
+
     //Dagger2
     kapt "com.google.dagger:dagger-compiler:$dagger_version"
 //    kapt "com.google.dagger:dagger-android-processor:$dagger_version"

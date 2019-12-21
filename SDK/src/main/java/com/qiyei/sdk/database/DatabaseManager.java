@@ -1,17 +1,18 @@
 package com.qiyei.sdk.database;
 
 import android.content.Context;
+import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.migration.Migration;
-import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.qiyei.sdk.common.RuntimeEnv;
-import com.qiyei.sdk.database.engine.room.AppDatabase;
-import com.qiyei.sdk.database.engine.room.User;
-import com.qiyei.sdk.database.engine.room.UserDao;
 import com.qiyei.sdk.database.engine.sqlite.SQLiteDatabaseEngine;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Created by qiyei2015 on 2017/9/9.
@@ -22,9 +23,16 @@ import com.qiyei.sdk.database.engine.sqlite.SQLiteDatabaseEngine;
 public class DatabaseManager implements IDatabaseManager {
 
     /**
+     * 全局Context
+     */
+    private Context mContext;
+
+    /**
      * 数据库引擎
      */
     private IDatabaseEngine mEngine;
+
+    private Map<String,RoomDatabase> mRoomDatabaseMap;
 
     /**
      * 单例方式提供对象
@@ -38,6 +46,7 @@ public class DatabaseManager implements IDatabaseManager {
      */
     private DatabaseManager(){
         initEngine(new SQLiteDatabaseEngine());
+        mRoomDatabaseMap = new HashMap<>();
     }
 
     /**
@@ -94,34 +103,35 @@ public class DatabaseManager implements IDatabaseManager {
         return mEngine.getDBSession(dbName,clazz);
     }
 
-    public void testRoom(Context context){
-        AppDatabase database = Room.databaseBuilder(context.getApplicationContext()
-                ,AppDatabase.class,"qiyei.db")
-                .addMigrations(MIGRATION_1_2)
-                .build();
-
-        UserDao userDao = database.userDao();
-        User user = new User();
-        user.setFirstName("大爷");
-        user.setLastName("嘿嘿");
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                userDao.insertAll(user);
-            }
-        }).start();
-
+    public void init(Context context){
+        mContext =context;
     }
 
-    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
-        @Override
-        public void migrate(SupportSQLiteDatabase database) {
-            //此处执行数据库升级的逻辑:例如表新增字段或者新建表等其他升级操作
+    /**
+     * 注册数据库
+     * @param clazz
+     * @param db
+     * @param migrations
+     * @param <T>
+     */
+    public <T extends RoomDatabase> void registerRoomDatabase(Class<T> clazz,String db,@NonNull Migration... migrations){
+        T database = Room.databaseBuilder(mContext.getApplicationContext()
+                ,clazz,db)
+                .addMigrations(migrations)
+                .build();
+        mRoomDatabaseMap.put(clazz.getCanonicalName(),database);
+    }
 
-            //User表新增字段
-            database.execSQL("ALTER TABLE User " + " ADD COLUMN sex TEXT");
-
+    /**
+     * 获取对应的Database实例
+     * @param clazz
+     * @param <T>
+     * @return
+     */
+    public <T extends RoomDatabase> T getRoomDatabase(Class<T> clazz){
+        if (mRoomDatabaseMap.get(clazz.getCanonicalName()) == null){
+            throw new IllegalArgumentException("clazz is illegal");
         }
-    };
+        return (T) mRoomDatabaseMap.get(clazz.getCanonicalName());
+    }
 }

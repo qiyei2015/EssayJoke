@@ -1,4 +1,4 @@
-package com.qiyei.sdk.database.engine.room;
+package com.qiyei.framework.database.room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

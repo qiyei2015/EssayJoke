@@ -1,7 +1,11 @@
-package com.qiyei.sdk.database.engine.room;
+package com.qiyei.framework.database.room;
+
+
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+
+
 
 /**
  * @author Created by qiyei2015 on 2019/12/19.
@@ -13,4 +17,5 @@ import androidx.room.RoomDatabase;
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract UserDao userDao();
+
 }

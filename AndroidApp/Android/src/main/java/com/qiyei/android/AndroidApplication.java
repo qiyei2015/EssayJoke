@@ -9,12 +9,15 @@ import com.github.moduth.blockcanary.BlockCanary;
 import com.github.moduth.blockcanary.BlockCanaryContext;
 import com.github.moduth.blockcanary.internal.BlockInfo;
 import com.qiyei.framework.FrameworkApplication;
+import com.qiyei.framework.database.room.AppData;
+import com.qiyei.framework.database.room.AppDatabase;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.performance.bootstarter.TaskDispatcher;
 import com.qiyei.performance.bootstarter.task.MainTask;
 import com.qiyei.performance.bootstarter.task.Task;
 import com.qiyei.performance.frame.FrameManager;
 import com.qiyei.performance.hook.BitmapHook;
+import com.qiyei.sdk.database.DatabaseManager;
 import com.qiyei.sdk.log.LogManager;
 
 import java.io.File;
@@ -39,6 +42,8 @@ public class AndroidApplication extends FrameworkApplication {
         TaskDispatcher.init(this);
 
         initARouter();
+        initDataBase(this);
+
 //        Task task1 = new Task.Builder()
 //                .setName("initARouter")
 //                .setTask(new Runnable() {
@@ -201,6 +206,11 @@ public class AndroidApplication extends FrameworkApplication {
                 .build());
     }
 
+    private void initDataBase(Context context) {
+        DatabaseManager.getInstance().init(this);
+        DatabaseManager.getInstance().registerRoomDatabase(AppDatabase.class,
+                AppData.DB_NAME,AppData.MIGRATION_1_2);
+    }
 
     private void initBlockCanary() {
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
