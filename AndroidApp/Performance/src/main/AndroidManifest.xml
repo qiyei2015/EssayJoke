@@ -8,6 +8,15 @@
         <activity android:name=".ui.activity.X2CDemoActivity" />
         <activity android:name=".ui.activity.ImageViewHookActivity" />
         <activity android:name=".ui.activity.AppStartOptimizationActivity" />
+        <activity android:name=".ui.activity.MemoryOptimizationActivity" />
+        <activity android:name=".ui.activity.ANRActivity" />
+        <activity android:name=".ui.activity.UIDrawActivity" />
+        <activity android:name=".ui.activity.MemoryLeakActivity" />
+
+        <service
+            android:name=".ui.service.ANRService"
+            android:enabled="true"
+            android:exported="true" />
     </application>
 
 </manifest>

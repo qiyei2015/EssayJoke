@@ -1,9 +1,9 @@
-package com.qiyei.architecture.ui.activity
+package com.qiyei.performance.ui.activity
 
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.qiyei.architecture.R
+import com.qiyei.performance.R
 
 class UIDrawActivity : AppCompatActivity() {
 

@@ -1,4 +1,4 @@
-package com.qiyei.architecture.ui.activity;
+package com.qiyei.performance.ui.activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -13,12 +13,14 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.qiyei.architecture.R;
-import com.qiyei.architecture.service.ANRService;
+
+import com.qiyei.framework.util.Utils;
+import com.qiyei.performance.R;
+import com.qiyei.performance.ui.service.ANRService;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.ToastUtil;
 
-import static com.qiyei.architecture.util.Utils.writeFile;
+
 
 /**
  * 1、主线程对输入事件在5秒内没有处理完毕
@@ -105,7 +107,7 @@ public class ANRActivity extends AppCompatActivity {
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                writeFile();
+                Utils.writeFile();
             }
         });
 
@@ -175,7 +177,7 @@ public class ANRActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             if (ACTION1.equals(intent.getAction())){
-                writeFile();
+                Utils.writeFile();
             }else if (ACTION2.equals(intent.getAction())){
                 LogManager.i(TAG,"wait for mLock in receiver");
                 synchronized (mLock){

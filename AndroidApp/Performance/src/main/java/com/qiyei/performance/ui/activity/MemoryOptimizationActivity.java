@@ -1,4 +1,4 @@
-package com.qiyei.architecture.ui.activity;
+package com.qiyei.performance.ui.activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.qiyei.architecture.R;
+import com.qiyei.performance.R;
 
 public class MemoryOptimizationActivity extends AppCompatActivity {
 

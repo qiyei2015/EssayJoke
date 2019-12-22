@@ -7,16 +7,8 @@
         <activity android:name=".ui.activity.PagingCustomDataSourceActivity" />
         <activity android:name=".ui.activity.PagingDemoActivity" />
         <activity android:name=".ui.activity.WorkManagerDemoActivity" />
-        <activity android:name=".ui.activity.MemoryOptimizationActivity" />
-        <activity android:name=".ui.activity.ANRActivity" />
 
-        <service
-            android:name=".service.ANRService"
-            android:enabled="true"
-            android:exported="true" />
 
-        <activity android:name=".ui.activity.UIDrawActivity" />
-        <activity android:name=".ui.activity.MemoryLeakActivity" />
         <activity android:name=".ui.activity.ProxyTestActivity" />
 
         <service

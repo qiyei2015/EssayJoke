@@ -1,4 +1,4 @@
-package com.qiyei.architecture.util;
+package com.qiyei.framework.util;
 
 import com.qiyei.sdk.common.RuntimeEnv;
 import com.qiyei.sdk.util.UUIDUtil;

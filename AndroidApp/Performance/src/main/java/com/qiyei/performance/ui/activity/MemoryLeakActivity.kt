@@ -1,12 +1,13 @@
-package com.qiyei.architecture.ui.activity
+package com.qiyei.performance.ui.activity
 
 import android.content.Context
 
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import com.qiyei.architecture.R
-import com.qiyei.architecture.util.SingleInstance
+import com.qiyei.framework.util.SingleInstance
+import com.qiyei.performance.R
+
 
 class MemoryLeakActivity : AppCompatActivity() {
 
