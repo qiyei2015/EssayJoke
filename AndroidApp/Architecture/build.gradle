@@ -44,6 +44,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
 
+    //paging,For Kotlin use paging-runtime-ktx
+    implementation "androidx.paging:paging-runtime:2.1.1"
+
     implementation "com.google.android.material:material:1.0.0"
 
     //Dagger2
@@ -53,6 +56,9 @@ dependencies {
     api project(':Framework:Framework')
 
     testImplementation "junit:junit:4.12"
+    //paging test alternatively - without Android dependencies for testing
+    testImplementation "androidx.paging:paging-common:2.1.1"
+
     androidTestImplementation "androidx.test:runner:1.2.0"
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
 }

@@ -3,4 +3,8 @@
     <string name="title_activity_network_test">NetworkTestActivity</string>
     <string name="title_activity_database_test">DatabaseTestActivity</string>
     <string name="title_activity_component_demo">ComponentDemoActivity</string>
+    <string name="data_from_data_source">自定义DataSource</string>
+    <string name="data_from_room">DataSource来源于Room</string>
+    <string name="data_from_network">DataSource来源于网络</string>
+    <string name="data_from_network_and_room">DataSource来源于网络和Room数据库</string>
 </resources>

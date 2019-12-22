@@ -1,74 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qiyei.architecture">
+    package="com.qiyei.architecture">
 
     <application>
-        <activity android:name=".ui.activity.WorkManagerDemoActivity">
-        </activity>
-        <activity android:name=".ui.activity.MemoryOptimizationActivity">
-        </activity>
-        <activity android:name=".ui.activity.ANRActivity">
-        </activity>
+        <activity android:name=".ui.activity.PagingCustomDataSourceActivity"></activity>
+        <activity android:name=".ui.activity.PagingDemoActivity" />
+        <activity android:name=".ui.activity.WorkManagerDemoActivity" />
+        <activity android:name=".ui.activity.MemoryOptimizationActivity" />
+        <activity android:name=".ui.activity.ANRActivity" />
 
         <service
             android:name=".service.ANRService"
             android:enabled="true"
-            android:exported="true">
-        </service>
+            android:exported="true" />
 
-        <activity android:name=".ui.activity.UIDrawActivity">
-        </activity>
-        <activity android:name=".ui.activity.MemoryLeakActivity">
-        </activity>
-        <activity android:name=".ui.activity.ProxyTestActivity">
-        </activity>
+        <activity android:name=".ui.activity.UIDrawActivity" />
+        <activity android:name=".ui.activity.MemoryLeakActivity" />
+        <activity android:name=".ui.activity.ProxyTestActivity" />
 
         <service
             android:name=".ui.service.LocalService"
             android:enabled="true"
-            android:exported="false">
-        </service>
+            android:exported="false" />
         <service
             android:name=".ui.service.RemoteService"
             android:enabled="true"
             android:exported="false"
-            android:process=":remote">
-        </service>
+            android:process=":remote" />
         <service
             android:name=".ui.service.JobWakeUpService"
             android:enabled="true"
             android:exported="false"
-            android:permission="android.permission.BIND_JOB_SERVICE">
-        </service>
+            android:permission="android.permission.BIND_JOB_SERVICE" />
         <service
             android:name=".ui.service.TestService"
             android:enabled="true"
-            android:exported="false">
-        </service>
+            android:exported="false" />
 
-        <activity android:name=".ui.activity.DataCenterTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.ProcessKeepAliveActivity">
-        </activity>
-        <activity android:name=".ui.activity.BinderTestActivity">
-        </activity>
+        <activity android:name=".ui.activity.DataCenterTestActivity" />
+        <activity android:name=".ui.activity.ProcessKeepAliveActivity" />
+        <activity android:name=".ui.activity.BinderTestActivity" />
         <activity
             android:name=".ui.activity.NetworkTestActivity"
             android:label="@string/title_activity_network_test"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.activity.DatabaseTestActivity"
             android:label="@string/title_activity_database_test"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity android:name=".ui.activity.ArchitectureActivity">
-        </activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".ui.activity.ArchitectureActivity" />
         <activity
             android:name=".ui.activity.ComponentDemoActivity"
             android:label="@string/title_activity_component_demo"
-            android:theme="@style/AppTheme">
-        </activity>
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
