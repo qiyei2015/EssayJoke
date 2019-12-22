@@ -67,6 +67,9 @@ dependencies {
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation "com.google.android.material:material:1.0.0"
+    
+    //paging,For Kotlin use paging-runtime-ktx
+    implementation "androidx.paging:paging-runtime:2.1.1"
 
     //分包
     implementation "androidx.multidex:multidex:2.0.1"

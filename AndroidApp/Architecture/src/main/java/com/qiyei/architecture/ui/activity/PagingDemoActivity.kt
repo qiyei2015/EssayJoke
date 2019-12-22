@@ -16,5 +16,9 @@ class PagingDemoActivity : AppCompatActivity() {
         button1.onClick {
             startActivity<PagingCustomDataSourceActivity>()
         }
+
+        button2.onClick {
+            startActivity<PagingRoomDataSourceActivity>()
+        }
     }
 }

@@ -28,6 +28,8 @@ import java.util.List;
 
 public class DatabaseTestActivity extends AppCompatActivity {
 
+    private static final int SIZE = 1000;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +77,7 @@ public class DatabaseTestActivity extends AppCompatActivity {
     private void testRoom(){
         UserDao userDao = DatabaseManager.getInstance().getRoomDatabase(AppDatabase.class).userDao();
         List<User> list = new ArrayList<>();
-        for (int i = 0; i < 100;i++){
+        for (int i = 0; i < SIZE;i++){
             User user = new User();
             user.setFirstName("大爷 " + i);
             user.setLastName("嘿嘿-->" + i);

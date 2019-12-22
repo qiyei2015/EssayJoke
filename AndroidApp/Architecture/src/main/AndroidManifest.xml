@@ -3,7 +3,8 @@
     package="com.qiyei.architecture">
 
     <application>
-        <activity android:name=".ui.activity.PagingCustomDataSourceActivity"></activity>
+        <activity android:name=".ui.activity.PagingRoomDataSourceActivity"></activity>
+        <activity android:name=".ui.activity.PagingCustomDataSourceActivity" />
         <activity android:name=".ui.activity.PagingDemoActivity" />
         <activity android:name=".ui.activity.WorkManagerDemoActivity" />
         <activity android:name=".ui.activity.MemoryOptimizationActivity" />
