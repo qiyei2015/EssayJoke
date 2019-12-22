@@ -26,6 +26,8 @@ buildscript {
 //        classpath "com.alibaba:arouter-register:1.0.2"
         //kotlin
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        //kotlin
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         //for AspectJ
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
     }
