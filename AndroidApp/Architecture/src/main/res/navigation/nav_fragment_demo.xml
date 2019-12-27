@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_fragment_demo"
+    app:startDestination="@id/navigationPage1Fragment">
+
+    <fragment
+        android:id="@+id/navigationPage1Fragment"
+        android:name="com.qiyei.architecture.ui.fragment.NavigationPage1Fragment"
+        android:label="NavigationPage1Fragment" >
+        <action
+            android:id="@+id/action_navigationPage1Fragment_to_navigationPage2Fragment"
+            app:destination="@id/navigationPage2Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+        <action
+            android:id="@+id/action_navigationPage1Fragment_to_navigationPage3Fragment"
+            app:destination="@id/navigationPage3Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationPage2Fragment"
+        android:name="com.qiyei.architecture.ui.fragment.NavigationPage2Fragment"
+        android:label="NavigationPage2Fragment" >
+        <action
+            android:id="@+id/action_navigationPage2Fragment_to_navigationPage3Fragment"
+            app:destination="@id/navigationPage3Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+        <action
+            android:id="@+id/action_navigationPage2Fragment_to_navigationPage1Fragment"
+            app:destination="@id/navigationPage1Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationPage3Fragment"
+        android:name="com.qiyei.architecture.ui.fragment.NavigationPage3Fragment"
+        android:label="NavigationPage3Fragment" >
+        <action
+            android:id="@+id/action_navigationPage3Fragment_to_navigationPage1Fragment"
+            app:destination="@id/navigationPage1Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+        <action
+            android:id="@+id/action_navigationPage3Fragment_to_navigationPage2Fragment"
+            app:destination="@id/navigationPage2Fragment"
+            app:enterAnim="@anim/fragment_in_anim"
+            app:exitAnim="@anim/fragment_out_anim" />
+    </fragment>
+</navigation>

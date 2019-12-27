@@ -43,6 +43,11 @@ dependencies {
     implementation "androidx.work:work-runtime:2.2.0"
     implementation "androidx.lifecycle:lifecycle-runtime:2.1.0"
     implementation "androidx.lifecycle:lifecycle-extensions:2.1.0"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.1.0'
+    implementation 'androidx.navigation:navigation-fragment:2.1.0'
+    implementation 'androidx.navigation:navigation-ui:2.1.0'
 
     //paging,For Kotlin use paging-runtime-ktx
     implementation "androidx.paging:paging-runtime:2.1.1"
