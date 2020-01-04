@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.qiyei.ui">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.qiyei.ui">
 
     <application
         android:allowBackup="true"
@@ -11,28 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-
-        <activity android:name=".ui.activity.XGrirdViewActivity">
-        </activity>
-        <activity android:name=".ui.activity.CommonDialogActivity">
-        </activity>
-        <activity android:name=".ui.activity.ViewPagerTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.RecyclerViewTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.EssayJokeMainActivity">
-        </activity>
-        <activity android:name=".ui.activity.SkinSwitchTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.BannerTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.ImageChooseTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.MultiDisplaySupportActivity">
-        </activity>
-
-        <activity android:name=".ui.activity.ScanCodeActivity">
-        </activity>
+        <activity android:name=".ui.activity.ToolbarDemoActivity"></activity>
+        <activity android:name=".ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity" />
+        <activity android:name=".ui.activity.CoordinatorLayoutAndBehaviorActivity" />
+        <activity android:name=".ui.activity.XGrirdViewActivity" />
+        <activity android:name=".ui.activity.CommonDialogActivity" />
+        <activity android:name=".ui.activity.ViewPagerTestActivity" />
+        <activity android:name=".ui.activity.RecyclerViewTestActivity" />
+        <activity android:name=".ui.activity.EssayJokeMainActivity" />
+        <activity android:name=".ui.activity.SkinSwitchTestActivity" />
+        <activity android:name=".ui.activity.BannerTestActivity" />
+        <activity android:name=".ui.activity.ImageChooseTestActivity" />
+        <activity android:name=".ui.activity.MultiDisplaySupportActivity" />
+        <activity android:name=".ui.activity.ScanCodeActivity" />
     </application>
 
 </manifest>
