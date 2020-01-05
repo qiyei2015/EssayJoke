@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity">
+
+
+    <!--
+        https://blog.csdn.net/yu540135101/article/details/100673407
+    -->
+    <!--
+        scroll:view随着指定的ScrollView一起滚动,就像是指定scrollview的一部分
+        enterAlways:当指定的scrollview向下滚动时,view也会跟着scrollview向下滚动
+        enterAlwaysCollapsed:当指定的scrollview向下滚动时,view首先是enterAlways效果,直至view达到最小高度(android:minHeight),View就暂时不去往下滚动，直到ScrollView滑动到顶部不再滑动时，View再继续往下滑动，直到滑到View的顶部结束
+        exitUntilCollapsed:当指定的scrollview向上滚动时,View会一直往上滑动，逐渐消失,直到view剩下的的高度达到它的最小高度(android:minHeight)后，view会固定不动,滑动事件会再交给scrollview
+        snap:在滚动结束后，如果view只是部分可见，它将滑动到最近的边界。比如，如果view的底部只有25%可见，它将滚动离开屏幕，而如果底部有75%可见，它将滚动到完全显示
+    -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_bar_layout">
+
+        <!--
+            app:title   设置标题
+            app:expandedTitleTextAppearance 展开时title的style
+            app:collapsedTitleTextAppearance 折叠时title的style
+            app:collapsedTitleGravity="center"  设置标题位置
+            app:contentScrim    设置折叠时toolbar的颜色，默认是colorPrimary的色值
+            app:statusBarScrim  设置折叠时状态栏的颜色 ，默认是colorPrimaryDark的色值
+            app:layout_collapseMode="parallax"  视差模式，在折叠的时候会有个视差折叠的效果
+            app:layout_collapseMode="pin"   固定模式，在折叠的时候最后固定在顶端
+
+            app:title="CollapsingToolbarLayout的标题"
+            app:titleEnabled="true"
+            app:collapsedTitleTextAppearance="@color/video_record_progress_color"
+            app:expandedTitleTextAppearance="@color/video_record_progress_color"
+            app:collapsedTitleGravity="center"
+        -->
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/collapsingToolbarLayout"
+            app:contentScrim="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/toolbar_imv"
+                android:scaleType="centerCrop"
+                android:src="@drawable/girl_19201200"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:id="@+id/toolbar"
+                app:title="Toolbar 标题"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:titleTextColor="@color/video_record_progress_color"
+                app:layout_collapseMode="pin" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!--设置behavior-->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/ll_content">
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

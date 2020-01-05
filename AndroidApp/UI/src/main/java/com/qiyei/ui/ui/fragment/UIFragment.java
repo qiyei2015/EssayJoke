@@ -7,6 +7,7 @@ import com.qiyei.framework.common.model.MainMenu;
 
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.ui.ui.activity.BannerTestActivity;
+import com.qiyei.ui.ui.activity.CollapsingToolbarLayoutDemoActivity;
 import com.qiyei.ui.ui.activity.CommonDialogActivity;
 import com.qiyei.ui.ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity;
 import com.qiyei.ui.ui.activity.CoordinatorLayoutAndBehaviorActivity;
@@ -40,12 +41,12 @@ public class UIFragment extends CommonListFragment {
     private String[] names = new String[]{"测试1 XGridView","测试2 自定义对话框测试","测试3 ViewPager测试"
             ,"测试4 RecyclerViewTest","测试5 EssayJokeMain","测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试"
             ,"测试9 多屏幕分辨率适配","测试 二维码扫描","Toolbar","CoordinatorLayout+自定义Behavior"
-            ,"CoordinatorLayout+AppbarLayout+CollapsingToolbarLayout实现Toolbar的折叠效果"
+            ,"CoordinatorLayout+AppbarLayout+CollapsingToolbarLayout实现Toolbar的折叠效果","CollapsingToolbarLayout 示例"
             ,};
     private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,CommonDialogActivity.class,ViewPagerTestActivity.class
             ,RecyclerViewTestActivity.class,EssayJokeMainActivity.class,SkinSwitchTestActivity.class,BannerTestActivity.class,ImageChooseTestActivity.class
             ,MultiDisplaySupportActivity.class,ScanCodeActivity.class, ToolbarDemoActivity.class,CoordinatorLayoutAndBehaviorActivity.class
-            , CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity.class,};
+            , CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity.class, CollapsingToolbarLayoutDemoActivity.class};
 
     public UIFragment() {
         super();

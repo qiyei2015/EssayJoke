@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.ToolbarDemoActivity"></activity>
+        <activity android:name=".ui.activity.CollapsingToolbarLayoutDemoActivity"></activity>
+        <activity android:name=".ui.activity.ToolbarDemoActivity" />
         <activity android:name=".ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity" />
         <activity android:name=".ui.activity.CoordinatorLayoutAndBehaviorActivity" />
         <activity android:name=".ui.activity.XGrirdViewActivity" />
