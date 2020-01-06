@@ -37,6 +37,7 @@
             app:collapsedTitleTextAppearance="@color/video_record_progress_color"
             app:expandedTitleTextAppearance="@color/video_record_progress_color"
             app:collapsedTitleGravity="center"
+
         -->
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -53,12 +54,14 @@
                 android:src="@drawable/girl_19201200"
                 app:layout_collapseMode="parallax" />
 
+            <!--
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+            -->
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:id="@+id/toolbar"
                 app:title="Toolbar 标题"
-                app:titleTextAppearance="@style/Toolbar.TitleText"
                 app:titleTextColor="@color/video_record_progress_color"
                 app:layout_collapseMode="pin" />
 

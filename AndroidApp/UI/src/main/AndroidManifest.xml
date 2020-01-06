@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.CollapsingToolbarLayoutDemoActivity"></activity>
+        <activity android:name=".ui.activity.GLSurfaceViewDemoActivity"></activity>
+        <activity android:name=".ui.activity.SurfaceViewDemoActivity" />
+        <activity android:name=".ui.activity.CollapsingToolbarLayoutDemoActivity" />
         <activity android:name=".ui.activity.ToolbarDemoActivity" />
         <activity android:name=".ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity" />
         <activity android:name=".ui.activity.CoordinatorLayoutAndBehaviorActivity" />

@@ -3,6 +3,7 @@ package com.qiyei.ui.ui.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.qiyei.ui.R;
@@ -18,6 +19,7 @@ public class ToolbarDemoActivity extends AppCompatActivity {
         mToolbar = findViewById(R.id.toolbar);
 
         mToolbar.setTitle("Toolbar Demo");
+        mToolbar.setTitleTextColor(Color.RED);
         setSupportActionBar(mToolbar);
 
     }

@@ -40,9 +40,10 @@ public class CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity 
 
         mLinearLayout = findViewById(R.id.ll_content);
 
-        setSupportActionBar(mToolbar);
         mToolbar.setTitle("测试CoordinatorLayout2");
         mToolbar.setTitleTextColor(Color.RED);
+
+        setSupportActionBar(mToolbar);
 
         setAvatorChange();
         initContentView();
