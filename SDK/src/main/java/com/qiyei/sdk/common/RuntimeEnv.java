@@ -168,6 +168,32 @@ public final class RuntimeEnv {
         return null;
     }
 
+    /***
+     * 获取当前运行的类的方法 和行数
+     * @return
+     */
+    public static String getCurrentMethodName2() {
+        StackTraceElement element = getCallLogManagerStackTrace();
+        if (element != null){
+            String methodName = element.getMethodName();
+            return methodName;
+        }
+        return null;
+    }
+
+    /***
+     * 获取当前运行的类的行数
+     * @return
+     */
+    public static int getCurrentLineNumber() {
+        StackTraceElement element = getCallLogManagerStackTrace();
+        if (element != null){
+            return element.getLineNumber();
+        }
+        return -1;
+    }
+
+
     /**
      * 获取当前运行的Class
      * @return

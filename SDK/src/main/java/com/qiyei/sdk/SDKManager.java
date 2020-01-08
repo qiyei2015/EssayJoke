@@ -72,6 +72,7 @@ public final class SDKManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        LogManager.i(TAG,"initSDK end");
     }
 
     /**

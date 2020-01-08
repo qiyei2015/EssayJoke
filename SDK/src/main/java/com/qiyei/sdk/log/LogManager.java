@@ -56,19 +56,11 @@ public class LogManager {
      * 初始化块
      */
     static {
-        //先创建文件夹 默认存储在 包名 + log 目录下
-        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
-        if (!dir.exists()){
-            dir.mkdirs();
-        }
-
-        String path = dir.getPath();
-
+        String logFile = getLogPath();
         //以当前进程名 为文件名
-        sDefLogImpl = new LogImpl(path + File.separator + RuntimeEnv.procName + LogConstant.FILE_SUFFIX);
-        sLogMap.put(LogConstant.DEF_NAME,sDefLogImpl);
-
-        //sXlogImpl = new XLogImpl();
+        //sDefLogImpl = new LogImpl(logFile);
+        sXlogImpl = new XLogImpl("",logFile);
+        sLogMap.put(LogConstant.DEF_NAME,sXlogImpl);
     }
 
     /**
@@ -296,5 +288,15 @@ public class LogManager {
         for (Map.Entry<String,ILog> entry : sLogMap.entrySet()){
             entry.getValue().setWriteFile(write);
         }
+    }
+
+    private static String getLogPath(){
+        //先创建文件夹 默认存储在 包名 + log 目录下
+        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
+        String path = dir.getPath();
+        return path + File.separator + RuntimeEnv.procName + LogConstant.FILE_SUFFIX;
     }
 }

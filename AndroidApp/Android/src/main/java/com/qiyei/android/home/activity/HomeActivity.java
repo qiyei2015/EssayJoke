@@ -16,6 +16,7 @@ import com.qiyei.ndk.ui.fragment.NDKFragment;
 import com.qiyei.opensource.ui.fragment.OpenSourceFragment;
 import com.qiyei.performance.ui.fragment.PerformanceFragment;
 import com.qiyei.sdk.ioc.ViewById;
+import com.qiyei.sdk.log.LogManager;
 import com.qiyei.ui.ui.fragment.UIFragment;
 
 /**
@@ -53,6 +54,7 @@ public class HomeActivity extends BaseSkinActivity {
         super.onCreate(savedInstanceState);
         initData();
         initView();
+        LogManager.i("HomeActivity2","onCreate");
     }
 
     @Override

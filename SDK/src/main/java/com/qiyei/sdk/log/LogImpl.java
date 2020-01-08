@@ -21,11 +21,6 @@ import java.util.Date;
 public class LogImpl implements ILog{
 
     /**
-     * 文件名称
-     */
-    private String mFileName;
-
-    /**
      * 级别,高于次级别的日志都会被打印
      */
     private int mLevel = LogConstant.DEBUG;
@@ -69,7 +64,6 @@ public class LogImpl implements ILog{
      */
     @Override
     public void print(int level,String tag, String msg){
-
         //如果是非调试状态，直接不打印，返回
         if (!AndroidUtil.isDebug(RuntimeEnv.appContext) && !isOpen){
             return ;
