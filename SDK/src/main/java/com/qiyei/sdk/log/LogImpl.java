@@ -18,24 +18,18 @@ import java.util.Date;
  * @email: 1273482124@qq.com
  * @description: 日志打印的具体实现
  */
-public class LogImpl {
+public class LogImpl implements ILog{
 
     /**
      * 文件名称
      */
     private String mFileName;
-    /**
-     * 文件后缀名
-     */
-    private static final String SUFFIX_NAME = ".log";
-    /**
-     * 文件路径
-     */
-    private String mPath;
+
     /**
      * 级别,高于次级别的日志都会被打印
      */
     private int mLevel = LogConstant.DEBUG;
+
     /**
      * 打印流到文件
      */
@@ -50,32 +44,15 @@ public class LogImpl {
      */
     private boolean isWriteFile;
 
-    /**
-     * 日志打印的标签
-     */
-    private static final String V = "V";
-    private static final String D = "D";
-    private static final String I = "I";
-    private static final String W = "W";
-    private static final String E = "E";
-    private static final String A = "A";
+
 
     /**
      * 构造方法
-     * @param fileName
+     * @param path
      */
-    public LogImpl(String fileName){
-        mFileName = fileName;
-        //先创建文件夹 默认存储在 包名 + log 目录下
-        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
-        if (!dir.exists()){
-            dir.mkdirs();
-        }
-        File file = new File(dir,mFileName + SUFFIX_NAME);
-
-        mPath = file.getAbsolutePath();
-
+    public LogImpl(String path){
         try {
+            File file = new File(path);
             mPrintWriter = new PrintWriter(new FileWriter(file,true),true);
         } catch (IOException e) {
             Log.i(LogConstant.TAG,"PrintWriter IOException ");
@@ -90,11 +67,12 @@ public class LogImpl {
      * @param msg
      * @return
      */
-    public int print(int level,String tag, String msg){
+    @Override
+    public void print(int level,String tag, String msg){
 
         //如果是非调试状态，直接不打印，返回
         if (!AndroidUtil.isDebug(RuntimeEnv.appContext) && !isOpen){
-            return 0;
+            return ;
         }
 
 //        Log.v(LogConstant.TAG,"log print --> level:" + level);
@@ -107,7 +85,11 @@ public class LogImpl {
             //打印到控制台
             printToConsole(level,tag, msg);
         }
-        return 0;
+    }
+
+    @Override
+    public void setWriteFile(boolean writeFile) {
+        isWriteFile = writeFile;
     }
 
     /**
@@ -117,39 +99,7 @@ public class LogImpl {
      * @param msg
      */
     private void printToFile(int level, String tag, String msg){
-        // 时间格式 2017-8-26 23.22.23.445
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        String time = sf.format(new Date());
-        String preTAG = V;
-
-        switch (level) {
-            case LogConstant.VERBOSE:
-                preTAG = V;
-                break;
-            case LogConstant.DEBUG:
-                preTAG = D;
-                break;
-            case LogConstant.INFO:
-                preTAG = I;
-                break;
-            case LogConstant.WARN:
-                preTAG = W;
-                break;
-            case LogConstant.ERROR:
-                preTAG = E;
-                break;
-            case LogConstant.ASSERT:
-                preTAG = A;
-                break;
-            default:
-                break;
-        }
-        //打印进程ID 线程ID 当前类 当前方法
-        String message = time + " " + preTAG + " "
-                + ""+ android.os.Process.myPid() + "|" + android.os.Process.myTid()
-                + "[" + RuntimeEnv.getCurrentFileName() + "->" + RuntimeEnv.getCurrentMethodName()+"]"
-                + "[" + tag +"]" + msg;
-        printMessage(message);
+        printMessage(LogHelper.formatLog(level,tag,msg));
     }
 
     /**
@@ -193,55 +143,6 @@ public class LogImpl {
         synchronized (mPrintWriter){
             mPrintWriter.println(msg);
         }
-    }
-
-    /**
-     * @return {@link #isOpen}
-     */
-    public boolean isOpen() {
-        return isOpen;
-    }
-
-    /**
-     * @param open the {@link #isOpen} to set
-     */
-    public void setOpen(boolean open) {
-        isOpen = open;
-    }
-
-    /**
-     * @return {@link #isWriteFile}
-     */
-    public boolean isWriteFile() {
-        return isWriteFile;
-    }
-
-    /**
-     * @param writeFile the {@link #isWriteFile} to set
-     */
-    public void setWriteFile(boolean writeFile) {
-        isWriteFile = writeFile;
-    }
-
-    /**
-     * @return {@link #mLevel}
-     */
-    public int getLevel() {
-        return mLevel;
-    }
-
-    /**
-     * @param level the {@link #mLevel} to set
-     */
-    public void setLevel(int level) {
-        mLevel = level;
-    }
-
-    /**
-     * @return {@link #mPath}
-     */
-    public String getPath() {
-        return mPath;
     }
 
 }

@@ -31,11 +31,16 @@ public class LogManager {
     /**
      * 保存日志实现的Map，可用于多个文件，多个进程使用
      */
-    private static Map<String,LogImpl> sLogMap = new HashMap<>();
+    private static Map<String,ILog> sLogMap = new HashMap<>();
     /**
      * 默认的日志实现对象
      */
-    private static LogImpl sDefLogImpl = null;
+    private static ILog sDefLogImpl = null;
+    /**
+     * 微信的Xlog实现
+     */
+    private static ILog sXlogImpl = null;
+
     /**
      * 默认的应用信息
      */
@@ -45,13 +50,25 @@ public class LogManager {
      */
     private static final String CRASH_FILE = "crash_file";
 
+
+
     /**
      * 初始化块
      */
     static {
+        //先创建文件夹 默认存储在 包名 + log 目录下
+        File dir = new File(AndroidUtil.getExternalDataPath() + File.separator + LogConstant.SUFFIX);
+        if (!dir.exists()){
+            dir.mkdirs();
+        }
+
+        String path = dir.getPath();
+
         //以当前进程名 为文件名
-        sDefLogImpl = new LogImpl(RuntimeEnv.procName);
+        sDefLogImpl = new LogImpl(path + File.separator + RuntimeEnv.procName + LogConstant.FILE_SUFFIX);
         sLogMap.put(LogConstant.DEF_NAME,sDefLogImpl);
+
+        //sXlogImpl = new XLogImpl();
     }
 
     /**
@@ -104,7 +121,6 @@ public class LogManager {
         return printLog(LogConstant.ERROR,tag,msg);
     }
 
-
     /**
      * 日志打印函数
      * @param level
@@ -114,21 +130,9 @@ public class LogManager {
      */
     private static int printLog(int level,String tag, String msg){
         //依次遍历map打开开关
-        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
+        for (Map.Entry<String,ILog> entry : sLogMap.entrySet()){
             entry.getValue().print(level,tag,msg);
         }
-        return 0;
-    }
-
-    /**
-     * 日志打印函数
-     * @param file
-     * @param level
-     * @param tag
-     * @param msg
-     * @return
-     */
-    private static int printLog(String file,int level,String tag, String msg){
         return 0;
     }
 
@@ -272,16 +276,16 @@ public class LogManager {
         return df.format(System.currentTimeMillis());
     }
 
-    /**
-     * 设置开关的状态
-     * @param open
-     */
-    public static void openLog(boolean open){
-        //依次遍历map打开开关
-        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
-            entry.getValue().setOpen(open);
-        }
-    }
+//    /**
+//     * 设置开关的状态
+//     * @param open
+//     */
+//    public static void openLog(boolean open){
+//        //依次遍历map打开开关
+//        for (Map.Entry<String,ILog> entry : sLogMap.entrySet()){
+//            entry.getValue().setOpen(open);
+//        }
+//    }
 
     /**
      * 设置是否写入文件
@@ -289,9 +293,8 @@ public class LogManager {
      */
     public static void writeFile(boolean write){
         //依次遍历map打开开关
-        for (Map.Entry<String,LogImpl> entry : sLogMap.entrySet()){
+        for (Map.Entry<String,ILog> entry : sLogMap.entrySet()){
             entry.getValue().setWriteFile(write);
         }
     }
-
 }

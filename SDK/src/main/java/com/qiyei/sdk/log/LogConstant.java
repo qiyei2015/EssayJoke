@@ -13,6 +13,12 @@ public class LogConstant {
      * Log的后缀
      */
     public static final String SUFFIX = "log";
+
+    /**
+     * Log文件的后缀
+     */
+    public static final String FILE_SUFFIX = ".log";
+
     /**
      * 默认名称
      */
@@ -48,5 +54,15 @@ public class LogConstant {
      */
     public static final int ASSERT = 6;
 
+
+    /**
+     * 日志打印的标签
+     */
+    public static final String V = "V";
+    public static final String D = "D";
+    public static final String I = "I";
+    public static final String W = "W";
+    public static final String E = "E";
+    public static final String A = "A";
 
 }

@@ -99,6 +99,9 @@ dependencies {
     //AspectJ
     api 'org.aspectj:aspectjrt:1.8.9'
 
+    //xlog https://github.com/Tencent/mars#mars_cn
+    api 'com.tencent.mars:mars-xlog:1.2.3'
+
     // add library
     api files('libs/nineoldandroids-2.4.0.jar')
     api files('libs/dom4j-2.1.0.jar')
