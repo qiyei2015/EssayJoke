@@ -117,8 +117,13 @@ public class ANRActivity extends AppCompatActivity {
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ACTION1);
-                ANRActivity.this.sendBroadcast(intent);
+//                Intent intent = new Intent(ACTION1);
+//                ANRActivity.this.sendBroadcast(intent);
+
+                Intent intent1 = new Intent("com.qiyei.android.perfromance.ANRTEST");
+                intent1.addFlags(0x01000000);
+                ANRActivity.this.sendBroadcast(intent1);
+                //writeXml()
             }
         });
 

@@ -3,7 +3,16 @@
     package="com.qiyei.performance">
 
     <application>
-        <activity android:name=".ui.activity.NetworkStatsDemoActivity"></activity>
+        <receiver
+            android:name=".ui.receiver.ANRReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.qiyei.android.perfromance.ANRTEST"/>
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".ui.activity.NetworkStatsDemoActivity" />
         <activity android:name=".ui.activity.AsyncLayoutInflaterActivity" />
         <activity android:name=".ui.activity.X2CDemoActivity" />
         <activity android:name=".ui.activity.ImageViewHookActivity" />
