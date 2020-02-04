@@ -11,7 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.GLSurfaceViewDemoActivity"></activity>
+        <activity android:name=".ui.activity.task.Demo4Activity"
+            android:launchMode="singleInstance"/>
+        <activity android:name=".ui.activity.task.Demo3Activity"
+            android:launchMode="singleTask"
+            />
+        <activity android:name=".ui.activity.task.Demo2Activity"
+            android:launchMode="singleInstance"
+            android:taskAffinity="com.android.ui.task3"
+            />
+        <activity android:name=".ui.activity.task.Demo1Activity"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.android.ui.task2"
+            />
+        <activity android:name=".ui.activity.LaunchModeAndTaskDemoActivity" />
+        <activity android:name=".ui.activity.GLSurfaceViewDemoActivity" />
         <activity android:name=".ui.activity.SurfaceViewDemoActivity" />
         <activity android:name=".ui.activity.CollapsingToolbarLayoutDemoActivity" />
         <activity android:name=".ui.activity.ToolbarDemoActivity" />

@@ -57,4 +57,48 @@ allprojects {
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
+    this.getSubprojects().each {
+        delete it.buildDir
+    }
+}
+
+/**
+ * 配置阶段之前，初始化阶段之后
+ */
+this.beforeEvaluate {
+    println "配置阶段之前"
+}
+
+/**
+ * 配置阶段之后，执行阶段之前
+ */
+this.afterEvaluate {
+    println "配置阶段之后，执行阶段之前"
+}
+
+/**
+ * 执行阶段之后的监听
+ */
+this.gradle.buildFinished {
+    println "执行阶段之后"
+}
+
+//等同于beforeEvaluate
+this.gradle.beforeProject {
+    println "配置阶段之前 beforeEvaluate"
+}
+
+//等同于afterEvaluate
+this.gradle.afterProject {
+    println "配置阶段之后，执行阶段之前 afterEvaluate"
+}
+
+//获取所有的工程
+this.getAllprojects().each {
+    println "正在遍历:${it.name}"
+}
+
+//所有子工程
+this.getSubprojects().each {
+    println "正在遍历子工程:${it.name}"
 }

@@ -2,7 +2,10 @@ package com.qiyei.android;
 
 
 import android.content.Context;
+import android.os.Looper;
 import android.os.StrictMode;
+import android.util.Log;
+import android.util.Printer;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.github.moduth.blockcanary.BlockCanary;
@@ -16,7 +19,8 @@ import com.qiyei.performance.bootstarter.TaskDispatcher;
 import com.qiyei.performance.bootstarter.task.MainTask;
 import com.qiyei.performance.bootstarter.task.Task;
 import com.qiyei.performance.frame.FrameManager;
-import com.qiyei.performance.hook.BitmapHook;
+import com.qiyei.performance.hook.ARTHookManager;
+import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.database.DatabaseManager;
 import com.qiyei.sdk.log.LogManager;
 
@@ -75,11 +79,11 @@ public class AndroidApplication extends FrameworkApplication {
                 .build();
 
         Task task4 = new Task.Builder()
-                .setName("initBitmapHook")
+                .setName("initARTHook")
                 .setTask(new Runnable() {
                     @Override
                     public void run() {
-                        BitmapHook.start();
+                        ARTHookManager.start();
                     }
                 })
                 .build();
@@ -111,6 +115,26 @@ public class AndroidApplication extends FrameworkApplication {
                 .addTask(task5)
                 .addTask(task6)
                 .start();
+
+        Looper.getMainLooper().setMessageLogging(new Printer() {
+
+            private static final String StartTAG = ">>>>>";
+            private static final String EndTAG = "<<<<<";
+            long time = 0;
+
+            @Override
+            public void println(String msg) {
+                if (msg.contains(StartTAG)){
+                    time = System.currentTimeMillis();
+                } else if (msg.contains(EndTAG)){
+                    long cost = System.currentTimeMillis() - time;
+                    if (cost > 16){
+
+                    }
+                    Log.e("EEE","cost:" + cost);
+                }
+            }
+        });
     }
 
 
@@ -153,7 +177,7 @@ public class AndroidApplication extends FrameworkApplication {
 
             @Override
             public void run() {
-                BitmapHook.start();
+                ARTHookManager.start();
             }
         }).addTask(new MainTask() {
             @Override
@@ -197,11 +221,19 @@ public class AndroidApplication extends FrameworkApplication {
     private void initStrictMode(){
         //使用严格模式，检测内存泄漏
         StrictMode.setVmPolicy(new StrictMode.VmPolicy.Builder()
-                .detectAll()//监测所以内容
+                .detectActivityLeaks()
+                .detectLeakedSqlLiteObjects()
+                //类实例限制
+                .setClassInstanceLimit(SDKManager.class,1)
+                .detectLeakedClosableObjects()
                 .penaltyLog()//违规对log日志
                 .build());
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
-                .detectAll()
+                .detectCustomSlowCalls()
+                .detectDiskReads()
+                .detectDiskWrites()
+                .detectNetwork()
+                .detectResourceMismatches()
                 .penaltyLog()
                 .build());
     }

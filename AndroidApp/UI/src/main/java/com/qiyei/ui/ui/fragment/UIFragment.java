@@ -14,6 +14,7 @@ import com.qiyei.ui.ui.activity.CoordinatorLayoutAndBehaviorActivity;
 import com.qiyei.ui.ui.activity.EssayJokeMainActivity;
 import com.qiyei.ui.ui.activity.GLSurfaceViewDemoActivity;
 import com.qiyei.ui.ui.activity.ImageChooseTestActivity;
+import com.qiyei.ui.ui.activity.LaunchModeAndTaskDemoActivity;
 import com.qiyei.ui.ui.activity.MultiDisplaySupportActivity;
 import com.qiyei.ui.ui.activity.RecyclerViewTestActivity;
 import com.qiyei.ui.ui.activity.ScanCodeActivity;
@@ -44,12 +45,12 @@ public class UIFragment extends CommonListFragment {
             ,"测试4 RecyclerViewTest","测试5 EssayJokeMain","测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试"
             ,"测试9 多屏幕分辨率适配","测试 二维码扫描","Toolbar","CoordinatorLayout+自定义Behavior"
             ,"CoordinatorLayout+AppbarLayout+CollapsingToolbarLayout实现Toolbar的折叠效果","CollapsingToolbarLayout 示例"
-            ,"SurfaceView 示例","GLSurfaceView 示例"};
+            ,"SurfaceView 示例","GLSurfaceView 示例","启动模式与任务栈示例"};
     private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,CommonDialogActivity.class,ViewPagerTestActivity.class
             ,RecyclerViewTestActivity.class,EssayJokeMainActivity.class,SkinSwitchTestActivity.class,BannerTestActivity.class,ImageChooseTestActivity.class
             ,MultiDisplaySupportActivity.class,ScanCodeActivity.class, ToolbarDemoActivity.class,CoordinatorLayoutAndBehaviorActivity.class
             , CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity.class, CollapsingToolbarLayoutDemoActivity.class
-            , SurfaceViewDemoActivity.class, GLSurfaceViewDemoActivity.class};
+            , SurfaceViewDemoActivity.class, GLSurfaceViewDemoActivity.class, LaunchModeAndTaskDemoActivity.class};
 
     public UIFragment() {
         super();
