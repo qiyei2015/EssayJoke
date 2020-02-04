@@ -116,25 +116,25 @@ public class AndroidApplication extends FrameworkApplication {
                 .addTask(task6)
                 .start();
 
-        Looper.getMainLooper().setMessageLogging(new Printer() {
-
-            private static final String StartTAG = ">>>>>";
-            private static final String EndTAG = "<<<<<";
-            long time = 0;
-
-            @Override
-            public void println(String msg) {
-                if (msg.contains(StartTAG)){
-                    time = System.currentTimeMillis();
-                } else if (msg.contains(EndTAG)){
-                    long cost = System.currentTimeMillis() - time;
-                    if (cost > 16){
-
-                    }
-                    Log.e("EEE","cost:" + cost);
-                }
-            }
-        });
+//        Looper.getMainLooper().setMessageLogging(new Printer() {
+//
+//            private static final String StartTAG = ">>>>>";
+//            private static final String EndTAG = "<<<<<";
+//            long time = 0;
+//
+//            @Override
+//            public void println(String msg) {
+//                if (msg.contains(StartTAG)){
+//                    time = System.currentTimeMillis();
+//                } else if (msg.contains(EndTAG)){
+//                    long cost = System.currentTimeMillis() - time;
+//                    if (cost > 16){
+//
+//                    }
+//                    Log.e("EEE","cost:" + cost);
+//                }
+//            }
+//        });
     }
 
 
@@ -317,7 +317,7 @@ public class AndroidApplication extends FrameworkApplication {
          */
         @Override
         public int provideBlockThreshold() {
-            return 1000;
+            return 500;
         }
 
         /**
@@ -374,7 +374,10 @@ public class AndroidApplication extends FrameworkApplication {
          */
         @Override
         public void upload(File zippedFile) {
-            throw new UnsupportedOperationException();
+
+            Log.w(TAG,"Block File:" + zippedFile.getAbsolutePath());
+
+            //throw new UnsupportedOperationException();
         }
 
 
@@ -426,7 +429,7 @@ public class AndroidApplication extends FrameworkApplication {
          */
         @Override
         public void onBlock(Context context, BlockInfo blockInfo) {
-
+            Log.w(TAG,"Block:" + blockInfo.toString());
         }
     }
 }
