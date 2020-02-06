@@ -10,6 +10,7 @@ import com.qiyei.performance.ui.activity.AppStartOptimizationActivity;
 import com.qiyei.performance.ui.activity.AsyncLayoutInflaterActivity;
 import com.qiyei.performance.ui.activity.ImageViewHookActivity;
 import com.qiyei.performance.ui.activity.MemoryLeakActivity;
+import com.qiyei.performance.ui.activity.MemoryOOMActivity;
 import com.qiyei.performance.ui.activity.MemoryOptimizationActivity;
 import com.qiyei.performance.ui.activity.UIDrawActivity;
 import com.qiyei.performance.ui.activity.X2CDemoActivity;
@@ -35,9 +36,9 @@ public class PerformanceFragment extends CommonListFragment {
     private List<MainMenu> mMenuList = new ArrayList<>();
 
     private String[] names = new String[]{"测试1 启动优化","测试2 ImageView Hook","测试3 AsyncLayoutInflater","测试4 X2CDemo",
-            "测试5 UI绘制优化","测试6 ANR","测试7 内存优化","测试8 内存泄漏",};
+            "测试5 UI绘制优化","测试6 ANR","测试7 内存优化","测试8 内存泄漏","测试9 OOM"};
     private Class<?>[] clazzs = new Class[]{AppStartOptimizationActivity.class, ImageViewHookActivity.class, AsyncLayoutInflaterActivity.class, X2CDemoActivity.class,
-            UIDrawActivity.class, ANRActivity.class, MemoryOptimizationActivity.class, MemoryLeakActivity.class,};
+            UIDrawActivity.class, ANRActivity.class, MemoryOptimizationActivity.class, MemoryLeakActivity.class, MemoryOOMActivity.class};
 
 
     public PerformanceFragment() {

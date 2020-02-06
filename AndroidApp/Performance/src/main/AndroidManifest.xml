@@ -3,12 +3,14 @@
     package="com.qiyei.performance">
 
     <application>
+        <activity android:name=".ui.activity.MemoryOOMActivity"></activity>
+
         <receiver
             android:name=".ui.receiver.ANRReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.qiyei.android.perfromance.ANRTEST"/>
+                <action android:name="com.qiyei.android.perfromance.ANRTEST" />
             </intent-filter>
         </receiver>
 

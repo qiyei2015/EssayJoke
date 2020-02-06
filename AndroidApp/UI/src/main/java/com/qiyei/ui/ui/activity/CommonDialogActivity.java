@@ -2,6 +2,7 @@ package com.qiyei.ui.ui.activity;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,15 @@ import com.qiyei.ui.R;
 
 public class CommonDialogActivity extends AppCompatActivity {
 
+    private static final String TAG = "CommonDialogActivity";
+
+    public static final String SECOND_TAG = "LifeCycleDemo ";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_dialog);
+        Log.i(TAG,SECOND_TAG + "onCreate");
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,4 +99,39 @@ public class CommonDialogActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.i(TAG,SECOND_TAG + "onStart");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.i(TAG,SECOND_TAG + "onResume");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.i(TAG,SECOND_TAG + "onPause");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.i(TAG,SECOND_TAG + "onStop");
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Log.i(TAG,SECOND_TAG + "finish");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.i(TAG,SECOND_TAG + "onDestroy");
+    }
 }
