@@ -3,7 +3,9 @@
     package="com.qiyei.architecture">
 
     <application>
-        <activity android:name=".ui.activity.NavigationDemoActivity"></activity>
+        <activity android:name=".viper.view.activity.MovieAddActivity"></activity>
+        <activity android:name=".viper.view.activity.MovieListActivity" />
+        <activity android:name=".ui.activity.NavigationDemoActivity" />
         <activity android:name=".ui.activity.PagingRoomDataSourceActivity" />
         <activity android:name=".ui.activity.PagingCustomDataSourceActivity" />
         <activity android:name=".ui.activity.PagingDemoActivity" />
