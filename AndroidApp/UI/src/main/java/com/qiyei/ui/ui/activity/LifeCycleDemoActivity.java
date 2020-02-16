@@ -1,5 +1,6 @@
 package com.qiyei.ui.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -66,4 +67,9 @@ public class LifeCycleDemoActivity extends AppCompatActivity {
         Log.i(TAG,SECOND_TAG + "onDestroy");
     }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG,SECOND_TAG + "onSaveInstanceState");
+    }
 }
