@@ -21,7 +21,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.6.0'
 //        //ARouter
 //        classpath "com.alibaba:arouter-register:1.0.2"
         //kotlin
@@ -60,6 +60,10 @@ task clean(type: Delete) {
     this.getSubprojects().each {
         delete it.buildDir
     }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
 
 /**
