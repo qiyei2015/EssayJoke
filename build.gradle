@@ -57,9 +57,9 @@ allprojects {
 }
 task clean(type: Delete) {
     delete rootProject.buildDir
-    this.getSubprojects().each {
-        delete it.buildDir
-    }
+//    this.getSubprojects().each {
+//        delete it.buildDir
+//    }
 }
 
 tasks.withType(JavaCompile) {
