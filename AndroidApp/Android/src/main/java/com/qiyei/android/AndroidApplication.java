@@ -23,6 +23,7 @@ import com.qiyei.performance.hook.ARTHookManager;
 import com.qiyei.sdk.SDKManager;
 import com.qiyei.sdk.database.DatabaseManager;
 import com.qiyei.sdk.log.LogManager;
+import com.tencent.mmkv.MMKV;
 
 import java.io.File;
 import java.util.LinkedList;
@@ -108,12 +109,23 @@ public class AndroidApplication extends FrameworkApplication {
                 })
                 .build();
 
+        Task task7 = new Task.Builder()
+                .setName("initMMKV")
+                .setTask(new Runnable() {
+                    @Override
+                    public void run() {
+                        String root = MMKV.initialize(getApplicationContext());
+                        Log.i(TAG,"mmkv root=" + root);
+                    }
+                })
+                .build();
         TaskDispatcher.getInstance()
                 .addTask(task2)
                 .addTask(task3)
                 .addTask(task4)
                 .addTask(task5)
                 .addTask(task6)
+                .addTask(task7)
                 .start();
 
 //        Looper.getMainLooper().setMessageLogging(new Printer() {

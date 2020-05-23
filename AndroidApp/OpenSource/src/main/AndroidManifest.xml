@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.qiyei.opensource">
+    package="com.qiyei.opensource">
 
     <application>
-        <activity android:name=".ui.activity.RxjavaTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.OkioTestActivity">
-        </activity>
-        <activity android:name=".ui.activity.DaggerDemoActivity">
-        </activity>
-        <activity android:name=".ui.activity.HotfixTestActivity">
-        </activity>
+        <activity android:name=".ui.activity.MMKVDemoActivity"></activity>
+        <activity android:name=".ui.activity.RxjavaTestActivity"></activity>
+        <activity android:name=".ui.activity.OkioTestActivity"></activity>
+        <activity android:name=".ui.activity.DaggerDemoActivity"></activity>
+        <activity android:name=".ui.activity.HotfixTestActivity"></activity>
     </application>
 
 </manifest>

@@ -4,7 +4,6 @@ android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
 
 
-
     defaultConfig {
         minSdkVersion rootProject.ext.common.minSdkVersion
         targetSdkVersion rootProject.ext.common.targetSdkVersion
@@ -39,6 +38,8 @@ dependencies {
 
     //hotfix
     api "com.aliyun.ams:alicloud-android-hotfix:$hotfix_version"
+
+    api 'com.tencent:mmkv-static:1.1.1'
 
     api project(':Framework:Framework')
 

@@ -33,7 +33,7 @@ public class OpenSourceFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 Rxjava测试","测试2 Okio测试","测试3 Dagger2","测试4 热修复"};
+    private String[] names = new String[]{"测试1 Rxjava测试","测试2 Okio测试","测试3 Dagger2","测试4 热修复","测试5 MMKV开源框架"};
     private Class<?>[] clazzs = new Class[]{RxjavaTestActivity.class,OkioTestActivity.class,DaggerDemoActivity.class,HotfixTestActivity.class};
 
 
