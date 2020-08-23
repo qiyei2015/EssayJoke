@@ -7,6 +7,7 @@ import android.view.View;
 import com.qiyei.architecture.ui.activity.ArchitectureActivity;
 import com.qiyei.architecture.ui.activity.BinderTestActivity;
 import com.qiyei.architecture.ui.activity.ComponentDemoActivity;
+import com.qiyei.architecture.ui.activity.DataBindingActivity;
 import com.qiyei.architecture.ui.activity.DataCenterTestActivity;
 import com.qiyei.architecture.ui.activity.DatabaseTestActivity;
 import com.qiyei.architecture.ui.activity.NavigationDemoActivity;
@@ -39,10 +40,10 @@ public class ArchitectureFragment extends CommonListFragment {
 
     private String[] names = new String[]{"测试1 动态代理","测试2 数据中心","测试3 进程保活","测试4 Binder测试"
             ,"测试5 网络框架测试","测试6 数据库框架测试","测试7 Android架构组件","测试8 组件化测试"
-            ,"测试9 WorkManager","测试10 PagingDemo分页加载库","测试11 NavigationDemo导航Demo","测试12 VIPER架构","测试13 SQLite架构测试"};
+            ,"测试9 WorkManager","测试10 PagingDemo分页加载库","测试11 NavigationDemo导航Demo","测试12 VIPER架构","测试13 SQLite架构测试","测试14 DataBinding","测试15 MVVM + DataBinding + ViewModel"};
     private Class<?>[] clazzs = new Class[]{ProxyTestActivity.class,DataCenterTestActivity.class,ProcessKeepAliveActivity.class,BinderTestActivity.class
             ,NetworkTestActivity.class,DatabaseTestActivity.class,ArchitectureActivity.class,ComponentDemoActivity.class, WorkManagerDemoActivity.class
-            , PagingDemoActivity.class, NavigationDemoActivity.class, MovieListActivity.class, SQLiteDemoActivity.class};
+            , PagingDemoActivity.class, NavigationDemoActivity.class, MovieListActivity.class, SQLiteDemoActivity.class, DataBindingActivity.class,DataBindingActivity.class};
 
 
     public ArchitectureFragment() {

@@ -3,7 +3,8 @@
     package="com.qiyei.architecture">
 
     <application>
-        <activity android:name=".ui.activity.SQLiteDemoActivity"></activity>
+        <activity android:name=".ui.activity.DataBindingActivity"></activity>
+        <activity android:name=".ui.activity.SQLiteDemoActivity" />
         <activity android:name=".viper.view.activity.MovieAddActivity" />
         <activity android:name=".viper.view.activity.MovieListActivity" />
         <activity android:name=".ui.activity.NavigationDemoActivity" />
