@@ -2,6 +2,7 @@ package com.qiyei.essayjoke;
 
 import android.app.Application;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.qiyei.framework.FrameworkApplication;
 import com.qiyei.framework.skin.SkinManager;
 import com.qiyei.sdk.SDKManager;
@@ -25,7 +26,7 @@ public class BaseApplication extends FrameworkApplication {
 //        }
         //初始化皮肤管理器
         SkinManager.getInstance().init(this);
-
+        ARouter.init(this);
         LogManager.i("ddddd","444444444");
 
     }

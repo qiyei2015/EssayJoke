@@ -14,8 +14,6 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        //分包
-        multiDexEnabled true
     }
 
     compileOptions {
@@ -54,7 +52,7 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.debug
-            multiDexKeepFile file('multidex-config.txt')
+            //multiDexKeepFile file('multidex-config.txt')
             //multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -66,7 +64,7 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.release
-            multiDexKeepFile file('multidex-config.txt')
+            //multiDexKeepFile file('multidex-config.txt')
             //multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

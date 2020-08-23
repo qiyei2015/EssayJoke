@@ -15,8 +15,6 @@ android {
                 cppFlags ""
             }
         }
-        //分包
-        multiDexEnabled true
     }
 
     compileOptions {
