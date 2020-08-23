@@ -16,8 +16,6 @@ android {
 
         //分包
         multiDexEnabled true
-        multiDexKeepProguard file("multiDexKeep.pro")
-
     }
 
     compileOptions {
@@ -56,6 +54,7 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.debug
+            multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -66,6 +65,7 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.release
+            multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 

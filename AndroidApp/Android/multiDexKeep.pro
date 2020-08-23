@@ -1,1 +1,1 @@
--keep public class com.qiyei.android.{*;}
+-keep class com.qiyei.android.**{*;}
