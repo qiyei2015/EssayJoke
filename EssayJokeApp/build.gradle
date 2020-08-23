@@ -87,7 +87,7 @@ android {
     }
 
     //指定github上ndk版本，要不然会编译失败
-    ndkVersion '21.3.6528147'
+    ndkVersion ' 21.0.6113669'
 }
 
 dependencies {
