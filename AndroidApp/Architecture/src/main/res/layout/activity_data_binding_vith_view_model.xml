@@ -5,38 +5,25 @@
 
     <data>
         <variable
-            name="bean"
-            type="com.qiyei.architecture.data.bean.DataBean" />
+            name="viewmodel"
+            type="com.qiyei.architecture.ui.viewmodel.DataBindingTestViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.activity.DataBindingActivity">
+        tools:context=".ui.activity.DataBindingVithViewModelActivity">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv"
-            android:text="@{bean.name,default=123456}"
+            android:text="@{viewmodel.name,default=66666}"
             android:gravity="center"
-            app:layout_constraintBottom_toTopOf="@+id/btn"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
         </TextView>
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btn"
-            android:text="databinding with viewmodel"
-            android:textAllCaps="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-        </Button>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
