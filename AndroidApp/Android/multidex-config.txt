@@ -1,0 +1,1 @@
+com/qiyei/android/AndroidApplication.class

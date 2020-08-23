@@ -54,7 +54,8 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.debug
-            multiDexKeepProguard file('"multiDexKeep.pro"')
+            multiDexKeepFile file('multidex-config.txt')
+            //multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -65,7 +66,8 @@ android {
             shrinkResources  = false
             minifyEnabled false
             signingConfig signingConfigs.release
-            multiDexKeepProguard file('"multiDexKeep.pro"')
+            multiDexKeepFile file('multidex-config.txt')
+            //multiDexKeepProguard file('"multiDexKeep.pro"')
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
 
@@ -101,8 +103,6 @@ dependencies {
 
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
-
-    implementation "androidx.multidex:multidex:2.0.1"
 
     api project(':AndroidApp:UI')
     api project(':AndroidApp:OpenSource')

@@ -71,9 +71,6 @@ dependencies {
     //paging,For Kotlin use paging-runtime-ktx
     implementation "androidx.paging:paging-runtime:2.1.1"
 
-    //分包
-    implementation "androidx.multidex:multidex:2.0.1"
-
     //Room
     api "androidx.room:room-runtime:2.2.3"
     // use kapt for Kotlin

@@ -1,8 +1,8 @@
 package com.qiyei.framework
 
 
+import android.app.Application
 import android.content.Context
-import androidx.multidex.MultiDexApplication
 import com.qiyei.framework.injection.component.AppComponent
 import com.qiyei.framework.injection.component.DaggerAppComponent
 import com.qiyei.framework.injection.module.AppModule
@@ -15,7 +15,7 @@ import com.squareup.leakcanary.LeakCanary
  * @email: 1273482124@qq.com
  * @description:
  */
-open class FrameworkApplication: MultiDexApplication() {
+open class FrameworkApplication: Application() {
 
     lateinit var mAppComponent:AppComponent
 

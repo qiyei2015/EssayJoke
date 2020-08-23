@@ -1,6 +1,7 @@
 package com.qiyei.android;
 
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Looper;
 import android.os.StrictMode;
