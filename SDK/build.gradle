@@ -100,7 +100,7 @@ dependencies {
     })
 
     //AspectJ
-    api 'org.aspectj:aspectjrt:1.8.9'
+    api 'org.aspectj:aspectjrt:1.9.5'
 
     //xlog https://github.com/Tencent/mars#mars_cn
     api 'com.tencent.mars:mars-xlog:1.2.3'
