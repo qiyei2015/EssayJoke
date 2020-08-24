@@ -20,7 +20,7 @@ ext{
      */
     common = [
             compileSdkVersion: 29,
-            buildToolsVersion: '29.0.2',
+            buildToolsVersion: '30.0.1',
             minSdkVersion    : 23,
             targetSdkVersion : 28,
     ]
