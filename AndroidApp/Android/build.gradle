@@ -88,6 +88,10 @@ android {
     aaptOptions { 
         cruncherEnabled = false
     }
+    
+    dataBinding {
+        enabled = true
+    }
 
     //指定github上ndk版本，要不然会编译失败
     ndkVersion '21.3.6528147'
