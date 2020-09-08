@@ -16,5 +16,9 @@ jobs:
     - name: chomd gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
-      run: ./gradlew build --parallel
-
+      run: ./gradlew assembleRelease --parallel
+    - name: Upload APK
+      uses: actions/upload-artifact@v1
+      with:
+        name: app
+        path: ../Compile/
