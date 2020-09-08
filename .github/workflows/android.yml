@@ -18,7 +18,7 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew assembleRelease --parallel
     - name: Upload APK
-      uses: actions/upload-artifact@v1
+      uses: actions/upload-artifact@v2
       with:
         name: app
-        path: ../Compile/
+        path: ../AndroidApp/Android/build/outputs/apk/release
