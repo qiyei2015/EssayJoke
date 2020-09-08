@@ -14,6 +14,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.activity.DataBindingActivity">
 
+        <!--单向绑定-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,6 +26,14 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
         </TextView>
+
+        <!--双向绑定-->
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit"
+            android:text="@={bean.value}">
+        </EditText>
 
         <Button
             android:layout_width="match_parent"
