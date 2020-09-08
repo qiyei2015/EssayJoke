@@ -1,7 +1,5 @@
 package com.qiyei.architecture.base;
 
-import android.app.IntentService;
-import android.content.ContentResolver;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LifecycleOwner;
