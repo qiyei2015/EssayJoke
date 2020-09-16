@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.LifeCycleDemo2Activity"></activity>
+        <activity android:name=".ui.activity.FragmentLazyLoadTwoActivity"></activity>
+        <activity android:name=".ui.activity.FragmentLazyLoadOneActivity" />
+        <activity android:name=".ui.activity.LifeCycleDemo2Activity" />
         <activity android:name=".ui.activity.LifeCycleDemoActivity" />
         <activity
             android:name=".ui.activity.task.Demo4Activity"
