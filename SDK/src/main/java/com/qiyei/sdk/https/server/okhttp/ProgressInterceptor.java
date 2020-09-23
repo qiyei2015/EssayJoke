@@ -38,7 +38,7 @@ public class ProgressInterceptor implements Interceptor {
         Request original = chain.request();
 
         //取出okHttp tag保存的数据
-        HttpTask task = (HttpTask) original.tag();
+        HttpTask task = (HttpTask) original.tag(HttpTask.class);
         if (task == null){
             return chain.proceed(original);
         }

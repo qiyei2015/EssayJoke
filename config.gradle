@@ -121,10 +121,10 @@ ext{
      */
     // java代码编写开源库
     javapoet_version = '1.7.0'
-    okhttp_version = '3.10.0'
-    retrofit_version = '2.3.0'
-    converter_gson_version = '2.3.0'
-    adapter_rxjava2_version = '2.3.0'
+    okhttp_version = '4.9.0'
+    retrofit_version = '2.9.0'
+    converter_gson_version = '2.9.0'
+    adapter_rxjava2_version = '2.9.0'
 
     /**
      * Rx系列

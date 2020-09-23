@@ -33,6 +33,7 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -300,10 +301,12 @@ public class RetrofitEngine implements IHttpEngine {
         //反射设置 tag
         Class<?> clazz = request.getClass();
         try {
-            Field field = clazz.getDeclaredField("tag");
+            Field field = clazz.getDeclaredField("tags");
             field.setAccessible(true);
             //将task设置成tag字段，保存数据
-            field.set(request,task);
+            Map<Class<?>,Object> originalMap = (Map<Class<?>, Object>) field.get(request);
+            originalMap.put(HttpTask.class,task);
+            field.set(request,originalMap);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
