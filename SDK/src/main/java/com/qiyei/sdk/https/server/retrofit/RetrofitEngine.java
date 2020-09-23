@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 import com.qiyei.sdk.https.HTTP;
+import com.qiyei.sdk.https.api.HTTPException;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -70,6 +71,7 @@ public class RetrofitEngine implements IHttpEngine {
         //构造Call
         Call call = buildCall(task,params);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
         //设置task到okHttp拦截器中
@@ -106,6 +108,7 @@ public class RetrofitEngine implements IHttpEngine {
         //构造Call
         Call call = buildCall(task,params);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
         //设置task到okHttp拦截器中
@@ -170,6 +173,7 @@ public class RetrofitEngine implements IHttpEngine {
         //构造Call
         Call call = buildCall(retrofit,task,params);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
         //设置task到okHttp拦截器中
@@ -442,7 +446,7 @@ public class RetrofitEngine implements IHttpEngine {
         for (Method method : task.getRequest().getApiClazz().getDeclaredMethods()){
 
             String value = null;
-
+            LogManager.d(HTTP.TAG,"taskId=" + task.getTaskId() + " getMethodName method=" + method.getName() + " from class " + task.getRequest().getApiClazz().getCanonicalName());
             switch (task.getRequest().getMethod()){
                 case HTTP.GET:
                     GET getAnnotation = method.getAnnotation(GET.class);
@@ -480,6 +484,7 @@ public class RetrofitEngine implements IHttpEngine {
                 default:
                     break;
             }
+
             if (value != null && task.getRequest().getPathUrl().equals(value)){
                 methodName = method.getName();
                 LogManager.v(HTTP.TAG,"method :" + methodName);
@@ -707,5 +712,15 @@ public class RetrofitEngine implements IHttpEngine {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    private <T,R> void onFailureCall(HttpTask<T> task, final IHttpCallback<R> callback,Exception exception){
+        //移除task
+        HttpCallManager.getInstance().removeCall(task.getTaskId());
+        callback.onFailure(exception);
+    }
+
+    private <T,R> void onFailureBuildCall(HttpTask<T> task, final IHttpCallback<R> callback){
+        onFailureCall(task,callback,new HTTPException(task.getTaskId(),"build call exception ,result is null"));
     }
 }

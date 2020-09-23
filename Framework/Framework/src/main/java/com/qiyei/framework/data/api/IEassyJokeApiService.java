@@ -55,7 +55,7 @@ public interface IEassyJokeApiService {
      * @return
      */
     @Streaming
-    @GET("sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe")
+    @GET("issue/netdisk/yunguanjia/BaiduYunGuanjia_7.0.2.9.exe")
     Call<ResponseBody> downloadFileWithFixedUrl();
 
     /**
