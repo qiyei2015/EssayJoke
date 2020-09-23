@@ -32,6 +32,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -305,8 +306,12 @@ public class RetrofitEngine implements IHttpEngine {
             field.setAccessible(true);
             //将task设置成tag字段，保存数据
             Map<Class<?>,Object> originalMap = (Map<Class<?>, Object>) field.get(request);
-            originalMap.put(HttpTask.class,task);
-            field.set(request,originalMap);
+            Map<Class<?>,Object> newMap = new HashMap<>();
+            for (Map.Entry<Class<?>,Object> entry : originalMap.entrySet()){
+                newMap.put(entry.getKey(),entry.getValue());
+            }
+            newMap.put(HttpTask.class,task);
+            field.set(request,newMap);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

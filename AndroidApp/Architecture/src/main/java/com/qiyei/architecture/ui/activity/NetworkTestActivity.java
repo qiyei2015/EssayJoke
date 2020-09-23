@@ -196,13 +196,13 @@ public class NetworkTestActivity extends AppCompatActivity {
 
         String url = "http://central.maven.org/maven2/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar";
 
-        String url2  = "http://issuecdn.baidupcs.com/issue/netdisk/yunguanjia/BaiduYunGuanjia_7.0.2.9.exe";
+        String url2  = "https://downloads.gradle-dn.com/distributions/gradle-6.5-all.zip";
 
         HttpRequest<String> request = new HttpRequest.Builder<String>()
                 .download()
-                .setBaseUrl("http://issuecdn.baidupcs.com/")
-                .setPathUrl("issue/netdisk/yunguanjia/BaiduYunGuanjia_7.0.2.9.exe")
-                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/BaiduYunGuanjia_7.0.2.9.exe")
+                .setBaseUrl("https://downloads.gradle-dn.com/")
+                .setPathUrl("distributions/gradle-6.5-all.zip")
+                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/gradle-6.5-all.zip")
                 .setBody(null)
                 .setApiClazz(IEassyJokeApiService.class)
                 .build();

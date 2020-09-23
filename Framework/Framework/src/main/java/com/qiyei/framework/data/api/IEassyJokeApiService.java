@@ -55,7 +55,7 @@ public interface IEassyJokeApiService {
      * @return
      */
     @Streaming
-    @GET("issue/netdisk/yunguanjia/BaiduYunGuanjia_7.0.2.9.exe")
+    @GET("distributions/gradle-6.5-all.zip")
     Call<ResponseBody> downloadFileWithFixedUrl();
 
     /**
