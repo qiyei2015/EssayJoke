@@ -95,6 +95,12 @@ android {
     ndkVersion '21.3.6528147'
 }
 
+aspectjx {
+    //开启AspectJX功能
+    enabled true
+    include 'com.qiyei.mall.MallApplication'
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -111,6 +117,9 @@ dependencies {
 
     //ARouter
     kapt "com.alibaba:arouter-compiler:$arouter_compiler_version"
+
+    //AspectJ
+    implementation 'org.aspectj:aspectjrt:1.9.5'
 
     implementation ("org.jetbrains.anko:anko-commons:$anko_version", {
         exclude group: 'com.android.support'

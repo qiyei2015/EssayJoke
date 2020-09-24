@@ -13,39 +13,39 @@ import org.aspectj.lang.annotation.Aspect;
  * @email: 1273482124@qq.com
  * @description:
  */
-//@Aspect
+@Aspect
 public class PerformanceManager {
 
     private static final String TAG = "PerformanceManager";
 
-//    @Around("execution(* com.qiyei.android.AndroidApplication.on**(..))")
-//    public Object getAndroidApplicationTime(ProceedingJoinPoint joinPoint){
-//        Signature signature = joinPoint.getSignature();
-//        long time = System.currentTimeMillis();
-//        Object object = null;
-//        try {
-//            object = joinPoint.proceed();
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-//        LogManager.i(TAG, "getAndroidApplicationTime "+ signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
-//        return object;
-//    }
+    @Around("execution(* com.qiyei.android.AndroidApplication.on**(..))")
+    public Object getAndroidApplicationTime(ProceedingJoinPoint joinPoint){
+        Signature signature = joinPoint.getSignature();
+        long time = System.currentTimeMillis();
+        Object object = null;
+        try {
+            object = joinPoint.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        LogManager.i(TAG, "getAndroidApplicationTime "+ signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
+        return object;
+    }
 
-//    @Around("call(* com.qiyei.android.AndroidApplication.**(..))")
-//    public Object getApplicationTime(ProceedingJoinPoint joinPoint){
-//        Signature signature = joinPoint.getSignature();
-//        long time = System.currentTimeMillis();
-//        Object object = null;
-//        try {
-//            object = joinPoint.proceed();
-//        } catch (Throwable throwable) {
-//            throwable.printStackTrace();
-//        }
-//        LogManager.i(TAG, "getApplicationTime " + signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
-//
-//        return object;
-//    }
+    @Around("call(* com.qiyei.android.AndroidApplication.**(..))")
+    public Object getApplicationTime(ProceedingJoinPoint joinPoint){
+        Signature signature = joinPoint.getSignature();
+        long time = System.currentTimeMillis();
+        Object object = null;
+        try {
+            object = joinPoint.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        LogManager.i(TAG, "getApplicationTime " + signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
+
+        return object;
+    }
 
 
 }

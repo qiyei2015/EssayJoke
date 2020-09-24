@@ -100,6 +100,7 @@ android {
 aspectjx {
     //开启AspectJX功能
     enabled true
+    include 'com.qiyei.android.AndroidApplication'
 }
 
 dependencies {
@@ -110,6 +111,9 @@ dependencies {
 
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+
+    //AspectJ
+    implementation 'org.aspectj:aspectjrt:1.9.5'
 
     api project(':AndroidApp:UI')
     api project(':AndroidApp:OpenSource')
