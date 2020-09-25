@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-aspectjx' // apply plugin
+// for upload to jcenter
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -108,4 +110,49 @@ dependencies {
 
     androidTestImplementation "androidx.test.espresso:espresso-core:3.2.0"
     testImplementation "junit:junit:4.12"
+}
+
+//publish common: gradlew clean build bintrayUpload -PbintrayUser=账号 -PbintrayKey=key -PdryRun=false  -x javadocRelease
+//github主页
+def siteUrl = 'https://github.com/qiyei2015/EssayJoke'
+def pomName = this.getProject().getName()
+def pomVersion = '1.0.0'
+publish{
+    //远程仓库名字,不指明，默认是上传到maven
+    repoName = 'android'
+    //bintray.com的用户名
+    userOrg = 'qiyei2018'
+    //一个唯一值，默认包名,生成的gradle依赖前缀
+    groupId = 'com.qiyei.sdk'
+    //
+    artifactId = pomName
+    //版本号
+    publishVersion = pomVersion
+    //描述，不重要
+    desc = 'android develop sdk'
+    //引用github主页
+    website = siteUrl
+    //bintray.com用户名
+    bintrayUser = 'qiyei2018'
+    bintrayKey = '9f1bf1dbdae9a54f84286bc0e26ec88ddd057ab6'
+    //设置为false才能上传
+    dryRun=false
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'utf-8'
+}
+//tasks.withType(Javadoc).all { enabled = false }
+//防止编码问题
+tasks.withType(Javadoc) {
+    options.encoding = "utf-8"
+    //options.compilerArgs.add("-encoding utf-8 -charset utf-8")
+    options.addStringOption('Xdoclint:none', '-quiet')
+    options.addStringOption('encoding', 'utf-8')
+    options.addStringOption('charSet', 'utf-8')
+    failOnError false
+    if (this.property("android") != null){
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
 }
