@@ -70,7 +70,7 @@ tasks.withType(JavaCompile) {
 
 
 subprojects {
-    //
+    //for all subProjects
 }
 
 /**
