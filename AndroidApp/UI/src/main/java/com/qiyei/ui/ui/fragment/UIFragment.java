@@ -11,6 +11,7 @@ import com.qiyei.ui.ui.activity.CollapsingToolbarLayoutDemoActivity;
 import com.qiyei.ui.ui.activity.CommonDialogActivity;
 import com.qiyei.ui.ui.activity.CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity;
 import com.qiyei.ui.ui.activity.CoordinatorLayoutAndBehaviorActivity;
+import com.qiyei.ui.ui.activity.DialogThemeActivity;
 import com.qiyei.ui.ui.activity.EssayJokeMainActivity;
 import com.qiyei.ui.ui.activity.FragmentLazyLoadOneActivity;
 import com.qiyei.ui.ui.activity.FragmentLazyLoadTwoActivity;
@@ -48,12 +49,13 @@ public class UIFragment extends CommonListFragment {
             ,"测试4 RecyclerViewTest","测试5 EssayJokeMain","测试6 换肤测试","测试7 Banner测试","测试8 图片选择器测试"
             ,"测试9 多屏幕分辨率适配","测试 二维码扫描","Toolbar","CoordinatorLayout+自定义Behavior"
             ,"CoordinatorLayout+AppbarLayout+CollapsingToolbarLayout实现Toolbar的折叠效果","CollapsingToolbarLayout 示例"
-            ,"SurfaceView 示例","GLSurfaceView 示例","启动模式与任务栈示例","Activity生命周期","Fragment懒加载1","Fragment懒加载2"};
+            ,"SurfaceView 示例","GLSurfaceView 示例","启动模式与任务栈示例","Activity生命周期","Fragment懒加载1","Fragment懒加载2","DialogTheme Activity 对话框样式的Activity"};
     private Class<?>[] clazzs = new Class[]{XGrirdViewActivity.class,CommonDialogActivity.class,ViewPagerTestActivity.class
             ,RecyclerViewTestActivity.class,EssayJokeMainActivity.class,SkinSwitchTestActivity.class,BannerTestActivity.class,ImageChooseTestActivity.class
             ,MultiDisplaySupportActivity.class,ScanCodeActivity.class, ToolbarDemoActivity.class,CoordinatorLayoutAndBehaviorActivity.class
             , CoordinatorLayoutAndAppbarLayoutAndCollapsingToolbarLayoutActivity.class, CollapsingToolbarLayoutDemoActivity.class
-            , SurfaceViewDemoActivity.class, GLSurfaceViewDemoActivity.class, LaunchModeAndTaskDemoActivity.class, LifeCycleDemoActivity.class, FragmentLazyLoadOneActivity.class, FragmentLazyLoadTwoActivity.class};
+            , SurfaceViewDemoActivity.class, GLSurfaceViewDemoActivity.class, LaunchModeAndTaskDemoActivity.class, LifeCycleDemoActivity.class, FragmentLazyLoadOneActivity.class, FragmentLazyLoadTwoActivity.class
+            , DialogThemeActivity.class};
 
     public UIFragment() {
         super();

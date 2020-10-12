@@ -20,10 +20,4 @@
         <!-- 点击空白部分activity不消失 -->
         <item name="android:windowCloseOnTouchOutside">false</item>
     </style>
-
-
-    <style name="activity_dialog" parent="dialog">
-
-    </style>
-
 </resources>

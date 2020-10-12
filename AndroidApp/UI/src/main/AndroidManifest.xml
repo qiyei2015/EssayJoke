@@ -11,7 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.FragmentLazyLoadTwoActivity"></activity>
+        <activity android:name=".ui.activity.DialogThemeActivity"
+            android:theme="@style/DialogTheme"
+            android:launchMode="singleInstance"></activity>
+        <activity android:name=".ui.activity.FragmentLazyLoadTwoActivity" />
         <activity android:name=".ui.activity.FragmentLazyLoadOneActivity" />
         <activity android:name=".ui.activity.LifeCycleDemo2Activity" />
         <activity android:name=".ui.activity.LifeCycleDemoActivity" />
