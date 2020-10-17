@@ -35,7 +35,7 @@ import okhttp3.ResponseBody;
  */
 public class NetworkTestActivity extends AppCompatActivity {
 
-    private final String TAG = "BaseActivity";
+    private final String TAG = "NetworkTestActivity";
 
 
     private ProgressBar mDownloadProgressBar;
@@ -128,7 +128,7 @@ public class NetworkTestActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(ResponseBody response) {
-                        LogManager.i(TAG,"response:" + response);
+                        LogManager.i(TAG,"response:");
                     }
 
                     @Override
@@ -196,13 +196,13 @@ public class NetworkTestActivity extends AppCompatActivity {
 
         String url = "http://central.maven.org/maven2/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar";
 
-        String url2  = "http://sw.bos.baidu.com/sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe";
+        String url2  = "https://downloads.gradle-dn.com/distributions/gradle-6.5-all.zip";
 
         HttpRequest<String> request = new HttpRequest.Builder<String>()
                 .download()
-                .setBaseUrl("http://sw.bos.baidu.com/")
-                .setPathUrl("sw-search-sp/software/16d5a98d3e034/QQ_8.9.5.22062_setup.exe")
-                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/QQ.exe")
+                .setBaseUrl("https://downloads.gradle-dn.com/")
+                .setPathUrl("distributions/gradle-6.5-all.zip")
+                .setFilePath(AndroidUtil.getExternalDataPath() + "/download/gradle-6.5-all.zip")
                 .setBody(null)
                 .setApiClazz(IEassyJokeApiService.class)
                 .build();

@@ -3,6 +3,7 @@ package com.qiyei.sdk.https.server.okhttp;
 import android.os.Handler;
 import android.os.Looper;
 
+import com.qiyei.sdk.https.api.HTTPException;
 import com.qiyei.sdk.https.server.HttpCallManager;
 import com.qiyei.sdk.https.server.HttpResponse;
 import com.qiyei.sdk.https.server.HttpUtil;
@@ -54,25 +55,16 @@ public class OkHttpEngine implements IHttpEngine{
 
         Call call = OkHttpHelper.buildGetCall(mClient,task);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
 
         //添加call
         HttpCallManager.getInstance().addCall(task.getTaskId(),call);
-
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-
-                //移除call
-                HttpCallManager.getInstance().removeCall(task.getTaskId());
-
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onFailure(e);
-                    }
-                });
+                onFailureCall(task,callback,e);
             }
 
             @Override
@@ -107,6 +99,7 @@ public class OkHttpEngine implements IHttpEngine{
 
         Call call = OkHttpHelper.buildPostCall(mClient,task);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
 
@@ -116,17 +109,7 @@ public class OkHttpEngine implements IHttpEngine{
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-
-                //移除call
-                HttpCallManager.getInstance().removeCall(task.getTaskId());
-
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        callback.onFailure(e);
-                    }
-                });
+                onFailureCall(task,callback,e);
             }
 
             @Override
@@ -160,6 +143,7 @@ public class OkHttpEngine implements IHttpEngine{
 
         Call call = OkHttpHelper.buildDownloadCall(mClient,task);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
 
@@ -169,16 +153,7 @@ public class OkHttpEngine implements IHttpEngine{
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-
-                //移除call
-                HttpCallManager.getInstance().removeCall(task.getTaskId());
-
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onFailure(e);
-                    }
-                });
+                onFailureCall(task,callback,e);
             }
 
             @Override
@@ -215,6 +190,7 @@ public class OkHttpEngine implements IHttpEngine{
 
         Call call = OkHttpHelper.buildUploadCall(mClient,task,callback);
         if (call == null){
+            onFailureBuildCall(task,callback);
             return ;
         }
 
@@ -224,16 +200,7 @@ public class OkHttpEngine implements IHttpEngine{
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, final IOException e) {
-
-                //移除call
-                HttpCallManager.getInstance().removeCall(task.getTaskId());
-
-                mHandler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        callback.onFailure(e);
-                    }
-                });
+                onFailureCall(task,callback,e);
             }
 
             @Override
@@ -292,5 +259,21 @@ public class OkHttpEngine implements IHttpEngine{
     @Override
     public Handler getHandler() {
         return mHandler;
+    }
+
+
+    private <T,R> void onFailureCall(HttpTask<T> task, final IHttpCallback<R> callback,Exception exception){
+        //移除call
+        HttpCallManager.getInstance().removeCall(task.getTaskId());
+        mHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                callback.onFailure(exception);
+            }
+        });
+    }
+
+    private <T,R> void onFailureBuildCall(HttpTask<T> task, final IHttpCallback<R> callback){
+        onFailureCall(task,callback,new HTTPException(task.getTaskId(),"build call exception ,result is null"));
     }
 }

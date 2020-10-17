@@ -4,7 +4,7 @@
 
     <application>
         <activity android:name=".ui.activity.ViewBindingActivity"></activity>
-        <activity android:name=".ui.activity.DataBindingVithViewModelActivity" />
+        <activity android:name=".ui.activity.DataBindingWithViewModelActivity" />
         <activity android:name=".ui.activity.DataBindingActivity" />
         <activity android:name=".ui.activity.SQLiteDemoActivity" />
         <activity android:name=".viper.view.activity.MovieAddActivity" />

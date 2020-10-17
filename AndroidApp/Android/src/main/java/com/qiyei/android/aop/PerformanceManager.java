@@ -19,27 +19,32 @@ public class PerformanceManager {
     private static final String TAG = "PerformanceManager";
 
     @Around("execution(* com.qiyei.android.AndroidApplication.on**(..))")
-    public void getAndroidApplicationTime(ProceedingJoinPoint joinPoint){
+    public Object getAndroidApplicationTime(ProceedingJoinPoint joinPoint){
         Signature signature = joinPoint.getSignature();
         long time = System.currentTimeMillis();
+        Object object = null;
         try {
-            joinPoint.proceed();
+            object = joinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
         LogManager.i(TAG, "getAndroidApplicationTime "+ signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
+        return object;
     }
 
     @Around("call(* com.qiyei.android.AndroidApplication.**(..))")
-    public void getApplicationTime(ProceedingJoinPoint joinPoint){
+    public Object getApplicationTime(ProceedingJoinPoint joinPoint){
         Signature signature = joinPoint.getSignature();
         long time = System.currentTimeMillis();
+        Object object = null;
         try {
-            joinPoint.proceed();
+            object = joinPoint.proceed();
         } catch (Throwable throwable) {
             throwable.printStackTrace();
         }
         LogManager.i(TAG, "getApplicationTime " + signature.getName() + " cost " + (System.currentTimeMillis() - time) + " ms");
+
+        return object;
     }
 
 

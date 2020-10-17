@@ -58,29 +58,33 @@ public class ARTHookManager {
     }
 
     public static void start(){
-        DexposedBridge.hookAllConstructors(ImageView.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                super.afterHookedMethod(param);
-                DexposedBridge.findAndHookMethod(ImageView.class,"setImageBitmap",Bitmap.class,new ImageViewMethodHook());
-            }
-        });
-
-        DexposedBridge.hookAllConstructors(Thread.class, new XC_MethodHook() {
-            @Override
-            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                super.afterHookedMethod(param);
-                Thread thread = (Thread) param.thisObject;
-                Class<?> clazz = thread.getClass();
-                if (clazz != Thread.class) {
-                    Log.i(TAG, "found class extend Thread:" + clazz);
-                    DexposedBridge.findAndHookMethod(clazz, "run", new ThreadMethodHook());
+        try {
+            DexposedBridge.hookAllConstructors(ImageView.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    super.afterHookedMethod(param);
+                    DexposedBridge.findAndHookMethod(ImageView.class, "setImageBitmap", Bitmap.class, new ImageViewMethodHook());
                 }
-                Log.i(TAG, "Thread: " + thread.getName() + " class:" + thread.getClass() +  " is created.");
-            }
-        });
-        //监控Thread
-        DexposedBridge.findAndHookMethod(Thread.class, "run", new ThreadMethodHook());
+            });
+
+            DexposedBridge.hookAllConstructors(Thread.class, new XC_MethodHook() {
+                @Override
+                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                    super.afterHookedMethod(param);
+                    Thread thread = (Thread) param.thisObject;
+                    Class<?> clazz = thread.getClass();
+                    if (clazz != Thread.class) {
+                        Log.i(TAG, "found class extend Thread:" + clazz);
+                        DexposedBridge.findAndHookMethod(clazz, "run", new ThreadMethodHook());
+                    }
+                    Log.i(TAG, "Thread: " + thread.getName() + " class:" + thread.getClass() + " is created.");
+                }
+            });
+            //监控Thread
+            DexposedBridge.findAndHookMethod(Thread.class, "run", new ThreadMethodHook());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //监控IPC
         try {

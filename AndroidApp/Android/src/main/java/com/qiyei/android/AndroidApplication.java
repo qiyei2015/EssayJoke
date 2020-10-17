@@ -85,7 +85,7 @@ public class AndroidApplication extends FrameworkApplication {
                 .setTask(new Runnable() {
                     @Override
                     public void run() {
-                        ARTHookManager.start();
+//                        ARTHookManager.start();
                     }
                 })
                 .build();

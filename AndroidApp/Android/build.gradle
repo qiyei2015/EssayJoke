@@ -86,6 +86,10 @@ android {
     aaptOptions { 
         cruncherEnabled = false
     }
+    
+    dataBinding {
+        enabled = true
+    }
 
     //指定github上ndk版本，要不然会编译失败
     ndkVersion '21.3.6528147'
@@ -94,6 +98,7 @@ android {
 aspectjx {
     //开启AspectJX功能
     enabled true
+    include 'com.qiyei.android.AndroidApplication'
 }
 
 dependencies {
@@ -104,6 +109,9 @@ dependencies {
 
 //    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.1.0"
     implementation "androidx.lifecycle:lifecycle-common-java8:2.1.0"
+
+    //AspectJ
+    implementation 'org.aspectj:aspectjrt:1.9.5'
 
     api project(':AndroidApp:UI')
     api project(':AndroidApp:OpenSource')

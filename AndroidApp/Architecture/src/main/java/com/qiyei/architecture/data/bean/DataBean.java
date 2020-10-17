@@ -1,7 +1,10 @@
 package com.qiyei.architecture.data.bean;
 
 
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
+import com.qiyei.architecture.BR;
 
 /**
  * @author Created by qiyei2015 on 2017/11/8.
@@ -10,7 +13,7 @@ package com.qiyei.architecture.data.bean;
  * @description:
  */
 
-public class DataBean {
+public class DataBean extends BaseObservable {
 
     private long id;
     private String name;
@@ -25,28 +28,34 @@ public class DataBean {
     public DataBean() {
     }
 
+    @Bindable
     public long getId() {
         return this.id;
     }
 
     public void setId(long id) {
         this.id = id;
+        notifyPropertyChanged(BR.id);
     }
 
+    @Bindable
     public String getName() {
         return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
+        notifyPropertyChanged(BR.name);
     }
 
+    @Bindable
     public String getValue() {
         return this.value;
     }
 
     public void setValue(String value) {
         this.value = value;
+        notifyPropertyChanged(BR.value);
     }
 
     public interface ${

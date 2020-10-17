@@ -10,6 +10,7 @@ import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.opensource.R;
 import com.qiyei.opensource.ui.activity.DaggerDemoActivity;
 import com.qiyei.opensource.ui.activity.HotfixTestActivity;
+import com.qiyei.opensource.ui.activity.MMKVDemoActivity;
 import com.qiyei.opensource.ui.activity.OkioTestActivity;
 import com.qiyei.opensource.ui.activity.RxjavaTestActivity;
 
@@ -34,7 +35,7 @@ public class OpenSourceFragment extends CommonListFragment {
     private List<MainMenu> mMenuList = new ArrayList<>();
 
     private String[] names = new String[]{"测试1 Rxjava测试","测试2 Okio测试","测试3 Dagger2","测试4 热修复","测试5 MMKV开源框架"};
-    private Class<?>[] clazzs = new Class[]{RxjavaTestActivity.class,OkioTestActivity.class,DaggerDemoActivity.class,HotfixTestActivity.class};
+    private Class<?>[] clazzs = new Class[]{RxjavaTestActivity.class,OkioTestActivity.class,DaggerDemoActivity.class,HotfixTestActivity.class, MMKVDemoActivity.class};
 
 
     public OpenSourceFragment() {
