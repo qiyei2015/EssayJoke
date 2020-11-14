@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -33,9 +34,10 @@ public class PagingRoomDataSourceActivity extends AppCompatActivity {
 
         UserDao userDao = DatabaseManager.getInstance().getRoomDatabase(AppDatabase.class).userDao();
         PagedList.Config config = new PagedList.Config.Builder()
-                .setPageSize(20)
-                .setEnablePlaceholders(true)
-                .setInitialLoadSizeHint(20)
+                .setPageSize(20)    // 分页加载的数量
+                .setEnablePlaceholders(true) // 是否启用占位符
+                .setInitialLoadSizeHint(20) // 初次加载的数量
+                .setPrefetchDistance(10)    //预取数据的距离
                 .build();
 
         LiveData<PagedList<User>> data = new LivePagedListBuilder<Integer, User>(userDao.getAllByUid(),config)
