@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'android-aspectjx' // apply plugin
 // for upload to jcenter
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.github.panpf.bintray-publish'
 
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
@@ -112,6 +112,7 @@ dependencies {
     testImplementation "junit:junit:4.12"
 }
 
+//https://github.com/panpf/bintray-publish
 //publish common: gradlew clean build bintrayUpload -PbintrayUser=账号 -PbintrayKey=key -PdryRun=false  -x javadocRelease
 //github主页
 def siteUrl = 'https://github.com/qiyei2015/EssayJoke'
