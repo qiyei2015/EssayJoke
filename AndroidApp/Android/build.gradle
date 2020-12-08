@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'android-aspectjx' // apply plugin
 
+def apkName
 android {
     compileSdkVersion rootProject.ext.common.compileSdkVersion
     buildToolsVersion rootProject.ext.common.buildToolsVersion
@@ -144,6 +145,7 @@ android.applicationVariants.all { variant ->
                 def fileName = prefix + "_V${android.defaultConfig.versionName}_${releaseTime()}" + suffix
                 //outputFile.parent参数可以改成你你想要的发布路径
                 outputFileName = fileName
+                apkName = outputFileName
             }
         }
     }
@@ -165,3 +167,81 @@ android.applicationVariants.all { variant ->
 //        dx.additionalParameters += '--minimal-main-dex'
 //    }
 //}
+
+def execute360JiaGuCmd(cmd){
+    def p
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        p = cmd.execute(null, new File("$rootProject.jiaGuPluginPath"))
+    } else {
+        p = cmd.execute(null, new File("/usr/android/sdk/360jiagubao_linux_64/jiagu"))
+    }
+    println p.text
+    p.waitFor()  // 用以等待外部进程调用结束
+    println p.exitValue()
+}
+
+task reinforceAppTask(dependsOn: 'assembleRelease') {
+    group "jiaGuApk"
+    doLast {
+        println "360加固 begin"
+        def currFile = new File(".")
+        // 生成的apk的路劲
+        def appFilePath = currFile.getCanonicalPath() + File.separator + project.name +
+                File.separator + "build" + File.separator + "outputs"+ File.separator + "apk" + File.separator + "release" +
+                File.separator
+        def apkFile = appFilePath + apkName
+        println "appFilePath=" + apkFile
+
+        if(!new File(apkFile).exists()){
+            println "apk not exist"
+            return
+        }
+        def cmdBase = 'java -jar jiagu.jar'
+        def cmdLogin = cmdBase + " -login  ${rootProject.jiaGuUserName}   ${rootProject.jiaGuPwd}"
+        def cmdImportSign = cmdBase + ' -importsign ' +
+                rootProject.storeFile.getCanonicalPath() + ' ' + rootProject.storePassword + ' ' + rootProject.keyAlias + ' ' + rootProject.keyPassword
+        def cmdShowSign = cmdBase + ' -showsign'
+        def cmdConfig = cmdBase + ' -config -x86'
+        def cmdShowConfig = cmdBase + ' -showconfig'
+        def cmdVersion = cmdBase + ' -version'
+        //生成的路径
+        def outPath = new File(appFilePath)
+        //删除旧文件
+        FileTree tree = fileTree(dir: outPath)
+        tree.each { File file ->
+            if (file.toString().contains("jiagu_sign")) {
+                delete file
+            }
+        }
+        def cmdJiaGu = cmdBase + ' -jiagu ' + apkFile + ' ' + outPath.getCanonicalPath() + ' -autosign' +' -automulpkg'
+        execute360JiaGuCmd(cmdLogin)
+        execute360JiaGuCmd(cmdImportSign)
+        execute360JiaGuCmd(cmdJiaGu)
+
+        File oldFile = new File(apkFile)
+        if (oldFile.exists()){
+            oldFile.delete()
+            println "360加固 delete oldFile=" + apkFile
+        }
+        //重命名
+        File[] files = outPath.listFiles()
+        if (files.length >= 1){
+            files[0].renameTo(new File(apkFile))
+            println "360加固 end apkFile=" + apkFile
+        } else {
+            println "360加固 end fail"
+        }
+    }
+}
+
+this.project.afterEvaluate { project ->
+    def buildTask = project.tasks.getByName('assembleRelease')
+    if(buildTask == null) {
+        throw GradleException('the assembleRelease task is not found')
+    }
+    /**
+     * 5.0以后废弃了execute()方法，finalizedBy（返回完成此任务之后的任务）代替
+     * tasks.reinforceAppTask.execute()
+     */
+    //buildTask.finalizedBy "reinforceAppTask"
+}
