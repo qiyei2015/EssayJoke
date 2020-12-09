@@ -46,11 +46,16 @@ ext{
     //JPush
     JPushAppkey = "66d86822c15c70caa48748bf"
 
-    jiaGuPluginPath = 'D:\\360jiagubao_windows_64\\jiagu'
+    if (System.properties['os.name'].toLowerCase().contains('windows')) {
+        jiaGuPluginPath = 'D:\\360jiagubao_windows_64\\jiagu'
+    } else {
+        jiaGuPluginPath = project.getRootDir().getAbsolutePath() + File.separator + "Compile" +
+                File.separator + "360jiagubao_windows_64/jiagu"
+    }
     storeFile = file(project.getRootDir().getAbsolutePath() + proj_storeFile)
-    storePassword = 'qiyei2015'
-    keyAlias = '510726'
-    keyPassword = '510726'
+    storePassword = proj_storePassword
+    keyAlias = proj_keyAlias
+    keyPassword = proj_keyPassword
     jiaGuUserName = '1273482124@qq.com'
     jiaGuPwd = 'hxw@0810'
 

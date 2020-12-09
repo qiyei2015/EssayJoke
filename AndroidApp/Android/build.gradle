@@ -169,12 +169,7 @@ android.applicationVariants.all { variant ->
 //}
 
 def execute360JiaGuCmd(cmd){
-    def p
-    if (System.properties['os.name'].toLowerCase().contains('windows')) {
-        p = cmd.execute(null, new File("$rootProject.jiaGuPluginPath"))
-    } else {
-        p = cmd.execute(null, new File("/usr/android/sdk/360jiagubao_linux_64/jiagu"))
-    }
+    def p = cmd.execute(null, new File("$rootProject.jiaGuPluginPath"))
     println p.text
     p.waitFor()  // 用以等待外部进程调用结束
     println p.exitValue()
@@ -243,5 +238,5 @@ this.project.afterEvaluate { project ->
      * 5.0以后废弃了execute()方法，finalizedBy（返回完成此任务之后的任务）代替
      * tasks.reinforceAppTask.execute()
      */
-    //buildTask.finalizedBy "reinforceAppTask"
+    buildTask.finalizedBy "reinforceAppTask"
 }
