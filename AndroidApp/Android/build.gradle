@@ -220,12 +220,48 @@ task reinforceAppTask(dependsOn: 'assembleRelease') {
         }
         //重命名
         File[] files = outPath.listFiles()
-        if (files.length >= 1){
-            files[0].renameTo(new File(apkFile))
-            println "360加固 end apkFile=" + apkFile
-        } else {
-            println "360加固 end fail"
+        boolean reSign = true
+        File jiaGuFile
+        for (File file:files){
+            if (file.name.contains("jiagu")){
+                jiaGuFile = file
+            }
+            if (file.name.contains("sign")){
+                reSign = false
+                break
+            }
         }
+        if (reSign && jiaGuFile != null){
+            //默认v1 v2，需配置好环境变量，防止找不到apksigner
+            def reSignCmd = 'apksigner sign --ks ' + rootProject.storeFile.getCanonicalPath() +
+                    ' --ks-key-alias ' + rootProject.keyAlias +
+                    ' --ks-pass pass:' + rootProject.keyPassword +
+                    ' --key-pass pass:' + rootProject.storePassword +
+                    ' --out ' + apkFile + ' ' + outPath.getCanonicalPath() + File.separator + jiaGuFile.name
+            executeCmd(reSignCmd)
+            if (jiaGuFile.exists()){
+                println "360加固 delete jiaGuFile=" + jiaGuFile.name
+                jiaGuFile.delete()
+            }
+        } else {
+            jiaGuFile.renameTo(new File(apkFile))
+        }
+    }
+}
+
+def executeCmd(cmd){
+    def commands = []
+    if (System.getProperty("os.name").toLowerCase().startsWith("windows")) {
+        commands << 'cmd'
+        commands << '/c'
+    } else {
+        commands << 'bash'
+        commands << '-c'
+    }
+    commands << cmd
+    println "executeCmd cmd=" + cmd
+    exec {
+        commandLine commands
     }
 }
 
