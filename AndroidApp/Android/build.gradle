@@ -99,7 +99,8 @@ android {
 aspectjx {
     //开启AspectJX功能
     enabled true
-    include 'com.qiyei.android.AndroidApplication'
+    //aop 代码所在的包名
+    include 'com.qiyei.android.aop'
 }
 
 dependencies {
