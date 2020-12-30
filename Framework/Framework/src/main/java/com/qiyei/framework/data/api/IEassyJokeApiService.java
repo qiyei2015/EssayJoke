@@ -42,6 +42,15 @@ public interface IEassyJokeApiService {
     Call<DiscoverListResp> getDiscoverList(@QueryMap Map<String, String> params);
 
     /**
+     * 获取发现列表
+     * @param params get请求参数 建议都按照这样写，方便参数传递
+     * @return
+     */
+    @Headers({"Content-Type: application/json", "Accept: application/json"})
+    @GET("passport/userExist?name=qiyei2009")
+    Call<DiscoverListResp> getDiscoverList2();
+
+    /**
      *  post请求测试
      * @param req post请求参数
      * @return

@@ -15,15 +15,16 @@ import com.qiyei.architecture.R;
 import com.qiyei.framework.data.api.IEassyJokeApiService;
 import com.qiyei.framework.data.bean.UserInfo;
 import com.qiyei.framework.data.protocol.DiscoverListReq;
-import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.framework.net.RequestObject;
 import com.qiyei.framework.net.ResponseObject;
 import com.qiyei.sdk.https.api.HttpManager;
 import com.qiyei.sdk.https.api.HttpRequest;
 import com.qiyei.sdk.https.api.IHttpListener;
 import com.qiyei.sdk.https.api.IHttpTransferListener;
+import com.qiyei.sdk.https.api.Response;
 import com.qiyei.sdk.log.LogManager;
 import com.qiyei.sdk.util.AndroidUtil;
+import com.qiyei.sdk.util.ToastUtil;
 
 import okhttp3.ResponseBody;
 
@@ -37,6 +38,7 @@ public class NetworkTestActivity extends AppCompatActivity {
 
     private final String TAG = "NetworkTestActivity";
 
+    private static final String BASE_URL = "http://139.155.247.210:8080/foodie/";
 
     private ProgressBar mDownloadProgressBar;
     private ProgressBar mUploadProgressBar;
@@ -77,11 +79,14 @@ public class NetworkTestActivity extends AppCompatActivity {
         findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new HttpManager().execute(getSupportFragmentManager(), buildGetRequest(), new IHttpListener<DiscoverListResp>() {
+                new HttpManager().execute(getSupportFragmentManager(), buildGetRequest(), new IHttpListener<Response<String>>() {
 
                     @Override
-                    public void onSuccess(DiscoverListResp response) {
-                        LogManager.d(TAG,"name --> "+response.getData().getCategories().getName());
+                    public void onSuccess(Response<String> response) {
+                        if (response != null){
+                            LogManager.d(TAG,"name --> "+ response.toString());
+                            ToastUtil.showLongToast(response.toString());
+                        }
                     }
 
                     @Override
@@ -154,14 +159,12 @@ public class NetworkTestActivity extends AppCompatActivity {
      * @return
      */
     private HttpRequest buildGetRequest(){
-        DiscoverListReq req = new DiscoverListReq();
-        req.setIid("6152551759");
-        req.setAid("7");
-        HttpRequest<DiscoverListReq> request = new HttpRequest.Builder<DiscoverListReq>()
+        GetInfo info = new GetInfo();
+        info.name = "qiyei2009";
+        HttpRequest request = new HttpRequest.Builder()
                 .get()
-                .setBaseUrl("http://is.snssdk.com/2/essay/")
-                .setPathUrl("discovery/v3/")
-                .setBody(req)
+                .setBaseUrl(BASE_URL)
+                .setPathUrl("passport/userExist?name=qiyei2009")
                 .setApiClazz(IEassyJokeApiService.class)
                 .build();
         return request;
@@ -208,5 +211,9 @@ public class NetworkTestActivity extends AppCompatActivity {
                 .build();
         return request;
 
+    }
+
+    public static class GetInfo{
+        public String name;
     }
 }
