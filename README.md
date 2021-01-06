@@ -18,7 +18,7 @@ app appdemo:业务相关，appdemo为sdk的测试demo
 已经想好后期的发展路线了，该项目主要用作实际项目开发的原型验证，也为学习新技术提供一个平台。
 
 后期将会按照如下的方式来打造这个项目
-![架构图](https://github.com/qiyei2015/EssayJoke/blob/master/Doc/image/Architecture_image.PNG)
+![架构图](https://github.com/qiyei2015/EssayJoke/raw/master/Doc/image/Architecture_image.PNG)
 
 主要分了四层，并准备使用Arouter实现组件化，使用Replugin实现插件化。
 
@@ -64,7 +64,7 @@ APP层打包各个APP，并依赖一个或者多个业务组件
 
 2 对Mall APP 全部引入MVP架构及采用kotlin语言开发，MVP架构如下
 
-![MVP](https://github.com/qiyei2015/EssayJoke/blob/master/Doc/image/MVP_image.PNG)
+![MVP](https://github.com/qiyei2015/EssayJoke/raw/master/Doc/image/MVP_image.PNG)
 
 后期的几大目标
 
@@ -77,7 +77,7 @@ APP层打包各个APP，并依赖一个或者多个业务组件
 4 项目进行多仓的拆分，并且公共组件上maven
 
 目前最新的架构图如下：
-![架构图2](https://github.com/qiyei2015/EssayJoke/blob/master/Doc/image/Architecture2_image.PNG)
+![架构图2](https://github.com/qiyei2015/EssayJoke/raw/master/Doc/image/Architecture2_image.PNG)
 
 业务层新增以下几部分
 
