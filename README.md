@@ -77,7 +77,7 @@ APP层打包各个APP，并依赖一个或者多个业务组件
 4 项目进行多仓的拆分，并且公共组件上maven
 
 目前最新的架构图如下：
-![架构图2](https://github.com/qiyei2015/EssayJoke/raw/master/Doc/image/Architecture2_image.PNG)
+![架构图2](https://raw.githubusercontent.com/qiyei2015/EssayJoke/master/Doc/image/Architecture2_image.PNG)
 
 业务层新增以下几部分
 
