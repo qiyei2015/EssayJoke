@@ -61,6 +61,7 @@ public class LogManager {
         //sDefLogImpl = new LogImpl(logFile);
         sXlogImpl = new XLogImpl("",logFile);
         sLogMap.put(LogConstant.DEF_NAME,sXlogImpl);
+        //sLogMap.put(LogConstant.DEF_NAME,sDefLogImpl);
     }
 
     /**
@@ -296,7 +297,15 @@ public class LogManager {
         if (!dir.exists()){
             dir.mkdirs();
         }
-        String path = dir.getPath();
-        return path + File.separator + RuntimeEnv.procName + LogConstant.FILE_SUFFIX;
+        String path = dir.getPath() + File.separator + RuntimeEnv.procName + LogConstant.FILE_SUFFIX;
+        File outFile = new File(path);
+        try {
+            if (!outFile.exists()){
+                outFile.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path ;
     }
 }

@@ -48,6 +48,7 @@ public class LogImpl implements ILog{
     public LogImpl(String path){
         try {
             File file = new File(path);
+            Log.i(LogConstant.TAG,"LogImpl init ,file=" + path);
             mPrintWriter = new PrintWriter(new FileWriter(file,true),true);
         } catch (IOException e) {
             Log.i(LogConstant.TAG,"PrintWriter IOException ");
@@ -134,6 +135,10 @@ public class LogImpl implements ILog{
      * @param msg
      */
     private void printMessage(String msg){
+        if (mPrintWriter == null){
+            Log.e(LogConstant.TAG,"mPrintWriter is error");
+            return;
+        }
         synchronized (mPrintWriter){
             mPrintWriter.println(msg);
         }
