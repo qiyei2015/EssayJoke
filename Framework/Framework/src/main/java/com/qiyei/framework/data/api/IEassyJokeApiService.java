@@ -5,6 +5,7 @@ import com.qiyei.framework.data.bean.UserInfo;
 import com.qiyei.framework.data.protocol.DiscoverListResp;
 import com.qiyei.framework.net.RequestObject;
 import com.qiyei.framework.net.ResponseObject;
+import com.qiyei.sdk.https.api.Response;
 
 
 import java.util.Map;
@@ -48,7 +49,7 @@ public interface IEassyJokeApiService {
      */
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @GET("passport/userExist?name=qiyei2009")
-    Call<DiscoverListResp> getDiscoverList2();
+    Call<Response<String>> getDiscoverList2();
 
     /**
      *  post请求测试
