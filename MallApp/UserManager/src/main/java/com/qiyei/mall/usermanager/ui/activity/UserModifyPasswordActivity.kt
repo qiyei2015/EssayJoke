@@ -24,7 +24,7 @@ class UserModifyPasswordActivity : BaseMVPActivity<UserModifyPasswordPresenter>(
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_modify_password)
-        mUserKey = intent.getStringExtra("userKey")
+        mUserKey = intent.getStringExtra("userKey")?:""
         initView()
     }
 
