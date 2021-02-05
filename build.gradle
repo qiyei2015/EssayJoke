@@ -7,16 +7,17 @@ buildscript {
     ext.anko_version='0.10.8'
 
     repositories {
+        //阿里云仓库
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
         jcenter()
         mavenCentral()
         mavenLocal()
         maven {
             url 'https://maven.google.com/'
             name 'Google'
-        }
-        //阿里云仓库
-        maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/releases"
         }
         google()
     }
@@ -36,6 +37,11 @@ buildscript {
 }
 allprojects {
     repositories {
+        //阿里云仓库
+        maven { url "https://maven.aliyun.com/repository/central" }
+        maven { url "https://maven.aliyun.com/repository/public" }
+        maven { url "https://maven.aliyun.com/repository/google" }
+        maven { url "https://maven.aliyun.com/repository/gradle-plugin" }
         jcenter()
         mavenCentral()
         mavenLocal()
