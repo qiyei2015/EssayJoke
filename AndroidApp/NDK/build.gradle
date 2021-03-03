@@ -48,6 +48,15 @@ android {
         }
     }
 
+    //资源或者so重复
+    packagingOptions {
+        pickFirst 'META-INF/*'
+        pickFirst 'lib/arm64-v8a/*.so'
+        pickFirst 'lib/armeabi-v7a/*.so'
+        pickFirst 'lib/armeabi/*.so'
+        pickFirst 'lib/x86/*.so'
+        pickFirst 'lib/x86_64/*.so'
+    }
 }
 
 dependencies {
