@@ -1,6 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.qiyei.ndk">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.qiyei.ndk">
 
     <application
         android:allowBackup="true"
@@ -10,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
-        <activity android:name=".ui.activity.EncryptActivity">
-        </activity>
+        <activity android:name=".ui.activity.JNIDemoActivity"></activity>
+        <activity android:name=".ui.activity.EncryptActivity"></activity>
     </application>
 
 </manifest>

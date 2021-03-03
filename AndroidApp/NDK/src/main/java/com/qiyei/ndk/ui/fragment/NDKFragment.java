@@ -9,6 +9,7 @@ import android.view.View;
 import com.qiyei.framework.common.model.MainMenu;
 import com.qiyei.framework.ui.fragment.CommonListFragment;
 import com.qiyei.ndk.ui.activity.EncryptActivity;
+import com.qiyei.ndk.ui.activity.JNIDemoActivity;
 
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class NDKFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 加密测试"};
-    private Class<?>[] clazzs = new Class[]{EncryptActivity.class};
+    private String[] names = new String[]{"测试1 加密测试","测试2 JNI测试"};
+    private Class<?>[] clazzs = new Class[]{EncryptActivity.class, JNIDemoActivity.class};
 
     public NDKFragment() {
         super();
