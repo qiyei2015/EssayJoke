@@ -13,5 +13,7 @@ class JNIDemoActivity : AppCompatActivity() {
 
         Log.i("JNIDemoActivity","jni start")
         Demo().stringFromJNI()
+
+        Log.i("JNIDemoActivity","jni start2${Demo().operateString("我是参数，传递下来了")}")
     }
 }

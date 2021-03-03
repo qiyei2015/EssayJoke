@@ -9,4 +9,6 @@ class Demo {
     }
 
     external fun stringFromJNI(): String
+
+    external fun operateString(msg: String): String
 }
