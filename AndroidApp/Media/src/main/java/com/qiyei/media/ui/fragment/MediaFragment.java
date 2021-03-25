@@ -8,6 +8,7 @@ import android.view.View;
 import com.qiyei.framework.common.model.MainMenu;
 
 import com.qiyei.framework.ui.fragment.CommonListFragment;
+import com.qiyei.media.ui.activity.MediaPlayActivity;
 import com.qiyei.media.ui.activity.MediaRecordActivity;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class MediaFragment extends CommonListFragment {
      */
     private List<MainMenu> mMenuList = new ArrayList<>();
 
-    private String[] names = new String[]{"测试1 音视频的采集、编码、封包成 mp4 输出"};
-    private Class<?>[] clazzs = new Class[]{MediaRecordActivity.class};
+    private String[] names = new String[]{"测试1 音视频的采集、编码、封包成 mp4 输出","测试2 音频播放"};
+    private Class<?>[] clazzs = new Class[]{MediaRecordActivity.class,MediaPlayActivity.class};
 
 
     public MediaFragment() {
