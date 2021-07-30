@@ -205,7 +205,7 @@ task reinforceAppTask(dependsOn: 'assembleRelease') {
         //删除旧文件
         FileTree tree = fileTree(dir: outPath)
         tree.each { File file ->
-            if (file.toString().contains("jiagu_sign")) {
+            if (file.toString().contains("jiagu")) {
                 delete file
             }
         }
@@ -245,7 +245,9 @@ task reinforceAppTask(dependsOn: 'assembleRelease') {
                 jiaGuFile.delete()
             }
         } else {
-            jiaGuFile.renameTo(new File(apkFile))
+            if (jiaGuFile != null){
+                jiaGuFile.renameTo(new File(apkFile))
+            }
         }
     }
 }
