@@ -1,2 +1,17 @@
 /build
 /.cxx/
+/libs/arm64-v8a/libbspatch.so
+/libs/arm64-v8a/libcompressimg.so
+/libs/arm64-v8a/libdiffpatch.so
+
+/libs/armebai-v7a/libbspatch.so
+/libs/armebai-v7a/libcompressimg.so
+/libs/armebai-v7a/libdiffpatch.so
+
+/libs/x86/libbspatch.so
+/libs/x86/libcompressimg.so
+/libs/x86/libdiffpatch.so
+
+/libs/x86_64/libbspatch.sogo
+/libs/x86_64/libcompressimg.so
+/libs/x86_64/libdiffpatch.so
